@@ -68,6 +68,7 @@ local.properties
 # Spring Boot Tooling
 .sts4-cache/
 .metadata/
+.metadata/.plugins
 .metadata/.log
 .metadata/.plugins/com.genuitec.eclipse.devstyle/recent.json
 .metadata/.plugins/org.eclipse.core.resources/.safetable/org.eclipse.core.resources
