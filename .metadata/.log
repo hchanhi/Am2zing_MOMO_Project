@@ -124,3 +124,15 @@ Binding(COMMAND+SHIFT+C,
 
 !ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-04-13 14:33:22.734
 !MESSAGE executing callback sts4.classpath.DGTFTuPU SUCCESS [done]
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-04-13 15:21:10.260
+!MESSAGE ClasspathListenerHandler removeClasspathListener sts4.classpath.DGTFTuPU
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-04-13 15:21:10.266
+!MESSAGE unsubscribing from classpath changes: sts4.classpath.DGTFTuPU
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-04-13 15:21:10.266
+!MESSAGE subsribers = {}
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-04-13 15:21:10.267
+!MESSAGE ClasspathListenerHandler removeClasspathListener sts4.classpath.DGTFTuPU => OK
