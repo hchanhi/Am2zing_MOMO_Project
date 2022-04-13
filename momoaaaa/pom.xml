@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.momo</groupId>
-	<artifactId>momo_project</artifactId>
+	<artifactId>momo_backend</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>momo_project</name>
+	<name>momo_backend</name>
 	<description>Am2zing Team momo project</description>
 	<properties>
 		<java.version>11</java.version>
