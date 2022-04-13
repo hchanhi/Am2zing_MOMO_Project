@@ -69,3 +69,10 @@ local.properties
 .sts4-cache/
 
 # End of https://www.toptal.com/developers/gitignore/api/eclipse
+.metadata
+.metadata/.lock
+.metadata/.lock
+.metadata/.log
+.metadata/.plugins/com.genuitec.eclipse.devstyle/recent.json
+.metadata/.plugins/com.genuitec.eclipse.monitor/myeclipse-usage.properties
+.metadata/.plugins/com.genuitec.eclipse.ui.common.platform/color-definitions-fix.css
