@@ -13,10 +13,12 @@ public class BoardService {
 	private BoardRepository boardRepository;
 
 	
-	public void save(String boardTitle) {
+	public Board save(String boardTitle) {
 		Board board = new Board();
 		board.setBoardTitle(boardTitle);
 		this.boardRepository.save(board);
+		
+		return board;
 	}
 	
 	

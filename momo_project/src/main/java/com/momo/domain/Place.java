@@ -41,10 +41,10 @@ public class Place implements Serializable {
     @Column
     private String placeImg;
 
-    @Column
+    @ManyToOne
     private Member member;
     
-    @Column
+    @ManyToOne
     private Board board;
    
 	}
