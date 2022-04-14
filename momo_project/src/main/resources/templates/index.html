@@ -1,6 +1,8 @@
 
 <!DOCTYPE html>
+<html xmlns:th="http://www.thymelaf.org">
 <html lang="ko">
+
 <head>
 	<title> Place Information UI </title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -126,6 +128,20 @@ padding: 0px;
 	
 </head>
 <body>
+
+<form method="post" th:action="@{/}">
+			<div class="">
+				<label for="title" class="">title</label>
+				<input type="text" class="" name="boardTitle" id="boardTitle">
+				<input type="text" class="" name="memEmail" id="memEmail" value="aaa@aaa.com" readonly="readonly">
+			</div>
+			
+		
+		<h1>목록</h1>
+		<ul class="list-group">
+			<li class="list-group-item" th:each="리스트 : ${Board}" th:text="${Board.boardTitle}">
+			</li>
+		</ul>
 	<div>
     	<button onclick="writeplaycard()">장소 검색</button>
     </div>
@@ -155,6 +171,10 @@ padding: 0px;
 			</div>
 		</div>
 	</div>
+	<div>
+				<button type="submit" class="">확인</button>
+			</div>
+		</form>
         
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a7b5481a65eecc18bd2cc1106898f604&libraries=services"></script>
 	<script>
@@ -164,6 +184,7 @@ padding: 0px;
 		
 	    modal.style.display = "flex"
 	    	map.relayout();
+		event.preventDefault();
 	}
 
 	const closeBtn = modal.querySelector(".close-area")
@@ -180,6 +201,7 @@ padding: 0px;
 	
 	function close_modal(){
 		modal.style.display = "none"
+			event.preventDefault();
 	}
 
 	//
