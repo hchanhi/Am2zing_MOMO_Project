@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.momo.domain.Board;
+
 @Controller
 public class BoardController {
 	@Autowired
@@ -19,14 +21,14 @@ public class BoardController {
 		return "/Board/addBoard";
 	}
 	
-	@RequestMapping
+	@RequestMapping("/writeBoard")
 	public String addBoard(@RequestParam(required = false) String boardTitle, Model model) {
+		Board board = new Board();
 		if (!Objects.isNull(boardTitle)&& !boardTitle.isBlank()) {
-			this.boardService.save(boardTitle);
-			
+			board = this.boardService.save(boardTitle);
 		}
-		
-		return "/Board/addBoard";
+		model.addAttribute("boardNum", board.getBoardNum());
+		return "index";
 	}
 	
 
