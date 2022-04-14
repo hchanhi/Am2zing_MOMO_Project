@@ -22,7 +22,7 @@ public class Member implements Serializable {
     @Column
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long memNum;
-
+    
     @Column
     private String memEmail;
 

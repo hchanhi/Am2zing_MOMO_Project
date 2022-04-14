@@ -1,6 +1,8 @@
 package com.momo.domain;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.*;
 
@@ -31,6 +33,11 @@ public class Board implements Serializable {
     
     @Column
     private int placeCnt;
+    
+	/*
+	 * @OneToMany(mappedBy = "board_num") private Set<Place> dataOnes = new
+	 * HashSet<>();
+	 */
 	
 	}
 	

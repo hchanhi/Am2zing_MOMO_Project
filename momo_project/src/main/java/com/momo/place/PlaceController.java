@@ -21,9 +21,9 @@ public class PlaceController {
 	
 	@RequestMapping
 	public String addCard(@RequestParam String placeTitle, String placeLat, String placeLng,
-			String placeId, String placeContent, Member member,Board board, Model model) {
+			String placeId, String placeContent,Board board, Model model) {
 		if(!Objects.isNull(placeTitle)&& !placeTitle.isBlank()) {
-			this.placeService.save(placeTitle, placeLat, placeLng, placeId, placeContent, member, board);
+			this.placeService.save(placeTitle, placeLat, placeLng, placeId, placeContent, board);
 		}
 		return "/index";
 	}
