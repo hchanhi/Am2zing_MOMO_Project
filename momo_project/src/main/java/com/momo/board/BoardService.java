@@ -1,5 +1,6 @@
 package com.momo.board;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,4 +17,6 @@ public class BoardService {
 		board.setBoardTitle(boardTitle);
 		this.boardRepositoty.save(board);
 	}
+	
+	
 }
