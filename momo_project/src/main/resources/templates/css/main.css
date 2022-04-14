@@ -1,0 +1,139 @@
+@charset "utf-8";
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    text-decoration: none;
+}
+
+li {
+    list-style: none;
+}
+
+table {
+    border-spacing: 0;
+}
+
+#wrap {
+    width: 100%;
+    margin: 0px auto;
+}
+
+.inner {
+    width: 1440px;
+    margin: 0 auto;
+}
+
+
+/* -------------------------- */
+
+header {
+    height: 90px;
+    /* background-color: rgb(212, 212, 212); */
+}
+
+.logo {
+    float: left;
+    color: orangered;
+    font-size: 40pt;
+    margin: 10px 0px 0px 0px;
+
+}
+
+.membericon {
+    float: right;
+    margin: 25px 0px 0px 0px;
+}
+
+/* ------------------end of header----------------- */
+
+.slide {
+    width: 100%;
+    height: 420px;
+}
+
+.slide div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+/* ------------------end of section(banner)----------------- */
+
+.mbti {
+    display: flex;
+    height: 350px;
+}
+
+.mbti .items {
+    width: 100px;
+    height: 200px;
+    margin: 50px 0;
+}
+
+.mbti .items img {
+    width: 200px;
+    height: 200px;
+    transition: all linear .4s;
+    margin: 0 auto;
+}
+
+.mbti .slick-center img {
+    transform: scale(1.2);
+}
+
+
+
+
+/* ------------------end of section(mbti)----------------- */
+
+
+.cards {
+    height: 320px;
+    padding-top: 40px;
+    margin-bottom: 150px;
+    text-align: center;
+    background-color: rgb(148, 148, 148);
+    border-radius: 20px;
+}
+
+.cards img {
+    border-radius: 20px;
+}
+
+
+
+
+
+
+/* ------------------end of section(cardSection)----------------- */
+
+footer {
+    width: 100%;
+    height: 200px;
+    color: white;
+}
+
+.foot1 {
+    float: left;
+    width: 50%;
+    height: 100%;
+    background-color: rgb(165, 165, 165);
+}
+
+.foot2 {
+    float: right;
+    width: 50%;
+    height: 100%;
+    background-color: rgb(117, 117, 117);
+}
+
+/* ------------------end of footer----------------- */
+
+#plusButton {
+    position: fixed; right: 3%; bottom: 30px; display: block; z-index: 99999;
+}
