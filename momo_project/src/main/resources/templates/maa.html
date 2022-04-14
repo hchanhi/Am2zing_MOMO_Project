@@ -1,7 +1,6 @@
+
 <!DOCTYPE html>
-
-<html xmlns:th="http://www.thymelaf.org" lang="ko">
-
+<html lang="ko">
 <head>
 	<title> Place Information UI </title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -127,14 +126,10 @@ padding: 0px;
 	
 </head>
 <body>
-
-<!--	<div><a href="/test02/1">1번 게시글<a></div>
-	<div><a href="/test02/2">2번 게시글</div>-->
-
 	<div>
     	<button onclick="writeplaycard()">장소 검색</button>
     </div>
-
+	
 	<!-- 모달연습 -->
     <div id="modal" class="modal-overlay">
         <div class="modal-window">
@@ -160,40 +155,15 @@ padding: 0px;
 			</div>
 		</div>
 	</div>
-
-
-	  <div>
-	    <!-- 위도 및 경도 좌표 및 위치정보 -->
-	    <form method="POST" th:action="@{/}">
-		    <input type="text" id="fulladdress" name="fulladdress" style="width:90%;" disabled> 
-		    <input type="text" id="placeTitle" name="placeTitle" value="" readonly>   
-		    <!--  <input type="text" id="paddress" name="paddress" value="">-->
-		    <input type="text" id="placeLat" name="placeLat" value="" readonly> 
-		    <input type="text" id="placeLng" name="placeLng" value="" readonly> 
-		    <input type="text" id="placeId" name="placeId" value="" readonly>
-		    <input type="number" id="boardnum" name="boardnum" value="" >
-		    <br>
-		    <div>내용</div>
-		    <textarea id="placeContent" name="placeContent" style="width:500px; height:150px; resize:none;"></textarea><br>
-	    <button type="submit">장소 추가</button>
-	    </form>
-    </div>
-    
-    <div>
-    <h1> 현재 추가된 장소</h1>
-    </div>
-</body>
-
         
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a7b5481a65eecc18bd2cc1106898f604&libraries=services"></script>
 	<script>
-	// 모달연습
+	// 모달연습 야호
 	function writeplaycard(){
 		const modal = document.getElementById("modal")
 		
 	    modal.style.display = "flex"
 	    	map.relayout();
-		event.preventDefault();
 	}
 
 	const closeBtn = modal.querySelector(".close-area")
@@ -210,7 +180,6 @@ padding: 0px;
 	
 	function close_modal(){
 		modal.style.display = "none"
-			event.preventDefault();
 	}
 
 	//
@@ -343,16 +312,15 @@ function displayPlaces(places) {
                 document.getElementById('fulladdress').value = "[" + pname + "]" + paddress;
                 }
             	
-            	document.getElementById('placeTitle').value = pname;            	
-               /* if (praddress) {
+            	document.getElementById('pname').value = pname;            	
+                if (praddress) {
                 	document.getElementById('paddress').value = praddress;
                 } else {
                 	document.getElementById('paddress').value = paddress; 
                 }
-               */
-            	document.getElementById('placeLat').value = plat;
-            	document.getElementById('placeLng').value = plng;
-            	document.getElementById('placeId').value = pid;
+            	document.getElementById('latclick').value = plat;
+            	document.getElementById('lngclick').value = plng;
+            	document.getElementById('id').value = pid;
             	
             };
 
@@ -449,5 +417,14 @@ function removeAllChildNods(el) {
     }
 }
 </script>
-		
+	  <div>
+	    <!-- 위도 및 경도 좌표 및 위치정보 -->
+	    <input type="text" id="fulladdress" name="fulladdress" style="width:90%;" disabled> 
+	    <input type="text" id="pname" name="pname" value="">   
+	    <input type="text" id="paddress" name="paddress" value="">  
+	    <input type="text" id="latclick" name="latclick" value=""> 
+	    <input type="text" id="lngclick" name="lngclick" value=""> 
+	    <input type="text" id="id" name="id" value="">
+    </div>
+</body>
 </html>
