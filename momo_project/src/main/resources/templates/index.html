@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html xmlns:th="http://www.thymelaf.org" lang="ko">
 
 <head>
@@ -126,8 +127,10 @@ padding: 0px;
 	
 </head>
 <body>
+
 <!--	<div><a href="/test02/1">1번 게시글<a></div>
 	<div><a href="/test02/2">2번 게시글</div>-->
+
 	<div>
     	<button onclick="writeplaycard()">장소 검색</button>
     </div>
@@ -158,6 +161,7 @@ padding: 0px;
 		</div>
 	</div>
 
+
 	  <div>
 	    <!-- 위도 및 경도 좌표 및 위치정보 -->
 	    <form method="POST" th:action="@{/}">
@@ -179,6 +183,7 @@ padding: 0px;
     <h1> 현재 추가된 장소</h1>
     </div>
 </body>
+
         
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a7b5481a65eecc18bd2cc1106898f604&libraries=services"></script>
 	<script>
@@ -188,6 +193,7 @@ padding: 0px;
 		
 	    modal.style.display = "flex"
 	    	map.relayout();
+		event.preventDefault();
 	}
 
 	const closeBtn = modal.querySelector(".close-area")
@@ -204,6 +210,7 @@ padding: 0px;
 	
 	function close_modal(){
 		modal.style.display = "none"
+			event.preventDefault();
 	}
 
 	//

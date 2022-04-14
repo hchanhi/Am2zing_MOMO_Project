@@ -11,6 +11,7 @@ public class BoardService {
 
 	@Autowired
 	private BoardRepository boardRepository;
+
 	
 	public void save(String boardTitle) {
 		Board board = new Board();
