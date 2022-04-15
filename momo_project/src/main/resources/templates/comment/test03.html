@@ -1,28 +1,43 @@
-
 <!DOCTYPE html>
-<html>
+<html th:replace="~{layouts/base :: layout(~{::title},~{::section})}"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="utf-8">
-    <title>댓글</title>
-    
+    <title>게시판 조회</title>
 </head>
 <body>
+<section class="masthead text-center">
 
-</script>
+    <div class="jumbotron"  th:object="${board}">
+        <h1 class="display-4" th:text="${board.title}">Hello, world!</h1>
+        <br>
+        <hr>
+        <br>
+       
+        <br><hr><br>
+        <p class="lead" th:text="${board.content}">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+        <hr><br>
+       
 
-<!-- Comments Form -->
-	<div class="card my-4">
-		<h5 class="card-header">Leave a Comment:</h5>
-		<div class="card-body">
-			<form name="comment-form" action="/board/comment/write" method="post" autocomplete="off">
-				<div class="form-group">
-					<input type="text" name="idx" th:value="*{idx}" />
-					<textarea name="content" class="form-control" rows="3"></textarea>
-				</div>
-				<button type="submit" class="btn btn-primary">Submit</button>
-			</form>
-		</div>
-	</div>
+        <br><hr><br>
 
+        <!-- Reply Section -->
+
+        <div class="input-group mb-3">
+
+            <form id="reply" action="/reply_write" method="post">
+                <input type="text" id="content" name="content" class="form-control" placeholder="댓글을 입력해주세요.." aria-label="댓글을 입력해주세요.." aria-describedby="basic-addon2">
+                <input type="hidden" id="boardNum" name="boardNum" th:value="${board.boardNum}">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="submit">등록</button>
+                </div>
+            </form>
+        </div>
+
+
+
+      
+    </div>
+
+</section>
 </body>
 </html>
