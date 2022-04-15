@@ -16,8 +16,6 @@ public class PlaceService {
 	@Autowired
 	private PlaceRepository placeRepository;
 	
-	@Autowired
-	private BoardRepository boardRepository; 
 	
 	@Autowired
 	private MyRepository myRepository;

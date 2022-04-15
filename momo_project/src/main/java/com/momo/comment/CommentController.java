@@ -11,12 +11,12 @@ public class CommentController {
 	@Autowired
 	CommentService commentService;
 	
-	@GetMapping("/test222")
-	private String insertComment(@RequestParam("idx") int idx, @RequestParam("content") String content) throws Exception {
-		Comment comment = new Comment();
-		comment.setContent(content);
-		comment.setIdx(idx);
-		commentService.insertComment(comment);
-		
-	}
+	/*
+	 * @GetMapping("/test222") private String insertComment(@RequestParam("idx") int
+	 * idx, @RequestParam("content") String content) throws Exception { Comment
+	 * comment = new Comment(); comment.setContent(content); comment.setIdx(idx);
+	 * commentService.insertComment(comment);
+	 * 
+	 * }
+	 */
 }

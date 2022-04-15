@@ -5,10 +5,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.momo.domain.Board;
 import com.momo.place.PlaceService;
 
 @Controller
@@ -32,7 +30,7 @@ public class TestController {
 	
 	
 	@GetMapping("/test02/{boardNum}")
-	public String MapTest02(@PathVariable Integer boardNum, Model model, @RequestBody Board board) {
+	public String MapTest02(@PathVariable Integer boardNum, Model model) {
 		model.addAttribute("myplaces", this.placeService.findByBoardNum(boardNum));
 		return "view/test02"; 
 	}
