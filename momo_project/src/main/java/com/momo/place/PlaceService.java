@@ -6,9 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.momo.board.BoardRepository;
-import com.momo.board.MyRepository;
+
 import com.momo.domain.Board;
-import com.momo.domain.Member;
+
 import com.momo.domain.Place;
 
 @Service
@@ -16,8 +16,7 @@ public class PlaceService {
 	@Autowired
 	private PlaceRepository placeRepository;
 	
-	@Autowired
-	private MyRepository myRepository;
+
 	
 	@Autowired
 	private BoardRepository boardRepository;
@@ -27,7 +26,7 @@ public class PlaceService {
 	}
 	public List<Place> findByBoardNum(int boardNum){
 		Board board = boardRepository.findById((long) boardNum).get();
-		return this.myRepository.findByBoard(board);
+		return this.placeRepository.findByBoard(board);
 	}
 	
 	public void save(String placeTitle, String placeLat, String placeLng,
