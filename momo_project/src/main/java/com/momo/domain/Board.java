@@ -28,7 +28,8 @@ public class Board implements Serializable {
     @Column
     private String boardTitle;
 
-    @Column
+    
+    @ManyToOne
     private Member member;
     
     @Column

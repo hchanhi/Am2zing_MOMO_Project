@@ -40,14 +40,11 @@ public class Place implements Serializable {
     
     @Column
     private String placeImg;
-    
-	/*
-	 * @ManyToOne(targetEntity = Member.class, fetch = FetchType.LAZY, cascade =
-	 * CascadeType.PERSIST)
-	 * 
-	 * @JoinColumn(name="mem_email") private Member member;
-	 */
-    
+
+
+    @ManyToOne
+    private Member member;
+
     @ManyToOne
     private Board board;
    

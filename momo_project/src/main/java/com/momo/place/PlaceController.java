@@ -20,11 +20,19 @@ public class PlaceController {
 	
 	
 	@RequestMapping
-	public String addCard(@RequestParam String placeTitle, String placeLat, String placeLng,
-			String placeId, String placeContent,Board board, Model model) {
-		if(!Objects.isNull(placeTitle)&& !placeTitle.isBlank()) {
-			this.placeService.save(placeTitle, placeLat, placeLng, placeId, placeContent, board);
+	public String addCard(@RequestParam String placeTitle, 
+							String placeLat, 
+							String placeLng,
+							String placeId, 
+							String placeContent, 
+							String memEmail,
+							int boardNum, 
+							Model model) {
+		if(!Objects.isNull(boardNum)&& !placeTitle.isBlank()) {
+			this.placeService.save(placeTitle, placeLat, placeLng, placeId, placeContent, memEmail, boardNum);
+
 		}
+		System.out.println(boardNum);
 		return "/index";
 	}
 }

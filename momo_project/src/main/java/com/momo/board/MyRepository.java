@@ -8,5 +8,8 @@ import com.momo.domain.Board;
 import com.momo.domain.Place;
 
 public interface MyRepository extends CrudRepository<Place, Long>{
-	List<Place> findByBoard(Board boardNum);
+
+
+	List<Place> findByBoard(Board board);
+
 }

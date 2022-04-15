@@ -46,7 +46,7 @@
 </head>
 <body>
 <div class="map_wrap">
-    <div id="map" style="width:100%;height:350px;"></div>
+    <div id="map" style="width:100vw;height:100vh;"></div>
 
     <div id="menu_wrap" class="bg_white">
     	<div class="hAddr">
@@ -94,6 +94,15 @@ console.log(places);
 // 마커 이미지의 이미지 주소입니다
 var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png"; 
 
+function setCenter() {            
+    // 이동할 위도 경도 위치를 생성합니다 
+    var moveLatLon = places[0].latlng;
+    map.setLevel(8);
+    // 지도 중심을 이동 시킵니다
+    map.setCenter(moveLatLon);
+}
+
+setCenter();
 
     
 for (var i = 0; i < places.length; i ++) {

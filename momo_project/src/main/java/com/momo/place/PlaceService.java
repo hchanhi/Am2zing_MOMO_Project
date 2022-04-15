@@ -22,24 +22,32 @@ public class PlaceService {
 	@Autowired
 	private MyRepository myRepository;
 	
+	@Autowired
+	private BoardRepository boardRepository;
+	
 	public List<Place> findAll() {
 		return this.placeRepository.findAll();
 	}
 	public List<Place> findByBoardNum(int boardNum){
-	      Board board = boardRepository.findById((long) boardNum).get();
-	      return this.myRepository.findByBoard(board);
-	   }
+
+		Board board = boardRepository.findById((long) boardNum).get();
+		return this.myRepository.findByBoard(board);
+	}
 	
 	public void save(String placeTitle, String placeLat, String placeLng,
-			String placeId, String placeContent,  Board board) {
+			String placeId, String placeContent, String memEmail, int boardNum) {
+		Board board = boardRepository.findById((long) boardNum).get();
+
 		Place place = new Place();
 		place.setPlaceTitle(placeTitle);
 		place.setPlaceLat(placeLat);
 		place.setPlaceLng(placeLng);
 		place.setPlaceId(placeId);
 		place.setPlaceContent(placeContent);
-		//place.getMember().setMemEmail(member.getMemEmail());
-		place.getBoard().setBoardNum(board.getBoardNum());
+
+//		place.getMember().setMemEmail(memEmail);
+		place.setBoard(board);
+
 		//place.setPlaceImg(placeImg);
 		this.placeRepository.save(place);
 	}
