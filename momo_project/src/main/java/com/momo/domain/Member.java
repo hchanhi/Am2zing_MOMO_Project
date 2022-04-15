@@ -22,14 +22,16 @@ public class Member implements Serializable {
     @Column
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long memNum;
-    
-    @Column
+
+
+    @Column(nullable = false, unique = true)
+
     private String memEmail;
 
     @Column
     private String memNickName;
 
-    @Column
+    @Column(nullable = false)
     private String memPassword;
 
     @Column
@@ -38,7 +40,7 @@ public class Member implements Serializable {
     @Column
     private String memBirth;
     
-    @Column
+    @Column(nullable = false)
     private String memLevel; 
     
     @Column
