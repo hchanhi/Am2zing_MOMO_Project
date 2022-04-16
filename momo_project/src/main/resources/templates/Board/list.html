@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>MOMO-게시판</title>
+</head>
+<body>
+<div>
+    <table>
+        <tr>
+            <th>글번호</th>
+            <th>제목</th>
+            <th>작성자</th>
+            <th>조회수</th>
+        </tr>
+        
+        <tbody>
+        <tr th:each="board : ${boards}">
+            <th>
+                <span th:text="${board.boardNum}"></span>
+            </th>
+            <td>
+                <a th:href="@{'/post/' + ${board.boardNum}}">
+                    <span th:text="${board.boardTitle}"></span>
+                </a>
+            </td>
+            <!--  
+            <td>
+                <span th:text="${board.member.NickName}"></span>
+            </td>
+            -->
+        </tr>
+        </tbody>
+    </table>
+    <div>
+        <div>
+            <a th:href="@{/post}" role="button">글쓰기</a>
+        </div>
+    </div>
+</div>
+</body>
+</html>

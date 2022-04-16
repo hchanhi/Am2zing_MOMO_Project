@@ -1,9 +1,14 @@
 package com.momo.place;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import com.momo.board.BoardRepository;
 
@@ -42,5 +47,9 @@ public class PlaceService {
 		place.setBoard(board);
 		//place.setPlaceImg(placeImg);
 		this.placeRepository.save(place);
+	}
+			
+	public void delete(int placeNum) {
+		placeRepository.deleteById((long) placeNum);
 	}
 }

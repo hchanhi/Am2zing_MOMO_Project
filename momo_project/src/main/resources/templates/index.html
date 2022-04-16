@@ -286,7 +286,7 @@ html, body {
 
 </head>
 <body>
-
+<div id="body">
 	<!--	<div><a href="/test02/1">1번 게시글<a></div>
 	<div><a href="/test02/2">2번 게시글</div>-->
 
@@ -324,28 +324,35 @@ html, body {
 
 	<div>
 		<!-- 위도 및 경도 좌표 및 위치정보 -->
-		<form id="inputForm" method="POST" th:action="@{/}">
+		<form id="inputForm" method="POST">
 			<input type="text" id="fulladdress" name="fulladdress"
-				style="width: 90%;" disabled> <input type="text"
-				id="placeTitle" name="placeTitle" value="" readonly>
+				style="width: 500px;" disabled>
+			<input hidden type="text" id="placeTitle" name="placeTitle" value="" readonly>
 			<!--  <input type="text" id="paddress" name="paddress" value="">-->
-			<input type="text" id="placeLat" name="placeLat" value="" readonly>
-			<input type="text" id="placeLng" name="placeLng" value="" readonly>
-			<input type="text" id="placeId" name="placeId" value="" readonly>
-			<input type="number" id="boardNum" name="boardNum"
+			<input hidden type="text" id="placeLat" name="placeLat" value="" readonly>
+			<input hidden type="text" id="placeLng" name="placeLng" value="" readonly>
+			<input hidden type="text" id="placeId" name="placeId" value="" readonly>
+			<input hidden type="number" id="boardNum" name="boardNum"
 				th:value="${boardNum}"> <br>
 			<div>내용</div>
 			<textarea id="placeContent" name="placeContent"
 				style="width: 500px; height: 150px; resize: none;"></textarea>
 			<br>
 		</form>
-		<button id="submitBtn">장소 추가</button>
+			<button id="submitBtn">장소 추가</button><br><br>
+			<a th:href="@{'/post/' + ${boardNum}}" role="button"><button>작성 완료</button></a>
+		<br>
+		
 	</div>
 
 	<div>
 		<h1>현재 추가된 장소</h1>
 	</div>
 	<div id="resDiv" style="margin-top: 50px;"></div>
+</div>	
+	
+	
+	
 	<script src="https://code.jquery.com/jquery-latest.min.js"></script>
 	<script type="text/javascript"
 		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a7b5481a65eecc18bd2cc1106898f604&libraries=services"></script>
@@ -382,6 +389,9 @@ html, body {
 			
 		 });
 	})
+	
+	
+	
 	
 	// 모달연습
 	function writeplaycard(){

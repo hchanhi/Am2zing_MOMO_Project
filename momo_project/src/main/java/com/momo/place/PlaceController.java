@@ -3,6 +3,7 @@ package com.momo.place;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,12 +18,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.momo.domain.Place;
+
 
 
 @Controller
 public class PlaceController {
 	@Autowired
 	private PlaceService placeService;
+	
+	@Autowired
+	private PlaceRepository placeRepository;
 	
 	@RequestMapping("/place")
 	public String findAllPlace(Model model) {
@@ -45,27 +51,9 @@ public class PlaceController {
 	}
 	
 	
-	/*
-	@RequestMapping
-	public String addCard(@RequestParam String placeTitle, 
-							String placeLat, 
-							String placeLng,
-							String placeId, 
-							String placeContent, 
-							String memEmail,
-							int boardNum, 
-							Model model) {
-		if(!Objects.isNull(boardNum)&& !placeTitle.isBlank()) {
-			this.placeService.save(placeTitle, placeLat, placeLng, placeId, placeContent, memEmail, boardNum);
-		}
-		System.out.println(boardNum);
-		return "/index";
-	}
-	*/
-	
 	@ResponseBody
 	@PostMapping("/updatePlace")
-	public ResponseEntity<?> updateLocation(@RequestBody Map<String,String> map) {
+	public ResponseEntity<?> update(@RequestBody Map<String,String> map) {
 		//System.out.println(map.toString());
 		Map<String, String> tempMap=new HashMap<>();
 		//DB처리
@@ -95,9 +83,8 @@ public class PlaceController {
 	
 	@ResponseBody
 	@PostMapping("/deletePlace")
-	public String deleteLocation(@RequestParam String placeNo) {
-		System.out.println(placeNo);
-		//삭제 DB처리
+	public String deleteLocation(@RequestParam int placeNum) {
+		placeRepository.deleteById((long) placeNum);
 		return "success";
 	}
 }

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>MOMO - 글 수정</title>
+</head>
+<body>
+<div >
+    <form th:action="@{'/post/edit/' + ${board.boardNum}}" method="post">
+        <input type="hidden" name="_method" value="put"/>
+        <input type="hidden" name="id" th:value="${board.boardNum}"/>
+        <div>
+            <h5>제목</h5>
+            <div>
+                <input type="text" name="boardTitle" th:value="${board.boardTitle}">
+            </div>
+        </div>
+        <div>
+            <div>
+                <input type="submit" role="button" value="수정">
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+</html>
