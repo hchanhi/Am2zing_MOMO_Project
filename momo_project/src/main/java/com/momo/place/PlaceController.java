@@ -50,13 +50,6 @@ public class PlaceController {
 		return "view/test02"; 
 	}
 	
-	@ResponseBody
-	@PostMapping("/deletePlace")
-	public String deleteLocation(@RequestParam int placeNum) {
-		placeRepository.deleteById((long) placeNum);
-		return "success";
-	}
-	
 	@PostMapping("/placeList/{boardNum}")
 	public String placeList(@PathVariable("boardNum") int boardNum, @RequestBody Map<String,String> map, Model model) {
 		placeService.update(map);

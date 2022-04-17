@@ -1,9 +1,11 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<html xmlns:th="http://www.thymelaf.org" lang="ko">
+
 <head>
-    <meta charset="UTF-8">
-    <title>MOMO - 글 수정</title>
-    <style>
+<title>Place Information UI</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style>
 body {
 	font-family: "맑은 고딕", "고딕", "굴림";
 }
@@ -281,21 +283,12 @@ html, body {
 	height: 200px;
 }
 </style>
+
 </head>
 <body>
-<div>
-    <form th:action="@{'/post/edit/' + ${board.boardNum}}" method="post">
-        <input type="hidden" name="_method" value="put"/>
-        <input type="hidden" name="id" th:value="${board.boardNum}"/>
-        <div>
-            <h5>제목</h5>
-            <div>
-                <input type="text" name="boardTitle" th:value="${board.boardTitle}">
-            </div>
-        </div>
+<div id="body">
 	<div>
 		<button onclick="writeplaycard()">장소 검색</button>
-		<button type="submit">수정 완료</button>
 	</div>
 
 	<!-- 모달연습 -->
@@ -303,7 +296,9 @@ html, body {
 		<div class="modal-window">
 			<div class="close-area">X</div>
 			<div id="wrapper">
+
 				<div class="map_wrap">
+
 					<div id="map"
 						style="width: 600px; height: 300px; position: relative; overflow: hidden;"></div>
 					<div id="menu_wrap" class="bg_white">
@@ -311,6 +306,7 @@ html, body {
 							<div>
 								키워드 : <input type="text" value="서울역" id="keyword" size="15">
 								<button onclick="searchPlaces(); return false;">검색하기</button>
+
 							</div>
 						</div>
 						<hr>
@@ -321,8 +317,11 @@ html, body {
 			</div>
 		</div>
 	</div>
+
+
+	<div>
 		<!-- 위도 및 경도 좌표 및 위치정보 -->
-		<div>
+		<form id="inputForm" method="POST">
 			<input type="text" id="fulladdress" name="fulladdress"
 				style="width: 500px;" disabled>
 			<input hidden type="text" id="placeTitle" name="placeTitle" value="" readonly>
@@ -336,35 +335,21 @@ html, body {
 			<textarea id="placeContent" name="placeContent"
 				style="width: 500px; height: 150px; resize: none;"></textarea>
 			<br>
-		</div>	
 		</form>
-		
 			<button id="submitBtn">장소 추가</button>
 			<button id="deleteBtn">장소 리셋</button><br><br>
+			<a th:href="@{'/post/' + ${boardNum}}" role="button"><button>작성 완료</button></a>
 		<br>
 		
-</div>
+	</div>
+
 	<div>
 		<h1>현재 추가된 장소</h1>
 	</div>
-	<div id="resDiv" style="margin-top: 50px;">
-    <table>
-        <tr>
-            <th>장소명</th>
-            <th>코멘트</th>
-        </tr>
-        <tbody>
-        <tr th:each="place : ${places}">
-            <td>
-                <span th:text="${place.placeTitle}"></span>
-            </td>
-            <td>
-                <span th:text="${place.placeContent}"></span>
-            </td>
-        </tr>
-        </tbody>
-    </table>
-	</div>
+	<div id="resDiv" style="margin-top: 50px;"></div>
+</div>	
+	
+	
 	
 	<script src="https://code.jquery.com/jquery-latest.min.js"></script>
 	<script type="text/javascript"

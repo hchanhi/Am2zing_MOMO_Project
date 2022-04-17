@@ -51,7 +51,7 @@ public class BoardController {
 			board = this.boardService.save(boardTitle);
 		}
 		model.addAttribute("boardNum", board.getBoardNum());
-		return "index";
+		return "Board/addPlace";
 		//나중에 장소추가하는 html로 변경.
 	}
 	
@@ -66,7 +66,10 @@ public class BoardController {
 	@GetMapping("/post/edit/{boardNum}")
 	public String edit(@PathVariable("boardNum") Long boardNum, Model model) {
 		Board board = boardRepository.findById(boardNum).get();
+		List<Place> places = placeService.getPlaceList(boardNum.intValue());
 		model.addAttribute("board", board);
+		model.addAttribute("places", places);
+		
 		return "Board/edit";
 	}
 	
@@ -96,7 +99,7 @@ public class BoardController {
 			board = this.boardService.save(boardTitle);
 		}
 		model.addAttribute("boardNum", board.getBoardNum());
-		return "index";
+		return "Board/addPlace";
 	}
 	
 	
