@@ -4,25 +4,29 @@
 <meta charset="UTF-8">
 <title>*</title>
 </head>
-<body>
+<body id="body">
 <div>
     <table>
         <tr>
-            <th>번호</th>
             <th>장소명</th>
             <th>코멘트</th>
         </tr>
         
         <tbody>
         <tr th:each="place : ${places}">
-            <th>
-                <span th:text="${place.placeNum}"></span>
-            </th>
             <td>
                 <span th:text="${place.placeTitle}"></span>
             </td>
             <td>
                 <span th:text="${place.placeContent}"></span>
+            </td>
+            <td>
+            <!--  
+            <form id="form" th:action="@{'/deletePlace/'+${place.placeNum}}" method="post">
+                <input type="hidden" name="_method" value="delete"/>
+                <button type="submit">삭제</button>
+            </form>
+            -->
             </td>
         </tr>
         </tbody>

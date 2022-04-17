@@ -339,7 +339,8 @@ html, body {
 				style="width: 500px; height: 150px; resize: none;"></textarea>
 			<br>
 		</form>
-			<button id="submitBtn">장소 추가</button><br><br>
+			<button id="submitBtn">장소 추가</button>
+			<button id="deleteBtn">장소 리셋</button><br><br>
 			<a th:href="@{'/post/' + ${boardNum}}" role="button"><button>작성 완료</button></a>
 		<br>
 		
@@ -361,6 +362,7 @@ html, body {
 $('#submitBtn').click(function(){
 	let boardNum = document.getElementById("boardNum").value;
 	var tempData={
+			
 			"placeTitle" : $('input[name="placeTitle"]').val(),
 			"placeLat" : $('input[name="placeLat"]').val(),
 			"placeLng" : $('input[name="placeLng"]').val(),
@@ -375,6 +377,7 @@ $('#submitBtn').click(function(){
 		contentType: "application/json; charset=UTF-8",
 		data: JSON.stringify(tempData),
 		success: function(data){
+			$('input[name="fulladdress"]').val("");
 			$('input[name="placeTitle"]').val("");
 			$('input[name="placeLat"]').val("");
 			$('input[name="placeLng"]').val("");
@@ -386,7 +389,24 @@ $('#submitBtn').click(function(){
 		
 	 });
 })
+	$('#deleteBtn').click(function(){
+	let boardNum = document.getElementById("boardNum").value;
 	
+	$.ajax({
+		url:"/deletePlace/"+boardNum,
+		type:"POST",
+		async: true,
+		success: function(data){
+			$('input[name="fulladdress"]').val("");
+			$('input[name="placeTitle"]').val("");
+			$('input[name="placeLat"]').val("");
+			$('input[name="placeLng"]').val("");
+			$('input[name="placeId"]').val("");
+			$('#placeContent').val("");
+			$('#resDiv').html(data)
+		}
+	 });
+})
 	
 	// 모달연습
 	function writeplaycard(){

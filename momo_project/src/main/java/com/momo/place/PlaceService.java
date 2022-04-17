@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.momo.board.BoardRepository;
 
@@ -46,9 +47,15 @@ public class PlaceService {
 		this.placeRepository.save(place);
 	}
 			
-	public void delete(int placeNum) {
-		placeRepository.deleteById((long) placeNum);
-	}
+	@Transactional
+    public void deletePlace(Long boardNum) {
+	 List<Place> places = this.findByBoardNum(boardNum.intValue());
+	 
+	 	for(Place place : places) {
+			 Long placeNum = place.getPlaceNum();
+			 placeRepository.deleteById(placeNum);
+	 	}
+    }
 	
 	public ResponseEntity<?> update(Map<String,String> map) {
 		//System.out.println(map.toString());

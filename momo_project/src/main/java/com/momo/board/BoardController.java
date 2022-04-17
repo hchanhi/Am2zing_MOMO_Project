@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.momo.domain.Board;
@@ -37,7 +38,7 @@ public class BoardController {
 		return "Board/list";
 	}
 	
-	@GetMapping("/post")
+	@GetMapping("/postBoard")
 	public String post() {
 		return "Board/post";
 	}
