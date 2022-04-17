@@ -4,14 +4,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-import javax.transaction.Transactional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -53,17 +52,28 @@ public class CommentController {
 		return "comment/test05"; 
 	}
 	
+	@PostMapping("/commentList/{boardNum}")
+	public String commentList(@PathVariable("boardNum") int boardNum, @RequestBody Map<String,String> map, Model model) {
+		commentService.update(map);
+		List<Comment> commentList = commentService.getCommentList(boardNum);
+		model.addAttribute("comments", commentList);
+		return "comment/commentList";
+	}
 	
+	@DeleteMapping("/commentList/{replyNum}")
+	public String deleteStudent(@PathVariable int replyNum) {
+		commentService.delete(replyNum);
+		return "comment/commentList";
+	}
 	
-	@Transactional
-	 @PostMapping("/writeComment") public String addComment(@RequestParam String
-	 replyContent, int boardNum, Model model) { if(!Objects.isNull(boardNum)&&
-	 !replyContent.isBlank()) { this.commentService.save(replyContent, boardNum);
-	 
-	  } Board board = new Board(); model.addAttribute("boardNum",
-	 board.getBoardNum());
-	  return "comment/test04"; }
-	
+	/*
+	 * @PostMapping("/writeComment") public String addComment(@RequestParam String
+	 * replyContent, int boardNum, Model model) { if(!Objects.isNull(boardNum)&&
+	 * !replyContent.isBlank()) { this.commentService.save(replyContent, boardNum);
+	 * 
+	 * } Board board = new Board(); model.addAttribute("boardNum",
+	 * board.getBoardNum()); return replyContent; }
+	 */
 	
 	/*
 	 * @ResponseBody
@@ -71,6 +81,6 @@ public class CommentController {
 	 * @PostMapping(value="/addComment",produces = MediaType.APPLICATION_JSON_VALUE)
 	 * public Comment addComment(@RequestBody Comment comment) {
 	 * 
-	 * commentRepository.save(comment); return comment; }
+	 * commentRepository.save(comment); return comment; } }
 	 */
 }

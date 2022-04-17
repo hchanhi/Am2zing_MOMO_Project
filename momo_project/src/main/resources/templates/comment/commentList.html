@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>*</title>
+</head>
+<body>
+<div>
+    <table>
+        <tr>
+        	<th>댓글 번호</th>
+            <th>댓글</th>
+        </tr>
+        
+        <tbody>
+        <tr th:each="comment : ${comments}">
+             <th>
+                <span th:text="${comment.replyNum}"></span>
+            </th>
+       
+            <td>
+                <span th:text="${comment.replyContent}"></span>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

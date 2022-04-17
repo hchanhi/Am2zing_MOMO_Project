@@ -34,7 +34,7 @@ public class Comment {
 	private Long replyNum; 
 	
 	
-	@Column(columnDefinition = "TEXT", nullable = false, length =120) 
+	@Column
 	private String replyContent; // 댓글 내용 
 	
 	/*
@@ -48,8 +48,7 @@ public class Comment {
 	 */
 
 	 @ManyToOne
-	 @JoinColumn(name="board_num")
-	    private Board board;
+	  private Board board;
 	 /*
 	 * @ManyToOne
 	 * 

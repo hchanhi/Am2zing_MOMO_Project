@@ -1,11 +1,15 @@
 package com.momo.comment;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.momo.board.BoardRepository;
@@ -40,7 +44,35 @@ public class CommentService {
 		
 		this.commentRepository.save(comment);
 	}
-
+	public ResponseEntity<?> update(Map<String,String> map) {
+		//System.out.println(map.toString());
+		Map<String, String> tempMap=new HashMap<>();
+		//DB처리
+		String replyContent = map.get("replyContent");
+		int boardNum = Integer.parseInt(map.get("boardNum"));
+		this.save(replyContent, boardNum);
+		
+		try {
+			
+			//DB처리 후 서비스에서 Place PK를 반환 받아옴
+			tempMap.put("replyContent", map.get("replyContent")); //DB에 넣으려는 제목
+			//DB에 저장되고 난 후 placeNo(PK) int값 String.valeuOf 로 타입변환
+			
+		} catch(Exception e) {
+			return new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
+		}
+		
+		//타이틀이랑 PK를 Map으로 view로 내려보냄
+		return new ResponseEntity<Map<String, String>>(tempMap, HttpStatus.OK);
+	}
+	public void delete(int replyNum) {
+		commentRepository.deleteById((long) replyNum);
+	}
+	public List<Comment> getCommentList(int boardNum){
+		Board board = boardRepository.findById((long) boardNum).get();
+		List<Comment> commentList = this.commentRepository.findByBoard(board);
+		return commentList;
+	}
 	
 
 	
