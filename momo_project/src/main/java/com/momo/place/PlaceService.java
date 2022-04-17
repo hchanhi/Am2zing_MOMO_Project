@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import com.momo.board.BoardRepository;
 
@@ -76,5 +75,11 @@ public class PlaceService {
 		
 		//타이틀이랑 PK를 Map으로 view로 내려보냄
 		return new ResponseEntity<Map<String, String>>(tempMap, HttpStatus.OK);
+	}
+	
+	public List<Place> getPlaceList(int boardNum){
+		Board board = boardRepository.findById((long) boardNum).get();
+		List<Place> placeList = this.placeRepository.findByBoard(board);
+		return placeList;
 	}
 }

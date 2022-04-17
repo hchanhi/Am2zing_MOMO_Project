@@ -358,39 +358,34 @@ html, body {
 		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a7b5481a65eecc18bd2cc1106898f604&libraries=services"></script>
 	<script>
 	
-	let btnNo=1;
-	$('#submitBtn').click(function(){
-		
-		var tempData={
-				"placeTitle" : $('input[name="placeTitle"]').val(),
-				"placeLat" : $('input[name="placeLat"]').val(),
-				"placeLng" : $('input[name="placeLng"]').val(),
-				"placeId" : $('input[name="placeId"]').val(),
-				"boardNum" : $('input[name="boardNum"]').val(),
-				"placeContent" : $('#placeContent').val()
-			};
-		$.ajax({
-			url:"/updatePlace",
-			type:"POST",
-			async: true,
-			contentType: "application/json; charset=UTF-8",
-			data: JSON.stringify(tempData),
-			success: function(data){
-				$('input[name="placeTitle"]').val("");
-				$('input[name="placeLat"]').val("");
-				$('input[name="placeLng"]').val("");
-				$('input[name="placeId"]').val("");
-				$('#placeContent').val("");
-				$('#resDiv').append("<h5 id='resTitle"+btnNo+"'>"+data.placeTitle+"</h5>");
-				
-				btnNo++;
-								
-			}
+$('#submitBtn').click(function(){
+	let boardNum = document.getElementById("boardNum").value;
+	var tempData={
+			"placeTitle" : $('input[name="placeTitle"]').val(),
+			"placeLat" : $('input[name="placeLat"]').val(),
+			"placeLng" : $('input[name="placeLng"]').val(),
+			"placeId" : $('input[name="placeId"]').val(),
+			"boardNum" : $('input[name="boardNum"]').val(),
+			"placeContent" : $('#placeContent').val()
+		};
+	$.ajax({
+		url:"/placeList/"+boardNum,
+		type:"POST",
+		async: true,
+		contentType: "application/json; charset=UTF-8",
+		data: JSON.stringify(tempData),
+		success: function(data){
+			$('input[name="placeTitle"]').val("");
+			$('input[name="placeLat"]').val("");
+			$('input[name="placeLng"]').val("");
+			$('input[name="placeId"]').val("");
+			$('#placeContent').val("");
+			$('#resDiv').html(data)
 			
-		 });
-	})
-	
-	
+		}
+		
+	 });
+})
 	
 	
 	// 모달연습
