@@ -1,43 +1,55 @@
 <!DOCTYPE html>
-<html th:replace="~{layouts/base :: layout(~{::title},~{::section})}"
+<html
       xmlns:th="http://www.thymeleaf.org">
 <head>
+ <meta charset="utf-8">
     <title>게시판 조회</title>
 </head>
-<body>
-<section class="masthead text-center">
-
-    <div class="jumbotron"  th:object="${board}">
-        <h1 class="display-4" th:text="${board.title}">Hello, world!</h1>
-        <br>
-        <hr>
-        <br>
-       
-        <br><hr><br>
-        <p class="lead" th:text="${board.content}">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
-        <hr><br>
-       
-
-        <br><hr><br>
-
-        <!-- Reply Section -->
-
-        <div class="input-group mb-3">
-
-            <form id="reply" action="/reply_write" method="post">
-                <input type="text" id="content" name="content" class="form-control" placeholder="댓글을 입력해주세요.." aria-label="댓글을 입력해주세요.." aria-describedby="basic-addon2">
-                <input type="hidden" id="boardNum" name="boardNum" th:value="${board.boardNum}">
-                <div class="input-group-append">
-                    <button class="btn btn-outline-secondary" type="submit">등록</button>
-                </div>
-            </form>
-        </div>
-
-
-
-      
-    </div>
-
-</section>
+	<form method="post" th:action="@{/addComment}">
+			<div class="">
+				<label for="title" class="">content</label>
+				<input type="text" class="form-control" name="replyContent" id="replyContent">
+				 <input type="number" id="boardNum" name="boardNum" th:value="${boardNum}">
+				
+			</div>
+			<div>
+				<button onclick="writeSubmit()" type="submit" class="btn btn-sm btn-primary" id="btnSave">저장</button>
+			</div>
+		</form>
+		
+		<h1>목록</h1>
+		<ul class="list-group">
+			<li class="list-group-item" th:each="리스트 : ${Board}" th:text="${Board.boardTitle}">
+			</li>
+		</ul>
 </body>
+<script th:inline="javascript">
+	//게시판 등록
+	function writeSubmit(){
+
+		//step2. 게시판 등록
+		var params = {
+			replyContent : $.trim($("#replyContent").val())
+			,boardNum : $.trim($("#boardNum").val())
+		
+		}
+
+        console.log(params);
+
+		$.ajax({
+	         type : 'POST'
+	        ,url : "/addComment"
+	        ,dataType : 'json'
+	        ,data : JSON.stringify(params)
+	        ,contentType: 'application/json'
+	        ,success : function(result) {
+				alert("해당글이 정상적으로 등록되었습니다.");
+				location.href="/";
+	        },
+	        error: function(request, status, error) {
+
+	        }
+	    })
+	}
+</script>
 </html>
