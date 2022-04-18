@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.momo.board.BoardRepository;
 import com.momo.board.BoardService;
@@ -59,6 +60,11 @@ public class CommentController {
 		model.addAttribute("comments", commentList);
 		return "comment/commentList";
 	}
+	/*
+	 * @RequestMapping("/test02") public ModelAndView list(ModelAndView mav) {
+	 * mav.setViewName("test02"); //뷰의 이름 List<Comment> list=commentService.list();
+	 * mav.addObject("test02", list); //뷰에 전달할 데이터 return mav; //뷰로 이동 (화면 출력함) }
+	 */
 	
 	/*
 	 * @PostMapping("/commentList02/{boardNum}") public String
@@ -70,9 +76,11 @@ public class CommentController {
 	 * model.getAttribute(num2); return "comment/commentList"; }
 	 */
 	@PostMapping("/commentList02/{boardNum}")
-	public List<Comment> replyList(@PathVariable int replyNum){
-		List<Comment> replylist = commentService.getCommentList(replyNum);
-		return replylist;
+	public String commentList02(@PathVariable("boardNum") int boardNum, @RequestBody Map<String,String> map, Model model) {
+		commentService.update(map);
+		List<Comment> commentList = commentService.getCommentList(boardNum);
+		model.addAttribute("comments", commentList);
+		return "view/test02";
 	}
 }
 /*	@GetMapping(value="/pages/{boardNum}/{page}", produces = {MediaType.APPLICATION_JSON_UTF8_VALUE, MediaType.APPLICATION_XML_VALUE})

@@ -57,8 +57,7 @@
         	<li>간장</li>
         	</ul>
         <div id="pagination"></div>
-    </div>
-    <form method="post"  >
+            <form method="post"  >
 			<div class="">
 				<label for="title" class="">content</label>
 				<textarea placeholder="댓글을 입력해주세요" name="replyContent" id="replyContent"style="width: 500px; height: 150px; resize: none;"></textarea>
@@ -68,14 +67,40 @@
 		
 		</form>
 		<button  id="btnSave">저장</button>
+			<h1>댓글목록</h1>
+		<div id="resDiv" style="margin-top: 50px;"></div>
+		<tbody>
+        <tr th:each="comment : ${test02}">
+           
+            <td>
+                <span th:text="${comment.replyContent}">콘텐츠</span>
+            </td>
+        </tr>
+        </tbody>
+    </div>
+
 		<!--<td><a th:href="@|/commentList//${comment.replyNum}|}">삭제</a></td>-->
 		<div>
-		<h1>댓글목록</h1>
+	
+		<!--<table>
+			<thead>
+			<tr>
+				<th>댓글 번호</th>
+				<th>댓글</th>
+			</tr>
+			</thead>
+			<tbody>
+				<tr th:each = "comments : ${board.comments}">
+					<td th:text = "${comments.replyNum}"></td th:text>
+					<td th:text = "${comments.replyContent}"></td th:text>
+				</tr>
+			</tbody>
+		</table>-->
 	</div>
 </div>
 
 
-	<div id="resDiv" style="margin-top: 50px;"></div>
+	
 	<script src="https://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a7b5481a65eecc18bd2cc1106898f604&libraries=services"></script>
 <script th:inline="javascript">
@@ -96,7 +121,7 @@ var places = [];
     var lat = [[${place.placeLat}]];
     var lng = [[${place.placeLng}]];
     var content = [[${place.placeContent}]];
-
+	
     
   
     
@@ -159,6 +184,7 @@ for (var i = 0; i < places.length; i ++) {
 			"boardNum" : $('input[name="boardNum"]').val(),
 			"replyContent" : $('#replyContent').val()
 		};
+		console.log(tempData);
 	var reply = $('#replyContent').val()
 		if(reply != "") {
 	$.ajax({
@@ -175,27 +201,34 @@ for (var i = 0; i < places.length; i ++) {
 		}
 		
 	 });
-	 }else {
-		$.getJSON('/commentList/'+boardNum, function(data){
-		$.each(data, function(index, item){
-			$('#resDiv').append("<tr><td>"+comment.replyNum+"</td>"+"<td>"+comment.replyContent+"</td></tr>")
-		})
-	})
-	}
+	 }
 });
 
-
-$(document).ready(function () {
-
-	
-	$.getJSON('/commentList/'+boardNum, function(data){
-		$.each(data, function(index, item){
-			$('#resDiv').append("<tr><td>"+comment.replyNum+"</td>"+"<td>"+comment.replyContent+"</td></tr>")
-		})
+$(document).ready(function (){
+	let boardNum = document.getElementById("boardNum").value;
+	var tempData={
 		
-	})
-})
+			"boardNum" : $('input[name="boardNum"]').val(),
+			
+		};
+		console.log(tempData);
+	var reply = $('#replyContent').val()
+		
+	$.ajax({
+		url:"/commentList/"+boardNum,
+		type:"POST",
+		async: true,
+		contentType: "application/json; charset=UTF-8",
+		data: JSON.stringify(tempData),
+		success: function(data){
+	
+			$('#resDiv').html(data)
 
+		}
+		
+	 });
+	 
+});
 
 
 /**function commentList(commentPage) {

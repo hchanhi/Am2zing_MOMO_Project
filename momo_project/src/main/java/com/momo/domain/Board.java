@@ -43,10 +43,8 @@ public class Board implements Serializable {
 
   
     
-	/*
-	 * @OneToMany(mappedBy = "board_num") private Set<Place> dataOnes = new
-	 * HashSet<>();
-	 */
+    @OneToMany(mappedBy = "board", fetch = FetchType.EAGER)
+    private List<Comment> comments;
 	
 	}
 	

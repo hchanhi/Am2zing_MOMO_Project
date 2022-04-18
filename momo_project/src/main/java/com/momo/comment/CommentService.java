@@ -73,6 +73,10 @@ public class CommentService {
 		List<Comment> commentList = this.commentRepository.findByBoard(board);
 		return commentList;
 	}
+	/*
+	 * public List<Comment> list() { // TODO Auto-generated method stub return
+	 * commentRepository.list(); }
+	 */
 	
 
 	

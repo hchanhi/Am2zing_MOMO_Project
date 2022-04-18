@@ -13,5 +13,5 @@ import com.momo.domain.Place;
 @Repository
 public interface CommentRepository extends JpaRepository<Comment, Long>{
 	List<Comment> findByBoard(Board board);
-
+	
 }
