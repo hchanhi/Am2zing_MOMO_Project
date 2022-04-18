@@ -283,7 +283,7 @@ html, body {
 </style>
 </head>
 <body>
-<div>
+<div style="width:500px">
     <form th:action="@{'/post/edit/' + ${board.boardNum}}" method="post">
         <input type="hidden" name="_method" value="put"/>
         <input type="hidden" name="id" th:value="${board.boardNum}"/>
@@ -295,7 +295,6 @@ html, body {
         </div>
 	<div>
 		<button onclick="writeplaycard()">장소 검색</button>
-		<button type="submit">수정 완료</button>
 	</div>
 
 	<!-- 모달연습 -->
@@ -336,9 +335,9 @@ html, body {
 			<textarea id="placeContent" name="placeContent"
 				style="width: 500px; height: 150px; resize: none;"></textarea>
 			<br>
-		</div>	
+		</div>
+		<button type="submit" style="float:right;">수정 완료</button>	
 		</form>
-		
 			<button id="submitBtn">장소 추가</button>
 		<br>
 		
@@ -359,6 +358,11 @@ html, body {
             </td>
             <td>
                 <span th:text="${place.placeContent}"></span>
+            </td>
+            <td>
+            <span hidden id="boardNum" th:boardNum="${place.board.boardNum}"></span>
+            <input type="button" class="deletePlace" th:data-del="${place.placeNum}"
+             value="삭제">
             </td>
         </tr>
         </tbody>
@@ -400,6 +404,26 @@ $('#submitBtn').click(function(){
 		
 	 });
 })
+
+$(document).ready(function() {
+	$("input:button.deletePlace").on('click',deletePlace);
+	
+});
+
+function deletePlace(){
+	let boardNum = document.getElementById("boardNum").value;
+    let placeNum = $(this).attr("data-del");
+    var sendData = {"boardNum": boardNum};
+    $.ajax({
+        method: 'DELETE',
+        url : '/deletePlace/'+placeNum,
+        data : sendData,
+        success: function(data){
+        	$('#resDiv').html(data)
+        }
+    });
+
+}
 	// 모달연습
 	function writeplaycard(){
 		const modal = document.getElementById("modal")
@@ -432,18 +456,6 @@ $('#submitBtn').click(function(){
 		
 	    maparea.style.display = "flex"
 	}
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 // 마커를 담을 배열입니다
 var markers = [];
