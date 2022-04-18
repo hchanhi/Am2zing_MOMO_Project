@@ -43,13 +43,13 @@ public class CommentController {
 	
 	@GetMapping("/addComment")
 	public String MapTest05() {
-		return "/comment/test03";
+		return "comment/test03";
 	}
 	
-	@GetMapping("/test04/{boardNum}")
+	@GetMapping("/addComment/{boardNum}")
 	public String MapTest03(@PathVariable Integer boardNum, Model model) {
 		model.addAttribute("mycomment", this.commentService.findByBoardNum(boardNum));
-		return "comment/test05"; 
+		return "comment/test03"; 
 	}
 	
 	@PostMapping("/commentList/{boardNum}")
@@ -60,11 +60,31 @@ public class CommentController {
 		return "comment/commentList";
 	}
 	
-	@DeleteMapping("/commentList/{replyNum}")
-	public String deleteStudent(@PathVariable int replyNum) {
-		commentService.delete(replyNum);
-		return "comment/commentList";
+	/*
+	 * @PostMapping("/commentList02/{boardNum}") public String
+	 * commentList02(@PathVariable("boardNum") int
+	 * boardNum, @PathVariable("replyNum") int replyNum,@RequestBody
+	 * Map<String,String> map, Model model) { String num = String.valueOf(boardNum);
+	 * String num2 = String.valueOf(replyNum); commentService.update(map);
+	 * List<Comment> commentList = commentService.getCommentList(boardNum);
+	 * model.getAttribute(num2); return "comment/commentList"; }
+	 */
+	@PostMapping("/commentList02/{boardNum}")
+	public List<Comment> replyList(@PathVariable int replyNum){
+		List<Comment> replylist = commentService.getCommentList(replyNum);
+		return replylist;
 	}
+}
+/*	@GetMapping(value="/pages/{boardNum}/{page}", produces = {MediaType.APPLICATION_JSON_UTF8_VALUE, MediaType.APPLICATION_XML_VALUE})
+	public ResponseEntity<List<Comment>> getListWithPage(@PathVariable("page") int page, @PathVariable("boardNum") int boardNum){
+		return new ResponseEntity<>
+	}
+	*/
+	/*
+	 * @DeleteMapping("/commentList/{replyNum}") public String
+	 * deleteStudent(@PathVariable int replyNum) { commentService.delete(replyNum);
+	 * return "comment/commentList"; }
+	 */
 	
 	/*
 	 * @PostMapping("/writeComment") public String addComment(@RequestParam String
@@ -83,4 +103,4 @@ public class CommentController {
 	 * 
 	 * commentRepository.save(comment); return comment; } }
 	 */
-}
+

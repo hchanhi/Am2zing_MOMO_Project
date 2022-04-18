@@ -65,7 +65,7 @@ public class CommentService {
 		//타이틀이랑 PK를 Map으로 view로 내려보냄
 		return new ResponseEntity<Map<String, String>>(tempMap, HttpStatus.OK);
 	}
-	public void delete(int replyNum) {
+	public void delete(Long replyNum) {
 		commentRepository.deleteById((long) replyNum);
 	}
 	public List<Comment> getCommentList(int boardNum){

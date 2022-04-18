@@ -58,9 +58,25 @@
         	</ul>
         <div id="pagination"></div>
     </div>
+    <form method="post"  >
+			<div class="">
+				<label for="title" class="">content</label>
+				<textarea placeholder="댓글을 입력해주세요" name="replyContent" id="replyContent"style="width: 500px; height: 150px; resize: none;"></textarea>
+				 <input type="number" id="boardNum" name="boardNum" th:value="${boardNum}">
+				
+			</div>
+		
+		</form>
+		<button  id="btnSave">저장</button>
+		<!--<td><a th:href="@|/commentList//${comment.replyNum}|}">삭제</a></td>-->
+		<div>
+		<h1>댓글목록</h1>
+	</div>
 </div>
 
 
+	<div id="resDiv" style="margin-top: 50px;"></div>
+	<script src="https://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a7b5481a65eecc18bd2cc1106898f604&libraries=services"></script>
 <script th:inline="javascript">
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
@@ -80,10 +96,12 @@ var places = [];
     var lat = [[${place.placeLat}]];
     var lng = [[${place.placeLng}]];
     var content = [[${place.placeContent}]];
+
     
   
     
     places.push({title: title, latlng: new kakao.maps.LatLng(lat, lng), content:content})
+
     
     /*[/]*/
 
@@ -129,6 +147,75 @@ for (var i = 0; i < places.length; i ++) {
 }
 
 
+	
+
+//게시판 등록
+
+
+	$('#btnSave').click(function(){
+	let boardNum = document.getElementById("boardNum").value;
+	var tempData={
+		
+			"boardNum" : $('input[name="boardNum"]').val(),
+			"replyContent" : $('#replyContent').val()
+		};
+	var reply = $('#replyContent').val()
+		if(reply != "") {
+	$.ajax({
+		url:"/commentList/"+boardNum,
+		type:"POST",
+		async: true,
+		contentType: "application/json; charset=UTF-8",
+		data: JSON.stringify(tempData),
+		success: function(data){
+	
+			$('#replyContent').val();
+			$('#resDiv').html(data)
+
+		}
+		
+	 });
+	 }else {
+		$.getJSON('/commentList/'+boardNum, function(data){
+		$.each(data, function(index, item){
+			$('#resDiv').append("<tr><td>"+comment.replyNum+"</td>"+"<td>"+comment.replyContent+"</td></tr>")
+		})
+	})
+	}
+});
+
+
+$(document).ready(function () {
+
+	
+	$.getJSON('/commentList/'+boardNum, function(data){
+		$.each(data, function(index, item){
+			$('#resDiv').append("<tr><td>"+comment.replyNum+"</td>"+"<td>"+comment.replyContent+"</td></tr>")
+		})
+		
+	})
+})
+
+
+
+/**function commentList(commentPage) {
+	$.getJSON("/comment/pages/"+${boardNum}+"/"+commentPage, function (data){
+		$("#resDiv").html('');
+		var html = "<ul class='list-group'>";
+		$(data).each(function(){
+			html += "<li class='list-group-item comments'>";
+			html += 	"<div class='comment'>";
+			html += 		"<div class='comment-info'>";
+			html += "			<div class='comment-text'>" + this.replyContent + "</div>";
+			html += "		</div>";
+			html += 	"</div>";
+			html += "</li>";
+			
+		});
+		html += "</ul>";
+		$("#resDiv").append(html);
+	});
+	}**/
 </script th:inline="javascript">
 <div id="place">
 장소 1: 블라블라

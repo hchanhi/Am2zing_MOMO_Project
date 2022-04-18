@@ -15,7 +15,7 @@
 		
 		</form>
 		<button  id="btnSave">저장</button>
-		<td><a th:href="@|/commentList//${comment.replyNum}|}">삭제</a></td>>
+		<!--<td><a th:href="@|/commentList//${comment.replyNum}|}">삭제</a></td>-->
 		<div>
 		<h1>댓글목록</h1>
 	</div>
@@ -31,7 +31,7 @@
 			"replyContent" : $('#replyContent').val()
 		};
 	$.ajax({
-		url:"/commentList/"+boardNum,
+		url:"/commentList02/"+boardNum,
 		type:"POST",
 		async: true,
 		contentType: "application/json; charset=UTF-8",
