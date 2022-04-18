@@ -1,14 +1,24 @@
 package com.momo.place;
 
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.Model;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.momo.board.BoardRepository;
 
@@ -33,7 +43,7 @@ public class PlaceService {
 	}
 	
 	public void save(String placeTitle, String placeLat, String placeLng,
-			String placeId, String placeContent, String memEmail, int boardNum) {
+			String placeId, String placeContent, String memEmail, int boardNum, String placeImg) {
 		Board board = boardRepository.findById((long) boardNum).get();
 		Place place = new Place();
 		place.setPlaceTitle(placeTitle);
@@ -43,7 +53,7 @@ public class PlaceService {
 		place.setPlaceContent(placeContent);
 //		place.getMember().setMemEmail(memEmail);
 		place.setBoard(board);
-		//place.setPlaceImg(placeImg);
+		place.setPlaceImg(placeImg);
 		this.placeRepository.save(place);
 	}
 			
@@ -70,9 +80,10 @@ public class PlaceService {
 		String placeLng = map.get("placeLng");
 		String placeId = map.get("placeId");
 		String placeContent = map.get("placeContent");
+		String placeImg = map.get("placeImg");
 		//String memEmail = map.get("memEmail");
 		int boardNum = Integer.parseInt(map.get("boardNum"));
-		this.save(placeTitle, placeLat, placeLng, placeId, placeContent, null, boardNum);
+		this.save(placeTitle, placeLat, placeLng, placeId, placeContent, null, boardNum, placeImg);
 		
 		try {
 			
@@ -93,4 +104,47 @@ public class PlaceService {
 		List<Place> placeList = this.placeRepository.findByBoard(board);
 		return placeList;
 	}
+	
+	private String path= "C:/Users/Administrator/Desktop/upload/";
+	
+	public String upload(MultipartFile multi, HttpServletRequest request,
+			HttpServletResponse response, Model model) {
+		
+		String url = null;
+		try {
+			String uploadpath = path;
+			String originFileName = multi.getOriginalFilename();
+			String extName = originFileName.substring(originFileName.lastIndexOf(".")
+					,originFileName.length());
+			long size = multi.getSize();
+			String saveFileName = genSaveFileName(extName);
+			
+			if(!multi.isEmpty()) {
+				File file = new File(uploadpath, multi.getOriginalFilename()+"_"+saveFileName);
+				multi.transferTo(file);
+				model.addAttribute("fileName", multi.getOriginalFilename());
+				model.addAttribute("uploadPath", file.getAbsolutePath());
+				//return file.getAbsolutePath();
+				return "Board/filePath";
+			}
+		} catch(Exception e){
+			
+		}
+		return "Board/filePath";
+	}
+	
+	private String genSaveFileName(String extName) {
+        String fileName = "";
+        
+        Calendar calendar = Calendar.getInstance();
+        fileName += calendar.get(Calendar.YEAR);
+        fileName += calendar.get(Calendar.MONTH);
+        fileName += calendar.get(Calendar.DATE);
+        fileName += calendar.get(Calendar.HOUR);
+        fileName += calendar.get(Calendar.MINUTE);
+        fileName += calendar.get(Calendar.SECOND);
+        fileName += calendar.get(Calendar.MILLISECOND);
+        fileName += extName;
+        return fileName;
+    }
 }

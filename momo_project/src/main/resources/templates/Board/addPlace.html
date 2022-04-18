@@ -306,7 +306,6 @@ html, body {
 							<div>
 								키워드 : <input type="text" value="서울역" id="keyword" size="15">
 								<button onclick="searchPlaces(); return false;">검색하기</button>
-
 							</div>
 						</div>
 						<hr>
@@ -321,21 +320,32 @@ html, body {
 
 	<div>
 		<!-- 위도 및 경도 좌표 및 위치정보 -->
-		<form id="inputForm" method="POST">
+		
 			<input type="text" id="fulladdress" name="fulladdress"
 				style="width: 500px;" disabled>
 			<input hidden type="text" id="placeTitle" name="placeTitle" value="" readonly>
-			<!--  <input type="text" id="paddress" name="paddress" value="">-->
 			<input hidden type="text" id="placeLat" name="placeLat" value="" readonly>
 			<input hidden type="text" id="placeLng" name="placeLng" value="" readonly>
 			<input hidden type="text" id="placeId" name="placeId" value="" readonly>
 			<input hidden type="number" id="boardNum" name="boardNum"
-				th:value="${boardNum}"> <br>
+				th:value="${boardNum}" readonly> <br>
+			<!-- 
+			<form name="form" method="post" action="/image" enctype="multipart/form-data">
+			<input type="file" name="placeImg"/>
+			<button name="submit">사진 추가</button>
+			</form>
+			 -->
+			<label for="file1">사진</label>
+			<input type="file" id="file1" name="file1">
+			<button id="imgBtn" onclick="javascript:fn_submit()">사진 추가</button>
+			<div class="img_wrap">
+				<img style="width:300px; height:300px;"id="img" name="img"/>
+			</div>
 			<div>내용</div>
 			<textarea id="placeContent" name="placeContent"
 				style="width: 500px; height: 150px; resize: none;"></textarea>
 			<br>
-		</form>
+		
 			<button id="submitBtn">장소 추가</button><br><br>
 			<a th:href="@{'/post/' + ${boardNum}}" role="button"><button>작성 완료</button></a>
 		<br>
@@ -346,13 +356,13 @@ html, body {
 		<h1>현재 추가된 장소</h1>
 	</div>
 	<div id="resDiv" style="margin-top: 50px;"></div>
+	<div id="placeImg"></div>
 </div>	
 	
 	<script src="https://code.jquery.com/jquery-latest.min.js"></script>
 	<script type="text/javascript"
 		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a7b5481a65eecc18bd2cc1106898f604&libraries=services"></script>
 	<script>
-
 $('#submitBtn').click(function(){
 	let boardNum = document.getElementById("boardNum").value;
 	var tempData={
@@ -361,6 +371,7 @@ $('#submitBtn').click(function(){
 			"placeLng" : $('input[name="placeLng"]').val(),
 			"placeId" : $('input[name="placeId"]').val(),
 			"boardNum" : $('input[name="boardNum"]').val(),
+			"placeImg" : $('input[name="placeImg"]').val(),
 			"placeContent" : $('#placeContent').val()
 		};
 	$.ajax({
@@ -375,16 +386,63 @@ $('#submitBtn').click(function(){
 			$('input[name="placeLat"]').val("");
 			$('input[name="placeLng"]').val("");
 			$('input[name="placeId"]').val("");
+			$('input[name="placeImg"]').val("");
 			$('#placeContent').val("");
+			$("#img").attr("src", "");
 			$('#resDiv').html(data)
 		}
 	 });
 })
-
-$("input:button.deletePlace").click(function(){
-		alert("sucess");
-	})
+	//이미지 미리보기
+	var sel_file;
+	$(document).ready(function(){
+		$("#file1").on("change", handleImgFileSelect);
+	});
 	
+	function handleImgFileSelect(e) {
+        var files = e.target.files;
+        var filesArr = Array.prototype.slice.call(files);
+        var reg = /(.*?)\/(jpg|jpeg|png|bmp)$/;
+ 
+        filesArr.forEach(function(f) {
+            if (!f.type.match(reg)) {
+                alert("확장자는 이미지 확장자만 가능합니다.");
+                return;
+            }
+ 
+            sel_file = f;
+ 
+            var reader = new FileReader();
+            reader.onload = function(e) {
+            	$("#img").attr("src", e.target.result);
+            }
+            reader.readAsDataURL(f);
+        });
+    }
+	//이미지 업로드
+	function fn_submit(){
+        
+		var form = new FormData();
+        form.append( "file1", $("#file1")[0].files[0] );
+        
+        
+         $.ajax({
+           url : "/upload",
+           type : "POST",
+           processData : false,
+           contentType : false,
+           data : form,
+           success:function(response) {
+        	   alert("사진 추가 완료!");
+        	   $('#placeImg').html(response);
+           },
+           error: function (jqXHR) 
+           { 
+               alert(jqXHR.responseText); 
+           }
+       });
+}
+
 	// 모달연습
 	function writeplaycard(){
 		const modal = document.getElementById("modal")

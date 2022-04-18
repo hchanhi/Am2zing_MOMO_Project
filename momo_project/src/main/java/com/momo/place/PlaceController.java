@@ -4,6 +4,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -16,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.momo.board.BoardRepository;
 import com.momo.board.BoardService;
@@ -65,4 +69,15 @@ public class PlaceController {
 		model.addAttribute("places", placeList);
 		return "Place/placeList";
 	}
+	
+	@RequestMapping("/form")
+	public String form() {
+		return "Board/addPlace";
+	}
+	
+	 @PostMapping("/upload")
+	 public String upload(@RequestParam("file1") MultipartFile multi, HttpServletRequest request, 
+			 HttpServletResponse response, Model model) {
+		 return placeService.upload(multi, request, response, model);
+	 }
 }
