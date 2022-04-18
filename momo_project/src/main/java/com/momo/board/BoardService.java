@@ -62,12 +62,10 @@ public class BoardService {
 	 @Transactional
 	    public void deletePost(Long boardNum) {
 		 List<Place> places = placeService.findByBoardNum(boardNum.intValue());
-		 
 		 for(Place place : places) {
 			 Long placeNum = place.getPlaceNum();
 			 placeRepository.deleteById(placeNum);
 		 }
-		 
 		 boardRepository.deleteById(boardNum);
 	    }
 	
