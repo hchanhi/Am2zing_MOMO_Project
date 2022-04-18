@@ -1,7 +1,9 @@
 $('.center').slick({
     centerMode: true,
-    centerPadding: '60px',
+    centerPadding: '300px',
     slidesToShow: 3,
+    prevArrow:'<span class="prev_arrow"><i class="fa-solid fa-angle-left"></i></span>',
+    nextArrow:'<span class="next_arrow"><i class="fa-solid fa-angle-right"></i></span>',
     responsive: [{
             breakpoint: 768,
             settings: {
