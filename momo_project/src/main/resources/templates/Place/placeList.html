@@ -5,7 +5,7 @@
 <title>*</title>
 </head>
 <body>
-<div id="body">
+<div>
     <table>
         <tr>
             <th>장소명</th>
@@ -34,17 +34,19 @@
 <script>
 $(document).ready(function() {
 	$("input:button.deletePlace").on('click',deletePlace);
+	
 });
 
 function deletePlace(){
+	let boardNum = document.getElementById("boardNum").value;
     let placeNum = $(this).attr("data-del");
-    var sendData = {"placeNum": placeNum};
+    var sendData = {"boardNum": boardNum};
     $.ajax({
         method: 'DELETE',
         url : '/deletePlace/'+placeNum,
         data : sendData,
         success: function(data){
-        	
+        	$('#resDiv').html(data)
         }
     });
 

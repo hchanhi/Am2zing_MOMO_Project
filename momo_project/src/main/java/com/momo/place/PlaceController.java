@@ -59,8 +59,10 @@ public class PlaceController {
 	}
 	
 	@DeleteMapping("/deletePlace/{placeNum}")
-	public String delete(@PathVariable("placeNum") int placeNum) {
+	public String delete(@PathVariable("placeNum") int placeNum, @RequestParam int boardNum, Model model) {
 		placeService.delete((long) placeNum);
+		List<Place> placeList = placeService.getPlaceList(boardNum);
+		model.addAttribute("places", placeList);
 		return "Place/placeList";
 	}
 }
