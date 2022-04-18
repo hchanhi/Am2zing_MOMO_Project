@@ -340,7 +340,6 @@ html, body {
 		</form>
 		
 			<button id="submitBtn">장소 추가</button>
-			<button id="deleteBtn">장소 리셋</button><br><br>
 		<br>
 		
 </div>
@@ -401,25 +400,6 @@ $('#submitBtn').click(function(){
 		
 	 });
 })
-	$('#deleteBtn').click(function(){
-	let boardNum = document.getElementById("boardNum").value;
-	
-	$.ajax({
-		url:"/deletePlace/"+boardNum,
-		type:"POST",
-		async: true,
-		success: function(data){
-			$('input[name="fulladdress"]').val("");
-			$('input[name="placeTitle"]').val("");
-			$('input[name="placeLat"]').val("");
-			$('input[name="placeLng"]').val("");
-			$('input[name="placeId"]').val("");
-			$('#placeContent').val("");
-			$('#resDiv').html(data)
-		}
-	 });
-})
-	
 	// 모달연습
 	function writeplaycard(){
 		const modal = document.getElementById("modal")

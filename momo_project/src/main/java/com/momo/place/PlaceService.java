@@ -57,6 +57,10 @@ public class PlaceService {
 	 	}
     }
 	
+	public void delete(Long placeNum) {
+		placeRepository.deleteById(placeNum);
+	}
+	
 	public ResponseEntity<?> update(Map<String,String> map) {
 		//System.out.println(map.toString());
 		Map<String, String> tempMap=new HashMap<>();

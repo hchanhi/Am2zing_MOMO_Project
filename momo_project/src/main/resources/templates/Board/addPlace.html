@@ -329,15 +329,14 @@ html, body {
 			<input hidden type="text" id="placeLat" name="placeLat" value="" readonly>
 			<input hidden type="text" id="placeLng" name="placeLng" value="" readonly>
 			<input hidden type="text" id="placeId" name="placeId" value="" readonly>
-			<input hidden type="number" id="boardNum" name="boardNum"
+			<input type="number" id="boardNum" name="boardNum"
 				th:value="${boardNum}"> <br>
 			<div>내용</div>
 			<textarea id="placeContent" name="placeContent"
 				style="width: 500px; height: 150px; resize: none;"></textarea>
 			<br>
 		</form>
-			<button id="submitBtn">장소 추가</button>
-			<button id="deleteBtn">장소 리셋</button><br><br>
+			<button id="submitBtn">장소 추가</button><br><br>
 			<a th:href="@{'/post/' + ${boardNum}}" role="button"><button>작성 완료</button></a>
 		<br>
 		
@@ -355,7 +354,7 @@ html, body {
 	<script type="text/javascript"
 		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a7b5481a65eecc18bd2cc1106898f604&libraries=services"></script>
 	<script>
-	
+
 $('#submitBtn').click(function(){
 	let boardNum = document.getElementById("boardNum").value;
 	var tempData={
@@ -381,29 +380,13 @@ $('#submitBtn').click(function(){
 			$('input[name="placeId"]').val("");
 			$('#placeContent').val("");
 			$('#resDiv').html(data)
-			
-		}
-		
-	 });
-})
-	$('#deleteBtn').click(function(){
-	let boardNum = document.getElementById("boardNum").value;
-	
-	$.ajax({
-		url:"/deletePlace/"+boardNum,
-		type:"POST",
-		async: true,
-		success: function(data){
-			$('input[name="fulladdress"]').val("");
-			$('input[name="placeTitle"]').val("");
-			$('input[name="placeLat"]').val("");
-			$('input[name="placeLng"]').val("");
-			$('input[name="placeId"]').val("");
-			$('#placeContent').val("");
-			$('#resDiv').html(data)
 		}
 	 });
 })
+
+$("input:button.deletePlace").click(function(){
+		alert("sucess");
+	})
 	
 	// 모달연습
 	function writeplaycard(){

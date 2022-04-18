@@ -58,9 +58,9 @@ public class PlaceController {
 		return "Place/placeList";
 	}
 	
-	@PostMapping("/deletePlace/{boardNum}")
-	public String deletePlace(@PathVariable("boardNum") int boardNum) {
-		placeService.deletePlace((long) boardNum);
+	@DeleteMapping("/deletePlace/{placeNum}")
+	public String delete(@PathVariable("placeNum") int placeNum) {
+		placeService.delete((long) placeNum);
 		return "Place/placeList";
 	}
 }
