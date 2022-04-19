@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko"
+xmlns:th="http://www.thymeleaf.org"
+  xmlns:sec="http://www.thymeleaf.org/extras/spring-security"">
   <head>
     <meta charset="UTF-8" />
     <title>MyPage</title>
@@ -7,5 +9,12 @@
   <body>
     <h1>This is MyPage.</h1>
     <hr />
+    
+    <div sec:authorize="isAuthenticated()">
+     이름:  <span sec:authentication="name"></span>
+     내 MBTI:  <span sec:authentication="memMbti"></span>
+     내 닉네임 :<span sec:authentication="principal.authorities"></span>
+    <a sec:authorize="hasRole('ROLE_MEMBER')" th:href="@{/editMamberForm}">회원정보 수정</a>
+     </div>
   </body>
 </html>

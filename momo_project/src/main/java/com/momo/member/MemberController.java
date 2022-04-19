@@ -1,6 +1,8 @@
 package com.momo.member;
 
 import java.util.Iterator;
+import java.util.List;
+import java.util.Locale.Category;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
@@ -89,4 +91,17 @@ public class MemberController {
 		userRepository.save(member);
 		return "Member/Login";
 	}
+	
+	@GetMapping("/memberEditForm")
+    public String myPageHome(Model model, @AuthenticationPrincipal Member currentMember) {
+        List<Category> categoryList = categoryService.findAll();
+
+        MemberForm memberForm = new MemberForm();
+        memberForm.setName(currentMember.getUsername());
+        memberForm.setEmail(currentMember.getEmail());
+        
+        model.addAttribute("categoryList", categoryList);
+        model.addAttribute("memberForm", memberForm);
+        return "member/editMember";
+    }
 }
