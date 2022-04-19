@@ -1,10 +1,17 @@
 package com.momo.domain;
 
 import java.io.Serializable;
-import java.sql.Blob;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.momo.comment.Comment;
+
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,8 +20,9 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
-@Table
+@Builder
 public class Board implements Serializable {
 
     @Id
@@ -25,16 +33,14 @@ public class Board implements Serializable {
     @Column
     private String boardTitle;
 
+    
+    @ManyToOne
+    private Member member;
+    
     @Column
-    private String memEmail;
-
-    @Builder
-	public Board(Long boardNum, String boardTitle, String memEmail) {
-		super();
-		this.boardNum = boardNum;
-		this.boardTitle = boardTitle;
-		this.memEmail = memEmail;
+    private int placeCnt;
+    
+    
 	
-	}
 	}
 

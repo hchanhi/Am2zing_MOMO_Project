@@ -14,6 +14,8 @@ local.properties
 .settings/
 .loadpath
 .recommenders
+.application.properties
+static/
 
 # External tool builders
 .externalToolBuilders/
@@ -101,3 +103,4 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
+**/application.properties

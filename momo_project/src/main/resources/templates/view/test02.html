@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset = "UTF-8">
+	<title></title>
+	    <style>
+	   
+.map_wrap, .map_wrap * {margin:0;padding:0;font-family:'Malgun Gothic',dotum,'돋움',sans-serif;font-size:12px;}
+.map_wrap a, .map_wrap a:hover, .map_wrap a:active{color:coral; font-size: 20px;text-decoration: none;}
+.map_wrap {position:relative;width:100%;height:500px;}
+#menu_wrap {position:absolute;top:0;left:0;bottom:0;width:250px;margin:10px 0 30px 10px;padding:5px;overflow-y:auto;background:rgb(255, 255, 255);z-index: 1;font-size:12px;border-radius: 10px;}
+.bg_white {background:#fff;}
+#menu_wrap hr {display: block; height: 1px;border: 0; border-top: 2px solid #5F5F5F;margin:3px 0;}
+#menu_wrap .option{text-align: center;}
+#menu_wrap .option p {margin:10px 0;}  
+#menu_wrap .option button {margin-left:5px;}
+#placesList li {list-style: none;}
+#placesList .item {position:relative;border-bottom:1px solid #888;overflow: hidden;cursor: pointer;min-height: 65px;}
+#placesList .item span {display: block;margin-top:4px;}
+#placesList .item h5, #placesList .item .info {text-overflow: ellipsis;overflow: hidden;white-space: nowrap;}
+#placesList .item .info{padding:10px 0 10px 55px;}
+#placesList .info .gray {color:#8a8a8a;}
+#placesList .info .jibun {padding-left:26px;background:url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/places_jibun.png) no-repeat;}
+#placesList .info .tel {color:#009900;}
+#placesList .item .markerbg {float:left;position:absolute;width:36px; height:37px;margin:10px 0 0 10px;background:url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_number_blue.png) no-repeat;}
+#placesList .item .marker_1 {background-position: 0 -10px;}
+#placesList .item .marker_2 {background-position: 0 -56px;}
+#placesList .item .marker_3 {background-position: 0 -102px}
+#placesList .item .marker_4 {background-position: 0 -148px;}
+#placesList .item .marker_5 {background-position: 0 -194px;}
+#placesList .item .marker_6 {background-position: 0 -240px;}
+#placesList .item .marker_7 {background-position: 0 -286px;}
+#placesList .item .marker_8 {background-position: 0 -332px;}
+#placesList .item .marker_9 {background-position: 0 -378px;}
+#placesList .item .marker_10 {background-position: 0 -423px;}
+#placesList .item .marker_11 {background-position: 0 -470px;}
+#placesList .item .marker_12 {background-position: 0 -516px;}
+#placesList .item .marker_13 {background-position: 0 -562px;}
+#placesList .item .marker_14 {background-position: 0 -608px;}
+#placesList .item .marker_15 {background-position: 0 -654px;}
+#pagination {margin:10px auto;text-align: center;}
+#pagination a {display:inline-block;margin-right:10px;}
+#pagination .on {font-weight: bold; cursor: default;color:#777;}
+.contt {color:coral; font-size: 20px;}
+</style>
+</head>
+<body>
+<div class="map_wrap">
+    <div id="map" style="width:100vw;height:100vh;"></div>
+
+    <div id="menu_wrap" class="bg_white">
+    	<div class="hAddr">
+        <span class="title">지도중심기준 행정동 주소정보</span>
+        <span id="centerAddr"></span>
+    </div>
+        <ul id="placesList">
+        	<li>간장</li>
+        	</ul>
+        <div id="pagination"></div>
+            <form method="post" action="/place/reply?cmd=save" >
+			<div class="">
+				<label for="title" class="">content</label>
+				<textarea placeholder="댓글을 입력해주세요" name="replyContent" id="replyContent"style="width: 500px; height: 150px; resize: none;"></textarea>
+				 <input type="number" id="boardNum" name="boardNum" th:value="${boardNum}">
+				
+			</div>
+		
+		</form>
+		<button  id="btnSave">저장</button>
+			<h1>댓글목록</h1>
+		<div id="resDiv" style="margin-top: 50px;"></div>
+		<p id="replyList"></p>
+	<!--	<tbody>
+        <tr th:each="comment : ${test02}">
+           
+            <td>
+                <span th:text="${comment.replyContent}">콘텐츠</span>
+            </td>
+        </tr>
+        </tbody>-->
+    </div>
+
+		<!--<td><a th:href="@|/commentList//${comment.replyNum}|}">삭제</a></td>-->
+		<div>
+	
+		<table>
+			<thead>
+			<tr>
+				<th>댓글 번호</th>
+				<th>댓글</th>
+			</tr>
+			</thead>
+			<!--<tbody>
+				<tr th:each = "comments : ${comment}">
+					<td th:text = "${comments.replyNum}"></td th:text>
+					<td th:text = "${comments.replyContent}"></td th:text>
+				</tr>
+			</tbody>-->
+		</table>
+	</div>
+</div>
+
+
+	
+	<script src="https://code.jquery.com/jquery-latest.min.js"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a7b5481a65eecc18bd2cc1106898f604&libraries=services"></script>
+<script th:inline="javascript">
+var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
+    mapOption = { 
+        center: new kakao.maps.LatLng(37.5546, 126.9706), // 지도의 중심좌표
+        level: 5 // 지도의 확대 레벨
+    };
+
+var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+ var infowindow = new kakao.maps.InfoWindow({zIndex:1});
+var places = [];
+
+/*<![CDATA[*/
+
+    /*[# th:each="place : ${myplaces}"]*/
+    var title = [[${place.placeTitle}]];
+    var lat = [[${place.placeLat}]];
+    var lng = [[${place.placeLng}]];
+    var content = [[${place.placeContent}]];
+	
+    
+  
+    
+    places.push({title: title, latlng: new kakao.maps.LatLng(lat, lng), content:content})
+
+    
+    /*[/]*/
+
+/*]]>*/
+var infowindow = new kakao.maps.InfoWindow({zIndex:1});
+console.log(places);
+
+// 마커 이미지의 이미지 주소입니다
+var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png"; 
+
+function setCenter() {            
+    // 이동할 위도 경도 위치를 생성합니다 
+    var moveLatLon = places[0].latlng;
+    map.setLevel(8);
+    // 지도 중심을 이동 시킵니다
+    map.setCenter(moveLatLon);
+}
+
+setCenter();
+
+    
+for (var i = 0; i < places.length; i ++) {
+    
+    // 마커 이미지의 이미지 크기 입니다
+    var imageSize = new kakao.maps.Size(24, 35); 
+    
+    // 마커 이미지를 생성합니다    
+    var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize); 
+    
+    // 마커를 생성합니다
+    var marker = new kakao.maps.Marker({
+        map: map, // 마커를 표시할 지도
+        position: places[i].latlng, // 마커를 표시할 위치
+        title : places[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
+        image : markerImage // 마커 이미지 
+    });
+   
+   		var infoDiv = document.getElementById('placesList');
+			infoDiv.innerHTML = infoDiv.innerHTML + '<br><h1 class="contt"><a href = /test02/'+ (i+1) + '>' + places[i].title + '</a></h1> <br>'
+                						+ places[i].latlng + "<br>" + places[i].content+ "<br>";
+                						
+   
+}
+
+
+
+//게시판 등록
+
+
+$('#btnSave').click(function(){
+
+
+	let boardNum = document.getElementById("boardNum").value;
+	var tempData={
+		
+			"boardNum" : $('input[name="boardNum"]').val(),
+			"replyContent" : $('#replyContent').val()
+		};
+		console.log(tempData);
+	var reply = $('#replyContent').val()
+		if(reply != "") {
+	$.ajax({
+		url:"/commentList/"+boardNum,
+		type:"POST",
+		async: true,
+		contentType: "application/json; charset=UTF-8",
+		data: JSON.stringify(tempData),
+		success: function(data){
+	
+			$('#replyContent').val();
+			$('#resDiv').html(data)
+			$('textarea[name="replyContent"]').val("");
+		}
+		
+	 });
+	 }
+});
+
+$(document).ready(function(){
+
+
+	let boardNum = document.getElementById("boardNum").value;
+	var tempData={
+		
+			"boardNum" : $('input[name="boardNum"]').val(),
+			
+		};
+		console.log(tempData);
+	var reply = $('#replyContent').val()
+		
+	$.ajax({
+		url:"/commentList02/"+boardNum,
+		type:"POST",
+		async: true,
+		contentType: "application/json; charset=UTF-8",
+		data: JSON.stringify(tempData),
+		success: function(data){
+	
+			$('#replyContent').val();
+			$('#resDiv').html(data)
+
+		}
+		
+	 });
+	 
+});
+function showReplyList(){
+
+		var url = "${pageContext.request.contextPath}/restBoard/getReqlyList";
+
+		var paramData = {"boardNum" : "${board.boardNum}"};
+
+		$.ajax({
+
+            type: 'POST',
+
+            url: url,
+
+            data: paramData,
+
+            dataType: 'json',
+
+            success: function(result) {
+
+               	var htmls = "";
+
+			if(result.length < 1){
+
+				htmls.push("등록된 댓글이 없습니다.");
+
+			} else {
+
+	                    $(result).each(function(){
+
+	                     htmls += '<div class="media text-muted pt-3" id="rid' + this.rid + '">';
+
+	                     htmls += '<svg class="bd-placeholder-img mr-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder:32x32">';
+
+	                     htmls += '<title>Placeholder</title>';
+
+	                     htmls += '<rect width="100%" height="100%" fill="#007bff"></rect>';
+
+	                     htmls += '<text x="50%" fill="#007bff" dy=".3em">32x32</text>';
+
+	                     htmls += '</svg>';
+
+	                     htmls += '<p class="media-body pb-3 mb-0 small lh-125 border-bottom horder-gray">';
+
+	                     htmls += '<span class="d-block">';
+
+	                     htmls += '<strong class="text-gray-dark">' + this.reg_id + '</strong>';
+
+	                     htmls += '<span style="padding-left: 7px; font-size: 9pt">';
+
+	                     htmls += '<a href="javascript:void(0)" onclick="fn_editReply(' + this.rid + ', \'' + this.reg_id + '\', \'' + this.content + '\' )" style="padding-right:5px">수정</a>';
+
+	                     htmls += '<a href="javascript:void(0)" onclick="fn_deleteReply(' + this.rid + ')" >삭제</a>';
+
+	                     htmls += '</span>';
+
+	                     htmls += '</span>';
+
+	                     htmls += this.content;
+
+	                     htmls += '</p>';
+
+	                     htmls += '</div>';
+
+
+
+	                });	//each end
+
+
+
+			}
+
+			$("#replyList").html(htmls);
+
+                
+
+            }	   // Ajax success end
+
+		});	// Ajax end
+
+	}
+$(document).ready(function(){
+
+		showReplyList();
+
+	});
+
+
+
+
+/**window.onpageshow = function (event) {
+
+    // 새로고침: window.performance.navigation.type == 1
+    // 뒤로가기: window.performance.navigation.type == 2
+    if (event.persisted || (window.performance && (window.performance.navigation.type == 1 || window.performance.navigation.type == 2))) {
+    
+        // 현재 브라우저에서 WebStorage를 지원할 때
+        if (('sessionStorage' in window) && window['sessionStorage'] !== null) {
+        
+            // sessionStorage로 데이터 다시 불러오기
+            if (sessionStorage.getItem('DATA')) {
+                input_text.value = sessionStorage.getItem('DATA');
+            }
+            
+        }
+        
+    }
+    
+}
+
+
+/**function commentList(commentPage) {
+	$.getJSON("/comment/pages/"+${boardNum}+"/"+commentPage, function (data){
+		$("#resDiv").html('');
+		var html = "<ul class='list-group'>";
+		$(data).each(function(){
+			html += "<li class='list-group-item comments'>";
+			html += 	"<div class='comment'>";
+			html += 		"<div class='comment-info'>";
+			html += "			<div class='comment-text'>" + this.replyContent + "</div>";
+			html += "		</div>";
+			html += 	"</div>";
+			html += "</li>";
+			
+		});
+		html += "</ul>";
+		$("#resDiv").append(html);
+	});
+	}**/
+</script th:inline="javascript">
+<div id="place">
+장소 1: 블라블라
+</div>
+ <input type='button' onclick='plusFun();' value='추가' />
+</body>
+</html>

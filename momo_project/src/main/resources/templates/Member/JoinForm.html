@@ -1,0 +1,70 @@
+<!--회원가입 페이지-->
+<!--signup.html-->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+ <script type="text/javascript" src="http://code.jquery.com/jquery-1.12.4.min.js"></script>
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+    <form method="post" action="Join">
+        email : <input type="email" name="memEmail">
+        password : <input type="password" name="memPassword">
+        password : <input type="password" name="memPassword">
+        passwordCheck : <input type="password" name="memPasswordCheck">
+        MBTI : <select name="MBTI">
+			    <option value="">MBTI 선택</option>
+			    <option value="ISTJ">ISTJ</option>
+			    <option value="ISTP">ISTP</option>
+			    <option value="ISFJ">ISFJ</option>
+			    <option value="ISFP">ISFP</option>
+			    <option value="INTJ">INTJ</option>
+			    <option value="INTP">INTP</option>
+			    <option value="INFJ">INFJ</option>
+			    <option value="INFP">INFP</option>
+			    <option value="ESTJ">ESTJ</option>
+			    <option value="ESTP">ESTP</option>
+			    <option value="ESFJ">ESFJ</option>
+			    <option value="ESFP">ESFP</option>
+			    <option value="ENTJ">ENTJ</option>
+			    <option value="ENTP">ENTP</option>
+			    <option value="ENFJ">ENFJ</option>
+			    <option value="ENFP">ENFP</option>
+			   </select>
+			   생년월일 : 
+			   <select name="yy" id="year"></select>년 
+			   <select name="mm" id="month"></select>월 
+			   <select name="dd" id="day"></select>일
+
+
+        <button>회원가입</button>
+    </form>
+    
+<script type="text/javascript">
+$(document).ready(function(){ 
+	var now = new Date(); 
+	var year = now.getFullYear(); 
+	var mon = (now.getMonth() + 1) > 9 ? ''+(now.getMonth() + 1) : '0'+(now.getMonth() + 1); 
+	var day = (now.getDate()) > 9 ? ''+(now.getDate()) : '0'+(now.getDate()); 
+	
+	//년도 selectbox만들기 
+	for(var i = 1900 ; i <= year ; i++) { 
+		$('#year').append('<option value="' + i + '">' + i + '년</option>'); } 
+	
+	// 월별 selectbox 만들기 	
+	for(var i=1; i <= 12; i++) { 
+		var mm = i > 9 ? i : "0"+i ; 
+		$('#month').append('<option value="' + mm + '">' + mm + '월</option>'); 
+	} 
+	
+	// 일별 selectbox 만들기 
+	for(var i=1; i <= 31; i++) { 
+		var dd = i > 9 ? i : "0"+i ; $('#day').append('<option value="' + dd + '">' + dd+ '일</option>'); 
+		} 
+		$("#year > option[value="+year+"]").attr("selected", "true"); 
+		$("#month > option[value="+mon+"]").attr("selected", "true"); 
+		$("#day > option[value="+day+"]").attr("selected", "true"); })
+</script>
+  
+</body>
+</html>

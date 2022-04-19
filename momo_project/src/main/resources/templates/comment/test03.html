@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>게시판 조회</title>
+</head>
+	<form method="post"  >
+			<div class="">
+				<label for="title" class="">content</label>
+				<textarea placeholder="댓글을 입력해주세요" name="replyContent" id="replyContent"style="width: 500px; height: 150px; resize: none;"></textarea>
+				 <input type="number" id="boardNum" name="boardNum" th:value="${boardNum}">
+				
+			</div>
+		
+		</form>
+		<button  id="btnSave">저장</button>
+		<!--<td><a th:href="@|/commentList//${comment.replyNum}|}">삭제</a></td>-->
+		<div>
+		<h1>댓글목록</h1>
+	</div>
+	<div id="resDiv" style="margin-top: 50px;"></div>
+	<script src="https://code.jquery.com/jquery-latest.min.js"></script>
+<script>
+	//게시판 등록
+	$('#btnSave').click(function(){
+	let boardNum = document.getElementById("boardNum").value;
+	var tempData={
+		
+			"boardNum" : $('input[name="boardNum"]').val(),
+			"replyContent" : $('#replyContent').val()
+		};
+	$.ajax({
+		url:"/commentList02/"+boardNum,
+		type:"POST",
+		async: true,
+		contentType: "application/json; charset=UTF-8",
+		data: JSON.stringify(tempData),
+		success: function(data){
+	
+			$('#replyContent').val("");
+			$('#resDiv').html(data)
+			
+		}
+		
+	 });
+})
+$('#btn').click(function(replyNum){
+	var query = {"comment" : replyNum};
+	$.ajax({
+		url:"${contextPath}/comment.momo.comment/nDelete",
+		type: "get",
+		data : query,
+		success : function(data) {
+			location.reload();
+		}
+		
+	})
+
+	
+});
+
+</script>
+</body>
+</html>

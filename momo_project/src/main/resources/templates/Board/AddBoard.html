@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymelaf.org">
+<head>
+<meta charset="UTF-8">
+<title></title>
+
+</head>
+<body>
+	
+		<form method="post" th:action="@{/writeBoard}">
+			<div class="">
+				<label for="title" class="">title</label>
+				<input type="text" class="" name="boardTitle" id="boardTitle">
+				<input type="text" class="" name="memEmail" id="memEmail" value="aaa@aaa.com" readonly="readonly">
+			</div>
+			<div>
+				<button type="submit" class="">장소추가하러 가기</button>
+			</div>
+		</form>
+		<!--  
+		<h1>목록</h1>
+		<ul class="list-group">
+			<li class="list-group-item" th:each="리스트 : ${Board}" th:text="${Board.boardTitle}">
+			</li>
+		</ul>
+		-->
+	
+</body>
+</html>

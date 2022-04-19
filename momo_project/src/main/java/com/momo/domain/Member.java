@@ -16,36 +16,39 @@ import lombok.Setter;
 @AllArgsConstructor
 @Entity
 @Builder
-public class Place implements Serializable {
+public class Member implements Serializable {
 
     @Id
     @Column
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long placeNum;
+    private Long memNum;
+
+
+    @Column(nullable = false, unique = true)
+
+    private String memEmail;
 
     @Column
-    private String placeTitle;
+    private String memNickName;
+
+    @Column(nullable = false)
+    private String memPassword;
 
     @Column
-    private String placeContent;
+    private String memMbti;
 
     @Column
-    private String placeId;
+    private String memBirth;
+    
+    @Column(nullable = false)
+    private String memLevel; 
     
     @Column
-    private String placeLat; //위도
-    
-    @Column
-    private String placeLng; //경도
-    
-    @Column
-    private String placeImg;
-
-
-    @ManyToOne
-    private Member member;
-
-    @ManyToOne
-    private Board board;
-   
+    private String memImg;
+	
 	}
+	
+
+
+
+
