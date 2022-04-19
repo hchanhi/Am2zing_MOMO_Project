@@ -26,6 +26,10 @@ public class CommentService {
 	@Autowired
 	private BoardRepository boardRepository;
 	
+	private CommentService commentService;
+	
+
+
 	public List<Comment> findAll() {
 		return this.commentRepository.findAll();
 	}
@@ -44,6 +48,10 @@ public class CommentService {
 		
 		this.commentRepository.save(comment);
 	}
+	
+	public void deleteComment(Long replyNum) {
+        commentRepository.deleteById(replyNum); // 3
+    }
 	public ResponseEntity<?> update(Map<String,String> map) {
 		//System.out.println(map.toString());
 		Map<String, String> tempMap=new HashMap<>();
@@ -76,6 +84,14 @@ public class CommentService {
 	/*
 	 * public List<Comment> list() { // TODO Auto-generated method stub return
 	 * commentRepository.list(); }
+	 */
+	/*
+	 * public void saveReply(Comment comment) { Comment comment = new Comment();
+	 * comment.setReplyContent(replyContent); comment.setBoard(board);
+	 * 
+	 * this.commentRepository.save(comment);
+	 * 
+	 * }
 	 */
 	
 

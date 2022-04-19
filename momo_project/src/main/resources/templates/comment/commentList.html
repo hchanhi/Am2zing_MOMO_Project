@@ -18,9 +18,16 @@
             <td>
                 <span th:text="${comment.replyContent}"></span>
             </td>
+             <td>
+            <td><a href="/comment" th:href="@{'comment/delete/' + ${comment.replyNum}}">삭제</a></td>
+         <!--   <span hidden id="boardNum" th:boardNum="${place.board.boardNum}"></span>
+            <input type="button" class="deletePlace" th:data-del="${place.placeNum}"
+             value="삭제">-->
+            </td>
         </tr>
         </tbody>
     </table>
 </div>
+
 </body>
 </html>

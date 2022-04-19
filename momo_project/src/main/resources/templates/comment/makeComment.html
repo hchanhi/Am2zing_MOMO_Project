@@ -1,0 +1,16 @@
+
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title> SpringBoot : makeComment </title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+<h1>댓글 입력하기</h1>
+<form action="#" th:action="@{/comment2}" th:object="${comment2}" method="post">
+    <p>Comment : <input type="text" th:field="*{replyContent}"/></p>
+  
+    <p><input type="submit" value="추가하기"/> <input type="reset" value="새로 입력하기"/></p>
+</form>
+</body>
+</html>

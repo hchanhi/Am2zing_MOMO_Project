@@ -60,6 +60,21 @@ public class CommentController {
 		model.addAttribute("comments", commentList);
 		return "comment/commentList";
 	}
+	@PostMapping("/commentList02/{boardNum}")
+	public String commentList02(@PathVariable("boardNum") int boardNum, Model model) {
+		List<Comment> commentList = commentService.getCommentList(boardNum);
+		model.addAttribute("comments", commentList);
+		return "comment/commentList";
+	}
+	@RequestMapping(value = "test02/comment/delete/{replyNum}")
+	public String deleteComment(@PathVariable Long replyNum, @PathVariable("boardNum") String boardNum, Model model) { // 8
+		/*
+		 * List<Comment> commentList = commentService.getCommentList(boardNum);
+		 * model.addAttribute("comments", commentList);
+		 */
+		commentService.deleteComment(replyNum); 
+	    return "view/test02/"+boardNum; // 9
+	}
 	/*
 	 * @RequestMapping("/test02") public ModelAndView list(ModelAndView mav) {
 	 * mav.setViewName("test02"); //뷰의 이름 List<Comment> list=commentService.list();
@@ -75,13 +90,13 @@ public class CommentController {
 	 * List<Comment> commentList = commentService.getCommentList(boardNum);
 	 * model.getAttribute(num2); return "comment/commentList"; }
 	 */
-	@PostMapping("/commentList02/{boardNum}")
-	public String commentList02(@PathVariable("boardNum") int boardNum, @RequestBody Map<String,String> map, Model model) {
-		commentService.update(map);
-		List<Comment> commentList = commentService.getCommentList(boardNum);
-		model.addAttribute("comments", commentList);
-		return "view/test02";
-	}
+	/*
+	 * @PostMapping("/commentList02/{boardNum}") public String
+	 * commentList02(@PathVariable("boardNum") int boardNum, @RequestBody
+	 * Map<String,String> map, Model model) { commentService.update(map);
+	 * List<Comment> commentList = commentService.getCommentList(boardNum);
+	 * model.addAttribute("comments", commentList); return "view/test02"; }
+	 */
 }
 /*	@GetMapping(value="/pages/{boardNum}/{page}", produces = {MediaType.APPLICATION_JSON_UTF8_VALUE, MediaType.APPLICATION_XML_VALUE})
 	public ResponseEntity<List<Comment>> getListWithPage(@PathVariable("page") int page, @PathVariable("boardNum") int boardNum){

@@ -28,7 +28,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @Entity
 @Builder
-public class Comment {
+public class Comment2 {
 	@Id 
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long replyNum; 
@@ -47,9 +47,11 @@ public class Comment {
 	 * @LastModifiedDate private String modifiedDate;
 	 */
 
-	 @ManyToOne
-	 @JoinColumn(name = "board_num")
-	  private Board board;
+	/*
+	 * @ManyToOne
+	 * 
+	 * @JoinColumn(name = "board_num") private Board board;
+	 */
 	 /*
 	 * @ManyToOne
 	 * 
