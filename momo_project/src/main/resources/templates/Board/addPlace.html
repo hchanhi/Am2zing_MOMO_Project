@@ -329,18 +329,14 @@ html, body {
 			<input hidden type="text" id="placeId" name="placeId" value="" readonly>
 			<input hidden type="number" id="boardNum" name="boardNum"
 				th:value="${boardNum}" readonly> <br>
-			<!-- 
-			<form name="form" method="post" action="/image" enctype="multipart/form-data">
-			<input type="file" name="placeImg"/>
-			<button name="submit">사진 추가</button>
-			</form>
-			 -->
+			
 			<label for="file1">사진</label>
 			<input type="file" id="file1" name="file1">
 			<button id="imgBtn" onclick="javascript:fn_submit()">사진 추가</button>
 			<div class="img_wrap">
 				<img style="width:300px; height:300px;"id="img" name="img"/>
 			</div>
+			
 			<div>내용</div>
 			<textarea id="placeContent" name="placeContent"
 				style="width: 500px; height: 150px; resize: none;"></textarea>
@@ -438,7 +434,7 @@ $('#submitBtn').click(function(){
            },
            error: function (jqXHR) 
            { 
-               alert(jqXHR.responseText); 
+               alert("이미지파일을 선택해주세요"); 
            }
        });
 }

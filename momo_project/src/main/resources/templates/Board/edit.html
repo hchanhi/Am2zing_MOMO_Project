@@ -283,7 +283,7 @@ html, body {
 </style>
 </head>
 <body>
-<div style="width:500px">
+<div style="width:600px">
     <form th:action="@{'/post/edit/' + ${board.boardNum}}" method="post">
         <input type="hidden" name="_method" value="put"/>
         <input type="hidden" name="id" th:value="${board.boardNum}"/>
@@ -338,6 +338,14 @@ html, body {
 		</div>
 		<button type="submit" style="float:right;">수정 완료</button>	
 		</form>
+			
+			<label for="file1">사진</label>
+			<input type="file" id="file1" name="file1">
+			<button id="imgBtn" onclick="javascript:fn_submit()">사진 추가</button>
+			<div class="img_wrap">
+			<img style="width:300px; height:300px;"id="img" name="img"/>
+			</div>
+			<div id="placeImg"></div>
 			<button id="submitBtn">장소 추가</button>
 		<br>
 		
@@ -346,6 +354,7 @@ html, body {
 		<h1>현재 추가된 장소</h1>
 	</div>
 	<div id="resDiv" style="margin-top: 50px;">
+	
     <table>
         <tr>
             <th>장소명</th>
@@ -368,6 +377,7 @@ html, body {
         </tbody>
     </table>
 	</div>
+	<div id="placeImg"></div>
 	
 	<script src="https://code.jquery.com/jquery-latest.min.js"></script>
 	<script type="text/javascript"
@@ -383,6 +393,7 @@ $('#submitBtn').click(function(){
 			"placeLng" : $('input[name="placeLng"]').val(),
 			"placeId" : $('input[name="placeId"]').val(),
 			"boardNum" : $('input[name="boardNum"]').val(),
+			"placeImg" : $('input[name="placeImg"]').val(),
 			"placeContent" : $('#placeContent').val()
 		};
 	$.ajax({
@@ -397,6 +408,7 @@ $('#submitBtn').click(function(){
 			$('input[name="placeLat"]').val("");
 			$('input[name="placeLng"]').val("");
 			$('input[name="placeId"]').val("");
+			$('input[name="placeImg"]').val("");
 			$('#placeContent').val("");
 			$('#resDiv').html(data)
 			
@@ -423,6 +435,56 @@ function deletePlace(){
         }
     });
 
+}
+
+//이미지 미리보기
+var sel_file;
+$(document).ready(function(){
+	$("#file1").on("change", handleImgFileSelect);
+});
+
+function handleImgFileSelect(e) {
+    var files = e.target.files;
+    var filesArr = Array.prototype.slice.call(files);
+    var reg = /(.*?)\/(jpg|jpeg|png|bmp)$/;
+
+    filesArr.forEach(function(f) {
+        if (!f.type.match(reg)) {
+            alert("확장자는 이미지 확장자만 가능합니다.");
+            return;
+        }
+
+        sel_file = f;
+
+        var reader = new FileReader();
+        reader.onload = function(e) {
+        	$("#img").attr("src", e.target.result);
+        }
+        reader.readAsDataURL(f);
+    });
+}
+//이미지 업로드
+function fn_submit(){
+    
+	var form = new FormData();
+    form.append( "file1", $("#file1")[0].files[0] );
+    
+    
+     $.ajax({
+       url : "/upload",
+       type : "POST",
+       processData : false,
+       contentType : false,
+       data : form,
+       success:function(response) {
+    	   alert("사진 추가 완료!");
+    	   $('#placeImg').html(response);
+       },
+       error: function (jqXHR) 
+       { 
+           alert("이미지파일을 선택해주세요"); 
+       }
+   });
 }
 	// 모달연습
 	function writeplaycard(){
