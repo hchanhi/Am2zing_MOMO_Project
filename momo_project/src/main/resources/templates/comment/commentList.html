@@ -20,14 +20,44 @@
             </td>
              <td>
             <td><a href="/comment" th:href="@{'comment/delete/' + ${comment.replyNum}}">삭제</a></td>
-         <!--   <span hidden id="boardNum" th:boardNum="${place.board.boardNum}"></span>
-            <input type="button" class="deletePlace" th:data-del="${place.placeNum}"
-             value="삭제">-->
+            <button id="btn">수정</button>
+        <!--<span hidden id="boardNum" th:boardNum="${place.board.boardNum}"></span>-->
             </td>
         </tr>
         </tbody>
     </table>
 </div>
+	<script src="https://code.jquery.com/jquery-latest.min.js"></script>
+<script th:inline="javascript">
+$('#btn').click(function(){
 
+
+	let boardNum = document.getElementById("boardNum").value;
+	var tempData={
+		
+			"boardNum" : $('input[name="boardNum"]').val(),
+			"replyContent" : $('#replyContent').val()
+		};
+		console.log(tempData);
+	var reply = $('#replyContent').val()
+		if(reply != "") {
+	$.ajax({
+		url:"/commentList03/"+boardNum,
+		type:"POST",
+		async: true,
+		contentType: "application/json; charset=UTF-8",
+		data: JSON.stringify(tempData),
+		success: function(data){
+	
+			$('#replyContent').val();
+			$('#resDiv').html(data)
+			$('textarea[name="replyContent"]').val("");
+		}
+		
+	 });
+	 }
+});
+
+</script>
 </body>
 </html>

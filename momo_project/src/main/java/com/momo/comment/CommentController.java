@@ -60,6 +60,13 @@ public class CommentController {
 		model.addAttribute("comments", commentList);
 		return "comment/commentList";
 	}
+	@PostMapping("/commentList03/{boardNum}")
+	public String commentList03(@PathVariable("boardNum") int boardNum, @RequestBody Map<String,String> map, Model model) {
+		commentService.update(map);
+		List<Comment> commentList = commentService.getCommentList(boardNum);
+		model.addAttribute("comments", commentList);
+		return "comment/commentList03";
+	}
 	@PostMapping("/commentList02/{boardNum}")
 	public String commentList02(@PathVariable("boardNum") int boardNum, Model model) {
 		List<Comment> commentList = commentService.getCommentList(boardNum);
@@ -67,13 +74,13 @@ public class CommentController {
 		return "comment/commentList";
 	}
 	@RequestMapping(value = "test02/comment/delete/{replyNum}")
-	public String deleteComment(@PathVariable Long replyNum, @PathVariable("boardNum") String boardNum, Model model) { // 8
+	public String deleteComment(@PathVariable Long replyNum,@PathVariable("boardNum") int boardNum) { // 8
 		/*
 		 * List<Comment> commentList = commentService.getCommentList(boardNum);
 		 * model.addAttribute("comments", commentList);
 		 */
 		commentService.deleteComment(replyNum); 
-	    return "view/test02/"+boardNum; // 9
+	    return "redirect:/test02/{boardNum}"; //
 	}
 	/*
 	 * @RequestMapping("/test02") public ModelAndView list(ModelAndView mav) {
