@@ -23,7 +23,9 @@ public class Member implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long memNum;
 
+
     @Column(nullable = false, unique = true)
+
     private String memEmail;
 
     @Column

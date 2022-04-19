@@ -1,0 +1,28 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title> SpringBoot : result </title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+<h2>리스트 보기(Read)</h2>
+
+<div th:if="${not #lists.isEmpty(comments)}">
+    <table class="glyphicon glyphicon-calendar">
+        <tr>
+            <th>ReplyNum</th>
+            <th>Comment</th>
+            <th>delete</th>
+        </tr>
+        <tr th:each="comment2 : ${comments}">
+            <td th:text="${comment2.replyNum}"></td>
+            <td th:text="${comment2.replyContent}"></td>
+            <td><a href="/comment2" th:href="@{'comment2/delete/' + ${comment2.replyNum}}">삭제</a></td>
+        </tr>
+    </table>
+    <hr/>
+</div>
+<a href="/addComment02"><button>새로 만들기</button></a>
+
+</body>
+</html>

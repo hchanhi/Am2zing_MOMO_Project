@@ -1,8 +1,15 @@
 package com.momo.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.momo.comment.Comment;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -32,6 +39,8 @@ public class Board implements Serializable {
     
     @Column
     private int placeCnt;
+    
+    
 	
 	}
-	
+

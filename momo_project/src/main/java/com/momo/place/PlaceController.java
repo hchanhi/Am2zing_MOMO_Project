@@ -70,6 +70,23 @@ public class PlaceController {
 		return "Place/placeList";
 	}
 	
+
+	@RequestMapping
+	public String addCard(@RequestParam String placeTitle, 
+							String placeLat, 
+							String placeLng,
+							String placeId, 
+							String placeContent, 
+							String memEmail,
+							int boardNum, 
+							Model model) {
+		if(!Objects.isNull(boardNum)&& !placeTitle.isBlank()) {
+			this.placeService.save(placeTitle, placeLat, placeLng, placeId, placeContent, memEmail, boardNum);
+
+		}
+		System.out.println(boardNum);
+		return "/index";
+
 	@RequestMapping("/form")
 	public String form() {
 		return "Board/addPlace";
