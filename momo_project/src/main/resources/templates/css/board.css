@@ -144,7 +144,7 @@ section {
     width:400px;
     height:50px;
     margin:0 auto;
-    border
+    border-radius: 20px;
     background-color: aquamarine;
 }
 
