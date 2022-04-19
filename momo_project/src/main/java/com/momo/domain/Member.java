@@ -2,6 +2,7 @@ package com.momo.domain;
 
 import java.sql.Timestamp;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -24,10 +25,13 @@ public class Member {
 	@Id // primary key
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int memId;
+	
+	@Column(nullable = false, unique = true)
 	private String memEmail;
 	private String memPassword;
 	private String memMbti;
 	private String memBirth;
+	@Column(unique = true)
 	private String memNickname;
 	private String memImg;
 	private String memRole; //ROLE_USER, ROLE_ADMIN
