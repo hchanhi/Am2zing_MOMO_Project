@@ -21,20 +21,21 @@ tr,td,th{
 <table>
 	<thead>
 		<tr>
-			<th style="width: 20%">닉네임</th>
-			<th style="width: 30%">이메일</th>
-			<th style="width: 10%">mbti</th>
-			<th style="width: 20%">생년월일</th>
-			<th style="width: 20%">view</th>
+		<!--  
+			<th style="width: 20%">닉네임</th>-->
+			<th style="width: 50%">이메일</th>
+			<th style="width: 25%">mbti</th>
+			<!-- <th style="width: 20%">생년월일</th>-->
+			<th style="width: 25%">view</th>
 		</tr>
 	</thead>
 	<tbody>
 		<tr th:each="member : ${members}" th:object="${member}">
-			<td th:text="*{memNickName}"></td>
+			<!-- <td th:text="*{memNickname}"></td>-->
 			<td th:text="*{memEmail}"></td>
 			<td th:text="*{memMbti}"></td>
-			<td th:text="*{memBirth}"></td>
-			<td ><a th:href="@{/admin/member/member-detail/{id}(id = ${member.memNum})}">view</a></td>
+			<!--<td th:text="*{memBirth}"></td>-->
+			<td ><a th:href="@{/admin/member/member-detail/{id}(id = ${member.memId})}">view</a></td>
 		</tr>		
 	</tbody>
 </table>

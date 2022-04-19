@@ -28,9 +28,9 @@ public class AdminController {
 		model.addAllAttributes(adminService.findAllMembers(page));
 	}
 	
-	@GetMapping("member/member-detail/{memNum}")
-	public String showMemberDetail(@PathVariable Integer memNum, Model model) {
-		model.addAttribute("member", this.adminService.findMemberByMemNum(memNum));
+	@GetMapping("member/member-detail/{memId}")
+	public String showMemberDetail(@PathVariable Integer memId, Model model) {
+		model.addAttribute("member", this.adminService.findMemberByMemNum(memId));
 		return "admin/member/member-detail";
 	}
 	

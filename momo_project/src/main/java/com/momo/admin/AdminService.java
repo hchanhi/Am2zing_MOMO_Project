@@ -27,7 +27,7 @@ public class AdminService {
 		
 		int cntPerPage = 10;
 		List<Member> members = adminMemberRepository
-				.findAll(PageRequest.of(page-1, cntPerPage, Direction.DESC, "memNum"))
+				.findAll(PageRequest.of(page-1, cntPerPage, Direction.DESC, "memId"))
 				.getContent();
 		
 		Paging paging = Paging.builder()
@@ -42,8 +42,8 @@ public class AdminService {
 	}
 	
 	//해당 회원 조회
-	public Member findMemberByMemNum(int memNum) {
-		Member member = adminMemberRepository.findById((long) memNum).get();
+	public Member findMemberByMemNum(int memId) {
+		Member member = adminMemberRepository.findById(memId).get();
 		
 		return member;
 	}

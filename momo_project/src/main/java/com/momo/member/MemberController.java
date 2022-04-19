@@ -44,11 +44,6 @@ public class MemberController {
 
 		return "유저 페이지입니다.";
 	}
-
-	@GetMapping("/admin")
-	public @ResponseBody String admin() {
-		return "어드민 페이지입니다.";
-	}
 	
 	//@PostAuthorize("hasRole('ROLE_MANAGER')")
 	//@PreAuthorize("hasRole('ROLE_MANAGER')")
