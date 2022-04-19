@@ -21,6 +21,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
+
 public class Member {
 	@Id // primary key
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
