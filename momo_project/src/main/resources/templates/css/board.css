@@ -26,6 +26,10 @@ table {
     border-spacing: 0;
 }
 
+input:focus {
+    outline: none;
+}
+
 #wrap {
     width: 100%;
     margin: 0px auto;
@@ -107,6 +111,36 @@ header {
 
 /* ------------------end of header----------------- */
 
+section {
+    width: 100%;
+    height: 700px;
+}
+
+.sec_left {
+    float: left;
+    width: calc(100%/2);
+    height: 100%;
+    background-color: rgb(194, 227, 174);
+}
+
+#title {
+    width: 560px;
+    height: 70px;
+    margin-top:10px;
+    background-color: rgb(180, 180, 180);
+    border: 0;
+    border-radius: 20px;
+    font-size: 25pt;
+    color: rgb(68, 68, 68);
+}
+
+
+.sec_right {
+    float: left;
+    width: calc(100%/2);
+    height: 100%;
+    background-color: rgb(237, 237, 177);
+}
 
 
 
@@ -117,6 +151,7 @@ footer {
     height: 300px;
     color: rgb(239, 239, 239);
     background-color: rgb(74, 74, 74);
+    margin-top: 100px;
 }
 
 .foot1 {
