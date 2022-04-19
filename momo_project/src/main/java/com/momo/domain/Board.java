@@ -41,16 +41,6 @@ public class Board implements Serializable {
     private int placeCnt;
     
     
-  
-
-  
-	/*
-	 * @JsonIgnore
-	 * 
-	 * @OneToMany(mappedBy = "board", fetch = FetchType.EAGER,cascade =
-	 * CascadeType.REMOVE) private List<Comment> comments = new
-	 * ArrayList<Comment>();
-	 */
 	
 	}
 	

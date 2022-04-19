@@ -45,6 +45,20 @@
 		
 	 });
 })
+$('#btn').click(function(replyNum){
+	var query = {"comment" : replyNum};
+	$.ajax({
+		url:"${contextPath}/comment.momo.comment/nDelete",
+		type: "get",
+		data : query,
+		success : function(data) {
+			location.reload();
+		}
+		
+	})
+
+	
+});
 
 </script>
 </body>

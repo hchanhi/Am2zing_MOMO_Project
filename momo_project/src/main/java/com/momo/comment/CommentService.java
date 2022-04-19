@@ -52,6 +52,9 @@ public class CommentService {
 	public void deleteComment(Long replyNum) {
         commentRepository.deleteById(replyNum); // 3
     }
+	public void deleteComment02(Long replyNum) {
+        commentRepository.deleteById(replyNum); // 3
+    }
 	public ResponseEntity<?> update(Map<String,String> map) {
 		//System.out.println(map.toString());
 		Map<String, String> tempMap=new HashMap<>();
@@ -93,7 +96,13 @@ public class CommentService {
 	 * 
 	 * }
 	 */
-	
+	public void deleteComment02(List<String> replyNumArray) {
+		 for(int i=0; i<replyNumArray.size(); i++) {
+	            String replyNum = replyNumArray.get(i);
+	            Optional<Comment> optional = commentRepository.findById(Long.parseLong(replyNum));
+	            
+	        }
+	    }
 
 	
 	

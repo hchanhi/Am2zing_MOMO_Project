@@ -73,15 +73,26 @@ public class CommentController {
 		model.addAttribute("comments", commentList);
 		return "comment/commentList";
 	}
-	@RequestMapping(value = "test02/comment/delete/{replyNum}")
-	public String deleteComment(@PathVariable Long replyNum,@PathVariable("boardNum") int boardNum) { // 8
-		/*
-		 * List<Comment> commentList = commentService.getCommentList(boardNum);
-		 * model.addAttribute("comments", commentList);
-		 */
-		commentService.deleteComment(replyNum); 
-	    return "redirect:/test02/{boardNum}"; //
-	}
+	
+	  @RequestMapping(value = "test02/comment/delete/{replyNum}") public String
+	  deleteComment(@PathVariable Long replyNum) { // 8 
+	  commentService.deleteComment(replyNum); 
+			  return "redirect:/test02/1"; 
+	  }
+	
+	
+	@ResponseBody
+ @RequestMapping(value = "/nDelete", method = RequestMethod.GET) public String
+	  nDeleteGet(Long replyNum) { commentService.deleteComment(replyNum); 
+	 return"";
+	  }
+	 @ResponseBody
+	    @PostMapping("/board/delete")
+	    public List<String> deleteSubmit(@RequestBody List<String> replyNumArray){
+
+	       commentService.deleteComment02(replyNumArray);
+	        return replyNumArray;
+	    }
 	/*
 	 * @RequestMapping("/test02") public ModelAndView list(ModelAndView mav) {
 	 * mav.setViewName("test02"); //뷰의 이름 List<Comment> list=commentService.list();
