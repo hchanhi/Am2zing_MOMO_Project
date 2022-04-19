@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>*</title>
+</head>
+<body>
+<div>
+    <table>
+        <tr>
+            <th>장소명</th>
+            <th>코멘트</th>
+        </tr>
+        
+        <tbody>
+        <tr th:each="place : ${places}">
+            <td>
+                <span th:text="${place.placeTitle}"></span>
+            </td>
+            <td>
+                <span th:text="${place.placeContent}"></span>
+            </td>
+            <td>
+            <span hidden id="boardNum" th:boardNum="${place.board.boardNum}"></span>
+            <input type="button" class="deletePlace" th:data-del="${place.placeNum}"
+             value="삭제">
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<script src="https://code.jquery.com/jquery-latest.min.js"></script>
+<script>
+$(document).ready(function() {
+	$("input:button.deletePlace").on('click',deletePlace);
+	
+});
+
+function deletePlace(){
+	let boardNum = document.getElementById("boardNum").value;
+    let placeNum = $(this).attr("data-del");
+    var sendData = {"boardNum": boardNum};
+    $.ajax({
+        method: 'DELETE',
+        url : '/deletePlace/'+placeNum,
+        data : sendData,
+        success: function(data){
+        	$('#resDiv').html(data)
+        }
+    });
+
+}
+</script>
+</body>
+</html>
