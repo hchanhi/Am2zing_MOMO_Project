@@ -8,6 +8,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
+import com.momo.comment.Comment;
 import com.momo.common.util.pagination.Paging;
 import com.momo.domain.Board;
 import com.momo.domain.Member;
@@ -21,6 +22,8 @@ public class AdminService {
 	
 	@Autowired
 	private AdminBoardRepository adminBoardRepository;
+	
+	@Autowired AdminCommentRepository adminCommentRepository;
 	
 	//회원 전체 조회
 	public Map<String,Object> findAllMembers(int page){
@@ -65,4 +68,23 @@ public class AdminService {
 		return Map.of("boards",boards,"paging",paging);
 		
 	}
+	
+	//댓글 전체 조회
+		public Map<String,Object> findAllComments(int page){
+			
+			int cntPerPage = 10;
+			List<Comment> comments = adminCommentRepository
+					.findAll(PageRequest.of(page-1, cntPerPage, Direction.DESC, "replyNum"))
+					.getContent();
+			
+			Paging paging = Paging.builder()
+					.url("/admin/comment/comment-list")
+					.total((int)adminCommentRepository.count())
+					.cntPerPage(cntPerPage)
+					.curPage(page)
+					.blockCnt(1)
+					.build();
+			
+			return Map.of("comments",comments,"paging",paging);
+		}
 }
