@@ -92,16 +92,5 @@ public class MemberController {
 		return "Member/Login";
 	}
 	
-	@GetMapping("/memberEditForm")
-    public String myPageHome(Model model, @AuthenticationPrincipal Member currentMember) {
-        List<Category> categoryList = categoryService.findAll();
-
-        MemberForm memberForm = new MemberForm();
-        memberForm.setName(currentMember.getUsername());
-        memberForm.setEmail(currentMember.getEmail());
-        
-        model.addAttribute("categoryList", categoryList);
-        model.addAttribute("memberForm", memberForm);
-        return "member/editMember";
-    }
+	
 }
