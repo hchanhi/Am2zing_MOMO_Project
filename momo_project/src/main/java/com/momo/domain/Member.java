@@ -1,54 +1,44 @@
 package com.momo.domain;
 
-import java.io.Serializable;
+import java.sql.Timestamp;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import org.hibernate.annotations.CreationTimestamp;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
-@Getter
-@Setter
+// ORM - Object Relation Mapping
+
+@Builder
+@Data
+@Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
-@Builder
-public class Member implements Serializable {
 
-    @Id
-    @Column
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long memNum;
-
-
-    @Column(nullable = false, unique = true)
-
-    private String memEmail;
-
-    @Column
-    private String memNickName;
-
-    @Column(nullable = false)
-    private String memPassword;
-
-    @Column
-    private String memMbti;
-
-    @Column
-    private String memBirth;
-    
-    @Column(nullable = false)
-    private String memLevel; 
-    
-    @Column
-    private String memImg;
+public class Member {
+	@Id // primary key
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int memId;
 	
-	}
-	
-
-
-
-
+	@Column(nullable = false, unique = true)
+	private String memEmail;
+	private String memPassword;
+	private String memMbti;
+	private String memBirth;
+	@Column(unique = true)
+	private String memNickname;
+	private String memImg;
+	private String memRole; //ROLE_USER, ROLE_ADMIN
+	// OAuth를 위해 구성한 추가 필드 2개
+	private String provider;
+	private String providerId;
+	@CreationTimestamp
+	private Timestamp createDate;
+}
