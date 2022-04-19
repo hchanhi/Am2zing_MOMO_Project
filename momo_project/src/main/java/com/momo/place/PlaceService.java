@@ -1,6 +1,8 @@
 package com.momo.place;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -18,6 +20,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
+import org.springframework.util.ResourceUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.momo.board.BoardRepository;
@@ -105,11 +108,11 @@ public class PlaceService {
 		return placeList;
 	}
 	
-	private String path= "C:/Users/Administrator/Desktop/upload/";
+	//private String path= "C:/Users/Administrator/Desktop/upload/";
 	
 	public String upload(MultipartFile multi, HttpServletRequest request,
 			HttpServletResponse response, Model model) {
-		
+		String path = new File("").getAbsolutePath()+"\\src\\main\\resources\\static\\images\\";
 		String url = null;
 		try {
 			String uploadpath = path;
@@ -121,9 +124,11 @@ public class PlaceService {
 			
 			if(!multi.isEmpty()) {
 				File file = new File(uploadpath, multi.getOriginalFilename()+"_"+saveFileName);
+				String name = multi.getOriginalFilename()+"_"+saveFileName;
 				multi.transferTo(file);
 				model.addAttribute("fileName", multi.getOriginalFilename());
-				model.addAttribute("uploadPath", file.getAbsolutePath());
+				//model.addAttribute("uploadPath", file.getAbsolutePath());
+				model.addAttribute("uploadPath", "/images/"+name);
 				//return file.getAbsolutePath();
 				return "Board/filePath";
 			}

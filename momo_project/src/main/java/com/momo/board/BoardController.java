@@ -59,7 +59,7 @@ public class BoardController {
 	    public String detail(@PathVariable("boardNum") Integer boardNum, Model model) {
 	        Board board = boardService.getPost(boardNum);
 	        model.addAttribute("board", board);
-	        model.addAttribute("places", this.placeService.findByBoardNum(boardNum));
+	        model.addAttribute("places", placeService.findByBoardNum(boardNum));
 	        return "Board/detail";
 	    }
 	
