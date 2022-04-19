@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.momo.comment.Comment;
+import com.momo.comment.CommentRepository;
 import com.momo.domain.Board;
 import com.momo.domain.Member;
 import com.momo.domain.Place;
@@ -23,6 +25,9 @@ public class BoardService {
 	
 	@Autowired
 	private PlaceRepository placeRepository;
+	
+	@Autowired
+	private CommentRepository commentRepository;
 	
 	@Autowired PlaceService placeService;
 	
@@ -60,13 +65,18 @@ public class BoardService {
     }
 	
 	 @Transactional
-	    public void deletePost(Long boardNum) {
-		 List<Place> places = placeService.findByBoardNum(boardNum.intValue());
+	    public void deletePost(Board board) {
+		 List<Place> places = placeService.findByBoardNum(board.getBoardNum().intValue());
 		 for(Place place : places) {
 			 Long placeNum = place.getPlaceNum();
 			 placeRepository.deleteById(placeNum);
 		 }
-		 boardRepository.deleteById(boardNum);
+		 List<Comment> comments = commentRepository.findByBoard(board);
+		 for(Comment comment : comments) {
+			 Long replyNum = comment.getReplyNum();
+			 commentRepository.deleteById(replyNum);
+		 }
+		 boardRepository.deleteById(board.getBoardNum());
 	    }
 	
 }

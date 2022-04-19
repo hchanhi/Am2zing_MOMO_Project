@@ -84,8 +84,10 @@ public class BoardController {
 	
 	@DeleteMapping("/post/{boardNum}")
     public String delete(@PathVariable("boardNum") Long boardNum) {
-		boardService.deletePost(boardNum);
-		
+		List<Board> boards = boardRepository.findByBoardNum(boardNum);
+		for(Board board:boards) {
+		boardService.deletePost(board);
+		}
         return "redirect:/board";
     }
 	////////////////////////////////////////////////////////////////////////
