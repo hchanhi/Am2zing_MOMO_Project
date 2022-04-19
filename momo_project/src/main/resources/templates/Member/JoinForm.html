@@ -10,12 +10,11 @@
     <meta charset="UTF-8" />
   </head>
   <body>
-    <form method="post" th:action="@{/signup}">
-      email : <input type="email" name="memEmail" /> password :
-      <input type="password" name="memPassword" /> password :
-      <input type="password" name="memPassword" /> passwordCheck :
-      <input type="password" name="memPasswordCheck" /> MBTI :
-      <select name="memMbti">
+    <form method="post" th:action="@{/joinProc}">
+      email : <input type="email" name="memEmail" /> 
+      password : <input type="password" name="memPassword" /> 
+      passwordCheck : <input type="password" name="memPasswordCheck" /> 
+      MBTI : <select name="memMbti">
         <option value="">MBTI 선택</option>
         <option value="ISTJ">ISTJ</option>
         <option value="ISTP">ISTP</option>
@@ -35,16 +34,14 @@
         <option value="ENFP">ENFP</option>
       </select>
       
-      생년월일 :
-      <input type="text" name="memBirth">
+      <!-- 생년월일 :
       <select name="yy" id="year"></select
       >년
       <select name="mm" id="month"></select
       >월
       <select name="dd" id="day"></select
       >일
-      </input>
-
+    -->
       <button type="submit">회원가입</button>
     </form>
 
