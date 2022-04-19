@@ -238,8 +238,9 @@ footer {
 
 #plusButton {
     position: fixed;
-    right: 3%;
+    right: 2%;
     bottom: 30px;
     display: block;
     z-index: 999;
+    cursor: pointer;
 }

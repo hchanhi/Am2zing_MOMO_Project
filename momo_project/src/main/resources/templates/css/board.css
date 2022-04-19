@@ -106,73 +106,9 @@ header {
 
 
 /* ------------------end of header----------------- */
-.all {
-    padding-top: 50px;
-    margin-bottom: 150px;
-    height: 750px;
-}
-
-aside {
-    float: left;
-    width: 180px;
-    height: 740px;
-    border-right: 2px solid rgb(133, 133, 133);
-    text-align: center;
-}
-
-aside .button_1 {
-    width: 150px;
-    background-color: rgb(203, 203, 203);
-    border: 2px solid rgb(185, 185, 185);
-    border-radius: 20px;
-    text-align: center;
-    padding: 10px 0;
-    margin-bottom: 20px;
-    color: rgb(75, 75, 75);
-    font-size: 18px;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-aside .button_2 {
-    width: 150px;
-    background-color: rgb(234, 234, 234);
-    border: 2px solid rgb(185, 185, 185);
-    border-radius: 20px;
-    text-align: center;
-    padding: 10px 0;
-    color: rgb(75, 75, 75);
-    font-size: 18px;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-/* <!--------------------end of aside-------------------> */
-.contents {
-    float: right;
-    width: 1250px;
-    height: 750px;
-    /* text-align: center; */
-}
-
-.content1 {
-    margin-bottom: 20px;
-}
-
-.content2 {
-    margin-bottom: 20px;
-}
 
 
-.contents .post {
-    display: inline-block;
-    cursor: pointer;
-    width: 390px;
-    height: 230px;
-    background-color: rgb(218, 218, 218);
-    border-radius: 20px;
-    margin-left: 22px;
-}
+
 
 /* ------------------end of section----------------- */
 

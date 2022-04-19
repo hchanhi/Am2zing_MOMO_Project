@@ -109,13 +109,13 @@ header {
 .all {
     padding-top: 50px;
     margin-bottom: 150px;
-    height: 750px;
+    height: 650px;
 }
 
 aside {
     float: left;
     width: 180px;
-    height: 720px;
+    height: 580px;
     border-right: 2px solid rgb(133, 133, 133);
     text-align: center;
 }
@@ -129,7 +129,7 @@ aside .button_1 {
     padding: 10px 0;
     margin-bottom: 20px;
     color: rgb(75, 75, 75);
-    font-size: 20px;
+    font-size: 18px;
     font-weight: bold;
     cursor: pointer;
 }
@@ -142,7 +142,7 @@ aside .button_2 {
     text-align: center;
     padding: 10px 0;
     color: rgb(75, 75, 75);
-    font-size: 20px;
+    font-size: 18px;
     font-weight: bold;
     cursor: pointer;
 }
@@ -151,28 +151,43 @@ aside .button_2 {
 .contents {
     float: right;
     width: 1250px;
-    height:750px;
-    
+    height: 750px;
+
 }
 
-.content1{
-    height:360px;
-    margin-bottom:10px;
+.content1 {
+    height: 280px;
+    margin-bottom: 20px;
 }
 
-.content2{
-    height:360px;
-    margin-bottom:20px;
-}
-
-
-.contents img{
-    width:610px;
-    height:350px;
-    float:left;
-    margin-left:15px;
+.placeimg {
+    float: left;
+    width: 250px;
+    height: 250px;
+    background-color: rgb(205, 205, 205);
     border-radius: 20px;
-    background-color:rgb(255, 191, 72) ;
+    margin-top: 15px;
+    margin-left: 15px;
+}
+
+.pinicon {
+    float: right;
+    margin: 15px 5px 0 0;
+}
+
+.content2 {
+    height: 280px;
+    margin-bottom: 20px;
+}
+
+
+.contents a {
+    width: 610px;
+    height: 280px;
+    float: left;
+    margin-left: 15px;
+    border-radius: 20px;
+    background-color: rgb(238, 238, 238);
 }
 
 /* ------------------end of section----------------- */
@@ -191,13 +206,13 @@ footer {
     font-size: 14pt;
 }
 
-.foot1 h3{
-    color:orangered;
+.foot1 h3 {
+    color: orangered;
     font-size: 25pt;
-    margin:40px 0px 10px 50px;
+    margin: 40px 0px 10px 50px;
 }
 
-.foot1 p{
+.foot1 p {
     margin-left: 50px;
 }
 
@@ -210,13 +225,13 @@ footer {
 }
 
 
-.foot2 h3{
+.foot2 h3 {
     font-size: 25pt;
-    margin:40px 0px 10px 0px;
-    
+    margin: 40px 0px 10px 0px;
+
 }
 
-.foot2 p{
+.foot2 p {
     margin-left: 0px;
 }
 
