@@ -35,7 +35,7 @@ public class Member implements Serializable {
     private String memPassword;
 
     @Column
-    private Board memMbti;
+    private String memMbti;
 
     @Column
     private String memBirth;

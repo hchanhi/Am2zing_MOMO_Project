@@ -9,4 +9,5 @@ import com.momo.domain.Place;
 
 public interface PlaceRepository extends JpaRepository<Place, Long> {
 	List<Place> findByBoard(Board board);
+	
 }
