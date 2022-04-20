@@ -91,12 +91,12 @@ public class MemberController {
         return memberService.memNicknameOverlap(memNickname);
     }
     
-    //닉네임 수정 중복 체크
-    @ResponseBody
-    @PostMapping("/api/nicknameModify")
-    public HashMap<String, Object> nicknameModify(@RequestParam(required = false) Long id, String nickname) {
-        return memberService.nicknameModify(nickname, id);
-    }
+//    //닉네임 수정 중복 체크
+//    @ResponseBody
+//    @PostMapping("/api/nicknameModify")
+//    public HashMap<String, Object> nicknameModify(@RequestParam(required = false) Long id, String nickname) {
+//        return memberService.nicknameModify(nickname, id);
+//    }
 
 	
 	
