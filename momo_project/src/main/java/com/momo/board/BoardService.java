@@ -34,7 +34,8 @@ public class BoardService {
 	public Board save(String boardTitle) {
 		Board board = new Board();
 		board.setBoardTitle(boardTitle);
-		this.boardRepository.save(board);
+		//board.setMember(member);
+		boardRepository.save(board);
 		
 		return board;
 	}

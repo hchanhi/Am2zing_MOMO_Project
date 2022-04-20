@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.momo.domain.Board;
+import com.momo.domain.Member;
 import com.momo.domain.Place;
 import com.momo.place.PlaceService;
 
@@ -97,7 +98,7 @@ public class BoardController {
 	}
 	
 	@RequestMapping("/writeBoard")
-	public String addBoard(@RequestParam(required = false) String boardTitle, Model model) {
+	public String addBoard(@RequestParam(required = false) String boardTitle,Model model) {
 		Board board = new Board();
 		if (!Objects.isNull(boardTitle)&& !boardTitle.isBlank()) {
 			board = this.boardService.save(boardTitle);

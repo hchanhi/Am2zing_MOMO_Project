@@ -60,7 +60,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		    .ignoringAntMatchers("/deletePlace/*")
 		    .ignoringAntMatchers("/commentList/*")
 		    .ignoringAntMatchers("/commentList02/*")
-		    .ignoringAntMatchers("/test02/*");
+		    .ignoringAntMatchers("/test02/*")
+		    .ignoringAntMatchers("/deleteReply/*");
 		    	 
 		
 	}
