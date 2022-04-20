@@ -446,7 +446,7 @@
 		<a th:href="@{/board}" role="button"><button>목록</button></a>
 	</div>
 	 <input name="memEmail" th:value="${#authentication.name}">
-    <input name="memNickname" th:value="${#authentication.name}">
+
 
 	<div th:each="place : ${places}">
 		<a th:name="@{${place.placeNum}}"></a>
