@@ -35,7 +35,7 @@ public class AdminController {
 	}
 	
 	@GetMapping("board/board-list")
-	public void searchAllBords(Model model
+	public void searchAllBoards(Model model
 					, @RequestParam(required = false, defaultValue = "1")
 					  int page) {
 		
@@ -47,4 +47,20 @@ public class AdminController {
 		model.addAttribute("myplaces", this.placeService.findByBoardNum(boardNum));
 		return "view/test02";
 	}
+	
+	@GetMapping("comment/comment-list")
+	public void searchAllComments(Model model
+					, @RequestParam(required = false, defaultValue = "1")
+					  int page) {
+		
+		model.addAllAttributes(adminService.findAllComments(page));
+	}
+	
+	@GetMapping("comment/comment-detail/{boardNum}")
+	public String showcommentDetail(@PathVariable Integer boardNum, Model model) {
+		model.addAttribute("myplaces", this.placeService.findByBoardNum(boardNum));
+		return "view/test02";
+	}
+	
+
 }

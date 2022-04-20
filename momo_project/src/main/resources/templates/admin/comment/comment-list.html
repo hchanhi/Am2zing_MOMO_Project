@@ -21,16 +21,18 @@ tr,td,th{
 <table>
 	<thead>
 		<tr>
-			<th style="width: 60%">제목</th>
-			<th style="width: 20%">닉네임</th>
-			<th style="width: 20%">view</th>
+			<th style="width: 40%">댓글 내용</th>
+			<th style="width: 10%">닉네임</th>
+			<th style="width: 40%">게시판 제목</th>
+			<th style="width: 10%">view</th>
 		</tr>
 	</thead>
 	<tbody>
-		<tr th:each="board : ${boards}" th:object="${board}">
-			<td th:text="*{boardTitle}"></td>
-			<td></td>
-			<td><a th:href="@{/admin/board/board-detail/{id}(id = ${board.boardNum})}">view</a></td>
+		<tr th:each="comment : ${comments}" th:object="${comment}">
+			<td th:text="*{replyContent}"></td>
+			<td>익명</td>
+			<td th:text="*{board.boardTitle}"></td>
+			<td><a th:href="@{/admin/comment/comment-detail/{id}(id = *{board.boardNum})}">view</a></td>
 		</tr>		
 	</tbody>
 </table>

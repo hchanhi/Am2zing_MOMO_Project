@@ -1,9 +1,22 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>MOMO-게시판</title>
-   <style>
+
+<meta charset="UTF-8">
+<title>MOMO-게시판</title>
+<style>
+.map_wrap, .map_wrap * {
+	margin: 0;
+	padding: 0;
+	font-family: 'Malgun Gothic', dotum, '돋움', sans-serif;
+	font-size: 12px;
+}
+
+.map_wrap a, .map_wrap a:hover, .map_wrap a:active {
+	color: coral;
+	font-size: 20px;
+	text-decoration: none;
+
 .map_wrap, .map_wrap * {margin:0;padding:0;font-family:'Malgun Gothic',dotum,'돋움',sans-serif;font-size:12px;}
 .map_wrap a, .map_wrap a:hover, .map_wrap a:active{color:coral; font-size: 20px;text-decoration: none;}
 .map_wrap {position:relative;width:100%;height:500px;}
@@ -45,73 +58,249 @@
    font-weight:bold;
    color:coral;
    font-size:15px;
+
 }
-    </style> 
+
+.map_wrap {
+	position: relative;
+	width: 100%;
+	height: 500px;
+}
+
+#menu_wrap {
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	width: 250px;
+	margin: 10px 0 30px 10px;
+	padding: 5px;
+	overflow-y: auto;
+	background: rgb(255, 255, 255);
+	z-index: 1;
+	font-size: 12px;
+	border-radius: 10px;
+}
+
+.bg_white {
+	background: #fff;
+}
+
+#menu_wrap hr {
+	display: block;
+	height: 1px;
+	border: 0;
+	border-top: 2px solid #5F5F5F;
+	margin: 3px 0;
+}
+
+#menu_wrap .option {
+	text-align: center;
+}
+
+#menu_wrap .option p {
+	margin: 10px 0;
+}
+
+#menu_wrap .option button {
+	margin-left: 5px;
+}
+
+#placesList .item {
+	position: relative;
+	border-bottom: 1px solid #888;
+	overflow: hidden;
+	cursor: pointer;
+	min-height: 65px;
+}
+
+#placesList .item span {
+	display: block;
+	margin-top: 4px;
+}
+
+#placesList .item h5, #placesList .item .info {
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+}
+
+#placesList .item .info {
+	padding: 10px 0 10px 55px;
+}
+
+#placesList .info .gray {
+	color: #8a8a8a;
+}
+
+#placesList .info .jibun {
+	padding-left: 26px;
+	background:
+		url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/places_jibun.png)
+		no-repeat;
+}
+
+#placesList .info .tel {
+	color: #009900;
+}
+
+#placesList .item .markerbg {
+	float: left;
+	position: absolute;
+	width: 36px;
+	height: 37px;
+	margin: 10px 0 0 10px;
+	background:
+		url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_number_blue.png)
+		no-repeat;
+}
+
+#placesList .item .marker_1 {
+	background-position: 0 -10px;
+}
+
+#placesList .item .marker_2 {
+	background-position: 0 -56px;
+}
+
+#placesList .item .marker_3 {
+	background-position: 0 -102px
+}
+
+#placesList .item .marker_4 {
+	background-position: 0 -148px;
+}
+
+#placesList .item .marker_5 {
+	background-position: 0 -194px;
+}
+
+#placesList .item .marker_6 {
+	background-position: 0 -240px;
+}
+
+#placesList .item .marker_7 {
+	background-position: 0 -286px;
+}
+
+#placesList .item .marker_8 {
+	background-position: 0 -332px;
+}
+
+#placesList .item .marker_9 {
+	background-position: 0 -378px;
+}
+
+#placesList .item .marker_10 {
+	background-position: 0 -423px;
+}
+
+#placesList .item .marker_11 {
+	background-position: 0 -470px;
+}
+
+#placesList .item .marker_12 {
+	background-position: 0 -516px;
+}
+
+#placesList .item .marker_13 {
+	background-position: 0 -562px;
+}
+
+#placesList .item .marker_14 {
+	background-position: 0 -608px;
+}
+
+#placesList .item .marker_15 {
+	background-position: 0 -654px;
+}
+
+#pagination {
+	margin: 10px auto;
+	text-align: center;
+}
+
+#pagination a {
+	display: inline-block;
+	margin-right: 10px;
+}
+
+#pagination .on {
+	font-weight: bold;
+	cursor: default;
+	color: #777;
+}
+
+.contt {
+	color: coral;
+	font-size: 20px;
+}
+
+.topBtn {
+	text-decoration: none;
+	font-weight: bold;
+	color: coral;
+	font-size: 15px;
+}
+</style>
 </head>
 <body>
-<div>
-    <div>
-        <div>
-            <h1 th:text="@{${board.boardTitle}}"></h1>
-        </div>
-    </div>
-    <div>
-        <div class="map_wrap">
-    <div id="map" style="width:900px; height:500px;"></div>
-    <div id="menu_wrap" class="bg_white">
-       <div class="hAddr">
-        <span id="centerAddr"></span>
-       </div>
-       <h1>MOMO리스트</h1>
-        <ul id="placesList"></ul>
-           
-           
-        <div id="pagination"></div>
-        
-    </div>
-</div>
-   <div style="float:right">
-        <div>
-            <a th:href="@{'/post/edit/' + ${board.boardNum}}" role="button"><button>수정</button></a>
-        </div>
-        <div>
-            <form th:action="@{'/post/' + ${board.boardNum}}" method="post">
-                <input type="hidden" name="_method" value="delete"/>
-                <button type="submit">삭제</button>
-            </form>
-       </div>
-          <a th:href="@{/board}" role="button"><button>목록</button></a>
-    </div>
-    <input name="memEmail" th:value="${#authentication.name}">
-       <div th:each="place : ${places}">
-             <a th:name="@{${place.placeNum}}"></a>
-             <h2  style="color:coral" th:text="${place.placeTitle}"></h2>
-             <img style="width:150px; height:150px; cursor:pointer;"th:src="@{${place.placeImg}}" onerror="this.style.display='none'" alt='' /><br>
-             <span th:text="${place.placeContent}"></span><br>
-             <a class="topBtn" href="#top">지도로 이동</a>
-       </div>
-    </div>
-    
-             <form method="post" action="/place/reply?cmd=save" >
-            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-         <div class="">
-            <label for="title" class="">content</label>
-            <textarea placeholder="댓글을 입력해주세요" name="replyContent" id="replyContent"style="width: 500px; height: 150px; resize: none;"></textarea>
-             <input type="number" id="boardNum" name="boardNum" th:value="${boardNum}">
-            
-         </div>
-      
-      </form>
-      <button  id="btnSave">저장</button>
-         <h1>댓글목록</h1>
-      
-      <div id="resDiv" style="margin-top: 50px;"></div>
-      
-</div>
 
-   <script src="https://code.jquery.com/jquery-latest.min.js"></script>
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a7b5481a65eecc18bd2cc1106898f604&libraries=services"></script>
-<script th:inline="javascript">
+	<div>
+		<div>
+			<div>
+				<h1 th:text="@{${board.boardTitle}}"></h1>
+			</div>
+		</div>
+		<div>
+			<div class="map_wrap">
+				<div id="map" style="width: 900px; height: 500px;"></div>
+				<div id="menu_wrap" class="bg_white">
+					<div class="hAddr">
+						<span id="centerAddr"></span>
+					</div>
+					<h1>MOMO리스트</h1>
+					<ul id="placesList"></ul>
+
+
+					<div id="pagination"></div>
+				</div>
+			</div>
+			<div style="float: right">
+				<div>
+					<a th:href="@{'/post/edit/' + ${board.boardNum}}" role="button"><button>수정</button></a>
+				</div>
+				<div>
+					<form th:action="@{'/post/' + ${board.boardNum}}" method="post">
+						<input type="hidden" name="_method" value="delete" />
+						<button type="submit">삭제</button>
+					</form>
+				</div>
+				<div>
+					<form th:action="@{'/boardBookmark/' + ${board.boardNum}}" method="post">
+						<input type="hidden" name="_method" value="boardBookmark" />
+						<button th:if="${boardBookmarkCheck} == true" type="submit">저장</button>
+						<button th:unless="${boardBookmarkCheck} == true" type="submit">저장 취소</button>
+					</form>
+				</div>
+				<a th:href="@{/board}" role="button"><button>목록</button></a>
+			</div>
+			<div th:each="place : ${places}">
+				<a th:name="@{${place.placeNum}}"></a>
+				<h2 style="color: coral" th:text="${place.placeTitle}"></h2>
+				<img style="width: 150px; height: 150px; cursor: pointer;"
+					th:src="@{${place.placeImg}}"><br> <span
+					th:text="${place.placeContent}"></span><br> <a class="topBtn"
+					href="#top">지도로 이동</a>
+			</div>
+		</div>
+	</div>
+
+
+	<script type="text/javascript"
+		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a7b5481a65eecc18bd2cc1106898f604&libraries=services"></script>
+	<script th:inline="javascript">
+
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
     mapOption = { 
         center: new kakao.maps.LatLng(37.5546, 126.9706), // 지도의 중심좌표
