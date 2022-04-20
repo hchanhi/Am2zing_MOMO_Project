@@ -27,6 +27,7 @@ import com.momo.board.BoardRepository;
 import com.momo.board.BoardService;
 import com.momo.domain.Board;
 import com.momo.domain.Place;
+import com.momo.member.MemberRepository;
 
 
 @Controller
@@ -36,6 +37,9 @@ public class PlaceController {
 	
 	@Autowired
 	private PlaceRepository placeRepository;
+	
+	@Autowired
+	private MemberRepository memberRepository;
 	
 	@RequestMapping("/place")
 	public String findAllPlace(Model model) {
@@ -57,6 +61,7 @@ public class PlaceController {
 	@PostMapping("/placeList/{boardNum}")
 	public String placeList(@PathVariable("boardNum") int boardNum, @RequestBody Map<String,String> map, Model model) {
 		placeService.update(map);
+		
 		List<Place> placeList = placeService.getPlaceList(boardNum);
 		model.addAttribute("places", placeList);
 		return "Place/placeList";

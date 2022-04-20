@@ -1,35 +1,21 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>MOMO - 글쓰기</title>
 </head>
 <body>
 <div>
-    <form th:action="@{/post}" method="post">
+    <form name="form" th:action="@{/post}" method="post">
         <div>
             <h5>제목</h5>
             <div>
-                <input type="text" name="boardTitle" id="boardTitle">
+                <input type="text" name="boardTitle" id="boardTitle"><br>
                 
             </div>
-            
+            <input hidden name="memEmail" th:value="${#authentication.name}">
         </div>
         <div>
-        <!--  
-            <h5>작성자</h5>
-            <div>
-            	<input type="text" name="member.NickName" id="member.NickName">
-               <input type="text" name="member.NickName" id="member.NickName" th:value="${member.NickName}">
-            </div>
-        </div>
-        <div>
-            <h5>MBTI</h5>
-            <div>
-           		<input type="text" name="member.Mbti" id="member.Mbti"></input>
-            <input type="text" name="member.Mbti" id="member.Mbti" th:value="${member.Mbti}"></input>
-            </div>
-         -->
         </div>
         
         <div>

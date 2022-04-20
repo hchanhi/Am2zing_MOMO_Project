@@ -26,8 +26,9 @@ import org.springframework.web.multipart.MultipartFile;
 import com.momo.board.BoardRepository;
 
 import com.momo.domain.Board;
-
+import com.momo.domain.Member;
 import com.momo.domain.Place;
+import com.momo.member.MemberRepository;
 
 @Service
 public class PlaceService {
@@ -37,6 +38,9 @@ public class PlaceService {
 
 	@Autowired
 	private BoardRepository boardRepository;
+	
+	@Autowired
+	private MemberRepository memberRepository;
 	
 	public List<Place> findAll() {
 		return this.placeRepository.findAll();
@@ -50,19 +54,15 @@ public class PlaceService {
 	public void save(String placeTitle, String placeLat, String placeLng,
 			String placeId, String placeContent, String memEmail, int boardNum, String placeImg) {
 		Board board = boardRepository.findById((long) boardNum).get();
-
+		Member member = memberRepository.findByMemEmail(memEmail);
 		Place place = new Place();
 		place.setPlaceTitle(placeTitle);
 		place.setPlaceLat(placeLat);
 		place.setPlaceLng(placeLng);
 		place.setPlaceId(placeId);
 		place.setPlaceContent(placeContent);
-
-//		place.getMember().setMemEmail(memEmail);
+		place.setMember(member);
 		place.setBoard(board);
-
-
-
 		place.setPlaceImg(placeImg);
 
 		this.placeRepository.save(place);
@@ -85,6 +85,7 @@ public class PlaceService {
 	public ResponseEntity<?> update(Map<String,String> map) {
 		//System.out.println(map.toString());
 		Map<String, String> tempMap=new HashMap<>();
+		String memEmail = map.get("memEmail");
 		//DB처리
 		String placeTitle = map.get("placeTitle");
 		String placeLat = map.get("placeLat");
@@ -92,9 +93,8 @@ public class PlaceService {
 		String placeId = map.get("placeId");
 		String placeContent = map.get("placeContent");
 		String placeImg = map.get("placeImg");
-		//String memEmail = map.get("memEmail");
 		int boardNum = Integer.parseInt(map.get("boardNum"));
-		this.save(placeTitle, placeLat, placeLng, placeId, placeContent, null, boardNum, placeImg);
+		this.save(placeTitle, placeLat, placeLng, placeId, placeContent, memEmail, boardNum, placeImg);
 		
 		try {
 			
