@@ -14,6 +14,7 @@ import com.momo.comment.CommentRepository;
 import com.momo.domain.Board;
 import com.momo.domain.Member;
 import com.momo.domain.Place;
+import com.momo.member.MemberRepository;
 import com.momo.place.PlaceRepository;
 import com.momo.place.PlaceService;
 
@@ -29,12 +30,18 @@ public class BoardService {
 	@Autowired
 	private CommentRepository commentRepository;
 	
-	@Autowired PlaceService placeService;
+	@Autowired
+	private PlaceService placeService;
 	
-	public Board save(String boardTitle) {
+	@Autowired
+	private MemberRepository memberRepository;
+	
+	public Board save(String boardTitle, String memEmail) {
 		Board board = new Board();
+		Member member = memberRepository.findByMemEmail(memEmail);
 		board.setBoardTitle(boardTitle);
-		this.boardRepository.save(board);
+		board.setMember(member);
+		boardRepository.save(board);
 		
 		return board;
 	}
@@ -49,9 +56,6 @@ public class BoardService {
 		List<Board> boardArrayList = new ArrayList<>();
 		
 		for(Board board : boardList) {
-//			board.getBoardNum();
-//			board.getBoardTitle();
-//			board.getMember();
 			boardArrayList.add(board);
 		}
 		return boardArrayList;

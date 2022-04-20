@@ -2,18 +2,73 @@
 <!--signup.html-->
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
-  <script
-    type="text/javascript"
-    src="http://code.jquery.com/jquery-1.12.4.min.js"
-  ></script>
+ 
   <head>
     <meta charset="UTF-8" />
+    <title>회원가입</title>
+    
+    <!-- default header name is X-CSRF-TOKEN -->
+    <meta id="_csrf" name="_csrf" th:content="${_csrf.token}"/>
+    <meta id="_csrf_header" name="_csrf_header" th:content="${_csrf.headerName}"/>
   </head>
   <body>
-    <form method="post" th:action="@{/joinProc}">
-      email : <input type="email" name="memEmail" /> 
-      password : <input type="password" name="memPassword" /> 
-      passwordCheck : <input type="password" name="memPasswordCheck" /> 
+    <form method="post" th:action="@{/joinProc}" th:object="${register}" onsubmit="return checkAll();">
+      <label th:for="memEmail" >이메일(아이디)</label>
+    <div>
+        <input type="email"  id="memEmail" name="memEmail"  placeholder="이메일을 입력해 주세요">
+        <input type="button" id="memEmailOverlay" onclick="memEmailCheck()" value="중복 체크"/>
+        <input  type="button" id="resetMemEmail" onclick="reMemEmail()" disabled value="다시입력"/>
+    </div>
+
+    <div >
+        <label th:for="memPassword">패스워드</label>
+    	  <input onchange="pwSame()" type="password" id="memPassword" name="memPassword" placeholder="비밀번호를 입력해 주세요"> 
+    </div>
+
+    <div >
+        <label for="password_check">패스워드 확인</label>
+        <input onkeyup="pwSame()" type="password" id="memPassword_Check" name="memPassword_Check" placeholder="비밀번호를 입력해 주세요">
+        <span id="pw_check_msg"></span>
+    </div>
+
+    <label th:for="memNickname" class="form-label">이름(닉네임)</label>
+    <div >
+        <input type="text" id="memNickname" name="memNickname" placeholder="닉네임을 입력해 주세요">
+        <input type="button" id="memNicknameOverlay" onclick="memNicknameCheck()" value="중복 체크"/>
+        <input type="button" id="resetMemNickname" onclick="reMemNickname()" disabled value="다시입력"/>
+    </div>
+
+    <label class="mb-3 form-label" for="birth">생년월일</label>
+    <div class="mb-3" id="birth" onchange="checkAge()">
+        <div class="birth dropdown">
+            <select class="form-control" id="year" name="year">
+                <option value="">년(YY)</option>
+                <th:block th:each="a: ${#numbers.sequence(2001,1900)}">
+                    <option th:value="${a}" th:text="${a}"></option>
+                </th:block>
+            </select>
+        </div>
+
+        <div class="birth mx-1 dropdown">
+            <select class="form-control" id="month" name="month">
+                <option value="">월(mm)</option>
+                <th:block th:each="month: ${#numbers.listFormatInteger(#numbers.sequence(1,12),2)}">
+                    <option class="dropdown-item" th:value="${month}" th:text="${month}"></option>
+                </th:block>
+            </select>
+        </div>
+
+        <div class="birth dropdown">
+            <select class="form-control" id="day" name="day">
+                <option value="">일(dd)</option>
+                <th:block th:each="day: ${#numbers.listFormatInteger(#numbers.sequence(1,31),2)}">
+                    <option class="dropdown-item" th:value="${day}" th:text="${day}"></option>
+                </th:block>
+            </select>
+        </div>
+        <span id="birth_check_msg"></span>
+    </div>
+      
       MBTI : <select name="memMbti">
         <option value="">MBTI 선택</option>
         <option value="ISTJ">ISTJ</option>
@@ -43,8 +98,13 @@
       >일
     -->
       <button type="submit">회원가입</button>
+      <div>
+      <a type="button" onclick="window.history.back();">취소</a>
+    </div>
     </form>
 
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script type="text/javascript" src="/js/signup.js"></script>
     <script type="text/javascript">
       $(document).ready(function () {
         var now = new Date();
@@ -77,6 +137,7 @@
         $('#month > option[value=' + mon + ']').attr('selected', 'true');
         $('#day > option[value=' + day + ']').attr('selected', 'true');
       });
+      
     </script>
   </body>
 </html>
