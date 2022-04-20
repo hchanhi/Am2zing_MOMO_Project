@@ -9,7 +9,7 @@ import lombok.Setter;
 public class MemberEdit {
 	
 	    @NotEmpty(message = "닉네임은 필수입니다.")
-	    private String memMickname;
+	    private String memNickname;
 	    
 	
 }

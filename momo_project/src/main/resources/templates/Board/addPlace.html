@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html xmlns:th="http://www.thymelaf.org" lang="ko">
+<html xmlns:th="http://www.thymelaf.org" lang="ko" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
 <title>Place Information UI</title>
@@ -328,7 +328,9 @@ html, body {
 			<input hidden type="text" id="placeLng" name="placeLng" value="" readonly>
 			<input hidden type="text" id="placeId" name="placeId" value="" readonly>
 			<input hidden type="number" id="boardNum" name="boardNum"
-				th:value="${boardNum}" readonly> <br>
+				th:value="${boardNum}" readonly>
+			<input hidden name="memEmail" th:value="${#authentication.name}">	
+			<br>
 			
 			<label for="file1">사진</label>
 			<input type="file" id="file1" name="file1">
@@ -368,8 +370,10 @@ $('#submitBtn').click(function(){
 			"placeId" : $('input[name="placeId"]').val(),
 			"boardNum" : $('input[name="boardNum"]').val(),
 			"placeImg" : $('input[name="placeImg"]').val(),
-			"placeContent" : $('#placeContent').val()
+			"placeContent" : $('#placeContent').val(),
+			"memEmail" : $('input[name="memEmail"]').val()
 		};
+	
 	$.ajax({
 		url:"/placeList/"+boardNum,
 		type:"POST",

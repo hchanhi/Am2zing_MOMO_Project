@@ -57,6 +57,7 @@ public class CommentController {
 	public String commentList(@PathVariable("boardNum") int boardNum, @RequestBody Map<String,String> map, Model model) {
 		commentService.update(map);
 		List<Comment> commentList = commentService.getCommentList(boardNum);
+		model.addAttribute("boardNum", boardNum);
 		model.addAttribute("comments", commentList);
 		return "comment/commentList";
 	}
@@ -87,6 +88,14 @@ public class CommentController {
 	       commentService.deleteComment02(replyNumArray);
 	        return replyNumArray;
 	    }
+	 
+	 @DeleteMapping("/deleteReply/{replyNum}")
+	 public String delete(@PathVariable("replyNum") long replyNum, @RequestParam int boardNum, Model model) {
+		 commentService.delete(replyNum);
+		 List<Comment> comments = commentService.findByBoardNum(boardNum);
+		 model.addAttribute("comments", comments);
+		 return "comment/commentList";
+	 }
 	/*
 	 * @RequestMapping("/test02") public ModelAndView list(ModelAndView mav) {
 	 * mav.setViewName("test02"); //뷰의 이름 List<Comment> list=commentService.list();

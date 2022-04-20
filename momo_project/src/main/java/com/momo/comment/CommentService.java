@@ -50,7 +50,7 @@ public class CommentService {
 	}
 	
 	public void deleteComment(Long replyNum) {
-        commentRepository.deleteById(replyNum); // 3
+        commentRepository.deleteById(replyNum);// 3
     }
 	public void deleteComment02(Long replyNum) {
         commentRepository.deleteById(replyNum); // 3

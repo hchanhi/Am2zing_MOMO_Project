@@ -41,10 +41,10 @@
 #pagination .on {font-weight: bold; cursor: default;color:#777;}
 .contt {color:coral; font-size: 20px;}
 .topBtn{
-	text-decoration: none;
-	font-weight:bold;
-	color:coral;
-	font-size:15px;
+   text-decoration: none;
+   font-weight:bold;
+   color:coral;
+   font-size:15px;
 }
     </style> 
 </head>
@@ -59,17 +59,18 @@
         <div class="map_wrap">
     <div id="map" style="width:900px; height:500px;"></div>
     <div id="menu_wrap" class="bg_white">
-    	<div class="hAddr">
+       <div class="hAddr">
         <span id="centerAddr"></span>
-    	</div>
-    	<h1>MOMO리스트</h1>
+       </div>
+       <h1>MOMO리스트</h1>
         <ul id="placesList"></ul>
-        	
-        	
+           
+           
         <div id="pagination"></div>
+        
     </div>
 </div>
-	<div style="float:right">
+   <div style="float:right">
         <div>
             <a th:href="@{'/post/edit/' + ${board.boardNum}}" role="button"><button>수정</button></a>
         </div>
@@ -78,20 +79,37 @@
                 <input type="hidden" name="_method" value="delete"/>
                 <button type="submit">삭제</button>
             </form>
-    	</div>
-    		<a th:href="@{/board}" role="button"><button>목록</button></a>
+       </div>
+          <a th:href="@{/board}" role="button"><button>목록</button></a>
     </div>
-    	<div th:each="place : ${places}">
-    			<a th:name="@{${place.placeNum}}"></a>
-    			<h2  style="color:coral" th:text="${place.placeTitle}"></h2>
-    			<img style="width:150px; height:150px; cursor:pointer;"th:src="@{${place.placeImg}}"><br>
-    			<span th:text="${place.placeContent}"></span><br>
-    			<a class="topBtn" href="#top">지도로 이동</a>
-    	</div>
+    <input name="memEmail" th:value="${#authentication.name}">
+       <div th:each="place : ${places}">
+             <a th:name="@{${place.placeNum}}"></a>
+             <h2  style="color:coral" th:text="${place.placeTitle}"></h2>
+             <img style="width:150px; height:150px; cursor:pointer;"th:src="@{${place.placeImg}}" onerror="this.style.display='none'" alt='' /><br>
+             <span th:text="${place.placeContent}"></span><br>
+             <a class="topBtn" href="#top">지도로 이동</a>
+       </div>
     </div>
+    
+             <form method="post" action="/place/reply?cmd=save" >
+            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+         <div class="">
+            <label for="title" class="">content</label>
+            <textarea placeholder="댓글을 입력해주세요" name="replyContent" id="replyContent"style="width: 500px; height: 150px; resize: none;"></textarea>
+             <input type="number" id="boardNum" name="boardNum" th:value="${boardNum}">
+            
+         </div>
+      
+      </form>
+      <button  id="btnSave">저장</button>
+         <h1>댓글목록</h1>
+      
+      <div id="resDiv" style="margin-top: 50px;"></div>
+      
 </div>
 
-
+   <script src="https://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a7b5481a65eecc18bd2cc1106898f604&libraries=services"></script>
 <script th:inline="javascript">
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
@@ -166,24 +184,114 @@ for (var i = 0; i < places.length; i ++) {
         });
         
         kakao.maps.event.addListener(marker, 'click', function () {
-			var position = this.getPosition();
-			var url = 'https://map.kakao.com/link/map/' + pid;
-			window.open(url, '_blank');
-			});
+         var position = this.getPosition();
+         var url = 'https://map.kakao.com/link/map/' + pid;
+         window.open(url, '_blank');
+         });
 
         kakao.maps.event.addListener(marker, 'mouseout', function() {
             infowindow.close();
         });
     })(marker, places[i].title,places[i].id);   
         
-   	var infoDiv = document.getElementById('placesList');
-		infoDiv.innerHTML = infoDiv.innerHTML + '<br><h1 class="contt"><a href="#'+places[i].placeNum+'">' + places[i].title +'</a></h1>';
+      var infoDiv = document.getElementById('placesList');
+      infoDiv.innerHTML = infoDiv.innerHTML + '<br><h1 class="contt"><a href="#'+places[i].placeNum+'">' + places[i].title +'</a></h1>';
 }
 //이미지 자세히 보기
 var img = document.getElementsByTagName("img");
     for (var x = 0; x < img.length; x++) {
       img.item(x).onclick=function() {window.open(this.src)}; 
     }
+    
+    //댓글저장
+$('#btnSave').click(function(){
+
+
+   let boardNum = document.getElementById("boardNum").value;
+   var tempData={
+      	
+         "boardNum" : $('input[name="boardNum"]').val(),
+         "replyContent" : $('#replyContent').val(),
+         
+      };
+      console.log(tempData);
+   var reply = $('#replyContent').val()
+      if(reply != "") {
+   $.ajax({
+      url:"/commentList/"+boardNum,
+      type:"POST",
+      async: true,
+      contentType: "application/json; charset=UTF-8",
+      data: JSON.stringify(tempData),
+      success: function(data){
+   
+         $('#replyContent').val();
+         $('#resDiv').html(data)
+         $('textarea[name="replyContent"]').val("");
+      },
+      error: function() { alert("에러 발생"); }
+
+
+    });
+    }
+});
+$(document).on("click","#deleteComment", function() {
+   
+
+   let item = $(this);
+    let replyNum = item.attr("data-replyNum");   
+    //let replyNum = document.getElementById("replyNum").value;
+     $.ajax({
+        method: 'Delete',
+        url : '/deleteComment/'+replyNum,
+        async: false,
+        contentType: "application/json; charset=UTF-8",
+        data : {"replyNum":replyNum},
+        success: function(data){
+   
+           $('#resDiv').html(data)
+           window.alert("삭제가 완료가 확인 되었습니다.");
+            document.location.reload(true);
+
+
+        },
+        error : function(data) {
+   console.dir(data);
+      
+}
+    });
+   
+});
+//새로고침 유지
+$(document).ready(function(){
+
+
+   let boardNum = document.getElementById("boardNum").value;
+   var tempData={
+      
+         "boardNum" : $('input[name="boardNum"]').val(),
+         
+      };
+      console.log(tempData);
+   var reply = $('#replyContent').val()
+      
+   $.ajax({
+      url:"/commentList02/"+boardNum,
+      type:"POST",
+      async: true,
+      contentType: "application/json; charset=UTF-8",
+      data: JSON.stringify(tempData),
+      success: function(data){
+   
+         $('#replyContent').val();
+         $('#resDiv').html(data)
+
+      }
+      
+    });
+    
+});
+
 
 </script>
 </body>

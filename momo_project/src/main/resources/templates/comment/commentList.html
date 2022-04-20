@@ -20,18 +20,42 @@
                 <span hidden id="replyNum" th:text="${comment.replyNum}"></span>
             </td>
              <td>
+             <span hidden id="boardNum" th:boardNum="${boardNum}"></span>
+             <input type="button" class="deleteReply" th:data-del="${comment.replyNum}"
+              value="삭제">
+           <!--   
           <td><a href="/comment" th:href="@{'comment/delete/' + ${comment.replyNum}}">삭제</a></td>
            <button onclick="commentDelete02()" type="button" class="btn btn-sm btn-danger" >삭제</button>
                
             <button id="btn" type="submit">수정</button>
-        
             </td>
+            --> 
         </tr>
         </tbody>
     </table>
 </div>
 	<script src="https://code.jquery.com/jquery-latest.min.js"></script>
 <script th:inline="javascript">
+$(document).ready(function() {
+	$("input:button.deleteReply").on('click',deleteReply);
+	
+});
+
+function deleteReply(){
+	let boardNum = document.getElementById("boardNum").value;
+    let replyNum = $(this).attr("data-del");
+    var sendData = {"replyNum": replyNum, "boardNum": boardNum};
+    $.ajax({
+        method: 'DELETE',
+        url : '/deleteReply/'+replyNum,
+        data : sendData,
+        success: function(data){
+        	$('#resDiv').html(data)
+        }
+    });
+
+}
+/*
 function commentDelete02(){
 
 		var replyNumArray = [];
@@ -75,6 +99,7 @@ $('#btn').click(function(replyNum){
     })
 }
 });
+*/
 
 </script>
 </body>

@@ -27,6 +27,7 @@ import com.momo.board.BoardRepository;
 import com.momo.board.BoardService;
 import com.momo.domain.Board;
 import com.momo.domain.Place;
+import com.momo.member.MemberRepository;
 
 
 @Controller
@@ -37,26 +38,19 @@ public class PlaceController {
 	@Autowired
 	private PlaceRepository placeRepository;
 	
+	@Autowired
+	private MemberRepository memberRepository;
+	
 	@RequestMapping("/place")
 	public String findAllPlace(Model model) {
 		model.addAttribute("myplaces", this.placeService.findAll());
 		return "/view/place";
 	}
 	
-	@GetMapping("/test")
-	public String MapTest() {
-		return "view/test";
-	}
-	
-	@GetMapping("/test02/{boardNum}")
-	public String MapTest02(@PathVariable Integer boardNum, Model model) {
-		model.addAttribute("myplaces", this.placeService.findByBoardNum(boardNum));
-		return "view/test02"; 
-	}
-	
 	@PostMapping("/placeList/{boardNum}")
 	public String placeList(@PathVariable("boardNum") int boardNum, @RequestBody Map<String,String> map, Model model) {
 		placeService.update(map);
+		
 		List<Place> placeList = placeService.getPlaceList(boardNum);
 		model.addAttribute("places", placeList);
 		return "Place/placeList";
@@ -70,23 +64,6 @@ public class PlaceController {
 		return "Place/placeList";
 	}
 	
-
-// 	@RequestMapping
-// 	public String addCard(@RequestParam String placeTitle, 
-// 							String placeLat, 
-// 							String placeLng,
-// 							String placeId, 
-// 							String placeContent, 
-// 							String memEmail,
-// 							int boardNum, 
-// 							Model model) {
-// 		if(!Objects.isNull(boardNum)&& !placeTitle.isBlank()) {
-// 			this.placeService.save(placeTitle, placeLat, placeLng, placeId, placeContent, memEmail, boardNum);
-
-// 		}
-// 		System.out.println(boardNum);
-// 		return "/index";
-// 	}
 	@RequestMapping("/form")
 	public String form() {
 		return "Board/addPlace";

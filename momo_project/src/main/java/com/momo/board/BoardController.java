@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.momo.domain.Board;
+import com.momo.domain.Member;
 import com.momo.domain.Place;
 import com.momo.place.PlaceService;
 
@@ -47,14 +48,14 @@ public class BoardController {
 	
 	//멤버는 일단 제거
 	@PostMapping("/post")
-	public String write(String boardTitle, Model model) {
+	public String write(String boardTitle, String memEmail, Model model) {
 		Board board = new Board();
 		if (!Objects.isNull(boardTitle)&& !boardTitle.isBlank()) {
-			board = this.boardService.save(boardTitle);
+			
+			board = boardService.save(boardTitle,memEmail);
 		}
 		model.addAttribute("boardNum", board.getBoardNum());
 		return "Board/addPlace";
-		//나중에 장소추가하는 html로 변경.
 	}
 	
 	 @GetMapping("/post/{boardNum}")
@@ -97,10 +98,10 @@ public class BoardController {
 	}
 	
 	@RequestMapping("/writeBoard")
-	public String addBoard(@RequestParam(required = false) String boardTitle, Model model) {
+	public String addBoard(@RequestParam(required = false) String boardTitle, String memEmail, Model model) {
 		Board board = new Board();
 		if (!Objects.isNull(boardTitle)&& !boardTitle.isBlank()) {
-			board = this.boardService.save(boardTitle);
+			board = this.boardService.save(boardTitle, memEmail);
 		}
 
 		model.addAttribute("boardNum", board.getBoardNum());
