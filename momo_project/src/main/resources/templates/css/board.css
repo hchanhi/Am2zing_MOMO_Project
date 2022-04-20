@@ -129,32 +129,40 @@ section {
 }
 
 #title {
-    width: 560px;
+    width: 640px;
     height: 70px;
     background-color: rgb(180, 180, 180);
     border: 0;
     border-radius: 20px;
-    font-size: 25pt;
+    font-size: 20pt;
     font-weight: bold;
     text-align: center;
     color: rgb(68, 68, 68);
+    margin-bottom: 20px;
 }
 
-.location{
-    width:400px;
+.locationbtn{
+    display: block;
+    width:500px;
     height:50px;
-    margin:0 auto;
+    border:0;
     border-radius: 20px;
-    background-color: aquamarine;
+    background-color: rgb(165, 211, 255);
+    color: rgb(68, 68, 68);
+    font-size: 15pt;
+    font-weight: bold;
+    margin:0 auto;
+    text-align: center;
+    cursor: pointer;
+
 }
-
-
-
-
-
-
-
-
+.uploader{
+    width:640px;
+    height:200px;
+    margin:20px auto 20px auto;
+    border-radius: 20px;
+    background-color: rgb(185, 185, 185);
+}
 
 
 
