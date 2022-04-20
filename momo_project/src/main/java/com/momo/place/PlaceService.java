@@ -34,7 +34,6 @@ import com.momo.member.MemberRepository;
 public class PlaceService {
 	@Autowired
 	private PlaceRepository placeRepository;
-	
 
 	@Autowired
 	private BoardRepository boardRepository;
@@ -116,7 +115,6 @@ public class PlaceService {
 		return placeList;
 	}
 	
-	//private String path= "C:/Users/Administrator/Desktop/upload/";
 	
 	public String upload(MultipartFile multi, HttpServletRequest request,
 			HttpServletResponse response, Model model) {

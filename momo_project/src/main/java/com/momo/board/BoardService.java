@@ -56,9 +56,6 @@ public class BoardService {
 		List<Board> boardArrayList = new ArrayList<>();
 		
 		for(Board board : boardList) {
-//			board.getBoardNum();
-//			board.getBoardTitle();
-//			board.getMember();
 			boardArrayList.add(board);
 		}
 		return boardArrayList;
