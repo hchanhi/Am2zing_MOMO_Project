@@ -53,18 +53,15 @@ public class BoardService {
 	
 	public List<Board> getBoardList(){
 		List<Board> boardList = boardRepository.findAll();
-		List<Board> boardArrayList = new ArrayList<>();
 		
-		for(Board board : boardList) {
-			boardArrayList.add(board);
-		}
-		return boardArrayList;
+		return boardList;
 	}
 	
 	@Transactional
     public Board getPost(Integer boardNum) {
         Board board = boardRepository.findById((long)boardNum).get();
-
+        int count = board.getPlaceCnt()+1;
+        board.setPlaceCnt(count);
         return board;
     }
 	

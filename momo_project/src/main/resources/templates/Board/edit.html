@@ -330,7 +330,10 @@ html, body {
 			<input hidden type="text" id="placeLng" name="placeLng" value="" readonly>
 			<input hidden type="text" id="placeId" name="placeId" value="" readonly>
 			<input hidden type="number" id="boardNum" name="boardNum"
-				th:value="${boardNum}"> <br>
+				th:value="${boardNum}">
+			<input hidden name="memEmail" th:value="${#authentication.name}">
+			<br>
+			
 			<div>내용</div>
 			<textarea id="placeContent" name="placeContent"
 				style="width: 500px; height: 150px; resize: none;"></textarea>
@@ -394,7 +397,8 @@ $('#submitBtn').click(function(){
 			"placeId" : $('input[name="placeId"]').val(),
 			"boardNum" : $('input[name="boardNum"]').val(),
 			"placeImg" : $('input[name="placeImg"]').val(),
-			"placeContent" : $('#placeContent').val()
+			"placeContent" : $('#placeContent').val(),
+			"memEmail" : $('input[name="memEmail"]').val()
 		};
 	$.ajax({
 		url:"/placeList/"+boardNum,
