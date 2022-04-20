@@ -24,6 +24,7 @@ import com.momo.domain.Board;
 import com.momo.domain.Member;
 import com.momo.domain.Place;
 import com.momo.member.PrincipalDetails;
+import com.momo.place.PlaceRepository;
 import com.momo.place.PlaceService;
 
 @Controller
@@ -44,12 +45,21 @@ public class BoardController {
 	@GetMapping("/board")
 	public String board(Model model) {
 		List<Board> boardList = boardService.getBoardList();
+		for(Board board : boardList) {
+			if(placeService.findByBoardNum(board.getBoardNum().intValue()).isEmpty()) {
+				this.delete(board.getBoardNum());
+			}
+		}
+		boardList = boardService.getBoardList();
 		model.addAttribute("boards", boardList);
 		return "Board/list";
 	}
 	
 	@GetMapping("/postBoard")
-	public String post() {
+	public String post(@AuthenticationPrincipal PrincipalDetails principal) {
+		if(principal == null) {
+			return "Member/Login";
+		}
 		return "Board/post";
 	}
 	
@@ -58,12 +68,13 @@ public class BoardController {
 	public String write(String boardTitle, String memEmail, Model model) {
 		Board board = new Board();
 		if (!Objects.isNull(boardTitle)&& !boardTitle.isBlank()) {
-			
 			board = boardService.save(boardTitle,memEmail);
-		}
-		model.addAttribute("boardNum", board.getBoardNum());
-		return "Board/addPlace";
+			model.addAttribute("boardNum", board.getBoardNum());
+			return "Board/addPlace";
+		} else {
+		return "Board/list";
 	}
+}
 	
 //	 @GetMapping("/post/{boardNum}")
 //	    public String detail(@PathVariable("boardNum") Integer boardNum, Model model) {
@@ -75,12 +86,17 @@ public class BoardController {
 	
 	 @GetMapping("/post/{boardNum}")
 	    public String detail(@PathVariable("boardNum") Integer boardNum, @AuthenticationPrincipal PrincipalDetails principal, Model model) {
-	        Board board = boardService.getPost(boardNum);
+		 	Board board = boardService.getPost(boardNum);
 	        Member member = principal.getMember();
+	    if(!placeService.findByBoardNum(boardNum).isEmpty()) {
 	        model.addAttribute("board", board);
 	        model.addAttribute("places", placeService.findByBoardNum(boardNum));
 	        model.addAttribute("boardBookmarkCheck", boardBookmarkService.isBoardBookmarkChecked(member, (long) boardNum));
 	        return "Board/detail";
+	    } else {
+	    	this.delete((long)boardNum);
+	    	return "Board/list";
+	    }
 	    }
 	
 	@GetMapping("/post/edit/{boardNum}")
@@ -124,8 +140,14 @@ public class BoardController {
 		model.addAttribute("boardNum", board.getBoardNum());
 
 		return "Board/addPlace";
-
 	}
-	
+	@GetMapping("/cancel/{boardNum}")
+    public String cancel(@PathVariable("boardNum") Long boardNum) {
+		List<Board> boards = boardRepository.findByBoardNum(boardNum);
+		for(Board board:boards) {
+		boardService.deletePost(board);
+		}
+        return "redirect:/board";
+    }
 	
 }

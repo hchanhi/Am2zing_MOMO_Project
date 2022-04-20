@@ -336,7 +336,7 @@ html, body {
 			<input type="file" id="file1" name="file1">
 			<button id="imgBtn" onclick="javascript:fn_submit()">사진 추가</button>
 			<div class="img_wrap">
-				<img style="width:300px; height:300px;"id="img" name="img"/>
+				<img style="width:300px; height:300px;"id="img" name="img">
 			</div>
 			
 			<div>내용</div>
@@ -346,6 +346,7 @@ html, body {
 		
 			<button id="submitBtn">장소 추가</button><br><br>
 			<a th:href="@{'/post/' + ${boardNum}}" role="button"><button>작성 완료</button></a>
+			<a id="cancel" th:href="@{'/cancel/' + ${boardNum}}" role="button"><button>취 소</button></a>
 		<br>
 		
 	</div>
@@ -361,6 +362,7 @@ html, body {
 	<script type="text/javascript"
 		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a7b5481a65eecc18bd2cc1106898f604&libraries=services"></script>
 	<script>
+	
 $('#submitBtn').click(function(){
 	let boardNum = document.getElementById("boardNum").value;
 	var tempData={
