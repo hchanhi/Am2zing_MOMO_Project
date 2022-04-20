@@ -9,9 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.momo.comment.Comment;
 import com.momo.comment.CommentRepository;
 import com.momo.domain.Board;
+import com.momo.domain.Comment;
 import com.momo.domain.Member;
 import com.momo.domain.Place;
 import com.momo.member.MemberRepository;

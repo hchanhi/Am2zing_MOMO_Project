@@ -8,6 +8,7 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 import com.momo.domain.Board;
+import com.momo.domain.Comment;
 import com.momo.domain.Place;
 
 @Repository
