@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -17,8 +18,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.momo.bookmark.BoardBookMarkService;
+import com.momo.bookmark.BoardBookmarkRepository;
 import com.momo.domain.Board;
+import com.momo.domain.Member;
 import com.momo.domain.Place;
+import com.momo.member.PrincipalDetails;
 import com.momo.place.PlaceService;
 
 @Controller
@@ -31,6 +36,9 @@ public class BoardController {
 	
 	@Autowired
 	private BoardRepository boardRepository;
+	
+	@Autowired 
+	private BoardBookMarkService boardBookmarkService;
 	
 	
 	@GetMapping("/board")
@@ -57,11 +65,21 @@ public class BoardController {
 		//나중에 장소추가하는 html로 변경.
 	}
 	
+//	 @GetMapping("/post/{boardNum}")
+//	    public String detail(@PathVariable("boardNum") Integer boardNum, Model model) {
+//	        Board board = boardService.getPost(boardNum);
+//	        model.addAttribute("board", board);
+//	        model.addAttribute("places", placeService.findByBoardNum(boardNum));
+//	        return "Board/detail";
+//	    }
+	
 	 @GetMapping("/post/{boardNum}")
-	    public String detail(@PathVariable("boardNum") Integer boardNum, Model model) {
+	    public String detail(@PathVariable("boardNum") Integer boardNum, @AuthenticationPrincipal PrincipalDetails principal, Model model) {
 	        Board board = boardService.getPost(boardNum);
+	        Member member = principal.getMember();
 	        model.addAttribute("board", board);
 	        model.addAttribute("places", placeService.findByBoardNum(boardNum));
+	        model.addAttribute("boardBookmarkCheck", boardBookmarkService.isBoardBookmarkChecked(member, (long) boardNum));
 	        return "Board/detail";
 	    }
 	
