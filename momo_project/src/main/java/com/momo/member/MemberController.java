@@ -1,11 +1,13 @@
 package com.momo.member;
 
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale.Category;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -13,15 +15,23 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.momo.domain.Member;
 
+import lombok.RequiredArgsConstructor;
+
+
 @Controller
+@RequiredArgsConstructor
 public class MemberController {
 
 	@Autowired
 	private MemberRepository userRepository;
+	
+	@Autowired
+	private MemberService memberService;
 
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -31,27 +41,6 @@ public class MemberController {
 		return "member/index";
 	}
 
-	@GetMapping("/user")
-	public @ResponseBody String user(@AuthenticationPrincipal PrincipalDetails principal) {
-		System.out.println("Principal : " + principal);
-//		System.out.println("OAuth2 : "+principal.getUser().getProvider());
-		// iterator 순차 출력 해보기
-		Iterator<? extends GrantedAuthority> iter = principal.getAuthorities().iterator();
-		while (iter.hasNext()) {
-			GrantedAuthority auth = iter.next();
-			System.out.println(auth.getAuthority());
-		}
-
-		return "유저 페이지입니다.";
-	}
-	
-	//@PostAuthorize("hasRole('ROLE_MANAGER')")
-	//@PreAuthorize("hasRole('ROLE_MANAGER')")
-	@Secured("ROLE_MANAGER")
-	@GetMapping("/manager")
-	public @ResponseBody String manager() {
-		return "매니저 페이지입니다.";
-	}
 
 	@GetMapping("/loginForm")
 	public String goLogin() {
@@ -86,6 +75,29 @@ public class MemberController {
 		userRepository.save(member);
 		return "Member/Login";
 	}
+	
+	//회원가입 이메일 중복 체크
+	@ResponseBody
+    @GetMapping("/member/emailCheck")
+    public HashMap<String, Object> memEmailOverlap(@RequestParam(value = "memEmail", required = false) String memEmail) {
+		System.out.println(memberService.memEmailOverlap(memEmail));
+        return memberService.memEmailOverlap(memEmail);
+    }
+	
+	//회원가입 닉네임 중복 체크
+    @ResponseBody
+    @GetMapping("/member/NicknameChk")
+    public HashMap<String, Object> nicknameOverlap(@RequestParam(value = "memNickname", required = false) String memNickname) {
+        return memberService.memNicknameOverlap(memNickname);
+    }
+    
+    //닉네임 수정 중복 체크
+    @ResponseBody
+    @PostMapping("/api/nicknameModify")
+    public HashMap<String, Object> nicknameModify(@RequestParam(required = false) Long id, String nickname) {
+        return memberService.nicknameModify(nickname, id);
+    }
+
 	
 	
 }

@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -25,7 +26,7 @@ import lombok.NoArgsConstructor;
 public class Member {
 	@Id // primary key
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int memId;
+	private Long memId;
 	
 	@Column(nullable = false, unique = true)
 	private String memEmail;
@@ -41,4 +42,8 @@ public class Member {
 	private String providerId;
 	@CreationTimestamp
 	private Timestamp createDate;
+	
+	public void excodePassword(PasswordEncoder passwordEncoder) {
+		this.memPassword = passwordEncoder.encode(this.memPassword);
+	}
 }
