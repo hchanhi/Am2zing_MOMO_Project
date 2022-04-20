@@ -39,7 +39,6 @@ public class BoardService {
 	public Board save(String boardTitle, String memEmail) {
 		Board board = new Board();
 		Member member = memberRepository.findByMemEmail(memEmail);
-		System.out.println(member.toString());
 		board.setBoardTitle(boardTitle);
 		board.setMember(member);
 		boardRepository.save(board);

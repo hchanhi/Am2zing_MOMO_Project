@@ -82,10 +82,11 @@
        </div>
           <a th:href="@{/board}" role="button"><button>목록</button></a>
     </div>
+    <input name="memEmail" th:value="${#authentication.name}">
        <div th:each="place : ${places}">
              <a th:name="@{${place.placeNum}}"></a>
              <h2  style="color:coral" th:text="${place.placeTitle}"></h2>
-             <img style="width:150px; height:150px; cursor:pointer;"th:src="@{${place.placeImg}}"><br>
+             <img style="width:150px; height:150px; cursor:pointer;"th:src="@{${place.placeImg}}" onerror="this.style.display='none'" alt='' /><br>
              <span th:text="${place.placeContent}"></span><br>
              <a class="topBtn" href="#top">지도로 이동</a>
        </div>
@@ -208,7 +209,7 @@ $('#btnSave').click(function(){
 
    let boardNum = document.getElementById("boardNum").value;
    var tempData={
-      
+      	
          "boardNum" : $('input[name="boardNum"]').val(),
          "replyContent" : $('#replyContent').val(),
          
@@ -290,6 +291,8 @@ $(document).ready(function(){
     });
     
 });
+
+
 </script>
 </body>
 </html>
