@@ -8,6 +8,7 @@
     <script src="https://kit.fontawesome.com/5168478d86.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="./css/slick.css">
     <link rel="stylesheet" href="./css/board.css">
+    <title>board</title>
 
 </head>
 
@@ -38,19 +39,27 @@
         <section class="inner">
             <div class="sec_left">
                 <div class="fortitle">
-                    <input type="text" name="return" id="title">
+                    <input type="text" name="return" id="title" placeholder="제목을 입력하세요" maxlength="20">
                 </div>
+
                 <div>
-                    <div class="location">장소찾기</div>
-                    <!-- <div class="pictures">
-                        <img src="" alt="">
-                        <img src="" alt="">
-                        <img src="" alt="">
-                    </div>
-                    <div class="comment"></div>
-                    <button class="addButton"></button> -->
+                    <button type="button" class="locationbtn">장소 찾기</button>
                 </div>
+
+
+
+                <div id='image_preview'>
+                    <span class="cameraImg">
+                        <img src='./images/camera-4-70.png' class='profileImg' id='profileImg'>
+                    </span>
+                    <input type='file' id='btnAtt' multiple='multiple' style="visibility:hidden;" />
+                    <div id='att_zone'></div>
+                </div>
+
+                <textarea class="comment" placeholder="코멘트"></textarea>
+
             </div>
+
 
             <div class="sec_right">
                 <!-- <div></div>
@@ -91,7 +100,7 @@
 
     <script src="./js/jquery-3.6.0.min.js"></script>
     <script src="./js/slick.min.js"></script>
-    <script src="./js/main.js"></script>
+    <script src="./js/board.js"></script>
 
 </body>
 
