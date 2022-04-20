@@ -451,7 +451,7 @@
 	<div th:each="place : ${places}">
 		<a th:name="@{${place.placeNum}}"></a>
 		<h2 style="color: coral" th:text="${place.placeTitle}"></h2>
-		<img style="width: 150px; height: 150px; cursor: pointer;" th:src="@{${place.placeImg}}"><br> <span
+		<img style="width: 150px; height: 150px; cursor: pointer;" th:src="@{${place.placeImg}}" onerror="this.style.display='none'" alt=''><br> <span
 			th:text="${place.placeContent}"></span><br> <a class="topBtn" href="#top">지도로 이동</a>
 	</div>
 	</div>
