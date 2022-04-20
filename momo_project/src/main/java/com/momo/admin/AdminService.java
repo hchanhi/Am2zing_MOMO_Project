@@ -8,9 +8,9 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
-import com.momo.comment.Comment;
 import com.momo.common.util.pagination.Paging;
 import com.momo.domain.Board;
+import com.momo.domain.Comment;
 import com.momo.domain.Member;
 
 

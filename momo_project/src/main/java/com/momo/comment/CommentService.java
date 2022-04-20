@@ -14,7 +14,10 @@ import org.springframework.stereotype.Service;
 
 import com.momo.board.BoardRepository;
 import com.momo.domain.Board;
+import com.momo.domain.Comment;
+import com.momo.domain.Member;
 import com.momo.domain.Place;
+import com.momo.member.MemberRepository;
 import com.momo.place.PlaceRepository;
 
 @Service
@@ -26,8 +29,9 @@ public class CommentService {
 	@Autowired
 	private BoardRepository boardRepository;
 	
-	private CommentService commentService;
-	
+	@Autowired
+	   private MemberRepository memberRepository;
+
 
 
 	public List<Comment> findAll() {
@@ -39,15 +43,18 @@ public class CommentService {
 		return this.commentRepository.findByBoard(board);
 	}
 	
-	public void save(String replyContent, int boardNum) {
-		Board board = boardRepository.findById((long) boardNum).get();
+	public void save(String replyContent, int boardNum, String memEmail, String memNickname) {
+	      Board board = boardRepository.findById((long) boardNum).get();
+	      Member member = memberRepository.findByMemEmail(memEmail);
+	      Member nick = memberRepository.findByMemNickName(memNickname);
+	      Comment comment = new Comment();
+	      comment.setReplyContent(replyContent);
+	      comment.setBoard(board);
+	      comment.setMember(member);
+	      comment.setMember(nick);
+	      this.commentRepository.save(comment);
+	   }
 
-		Comment comment = new Comment();
-		comment.setReplyContent(replyContent);
-		comment.setBoard(board);
-		
-		this.commentRepository.save(comment);
-	}
 	
 	public void deleteComment(Long replyNum) {
         commentRepository.deleteById(replyNum);// 3
@@ -55,27 +62,25 @@ public class CommentService {
 	public void deleteComment02(Long replyNum) {
         commentRepository.deleteById(replyNum); // 3
     }
-	public ResponseEntity<?> update(Map<String,String> map) {
-		//System.out.println(map.toString());
-		Map<String, String> tempMap=new HashMap<>();
-		//DB처리
-		String replyContent = map.get("replyContent");
-		int boardNum = Integer.parseInt(map.get("boardNum"));
-		this.save(replyContent, boardNum);
-		
-		try {
-			
-			//DB처리 후 서비스에서 Place PK를 반환 받아옴
-			tempMap.put("replyContent", map.get("replyContent")); //DB에 넣으려는 제목
-			//DB에 저장되고 난 후 placeNo(PK) int값 String.valeuOf 로 타입변환
-			
-		} catch(Exception e) {
-			return new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
-		}
-		
-		//타이틀이랑 PK를 Map으로 view로 내려보냄
-		return new ResponseEntity<Map<String, String>>(tempMap, HttpStatus.OK);
-	}
+	 public ResponseEntity<?> update(Map<String,String> map) {
+	      
+	      Map<String, String> tempMap=new HashMap<>();
+	   
+	      String replyContent = map.get("replyContent");
+	      String memEmail = map.get("memEmail");
+	      String memNickname = map.get("memNickname");
+	      int boardNum = Integer.parseInt(map.get("boardNum"));
+	      this.save(replyContent, boardNum, memEmail,memNickname);
+	      
+	      try {      
+	         tempMap.put("replyContent", map.get("replyContent"));          
+	      } catch(Exception e) {
+	         return new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
+	      }
+	      return new ResponseEntity<Map<String, String>>(tempMap, HttpStatus.OK);
+	   }
+	   
+
 	public void delete(Long replyNum) {
 		commentRepository.deleteById((long) replyNum);
 	}
@@ -84,18 +89,7 @@ public class CommentService {
 		List<Comment> commentList = this.commentRepository.findByBoard(board);
 		return commentList;
 	}
-	/*
-	 * public List<Comment> list() { // TODO Auto-generated method stub return
-	 * commentRepository.list(); }
-	 */
-	/*
-	 * public void saveReply(Comment comment) { Comment comment = new Comment();
-	 * comment.setReplyContent(replyContent); comment.setBoard(board);
-	 * 
-	 * this.commentRepository.save(comment);
-	 * 
-	 * }
-	 */
+	
 	public void deleteComment02(List<String> replyNumArray) {
 		 for(int i=0; i<replyNumArray.size(); i++) {
 	            String replyNum = replyNumArray.get(i);

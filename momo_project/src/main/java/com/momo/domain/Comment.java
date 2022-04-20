@@ -1,4 +1,4 @@
-package com.momo.comment;
+package com.momo.domain;
 
 import java.util.Date;
 
@@ -12,9 +12,6 @@ import javax.persistence.ManyToOne;
 
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
-
-import com.momo.domain.Board;
-import com.momo.domain.Member;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -50,6 +47,9 @@ public class Comment {
 	 @ManyToOne
 	 @JoinColumn(name = "board_num")
 	  private Board board;
+	 
+	 @ManyToOne
+	 private Member member;
 	 /*
 	 * @ManyToOne
 	 * 
