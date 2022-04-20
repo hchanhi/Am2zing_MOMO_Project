@@ -42,6 +42,20 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 			.usernameParameter("memEmail")
             .passwordParameter("memPassword")
 			.defaultSuccessUrl("/member")
+			.and()
+			//다른 부분은 무시해주시고 이 부분만 잘 사용 해주시면 됩니다.
+			.csrf()
+			.ignoringAntMatchers("/upload")
+		    	.ignoringAntMatchers("/placeList/*") 
+		    	.ignoringAntMatchers("/deleteList/*") 
+		    	.ignoringAntMatchers("/deletePlace/*") 
+		    	.ignoringAntMatchers("/commentList/*") 
+		    	.ignoringAntMatchers("/commentList02/*") 
+		    	.ignoringAntMatchers("/test02/*") 
+		    	.ignoringAntMatchers("/deleteComment/*") 
+		    	
+		    	
+		    	 //
 		.and()
 			.logout()
     		.logoutRequestMatcher(new AntPathRequestMatcher("/logout")) // 로그아웃 시 URL 재정의 

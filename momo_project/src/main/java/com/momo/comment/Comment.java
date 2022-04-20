@@ -50,6 +50,9 @@ public class Comment {
 	 @ManyToOne
 	 @JoinColumn(name = "board_num")
 	  private Board board;
+	 
+	 @ManyToOne
+	  private Member member;
 	 /*
 	 * @ManyToOne
 	 * 

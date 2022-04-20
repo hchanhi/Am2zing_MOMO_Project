@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+<!-- default header name is X-CSRF-TOKEN -->
+    <meta id="_csrf" name="_csrf" th:content="${_csrf.token}"/>
+    <meta id="_csrf_header" name="_csrf_header" th:content="${_csrf.headerName}"/>
 	<meta charset = "UTF-8">
 	<title></title>
 	    <style>
@@ -58,6 +61,7 @@
         	</ul>
         <div id="pagination"></div>
             <form method="post" action="/place/reply?cmd=save" >
+            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 			<div class="">
 				<label for="title" class="">content</label>
 				<textarea placeholder="댓글을 입력해주세요" name="replyContent" id="replyContent"style="width: 500px; height: 150px; resize: none;"></textarea>
@@ -200,8 +204,10 @@ $('#btnSave').click(function(){
 			$('#replyContent').val();
 			$('#resDiv').html(data)
 			$('textarea[name="replyContent"]').val("");
-		}
-		
+		},
+		error: function() { alert("에러 발생"); }
+
+
 	 });
 	 }
 });

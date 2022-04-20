@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>*</title>
+</head>
+<body>
+<div>
+    <table>
+        <tr>
+        	<th>댓글 번호</th>
+            <th>댓글</th>
+        </tr>
+        
+        <tbody id="divReloadLayer">
+        <tr th:each="comment : ${comments}">
+           
+            <td>
+             <span th:text="${comment.replyNum}"></span>
+                <span th:text="${comment.replyContent}"></span>
+                <span hidden id="replyNum" th:text="${comment.replyNum}"></span>
+            </td>
+             <td>
+          <td><a href="/comment" th:href="@{'comment/delete/' + ${comment.replyNum}}">삭제</a></td>
+           <span hidden id="boardNum" th:boardNum="${comment.board.boardNum}"></span>
+          <!-- <span hidden id="replyNum" th:replyNum="${comment.replyNum}"></span>-->
+            <td><input type="button" id="deleteComment" th:data-replyNum="${comment.replyNum}"
+             value="삭제"></td>
+             <div id="resDiv" style="margin-top: 50px;">   
+            <button id="btn" type="submit">수정</button>
+        
+            </td>
+        </tr>
+      
+        </tbody>
+    </table>
+</div>
+	<script src="https://code.jquery.com/jquery-latest.min.js"></script>
+<script th:inline="javascript">
+function commentDelete02(){
+
+		var replyNumArray = [];
+let boardNum = document.getElementById("boardNum").value;
+		replyNumArray.push($("#replyNum").val());
+
+		console.log(replyNumArray);
+
+
+
+		var confirmAlert = confirm('정말로 삭제하시겠습니까?');
+		if(confirmAlert){
+
+			$.ajax({
+		        type : 'POST'
+		       ,url : "/board/delete"
+		       ,dataType : 'json'
+		       ,data : JSON.stringify(replyNumArray)
+		       ,contentType: 'application/json'
+		       ,success : function(result) {
+					alert("해당글이 정상적으로 삭제되었습니다.");
+					location.href = "/test02/"+{boardNum};
+		       },
+		       error: function(request, status, error) {
+
+		       }
+		   })
+		}
+	}
+	
+$(document).ready(function() {
+	$("input:button#deleteComment").on('click',deleteComment);
+	
+function deleteComment(){
+	let item = $(this);
+    let replyNum = item.attr("data-replyNum");
+ 	let boardNum = document.getElementById("boardNum").value;	
+		var data = {
+			
+			"replyNum":replyNum,
+			"boardNum":boardNum
+		}
+     $.ajax({
+        method: 'Delete',
+        url : '/deleteComment/'+replyNum,
+        async: false,
+        contentType: "application/json; charset=UTF-8",
+        data : data,
+        success: function(data){
+        	$('#resDiv').html(data)
+        	window.alert("삭제가 완료가 확인 되었습니다.");
+        	 document.location.reload(true);
+
+
+        },
+        error : function(data) {
+			alert("전송실패");
+}
+    });
+	}
+});
+$('#btn').click(function(replyNum){
+	function replyDelete(){
+    var replyNum = $(this).attr("data-del");
+    var sendData = {"comment": replyNum}
+    $.ajax({
+        method: 'GET',
+        url : 'replyDelete',
+        data : sendData,
+        success: init
+    })
+}
+});
+
+</script>
+</body>
+</html>

@@ -19,6 +19,7 @@ import com.momo.domain.Member;
 public interface MemberRepository extends JpaRepository<Member, Integer>{
 	// SELECT * FROM user WHERE username = ?1
 	Member findByMemEmail(String memEmail);
+	Member findByMemNickName(String memNickName);
 	
 	// SELECT * FROM user WHERE provider = ?1 and providerId = ?2
 	Optional<Member> findByProviderAndProviderId(String provider, String providerId);
