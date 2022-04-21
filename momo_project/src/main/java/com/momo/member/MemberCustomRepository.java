@@ -48,7 +48,7 @@ public class MemberCustomRepository {
     }
 
     @Transactional
-    public void updateMemberPassword(Member member) {
+    public void updateMemPassword(Member member) {
         queryFactory.update(QMember.member)
                 .set(QMember.member.memPassword, member.getMemPassword())
                 .where(QMember.member.memEmail.eq(member.getMemEmail()))

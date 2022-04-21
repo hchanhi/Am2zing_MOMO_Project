@@ -51,7 +51,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
     .and() // 403 예외처리 핸들링 
     	.exceptionHandling()
     		.accessDeniedPage("/denied")
-    		//다른 부분은 무시해주시고 이 부분만 잘 사용 해주시면 됩니다.
+    		
     .and()
 			.csrf()
 			.ignoringAntMatchers("/upload")
