@@ -38,12 +38,12 @@
         <input type="button" id="resetMemNickname" onclick="reMemNickname()" disabled value="다시입력"/>
     </div>
 
-    <label class="mb-3 form-label" for="birth">생년월일</label>
-    <div class="mb-3" id="birth" onchange="checkAge()">
+    <label for="memBirth">생년월일</label>
+    <div id="memBirth" onchange="checkBirth()">
         <div class="birth dropdown">
             <select class="form-control" id="year" name="year">
                 <option value="">년(YY)</option>
-                <th:block th:each="a: ${#numbers.sequence(2001,1900)}">
+                <th:block th:each="a: ${#numbers.sequence(2022,1900)}">
                     <option th:value="${a}" th:text="${a}"></option>
                 </th:block>
             </select>
@@ -68,9 +68,9 @@
         </div>
         <span id="birth_check_msg"></span>
     </div>
-      
+       <div id="memMbti" onchange="checkMbti()">
       MBTI : <select name="memMbti">
-        <option value="">MBTI 선택</option>
+        <option value="noMbti">MBTI 선택</option>
         <option value="ISTJ">ISTJ</option>
         <option value="ISTP">ISTP</option>
         <option value="ISFJ">ISFJ</option>
@@ -88,15 +88,9 @@
         <option value="ENFJ">ENFJ</option>
         <option value="ENFP">ENFP</option>
       </select>
-      
-      <!-- 생년월일 :
-      <select name="yy" id="year"></select
-      >년
-      <select name="mm" id="month"></select
-      >월
-      <select name="dd" id="day"></select
-      >일
-    -->
+      <span id="Mbti_check_msg"></span>
+      </div>
+     
       <button type="submit">회원가입</button>
       <div>
       <a type="button" onclick="window.history.back();">취소</a>
@@ -105,39 +99,6 @@
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script type="text/javascript" src="/js/signup.js"></script>
-    <script type="text/javascript">
-      $(document).ready(function () {
-        var now = new Date();
-        var year = now.getFullYear();
-        var mon =
-          now.getMonth() + 1 > 9
-            ? '' + (now.getMonth() + 1)
-            : '0' + (now.getMonth() + 1);
-        var day = now.getDate() > 9 ? '' + now.getDate() : '0' + now.getDate();
-
-        //년도 selectbox만들기
-        for (var i = 1900; i <= year; i++) {
-          $('#year').append('<option value="' + i + '">' + i + '년</option>');
-        }
-
-        // 월별 selectbox 만들기
-        for (var i = 1; i <= 12; i++) {
-          var mm = i > 9 ? i : '0' + i;
-          $('#month').append(
-            '<option value="' + mm + '">' + mm + '월</option>'
-          );
-        }
-
-        // 일별 selectbox 만들기
-        for (var i = 1; i <= 31; i++) {
-          var dd = i > 9 ? i : '0' + i;
-          $('#day').append('<option value="' + dd + '">' + dd + '일</option>');
-        }
-        $('#year > option[value=' + year + ']').attr('selected', 'true');
-        $('#month > option[value=' + mon + ']').attr('selected', 'true');
-        $('#day > option[value=' + day + ']').attr('selected', 'true');
-      });
-      
-    </script>
+   
   </body>
 </html>

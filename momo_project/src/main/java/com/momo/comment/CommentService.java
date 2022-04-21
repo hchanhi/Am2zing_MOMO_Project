@@ -17,6 +17,7 @@ import com.momo.domain.Board;
 import com.momo.domain.Comment;
 import com.momo.domain.Member;
 import com.momo.domain.Place;
+import com.momo.member.MemberCustomRepository;
 import com.momo.member.MemberRepository;
 import com.momo.place.PlaceRepository;
 
@@ -30,7 +31,7 @@ public class CommentService {
 	private BoardRepository boardRepository;
 	
 	@Autowired
-	   private MemberRepository memberRepository;
+	   private MemberCustomRepository memberCustomRepository;
 
 
 
@@ -45,7 +46,7 @@ public class CommentService {
 	
 	public void save(String replyContent, int boardNum, String memEmail) {
 	      Board board = boardRepository.findById((long) boardNum).get();
-	      Member member = memberRepository.findByMemEmail(memEmail);
+	      Member member = memberCustomRepository.findByMemEmail(memEmail);
 	 
 
 

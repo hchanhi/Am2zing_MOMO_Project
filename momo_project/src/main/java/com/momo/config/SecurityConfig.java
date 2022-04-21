@@ -1,4 +1,4 @@
-package com.momo.member;
+package com.momo.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -61,10 +61,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		    .ignoringAntMatchers("/commentList/*")
 		    .ignoringAntMatchers("/commentList02/*")
 		    .ignoringAntMatchers("/test02/*")
-		    .ignoringAntMatchers("/deleteReply/*")
-			.ignoringAntMatchers("/boardBookmark")
-			.ignoringAntMatchers("/unBoardBookmark");
-
+		    .ignoringAntMatchers("/deleteReply/*");
 
 		    	 
 		

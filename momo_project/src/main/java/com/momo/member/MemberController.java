@@ -5,6 +5,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Locale.Category;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.Authentication;
@@ -18,10 +20,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.momo.bookmark.BoardBookMarkService;
 import com.momo.domain.Member;
 
 import lombok.RequiredArgsConstructor;
+import net.bytebuddy.dynamic.DynamicType.Builder.FieldDefinition.Optional;
 
 
 @Controller
@@ -29,24 +31,22 @@ import lombok.RequiredArgsConstructor;
 public class MemberController {
 
 	@Autowired
-	private MemberRepository userRepository;
+	private MemberRepository memberRepository;
 	
 	@Autowired
 	private MemberService memberService;
 
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
-	
-	@Autowired
-	private BoardBookMarkService boardBookMarkService;
 
+	//멤버 메인 페이지 -> 추후 경로 수정 예정 
 	@GetMapping({ "/member" })
 	public String index() {
 		return "member/index";
 	}
 
-
-	@GetMapping("/loginForm")
+	//로그인 페이지 이동
+	@GetMapping("member/login")
 	public String goLogin() {
 		return "Member/Login"; 
 		} 
@@ -59,23 +59,28 @@ public class MemberController {
 		model.addAttribute("loginError", true); 
 		return "Member/Login"; } 
 
-	@GetMapping("/joinForm")
+	@GetMapping("member/join")
 	public String join() {
 		return "Member/joinForm";
 	}
 	
-	@GetMapping("/info") 
-	public String goMyInfo() { 
-		return "Member/mypage"; 
-		} 
-	
-	@GetMapping("bookmark/board") 
-	public String goMyboardBookmark(@AuthenticationPrincipal PrincipalDetails principal, Model model) {
-		Member member = principal.getMember();
-		model.addAttribute("boardBookmarks", boardBookMarkService.findAllByMember(member));
-		return "Member/boardBookmark"; 
-		} 
+	//마이페이지
+	@GetMapping("member/mypage")
+    public String mypage(Authentication authentication, Model model) {
+        Member member = memberService.mypage(authentication.getName());
+        model.addAttribute("member",member);
 
+        return "Member/mypage";
+    }
+	
+	 //내정보 수정
+    @PostMapping("member/myinfoEdit")
+    public String memberUpdate(Member member) {
+        memberService.updateMember(member);
+        return "redirect:/";
+    }
+
+	//회원가입 진행
 	@PostMapping("/joinProc")
 	public String joinProc(Member member) {
 		System.out.println("회원가입 진행 : " + member);
@@ -83,31 +88,70 @@ public class MemberController {
 		String encPassword = bCryptPasswordEncoder.encode(rawPassword);
 		member.setMemPassword(encPassword);
 		member.setMemRole("ROLE_MEMBER");
-		userRepository.save(member);
-		return "Member/Login";
+		memberRepository.save(member);
+		return "member/loginForm";
 	}
 	
 	//회원가입 이메일 중복 체크
 	@ResponseBody
-    @GetMapping("/member/emailCheck")
-    public HashMap<String, Object> memEmailOverlap(@RequestParam(value = "memEmail", required = false) String memEmail) {
-		System.out.println(memberService.memEmailOverlap(memEmail));
-        return memberService.memEmailOverlap(memEmail);
+    @GetMapping("/member/emailChk")
+    public HashMap<String, Object> memEmailCheck(@RequestParam(value = "memEmail", required = false) String memEmail) {
+		System.out.println(memberService.memEmailCheck(memEmail));
+        return memberService.memEmailCheck(memEmail);
     }
 	
 	//회원가입 닉네임 중복 체크
     @ResponseBody
-    @GetMapping("/member/NicknameChk")
-    public HashMap<String, Object> nicknameOverlap(@RequestParam(value = "memNickname", required = false) String memNickname) {
-        return memberService.memNicknameOverlap(memNickname);
+    @GetMapping("/member/nicknameChk")
+    public HashMap<String, Object> memNicknameCheck(@RequestParam(value = "memNickname", required = false) String memNickname) {
+        return memberService.memNicknameCheck(memNickname);
     }
     
-//    //닉네임 수정 중복 체크
-//    @ResponseBody
-//    @PostMapping("/api/nicknameModify")
-//    public HashMap<String, Object> nicknameModify(@RequestParam(required = false) Long id, String nickname) {
-//        return memberService.nicknameModify(nickname, id);
+    //닉네임 수정 중복 체크
+    @ResponseBody
+    @PostMapping("/nicknameEdit")
+    public HashMap<String, Object> memNicknameEdit(@RequestParam(required = false) Long memId, String memNickname) {
+        return memberService.memNicknameEdit(memNickname, memId);
+    }
+    
+    
+    //패스워드 수정페이지
+    @GetMapping("/passwordEdit")
+    public String modifyPassword() {
+        return "Member/passwordEdit";
+    }
+    
+    //패스워드 확인
+    @ResponseBody
+    @GetMapping("/passwordCheck")
+    public HashMap<String, Object> pwCheck(@RequestParam(required = false) String original_Pw, Authentication authentication) {
+        return memberService.pwCheck(authentication,original_Pw);
+    }
+    
+
+//    //패스워드 변경
+//    public void passwordUpdate(Member member) {
+//        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+//        member.setMemPassword(passwordEncoder.encode(member.getMemPassword()));
+//        memberRepository.updateMemPassword(member);
 //    }
+    
+    //회원탈퇴
+    @GetMapping("/member/withdrawal")
+    public String withdrawalMember(Authentication authentication, Model model) {
+        Member member = memberService.memberInfo(authentication.getName());
+        model.addAttribute("member", member);
+        return "account/withdrawal";
+    }
+
+    //회원 탈퇴 실행
+    @PostMapping("/memebr/withdrawal")
+    public String withdrawalMember(Member member, HttpSession session) {
+        memberService.deleteUser(member.getMemId());
+        session.invalidate();
+        return "redirect:/";
+    }
+
 
 	
 	

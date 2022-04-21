@@ -1,26 +1,28 @@
 function checkAll() {
-  if (memEmailOverlapCheck == 0) {
-    alert('아이디 중복체크를 해주세요');
+  if (memEmailCheckCnt == 0) {
+    alert('이메일 중복체크를 해주세요');
     return false;
   } else if (!pwSame()) {
     return false;
-  } else if (memNicknameOverlapCheck == 0) {
+  } else if (memNicknameCheckCnt == 0) {
     alert('닉네임 중복체크를 해주세요');
     return false;
-  } else if (!checkAge()) {
+  } else if (!checkBirth()) {
+    return false;
+  } else if (!checkMbti()) {
     return false;
   } else if (
     !confirm('일부 정보는 수정이 불가합니다 \n회원가입을 진행하시겠습니까?')
   ) {
     return false;
   } else {
-    alert($('#memEmail').val() + ' 님 회원가입이 완료되었습니다.');
+    alert($('#memNickname').val() + ' 님 회원가입이 완료되었습니다.');
   }
   return true;
 }
 
-let memEmailOverlapCheck = 0;
-let memNicknameOverlapCheck = 0;
+let memEmailCheckCnt = 0;
+let memNicknameCheckCnt = 0;
 
 /*ajax csrf 토큰 설정*/
 let token = $("meta[name='_csrf']").attr('content');
@@ -43,14 +45,14 @@ function memEmailCheck() {
   
   $.ajax({
     type: 'get',
-    url: '/member/emailCheck',
+    url: '/member/emailChk',
     data: {"memEmail": memEmail},
     dataType: 'JSON',
 
     success: function (result) {
       if (result.result == '0') {
         if (confirm('이 아이디는 사용 가능합니다. \n사용하시겠습니까?')) {
-          memEmailOverlapCheck = 1;
+          memEmailCheckCnt = 1;
           $('#memEmail').attr('readonly', true);
           $('#memEmailOverlay').attr('disabled', true);
           $('#memEmailOverlay').css('display', 'none');
@@ -112,14 +114,14 @@ function memNicknameCheck() {
   }
   $.ajax({
     type: 'get',
-    url: '/member/NicknameChk',
+    url: '/member/nicknameChk',
     data: { "memNickname": memNickname },
     dataType: 'JSON',
     
     success: function (result) {
       if (result.result == '0') {
         if (confirm('이 이름은 사용 가능합니다. \n사용하시겠습니까?')) {
-          memNicknameOverlapCheck = 1;
+          memNicknameCheckCnt = 1;
           $('#memNickname').attr('readonly', true);
           $('#memNicknameOverlay').attr('disabled', true);
           $('#memNicknameOverlay').css('display', 'none');
@@ -139,7 +141,7 @@ function memNicknameCheck() {
   });
 }
 
-function checkAge() {
+function checkBirth() {
   const birth_check_msg = $('#birth_check_msg');
   if ($('#year').val() == '') {
     birth_check_msg.html('태어난 년도를 선택해주세요');
@@ -159,6 +161,17 @@ function checkAge() {
   return true;
 }
 
+function checkMbti() {
+  const Mbti_check_msg = $('#Mbti_check_msg');
+  if ($('#memMbti').val() == 'noMbti') {
+    Mbti_check_msg.html('MBTI를 선택해 주세요.');
+    Mbti_check_msg.css('color', 'red');
+    return false;
+    }else {
+    Mbti_check_msg.html('');
+    }
+    return true;
+}
 
 
 function reMemEmail() {
@@ -171,7 +184,7 @@ function reMemEmail() {
   $('#resetMemEmail').css('display', 'none');
 }
 
-function reNickname() {
+function reMemNickname() {
   nicknameOverlapCheck = 0;
   $('#memNickname').attr('readonly', false).focus();
   $('#memNickname').val('');
