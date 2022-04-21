@@ -28,6 +28,7 @@ import com.momo.board.BoardRepository;
 import com.momo.domain.Board;
 import com.momo.domain.Member;
 import com.momo.domain.Place;
+import com.momo.member.MemberCustomRepository;
 import com.momo.member.MemberRepository;
 
 @Service
@@ -41,6 +42,9 @@ public class PlaceService {
 	@Autowired
 	private MemberRepository memberRepository;
 	
+	@Autowired
+	private MemberCustomRepository memberCustomRepository;
+	
 	public List<Place> findAll() {
 		return this.placeRepository.findAll();
 	}
@@ -53,7 +57,7 @@ public class PlaceService {
 	public void save(String placeTitle, String placeLat, String placeLng,
 			String placeId, String placeContent, String memEmail, int boardNum, String placeImg) {
 		Board board = boardRepository.findById((long) boardNum).get();
-		Member member = memberRepository.findByMemEmail(memEmail);
+		Member member = memberCustomRepository.findByMemEmail(memEmail);
 		Place place = new Place();
 		place.setPlaceTitle(placeTitle);
 		place.setPlaceLat(placeLat);

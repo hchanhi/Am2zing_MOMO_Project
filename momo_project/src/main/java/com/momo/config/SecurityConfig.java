@@ -1,4 +1,4 @@
-package com.momo.member;
+package com.momo.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
