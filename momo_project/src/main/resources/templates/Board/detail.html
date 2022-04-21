@@ -217,7 +217,7 @@
 			margin: 10px 0 30px 10px;
 			padding: 5px;
 			overflow-y: auto;
-			background: rgb(255, 255, 255);
+			background: none;
 			z-index: 1;
 			font-size: 12px;
 			border-radius: 10px;
@@ -382,6 +382,17 @@
 			color: coral;
 			font-size: 15px;
 		}
+
+		.list123 {
+			width: 300px;
+			margin: 10px 0 30px 10px;
+			padding: 5px;
+
+			background: rgb(200, 234, 218);
+			z-index: 2;
+			font-size: 12px;
+			border-radius: 10px;
+		}
 	</style>
 </head>
 
@@ -407,6 +418,8 @@
 					<div id="pagination"></div>
 					<form method="post" action="/place/reply?cmd=save">
 						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+
+
 						<div class="">
 							<label for="title" class="">content</label>
 							<textarea placeholder="댓글을 입력해주세요" name="replyContent" id="replyContent"
@@ -416,10 +429,11 @@
 						</div>
 
 					</form>
+
 					<button id="btnSave">저장</button>
 					<h1>댓글목록</h1>
-
-					<div id="resDiv" style="margin-top: 50px;"></div>
+					<div class=".list123" id="resDiv" style="margin-top: 50px;"></div>
+					<hr>
 
 				</div>
 			</div>
@@ -445,132 +459,198 @@
 		</div>
 		<a th:href="@{/board}" role="button"><button>목록</button></a>
 	</div>
-	 <input name="memEmail" th:value="${#authentication.name}">
-    <input name="memNickname" th:value="${#authentication.name}">
+	<input name="memEmail" th:value="${#authentication.name}">
+
 
 	<div th:each="place : ${places}">
 		<a th:name="@{${place.placeNum}}"></a>
 		<h2 style="color: coral" th:text="${place.placeTitle}"></h2>
 		<img style="width: 150px; height: 150px; cursor: pointer;" th:src="@{${place.placeImg}}"><br> <span
 			th:text="${place.placeContent}"></span><br> <a class="topBtn" href="#top">지도로 이동</a>
+
+
 	</div>
 	</div>
 	</div>
 
+
 	<script src="https://code.jquery.com/jquery-latest.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
 
 	<script type="text/javascript"
 		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a7b5481a65eecc18bd2cc1106898f604&libraries=services"></script>
 	<script th:inline="javascript">
 
-		var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
-			mapOption = {
-				center: new kakao.maps.LatLng(37.5546, 126.9706), // 지도의 중심좌표
-				level: 5 // 지도의 확대 레벨
-			};
+			var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
+				mapOption = {
+					center: new kakao.maps.LatLng(37.5546, 126.9706), // 지도의 중심좌표
+					level: 5 // 지도의 확대 레벨
+				};
 
-		var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
-		var infowindow = new kakao.maps.InfoWindow({zIndex: 1});
-		var places = [];
+			var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+			var infowindow = new kakao.maps.InfoWindow({zIndex: 1});
+			var places = [];
 
-		/*<![CDATA[*/
+			/*<![CDATA[*/
 
-		/*[# th:each="place : ${places}"]*/
-		var title = [[${place.placeTitle}]];
-		var lat = [[${place.placeLat}]];
-		var lng = [[${place.placeLng}]];
-		var content = [[${place.placeContent}]];
-		var id = [[${place.placeId}]];
-		var placeImg = [[${place.placeImg}]];
-		var placeNum = [[${place.placeNum}]];
+			/*[# th:each="place : ${places}"]*/
+			var title = [[${place.placeTitle}]];
+			var lat = [[${place.placeLat}]];
+			var lng = [[${place.placeLng}]];
+			var content = [[${place.placeContent}]];
+			var id = [[${place.placeId}]];
+			var placeImg = [[${place.placeImg}]];
+			var placeNum = [[${place.placeNum}]];
 
 
-		places.push({title: title, latlng: new kakao.maps.LatLng(lat, lng), content: content, id: id, placeImg: placeImg, placeNum: placeNum})
+			places.push({title: title, latlng: new kakao.maps.LatLng(lat, lng), content: content, id: id, placeImg: placeImg, placeNum: placeNum})
 
-		/*[/]*/
+			/*[/]*/
 
-		/*]]>*/
-		var infowindow = new kakao.maps.InfoWindow({zIndex: 1});
+			/*]]>*/
+			var infowindow = new kakao.maps.InfoWindow({zIndex: 1});
 
-		// 마커 이미지의 이미지 주소입니다
-		var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
+			// 마커 이미지의 이미지 주소입니다
+			var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
 
-		function setCenter() {
-			// 이동할 위도 경도 위치를 생성합니다 
-			var moveLatLon = places[0].latlng;
-			map.setLevel(8);
-			// 지도 중심을 이동 시킵니다
-			map.setCenter(moveLatLon);
-		}
-		var infowindow = new kakao.maps.InfoWindow({zIndex: 1});
+			function setCenter() {
+				// 이동할 위도 경도 위치를 생성합니다 
+				var moveLatLon = places[0].latlng;
+				map.setLevel(8);
+				// 지도 중심을 이동 시킵니다
+				map.setCenter(moveLatLon);
+			}
+			var infowindow = new kakao.maps.InfoWindow({zIndex: 1});
 
-		function displayInfowindow(marker, title) {
-			var content = '<div style="padding:5px;z-index:1;">' + title + '</div>';
+			function displayInfowindow(marker, title) {
+				var content = '<div style="padding:5px;z-index:1;">' + title + '</div>';
 
-			infowindow.setContent(content);
-			infowindow.open(map, marker);
-		}
+				infowindow.setContent(content);
+				infowindow.open(map, marker);
+			}
 
-		setCenter();
+			setCenter();
 
-		for (var i = 0; i < places.length; i++) {
+			for (var i = 0; i < places.length; i++) {
 
-			// 마커 이미지의 이미지 크기 입니다
-			var imageSize = new kakao.maps.Size(24, 35);
+				// 마커 이미지의 이미지 크기 입니다
+				var imageSize = new kakao.maps.Size(24, 35);
 
-			// 마커 이미지를 생성합니다    
-			var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
+				// 마커 이미지를 생성합니다    
+				var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
 
-			// 마커를 생성합니다
-			var marker = new kakao.maps.Marker({
-				map: map, // 마커를 표시할 지도
-				position: places[i].latlng, // 마커를 표시할 위치
-				title: places[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
-				image: markerImage // 마커 이미지 
+				// 마커를 생성합니다
+				var marker = new kakao.maps.Marker({
+					map: map, // 마커를 표시할 지도
+					position: places[i].latlng, // 마커를 표시할 위치
+					title: places[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
+					image: markerImage // 마커 이미지 
+				});
+
+				(function (marker, title, pid) {
+					kakao.maps.event.addListener(marker, 'mouseover', function () {
+						displayInfowindow(marker, title);
+					});
+
+					kakao.maps.event.addListener(marker, 'click', function () {
+						var position = this.getPosition();
+						var url = 'https://map.kakao.com/link/map/' + pid;
+						window.open(url, '_blank');
+					});
+
+					kakao.maps.event.addListener(marker, 'mouseout', function () {
+						infowindow.close();
+					});
+				})(marker, places[i].title, places[i].id);
+
+				var infoDiv = document.getElementById('placesList');
+				infoDiv.innerHTML = infoDiv.innerHTML + '<div class="list123"><h1 class="contt"><a href="#' + places[i].placeNum + '">' + places[i].title + '</a></h1><div><br>';
+			}
+			//이미지 자세히 보기
+			var img = document.getElementsByTagName("img");
+			for (var x = 0; x < img.length; x++) {
+				img.item(x).onclick = function () {window.open(this.src)};
+			}
+
+			//댓글저장
+			$('#btnSave').click(function () {
+
+
+				let boardNum = document.getElementById("boardNum").value;
+				var tempData = {
+
+					"boardNum": $('input[name="boardNum"]').val(),
+					"replyContent": $('#replyContent').val(),
+					"memEmail": $('input[name="memEmail"]').val()
+
+
+				};
+				console.log(tempData);
+				var reply = $('#replyContent').val()
+				if (reply != "") {
+					$.ajax({
+						url: "/commentList/" + boardNum,
+						type: "POST",
+						async: true,
+						contentType: "application/json; charset=UTF-8",
+						data: JSON.stringify(tempData),
+						success: function (data) {
+
+							$('#replyContent').val();
+							$('#resDiv').html(data);
+							$('textarea[name="replyContent"]').val("");
+						},
+						error: function () {alert("에러 발생");}
+
+
+					});
+				}
 			});
-
-			(function (marker, title, pid) {
-				kakao.maps.event.addListener(marker, 'mouseover', function () {
-					displayInfowindow(marker, title);
-				});
-
-				kakao.maps.event.addListener(marker, 'click', function () {
-					var position = this.getPosition();
-					var url = 'https://map.kakao.com/link/map/' + pid;
-					window.open(url, '_blank');
-				});
-
-				kakao.maps.event.addListener(marker, 'mouseout', function () {
-					infowindow.close();
-				});
-			})(marker, places[i].title, places[i].id);
-
-			var infoDiv = document.getElementById('placesList');
-			infoDiv.innerHTML = infoDiv.innerHTML + '<br><h1 class="contt"><a href="#' + places[i].placeNum + '">' + places[i].title + '</a></h1>';
-		}
-		//이미지 자세히 보기
-		var img = document.getElementsByTagName("img");
-		for (var x = 0; x < img.length; x++) {
-			img.item(x).onclick = function () {window.open(this.src)};
-		}
-
-		//댓글저장
-		$('#btnSave').click(function () {
+			$(document).on("click", "#deleteComment", function () {
 
 
-			let boardNum = document.getElementById("boardNum").value;
-			var tempData = {
-
-				"boardNum": $('input[name="boardNum"]').val(),
-				"replyContent": $('#replyContent').val(),
- 				"memEmail" :  $('input[name="memEmail"]').val(),
-
-			};
-			console.log(tempData);
-			var reply = $('#replyContent').val()
-			if (reply != "") {
+				let item = $(this);
+				let replyNum = item.attr("data-replyNum");
+				//let replyNum = document.getElementById("replyNum").value;
 				$.ajax({
-					url: "/commentList/" + boardNum,
+					method: 'Delete',
+					url: '/deleteComment/' + replyNum,
+					async: false,
+					contentType: "application/json; charset=UTF-8",
+					data: {"replyNum": replyNum},
+					success: function (data) {
+
+						$('#resDiv').html(data)
+						window.alert("삭제가 완료가 확인 되었습니다.");
+						document.location.reload(true);
+
+
+					},
+					error: function (data) {
+						console.dir(data);
+
+					}
+				});
+
+			});
+			//새로고침 유지
+			$(document).ready(function () {
+
+
+				let boardNum = document.getElementById("boardNum").value;
+				var tempData = {
+
+					"boardNum": $('input[name="boardNum"]').val(),
+
+				};
+				console.log(tempData);
+				var reply = $('#replyContent').val()
+
+				$.ajax({
+					url: "/commentList02/" + boardNum,
 					type: "POST",
 					async: true,
 					contentType: "application/json; charset=UTF-8",
@@ -579,70 +659,12 @@
 
 						$('#replyContent').val();
 						$('#resDiv').html(data)
-						$('textarea[name="replyContent"]').val("");
-					},
-					error: function () {alert("에러 발생");}
 
+					}
 
 				});
-			}
-		});
-		$(document).on("click", "#deleteComment", function () {
-
-
-			let item = $(this);
-			let replyNum = item.attr("data-replyNum");
-			//let replyNum = document.getElementById("replyNum").value;
-			$.ajax({
-				method: 'Delete',
-				url: '/deleteComment/' + replyNum,
-				async: false,
-				contentType: "application/json; charset=UTF-8",
-				data: {"replyNum": replyNum},
-				success: function (data) {
-
-					$('#resDiv').html(data)
-					window.alert("삭제가 완료가 확인 되었습니다.");
-					document.location.reload(true);
-
-
-				},
-				error: function (data) {
-					console.dir(data);
-
-				}
-			});
-
-		});
-		//새로고침 유지
-		$(document).ready(function () {
-
-
-			let boardNum = document.getElementById("boardNum").value;
-			var tempData = {
-
-				"boardNum": $('input[name="boardNum"]').val(),
-
-			};
-			console.log(tempData);
-			var reply = $('#replyContent').val()
-
-			$.ajax({
-				url: "/commentList02/" + boardNum,
-				type: "POST",
-				async: true,
-				contentType: "application/json; charset=UTF-8",
-				data: JSON.stringify(tempData),
-				success: function (data) {
-
-					$('#replyContent').val();
-					$('#resDiv').html(data)
-
-				}
 
 			});
-
-		});
 
 
 	</script>
