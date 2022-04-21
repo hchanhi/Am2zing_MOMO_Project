@@ -48,7 +48,7 @@ public class MemberController {
 	//로그인 페이지 이동
 	@GetMapping("member/login")
 	public String goLogin() {
-		return "Member/Login"; 
+		return "member/loginForm"; 
 		} 
 	
 	/* 로그인 에러 *
