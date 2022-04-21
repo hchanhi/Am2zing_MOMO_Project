@@ -123,14 +123,14 @@ public class MemberController {
     
     //패스워드 확인
     @ResponseBody
-    @GetMapping("/passwordCheck")
+    @GetMapping("/member/pwdCheck")
     public HashMap<String, Object> pwCheck(@RequestParam(required = false) String original_Pw, Authentication authentication) {
         return memberService.pwCheck(authentication,original_Pw);
     }
     
 
     //패스워드 변경
-    @PostMapping("/member/password")
+    @PostMapping("/member/pwdEdit")
     public String pwdUpdate(Authentication authentication,Member member) {
         member.setMemEmail(authentication.getName());
         memberService.passwordUpdate(member);
