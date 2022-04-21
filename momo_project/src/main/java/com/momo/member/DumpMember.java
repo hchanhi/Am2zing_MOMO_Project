@@ -35,6 +35,7 @@ public class DumpMember implements CommandLineRunner{
         Member member2 = memberRepository.save(Member.builder()
                 .memEmail("aaaa@aaaa.com")
                 .memNickname("aaaa")
+                .memMbti("INFP")
                 .memPassword(encPassword1)
                 .memRole("ROLE_MEMBER")
                 .build());

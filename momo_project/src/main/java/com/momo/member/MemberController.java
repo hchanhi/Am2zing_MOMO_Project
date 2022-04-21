@@ -109,7 +109,7 @@ public class MemberController {
     
     //닉네임 수정 중복 체크
     @ResponseBody
-    @PostMapping("/nicknameEdit")
+    @GetMapping("/member/nicknameEdit")
     public HashMap<String, Object> memNicknameEdit(@RequestParam(required = false) Long memId, String memNickname) {
         return memberService.memNicknameEdit(memNickname, memId);
     }

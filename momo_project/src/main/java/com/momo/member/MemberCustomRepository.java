@@ -9,7 +9,7 @@ import lombok.RequiredArgsConstructor;
 import com.momo.domain.Member;
 import com.momo.domain.QMember;
 import com.querydsl.core.QueryResults;
-
+import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 
 @RequiredArgsConstructor
@@ -55,6 +55,15 @@ public class MemberCustomRepository {
                 .execute();
     }
 
+    private BooleanExpression eqSearchType(String searchType, String keyword){
+        if(!keyword.equals("")){
+            switch (searchType) {
+                case "memNickname":
+                    return QMember.member.memNickname.contains(keyword);
+            }
+        }
+        return null;
+    }
 
 
 }
