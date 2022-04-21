@@ -3,23 +3,37 @@
 <head>
 <meta charset="UTF-8">
 <title>*</title>
+<style>
+	.list123 {
+			width: 300px;
+			margin: 10px 0 30px 10px;
+			padding: 5px;
+		
+			background: rgb(200, 234, 218);
+			z-index: 2;
+			font-size: 12px;
+			border-radius: 10px;
+		}
+	</style>
 </head>
 <body>
 <div>
     <table>
 
-        <tbody id="divReloadLayer">
+        <tbody class=".list123" id="divReloadLayer">
         <tr th:each="comment : ${comments}">
-           <td>
-                <span th:text="${comment.replyContent}"></span>
-                <span hidden id="replyNum" th:text="${comment.replyNum}"></span>
-            </td>
-             <td>
-             <span hidden id="boardNum" th:boardNum="${boardNum}"></span>
-            <input type="button" th:data-del="${comment.replyNum}" class="deleteComment" value="❌"><br>
-     
+           
+                <div style="background: rgb(200, 234, 218);width: 150px; height: 50px; text-align: center;
+			margin: 10px 10px 10px 10px;
+			padding: 5px; border-radius: 10px;"><span style="color: rgb(53, 26, 29); font-size: 15pt;" th:text="${comment.replyContent}"></span>
+            
+            <input type="button" style="background: none; border: none;" th:data-del="${comment.replyNum}" class="deleteComment" value="❌"></div>
         
-            </td>
+                <span hidden id="replyNum" th:text="${comment.replyNum}"></span>
+              <span  id="memNickname" th:text="${comment.member.memNickname}"></span>
+
+           
+             <span hidden id="boardNum" th:boardNum="${boardNum}"></span>
         </tr>
       
         </tbody>
@@ -53,7 +67,7 @@ function deleteComment(){
 
     });
    
-}
+};
 
 </script>
 </body>

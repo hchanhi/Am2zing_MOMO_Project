@@ -46,13 +46,14 @@ public class CommentService {
 	public void save(String replyContent, int boardNum, String memEmail) {
 	      Board board = boardRepository.findById((long) boardNum).get();
 	      Member member = memberRepository.findByMemEmail(memEmail);
+	 
 
-	      Member nick = memberRepository.findByMemNickname(memNickname);
 
 	      Comment comment = new Comment();
 	      comment.setReplyContent(replyContent);
 	      comment.setBoard(board);
 	      comment.setMember(member);
+	 
 	      
 	      this.commentRepository.save(comment);
 	   }
@@ -70,6 +71,7 @@ public class CommentService {
 	   
 	      String replyContent = map.get("replyContent");
 	      String memEmail = map.get("memEmail");
+	
 	      int boardNum = Integer.parseInt(map.get("boardNum"));
 	      this.save(replyContent, boardNum, memEmail);
 	      

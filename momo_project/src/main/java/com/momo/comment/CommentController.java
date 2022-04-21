@@ -65,20 +65,7 @@ public class CommentController {
 		return "comment/commentList";
 	}
 	
-	  @RequestMapping(value = "test02/comment/delete/{replyNum}") public String
-	  deleteComment(@PathVariable Long replyNum) { // 8 
-	  commentService.deleteComment(replyNum); 
-			  return "redirect:/test02/1"; 
-	  }
-	
-	
-	 @ResponseBody
-	    @PostMapping("/board/delete")
-	    public List<String> deleteSubmit(@RequestBody List<String> replyNumArray){
 
-	       commentService.deleteComment02(replyNumArray);
-	        return replyNumArray;
-	    }
 	 
 	 @DeleteMapping("/deleteComment/{replyNum}")
 	    public String delete(@PathVariable("replyNum") long replyNum, @RequestParam int boardNum, Model model) {
