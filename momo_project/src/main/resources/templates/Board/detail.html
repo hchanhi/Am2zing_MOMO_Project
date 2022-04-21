@@ -12,6 +12,7 @@
 			padding: 0;
 			font-family: 'Malgun Gothic', dotum, '돋움', sans-serif;
 			font-size: 12px;
+	
 		}
 
 		.map_wrap a,
@@ -38,7 +39,7 @@
 			padding: 5px;
 			overflow-y: auto;
 			background: rgb(255, 255, 255);
-			z-index: 1;
+		
 			font-size: 12px;
 			border-radius: 10px;
 		}
@@ -218,7 +219,7 @@
 			padding: 5px;
 			overflow-y: auto;
 			background: none;
-			z-index: 1;
+		
 			font-size: 12px;
 			border-radius: 10px;
 		}
@@ -399,22 +400,23 @@
 <body>
 
 	<div>
-		<div style="width:1000px;">
-			<div style="font-size: 40px; font-weight: bold;">
-				<span>제목 : </span><span th:text="@{${board.boardTitle}}"></span>
-			</div>
+	
+		
 			<div style="font-size: 20px; margin-left: 50px; float:right;">	
 				<span>작성자: </span><span th:text="@{${board.member.memNickname}}"></span>
 			</div>
 		</div>
 		<div>
 			<div class="map_wrap">
-				<div id="map" style="width: 900px; height: 500px;"></div>
-				<div id="menu_wrap" class="bg_white">
+				
+				<div id="map" style="width: 500px; height: 500px; justify-content: center; text-align: 
+				center; padding: 0; margin-left: 300px;  display: inline-block;"></div>
+				
+				<div id="menu_wrap" class="bg_white" style = "display: inline-block;">
 					<div class="hAddr">
 						<span id="centerAddr"></span>
 					</div>
-					<h1>MOMO리스트</h1>
+		
 					<ul id="placesList"></ul>
 
 
@@ -440,10 +442,19 @@
 
 				</div>
 			</div>
+		<div class="map_wrap" style=" z-index: 0;">
+	
+	<div th:each="place : ${places}">
+		<a th:name="@{${place.placeNum}}"></a>
+		<h2 style="color: coral" th:text="${place.placeTitle}"></h2>
+		<img style="width: 150px; height: 150px; cursor: pointer;" th:src="@{${place.placeImg}}" onerror="this.style.display='none'" alt=''><br> <span
+			th:text="${place.placeContent}"></span><br> <a class="topBtn" href="#top">지도로 이동</a>
 
+
+	</div>
 		</div>
 	</div>
-	<div style="float: right">
+
 		<div>
 			<a th:href="@{'/post/edit/' + ${board.boardNum}}" role="button"><button>수정</button></a>
 		</div>
@@ -463,14 +474,6 @@
 	 <input name="memEmail" th:value="${#authentication.name}">
 
 
-	<div th:each="place : ${places}">
-		<a th:name="@{${place.placeNum}}"></a>
-		<h2 style="color: coral" th:text="${place.placeTitle}"></h2>
-		<img style="width: 150px; height: 150px; cursor: pointer;" th:src="@{${place.placeImg}}" onerror="this.style.display='none'" alt=''><br> <span
-			th:text="${place.placeContent}"></span><br> <a class="topBtn" href="#top">지도로 이동</a>
-
-
-	</div>
 
 
 	<script src="https://code.jquery.com/jquery-latest.min.js"></script>
