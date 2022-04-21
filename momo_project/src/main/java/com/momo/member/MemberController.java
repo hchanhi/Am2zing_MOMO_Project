@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.momo.bookmark.BoardBookMarkService;
 import com.momo.domain.Member;
 
 import lombok.RequiredArgsConstructor;
@@ -35,6 +36,9 @@ public class MemberController {
 
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
+	
+	@Autowired
+	private BoardBookMarkService boardBookMarkService;
 
 	@GetMapping({ "/member" })
 	public String index() {
@@ -63,6 +67,13 @@ public class MemberController {
 	@GetMapping("/info") 
 	public String goMyInfo() { 
 		return "Member/mypage"; 
+		} 
+	
+	@GetMapping("bookmark/board") 
+	public String goMyboardBookmark(@AuthenticationPrincipal PrincipalDetails principal, Model model) {
+		Member member = principal.getMember();
+		model.addAttribute("boardBookmarks", boardBookMarkService.findAllByMember(member));
+		return "Member/boardBookmark"; 
 		} 
 
 	@PostMapping("/joinProc")
