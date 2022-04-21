@@ -17,7 +17,6 @@ import com.momo.domain.Board;
 import com.momo.domain.Comment;
 import com.momo.domain.Member;
 import com.momo.domain.Place;
-import com.momo.member.MemberCustomRepository;
 import com.momo.member.MemberRepository;
 import com.momo.place.PlaceRepository;
 
@@ -32,9 +31,6 @@ public class CommentService {
 	
 	@Autowired
 	   private MemberRepository memberRepository;
-	
-	@Autowired
-	private MemberCustomRepository memberCustomRepository;
 
 
 
@@ -47,15 +43,18 @@ public class CommentService {
 		return this.commentRepository.findByBoard(board);
 	}
 	
-	public void save(String replyContent, int boardNum, String memEmail, String memNickname) {
+	public void save(String replyContent, int boardNum, String memEmail) {
 	      Board board = boardRepository.findById((long) boardNum).get();
-	      Member member = memberCustomRepository.findByMemEmail(memEmail);
-	      Member nick = memberRepository.findByMemNickname(memNickname);
+	      Member member = memberRepository.findByMemEmail(memEmail);
+	 
+
+
 	      Comment comment = new Comment();
 	      comment.setReplyContent(replyContent);
 	      comment.setBoard(board);
 	      comment.setMember(member);
-	      comment.setMember(nick);
+	 
+	      
 	      this.commentRepository.save(comment);
 	   }
 
@@ -72,9 +71,9 @@ public class CommentService {
 	   
 	      String replyContent = map.get("replyContent");
 	      String memEmail = map.get("memEmail");
-	      String memNickname = map.get("memNickname");
+	
 	      int boardNum = Integer.parseInt(map.get("boardNum"));
-	      this.save(replyContent, boardNum, memEmail,memNickname);
+	      this.save(replyContent, boardNum, memEmail);
 	      
 	      try {      
 	         tempMap.put("replyContent", map.get("replyContent"));          
