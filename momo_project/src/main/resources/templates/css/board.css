@@ -114,9 +114,10 @@ header {
 
 section {
     width: 100%;
-    height: 850px;
+    height: 800px;
     border-radius: 20px;
-    background-color: rgb(194, 227, 174);
+    background-color: rgb(228, 228, 228);
+    /* background-color: rgb(194, 227, 174); */
 }
 
 .sec_left {
@@ -126,11 +127,13 @@ section {
     /* background-color: rgb(194, 227, 174); */
 }
 
+/* 제목 입력 div */
 .fortitle {
     text-align: center;
     padding-top: 35px;
 }
 
+/* 제목 입력 */
 #title {
     width: 640px;
     height: 70px;
@@ -144,6 +147,7 @@ section {
     margin-bottom: 20px;
 }
 
+/* 장소찾기 */
 .locationbtn {
     display: block;
     width: 500px;
@@ -158,14 +162,16 @@ section {
     text-align: center;
     cursor: pointer;
     
-
 }
+
+/* 이미지 첨부 미리보기 div */
 #image_preview{
     position: relative;
     width:100%;
     height:160px;
 }
 
+/* 카메라이미지 */
 .cameraImg{
     position:absolute;
     display: flex;
@@ -179,6 +185,7 @@ section {
     cursor: pointer;
 }
 
+/* 첨부한 사진이 뜨는 곳 */
 #att_zone {
     float:right;
     width: 500px;
@@ -189,17 +196,20 @@ section {
     margin-top:-35px;
 }
 
+/* 첨부한 사진 없이 비어있을때 */
 #att_zone:empty:before {
     content: attr(data-placeholder);
     color: #999;
     font-size: .9em;
 }
 
+/* 커멘트 div */
 #commentbox{
     width:100%;
-    height:340px;
+    height:350px;
 }
 
+/* 커멘트 */
 .comment{
     width:630px;
     height:300px;
@@ -215,11 +225,12 @@ section {
     font-family: "Noto Sans KR", sans-serif;
 }
 
+/* 스크롤바 막대 설정*/
 .comment::-webkit-scrollbar{
     width: 10px;
     cursor: pointer;
 }
-/* 스크롤바 막대 설정*/
+
 .comment::-webkit-scrollbar-thumb{
     height: 17%;
     background-color: rgba(255,255,255,1);
@@ -232,12 +243,14 @@ section {
     background-color: rgba(0,0,0,0);
 }
 
+/* 추가버튼 div */
 #addbtnbox{
     width:690px;
     height:70px;
     padding-right:20px;
 }
 
+/* 추가버튼*/
 .addbtn{
     float:right;
     width:100px;
@@ -252,9 +265,7 @@ section {
 }
 
 
-
-
-
+/* ------------end of sec_left------------ */
 
 .sec_right {
     float: left;
@@ -262,8 +273,63 @@ section {
     height: 100%;
     background-color: rgb(237, 237, 177);
 }
+/* 
+#places{
+} */
+
+#myplace1{
+    margin:0 auto;
+    width: 640px;
+    height: 150px;
+    text-align: center;
+    border: 3px solid rgb(187, 187, 187);
+    border-radius: 20px;
+}
 
 
+
+
+
+
+
+
+
+
+
+
+/* ------------end of sec_right------------ */
+
+.sec_bottom{
+    margin-top: 30px;
+    height:60px;
+}
+
+.cancelbtn{
+    float:left;
+    width:140px;
+    height:50px;
+    left:0;
+    background-color: rgb(203, 203, 203);
+    border: 3px solid rgb(187, 187, 187) ;
+    border-radius: 20px;
+    font-size:18px;
+    font-weight: bold;
+    color: rgb(68, 68, 68);
+    cursor:pointer;
+}
+
+.savebtn{
+    float:right;
+    width:140px;
+    height:50px;
+    background-color: rgb(203, 203, 203);
+    border: 3px solid rgb(187, 187, 187) ;
+    border-radius: 20px;
+    font-size:18px;
+    font-weight: bold;
+    color: rgb(68, 68, 68);
+    cursor:pointer;
+}
 
 /* ------------------end of section----------------- */
 
@@ -292,7 +358,6 @@ footer {
     margin-left: 50px;
 }
 
-
 .foot2 {
     float: left;
     width: 50%;
@@ -300,16 +365,13 @@ footer {
     font-size: 14pt;
 }
 
-
 .foot2 h3 {
     font-size: 25pt;
     margin: 40px 0px 10px 0px;
-
 }
 
 .foot2 p {
     margin-left: 0px;
 }
-
 
 /* ------------------end of footer----------------- */
