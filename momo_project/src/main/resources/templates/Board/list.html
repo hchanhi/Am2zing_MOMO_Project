@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
+<th:block th:replace="fragments :: flg_head"></th:block>
 <meta charset="UTF-8">
 <title>MOMO-게시판</title>
 </head>
@@ -40,11 +41,11 @@
         </tr>
         </tbody>
     </table>
+    <div th:replace="fragments :: paging"></div>
     <div>
-        <div>
-            <a th:href="@{/postBoard}" role="button">글쓰기</a>
-        </div>
+        <a th:href="@{/postBoard}" role="button">글쓰기</a>
     </div>
+    
 </div>
 </body>
 </html>
