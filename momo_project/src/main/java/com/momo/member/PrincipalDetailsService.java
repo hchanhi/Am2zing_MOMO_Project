@@ -31,7 +31,7 @@ public class PrincipalDetailsService implements UserDetailsService{
 	        Member member = memberWrapper.get();
 	        List<GrantedAuthority> authorities = new ArrayList<>();
 	        authorities.add(new SimpleGrantedAuthority(member.getMemRole()));
-	        return new User(member.getMemEmail(), member.getMemPassword(), authorities);
+	        return new PrincipalDetails(member);
 	    }
 		
 	}
