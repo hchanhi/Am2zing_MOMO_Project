@@ -1,6 +1,8 @@
+
 /* 
 //att_zone : 이미지들이 들어갈 위치 id, btn : file tag id
  
+
   imageView = function imageView(att_zone, btn) {
 
     var attZone = document.getElementById(att_zone);
@@ -51,6 +53,7 @@
 
 
 
+
     //첨부된 이미리즐을 배열에 넣고 미리보기
 
     imageLoader = function (file) {
@@ -66,7 +69,9 @@
       reader.readAsDataURL(file);
     }
 
+
    // 첨부된 파일이 있는 경우 checkbox와 함께 attZone에 추가할 div를 만들어 반환 
+
     makeDiv = function (img, file) {
       var div = document.createElement('div')
       div.setAttribute('style', div_style)
@@ -106,6 +111,7 @@
 */
 $(document).on('click', '#profileImg', function () {
   $('#file1').trigger('click');
+
 });
 
 //파일선택 버튼 대신 이미지 클릭해서 파일 첨부 (javascript)
