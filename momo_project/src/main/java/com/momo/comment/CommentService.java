@@ -46,7 +46,7 @@ public class CommentService {
 	public void save(String replyContent, int boardNum, String memEmail, String memNickname) {
 	      Board board = boardRepository.findById((long) boardNum).get();
 	      Member member = memberRepository.findByMemEmail(memEmail);
-	      Member nick = memberRepository.findByMemNickname(memNickname);
+	      Member nick = memberRepository.findByMemNickName(memNickname);
 	      Comment comment = new Comment();
 	      comment.setReplyContent(replyContent);
 	      comment.setBoard(board);
