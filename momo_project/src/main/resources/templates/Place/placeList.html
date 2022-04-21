@@ -27,16 +27,16 @@
 <div>
     <table style="margin:auto; margin-top:50px;">
         <tr>
-            <th style="font-size:20px; width:200px;">장소명</th>
-            <th style="font-size:20px; width:400px;">코멘트</th>
+            <th style="font-size:35px; width:200px;">장소명</th>
+            <th style="font-size:35px; width:400px;">코멘트</th>
         </tr>
         
         <tbody>
         <tr th:each="place : ${places}">
-            <td style="font-weight:bold;">
+            <td style="font-weight:bold; font-size:20px">
                 <span th:text="${place.placeTitle}"></span>
             </td>
-            <td style="text-align:center;">
+            <td style="text-align:center; font-size:17px;">
                 <span th:text="${place.placeContent}"></span>
             </td>
             <td>
