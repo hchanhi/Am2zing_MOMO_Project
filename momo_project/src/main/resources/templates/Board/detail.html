@@ -482,7 +482,7 @@
 	<script type="text/javascript"
 		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a7b5481a65eecc18bd2cc1106898f604&libraries=services"></script>
 	<script th:inline="javascript">
-
+	
 			var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
 				mapOption = {
 					center: new kakao.maps.LatLng(37.5546, 126.9706), // 지도의 중심좌표
@@ -558,51 +558,7 @@
 						var position = this.getPosition();
 						var url = 'https://map.kakao.com/link/map/' + pid;
 						window.open(url, '_blank');
-					});
-
-			var infoDiv = document.getElementById('placesList');
-			infoDiv.innerHTML = infoDiv.innerHTML + '<br><h1 class="contt"><a href="#' + places[i].placeNum + '">' + places[i].title + '</a></h1>';
-		}
-		//이미지 자세히 보기
-		var img = document.getElementsByTagName("img");
-		for (var x = 0; x < img.length; x++) {
-			img.item(x).onclick = function () {window.open(this.src)};
-		}
-		
-		//게시글 북마크
-		$('#btn-bookmark').click(function() {
-			let boardNum = document.getElementById("boardNum").value;
-			let sendData = {"boardNum": boardNum};
-			$.ajax({
-				method:'POST',
-				url:'/boardBookmark',
-				data: sendData,
-				success : function(data){
-					window.location.href = data;
-				},
-				error: function(){
-					console.log('ajax 통신 실패');
-				}
-			});
-		});
-		
-		//게시글 북마크 해제
-		$('#btn-unbookmark').click(function() {
-			let boardNum = document.getElementById("boardNum").value;
-			let deleteData = {"boardNum": boardNum};
-			$.ajax({
-				method:'POST',
-				url: '/unBoardBookmark',
-				data: deleteData,
-				success : function(data){
-					window.location.href = data;
-				},
-				error: function(){
-					console.log('ajax 통신 실패');
-				}
-			});
-		});
-
+					});	
 					kakao.maps.event.addListener(marker, 'mouseout', function () {
 						infowindow.close();
 					});
@@ -611,12 +567,14 @@
 				var infoDiv = document.getElementById('placesList');
 				infoDiv.innerHTML = infoDiv.innerHTML + '<div class="list123"><h1 class="contt"><a href="#' + places[i].placeNum + '">' + places[i].title + '</a></h1><div><br>';
 			}
-			//이미지 자세히 보기
-			var img = document.getElementsByTagName("img");
-			for (var x = 0; x < img.length; x++) {
-				img.item(x).onclick = function () {window.open(this.src)};
-			}
 
+		//이미지 자세히 보기
+		var img = document.getElementsByTagName("img");
+		for (var x = 0; x < img.length; x++) {
+			img.item(x).onclick = function () {window.open(this.src)};
+		}
+		
+		
 			//댓글저장
 			$('#btnSave').click(function () {
 
@@ -707,7 +665,39 @@
 				});
 
 			});
-
+			//게시글 북마크
+			$('#btn-bookmark').click(function() {
+				let boardNum = document.getElementById("boardNum").value;
+				let sendData = {"boardNum": boardNum};
+				$.ajax({
+					method:'POST',
+					url:'/boardBookmark',
+					data: sendData,
+					success : function(data){
+						window.location.href = data;
+					},
+					error: function(){
+						console.log('ajax 통신 실패');
+					}
+				});
+			});
+			
+			//게시글 북마크 해제
+			$('#btn-unbookmark').click(function() {
+				let boardNum = document.getElementById("boardNum").value;
+				let deleteData = {"boardNum": boardNum};
+				$.ajax({
+					method:'POST',
+					url: '/unBoardBookmark',
+					data: deleteData,
+					success : function(data){
+						window.location.href = data;
+					},
+					error: function(){
+						console.log('ajax 통신 실패');
+					}
+				});
+			});
 
 	</script>
 </body>

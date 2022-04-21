@@ -56,7 +56,7 @@ public class BoardController {
 	@GetMapping("/postBoard")
 	public String post(@AuthenticationPrincipal PrincipalDetails principal) {
 		if(principal == null) {
-			return "Member/Login";
+			return "Member/loginForm";
 		}
 		return "Board/post";
 	}
