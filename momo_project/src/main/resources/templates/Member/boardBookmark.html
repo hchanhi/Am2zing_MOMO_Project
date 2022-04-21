@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/saved posts.css">
+    <title>saved posts</title>
+
+</head>
+
+<body>
+    <div id="wrap">
+        <header class="inner">
+            <a href="#">
+                <h2 class="logo">MOMO</h2>
+            </a>
+            <h4 class="mybox">MY BOX</h4>
+
+
+            <div class="user">
+                <div class="dropdown">
+                    <button class="dropbtn"><img src="/images/membericon.png" alt="membericon"></button>
+                    <div class="dropdown-content">
+                        <a href="#">마이페이지</a>
+                        <a href="#">회원정보수정</a>
+                        <a href="#">내글 / 내북마크</a>
+                        <a href="#">로그아웃</a>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- ------------------end of header------------------->
+        <div class="all inner">
+
+            <aside>
+                <div class="button_1">저장한 글</div>
+                <div class="button_2">저장한 장소</div>
+            </aside>
+
+            <!--------------------end of aside------------------->
+
+            <section class="contents" th:each="boardBookmark : ${boardBookmarks}">
+                <div class="content1">
+                    <div class="post"></div>
+                    <div class="post"></div>
+                    <div class="post"></div>
+                </div>
+                <div class="content2">
+                    <div class="post"></div>
+                    <div class="post"></div>
+                    <div class="post"></div>
+                </div>
+                <div class="content3">
+                    <div class="post"></div>
+                    <div class="post"></div>
+                    <div class="post"></div>
+                </div>
+            </section>
+
+        </div>
+        <!--------------------end of section------------------->
+
+        <footer>
+            <div class="foot1">
+                <h3>MOMO</h3>
+                <p>
+                    ㈜ MOMO : 서울특별시 강남구 언주로 508 14층(역삼동, 서울상록빌딩)<br>
+                    대표이사 : 박성태<br>
+                    사업자등록번호 : 104-81-53114<br>
+                    통신판매신고번호 : 제2016-서울강남-00515호<br>
+                    개인정보관리 최고책임자 : 임영관 이사<br>
+                    Copyright by MOMO Co., Ltd. All rights reserved.
+                </p>
+
+            </div>
+            <div class="foot2">
+                <h3>고객센터</h3>
+
+                <p>
+                    1544-9001<br>
+                    평일 08:00~20:00<br>
+                    휴일 09:00~18:00 (점심시간 12:00~13:00 제외)
+                </p>
+            </div>
+        </footer>
+    </div>
+
+    <!--------------------end of footer------------------->
+
+    <script src="/js/jquery-3.6.0.min.js"></script>
+    <script src="/js/slick.min.js"></script>
+</body>
+
+</html>

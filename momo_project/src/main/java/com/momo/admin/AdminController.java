@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.momo.board.BoardService;
+import com.momo.domain.Board;
 import com.momo.place.PlaceService;
 
 @Controller
@@ -19,6 +21,9 @@ public class AdminController {
 	
 	@Autowired
 	private PlaceService placeService;
+	
+	@Autowired
+	private BoardService boardService;
 	
 	@GetMapping("member/member-list")
 	public void searchAllMembers(Model model
@@ -44,8 +49,10 @@ public class AdminController {
 	
 	@GetMapping("board/board-detail/{boardNum}")
 	public String showboardDetail(@PathVariable Integer boardNum, Model model) {
-		model.addAttribute("myplaces", this.placeService.findByBoardNum(boardNum));
-		return "view/test02";
+		Board board = boardService.getPost(boardNum);
+		model.addAttribute("board", board);
+		model.addAttribute("places", this.placeService.findByBoardNum(boardNum));
+		return "Board/detail";
 	}
 	
 	@GetMapping("comment/comment-list")
@@ -58,8 +65,10 @@ public class AdminController {
 	
 	@GetMapping("comment/comment-detail/{boardNum}")
 	public String showcommentDetail(@PathVariable Integer boardNum, Model model) {
-		model.addAttribute("myplaces", this.placeService.findByBoardNum(boardNum));
-		return "view/test02";
+		Board board = boardService.getPost(boardNum);
+		model.addAttribute("board", board);
+		model.addAttribute("places", this.placeService.findByBoardNum(boardNum));
+		return "Board/detail";
 	}
 	
 

@@ -116,8 +116,11 @@ section {
     width: 100%;
     height: 800px;
     border-radius: 20px;
+
+
     background: linear-gradient(90deg, #e1e1e1 50%, #fbffd7 50%);
-    /* background-color: rgb(194, 227, 174); */
+
+
 }
 
 .sec_left {
@@ -225,6 +228,8 @@ section {
     font-family: "Noto Sans KR", sans-serif;
 }
 
+
+
 .comment2{
     margin:0 40px 0 40px;
     padding-left:10px;
@@ -237,6 +242,9 @@ section {
     resize: none;
     font-family: "Noto Sans KR", sans-serif;
 }
+
+
+
 
 /* 스크롤바 막대 설정*/
 .comment::-webkit-scrollbar{
@@ -278,6 +286,7 @@ section {
 }
 
 .addbtn2{
+
     float:right;
     width:100px;
     height:50px;
@@ -289,6 +298,7 @@ section {
     color: rgb(68, 68, 68);
     cursor:pointer;
 }
+
 
 .addbtn3{
     width:100px;
@@ -302,18 +312,24 @@ section {
     cursor:pointer;
 }
 
+
+
 /* ------------end of sec_left------------ */
 
 .sec_right {
     float: left;
     width: calc(100%/2);
     height: 100%;
+    background-color: rgb(237, 237, 177);
+
 }
 /* 
 #places{
 } */
 
+
 .myplace{
+
     margin:0 auto;
     width: 640px;
     height: 150px;
@@ -321,6 +337,9 @@ section {
     border: 3px solid rgb(187, 187, 187);
     border-radius: 20px;
 }
+
+
+
 
 
 

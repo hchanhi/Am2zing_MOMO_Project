@@ -6,41 +6,61 @@
   <head>
     <meta charset="UTF-8" />
     <title>회원가입</title>
+    <link rel="stylesheet" href="/css/login.css"/>
     
     <!-- default header name is X-CSRF-TOKEN -->
     <meta id="_csrf" name="_csrf" th:content="${_csrf.token}"/>
     <meta id="_csrf_header" name="_csrf_header" th:content="${_csrf.headerName}"/>
   </head>
-  <body>
-    <form method="post" th:action="@{/joinProc}" th:object="${register}" onsubmit="return checkAll();">
-      <label th:for="memEmail" >이메일(아이디)</label>
-    <div>
-        <input type="email"  id="memEmail" name="memEmail"  placeholder="이메일을 입력해 주세요">
-        <input type="button" id="memEmailOverlay" onclick="memEmailCheck()" value="중복 체크"/>
-        <input  type="button" id="resetMemEmail" onclick="reMemEmail()" disabled value="다시입력"/>
-    </div>
-
-    <div >
-        <label th:for="memPassword">패스워드</label>
-    	  <input onchange="pwSame()" type="password" id="memPassword" name="memPassword" placeholder="비밀번호를 입력해 주세요"> 
-    </div>
-
-    <div >
-        <label for="password_check">패스워드 확인</label>
-        <input onkeyup="pwSame()" type="password" id="memPassword_Check" name="memPassword_Check" placeholder="비밀번호를 입력해 주세요">
-        <span id="pw_check_msg"></span>
-    </div>
-
-    <label th:for="memNickname" class="form-label">이름(닉네임)</label>
-    <div >
-        <input type="text" id="memNickname" name="memNickname" placeholder="닉네임을 입력해 주세요">
+    
+    <body class="login_body">
+    <div class="login_main">
+      <h1>회원가입</h1>
+       <form method="post" th:action="@{/joinProc}" th:object="${register}" onsubmit="return checkAll();">
+        <div>
+        <div class="inp_field">
+         <input type="text" id="memNickname" name="memNickname" required autocomplete="off">
+          <span></span>
+          <label>닉네임</label>
+          </div>
+          <div class="inp_field">
         <input type="button" id="memNicknameOverlay" onclick="memNicknameCheck()" value="중복 체크"/>
-        <input type="button" id="resetMemNickname" onclick="reMemNickname()" disabled value="다시입력"/>
-    </div>
-
-    <label for="memBirth">생년월일</label>
-    <div id="memBirth" onchange="checkBirth()">
-        <div class="birth dropdown">
+        <input type="button" id="resetMemNickname" onclick="reMemNickname()"  style = "display:none;" disabled value="다시입력"/>
+        </div>
+       
+        </div>
+		<div>
+        <div class="inp_field">
+        <input type="email"  id="memEmail" name="memEmail"   required autocomplete="off" >
+         <span></span>
+         <label>이메일</label>
+         </div>
+          <div class="inp_field">
+        <input type="button" id="memEmailOverlay" onclick="memEmailCheck()" value="중복 체크"/>
+        <input  type="button" id="resetMemEmail" onclick="reMemEmail()" style = "display:none;" disabled value="다시입력"/>
+        </div>
+          </div>
+        
+          <div class="inp_field">
+    	  <input onchange="pwSame()" type="password" id="memPassword" name="memPassword" required autocomplete="off"> 
+            <span></span>
+            <label>비밀번호 4 ~ 12자의 영문과 숫자로만 입력</label>
+          </div>
+           <div class="inp_field">
+    	 	
+			<input onkeyup="pwSame()" type="password" id="memPassword_Check" name="memPassword_Check" required autocomplete="off">
+            <span></span>
+            <label>비밀번호 확인</label>
+          </div>
+          <span id="pw_check_msg"></span>
+            
+        <div class="inp_field" >
+            <label style="top:-5px;" for="memBirth">생년월일</label>
+             <input id="birthdate" type="date" name="memBirth">
+             </div>
+            
+   			<!--  <div id="memBirth" onchange="checkBirth()">
+     		 <div class="birth dropdown">
             <select class="form-control" id="year" name="year">
                 <option value="">년(YY)</option>
                 <th:block th:each="a: ${#numbers.sequence(2022,1900)}">
@@ -48,6 +68,8 @@
                 </th:block>
             </select>
         </div>
+        
+        
 
         <div class="birth mx-1 dropdown">
             <select class="form-control" id="month" name="month">
@@ -67,9 +89,13 @@
             </select>
         </div>
         <span id="birth_check_msg"></span>
-    </div>
+    </div> -->
+
+      
+        <div class="inp_field" >
+            <label style="top:-8px;" for="memBirth">MBTI</label>
        <div id="memMbti" onchange="checkMbti()">
-      MBTI : <select name="memMbti">
+     	<select name="memMbti">
         <option value="noMbti">MBTI 선택</option>
         <option value="ISTJ">ISTJ</option>
         <option value="ISTP">ISTP</option>
@@ -90,12 +116,18 @@
       </select>
       <span id="Mbti_check_msg"></span>
       </div>
-     
-      <button type="submit">회원가입</button>
-      <div>
-      <a type="button" onclick="window.history.back();">취소</a>
-    </div>
-    </form>
+      </div>
+             
+          <button class="lg_submit" type="submit">회원가입</button>
+        	<div class="signup_link">이미 회원이신가요?
+         	 <a href="/member/login">로그인 하기</a>
+        </div>
+        </div>
+      </form>
+      
+      </div>
+      
+        
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script type="text/javascript" src="/js/signup.js"></script>
