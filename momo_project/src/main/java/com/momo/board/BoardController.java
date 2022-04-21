@@ -84,17 +84,14 @@ public class BoardController {
 	
 	 @GetMapping("/post/{boardNum}")
 	    public String detail(@PathVariable("boardNum") Integer boardNum, @AuthenticationPrincipal PrincipalDetails principal, Model model) {
-
 		 	Board board = boardService.getPost(boardNum);
-	        Member member = principal.getMember();
 	    if(!placeService.findByBoardNum(boardNum).isEmpty()) {
 	        if(principal == null) {
 	        	model.addAttribute("boardBookmarkCheck", true);
 	        } else {
+	        	Member member = principal.getMember();
 	        	model.addAttribute("boardBookmarkCheck", boardBookmarkService.isBoardBookmarkChecked(member, (long) boardNum));
 	        }
-	       
-
 	        model.addAttribute("board", board);
 	        model.addAttribute("places", placeService.findByBoardNum(boardNum));
 	        
@@ -103,7 +100,7 @@ public class BoardController {
 	    	this.delete((long)boardNum);
 	    	return "Board/list";
 	    }
-	    }
+}
 	
 	@GetMapping("/post/edit/{boardNum}")
 	public String edit(@PathVariable("boardNum") Long boardNum, Model model) {
