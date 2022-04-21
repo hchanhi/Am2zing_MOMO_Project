@@ -73,12 +73,12 @@ public class MemberService {
         memberCustomRepository.updateMember(member);
     }
     
-//  //패스워드 변경
-//    public void passwordUpdate(Member member) {
-//        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-//        member.setMemPassword(passwordEncoder.encode(member.getMemPassword()));
-//        memberRepository.updateMemPassword(member);
-//    }
+  //패스워드 변경
+    public void passwordUpdate(Member member) {
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        member.setMemPassword(passwordEncoder.encode(member.getMemPassword()));
+        memberCustomRepository.updateMemPassword(member);
+    }
     
     // 회원 탈퇴
     public void deleteUser(Long memId) {    

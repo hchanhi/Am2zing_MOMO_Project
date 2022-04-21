@@ -116,9 +116,9 @@ public class MemberController {
     
     
     //패스워드 수정페이지
-    @GetMapping("/passwordEdit")
+    @GetMapping("/member/pwdEdit")
     public String modifyPassword() {
-        return "Member/passwordEdit";
+        return "member/pwdEdit";
     }
     
     //패스워드 확인
@@ -129,12 +129,14 @@ public class MemberController {
     }
     
 
-//    //패스워드 변경
-//    public void passwordUpdate(Member member) {
-//        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-//        member.setMemPassword(passwordEncoder.encode(member.getMemPassword()));
-//        memberRepository.updateMemPassword(member);
-//    }
+    //패스워드 변경
+    @PostMapping("/member/password")
+    public String pwdUpdate(Authentication authentication,Member member) {
+        member.setMemEmail(authentication.getName());
+        memberService.passwordUpdate(member);
+        return "redirect:/account/logout";
+    }
+
     
     //회원탈퇴
     @GetMapping("/member/withdrawal")

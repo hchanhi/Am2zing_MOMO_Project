@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <body>
-
+<div th:include="member/mypagesidebar"> </div>
 
     <form th:action="@{/myInfoEdit}" method="post" th:object="${member}">
 
