@@ -15,11 +15,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.momo.bookmark.BoardBookMarkService;
-import com.momo.bookmark.BoardBookmarkRepository;
 import com.momo.domain.Board;
 import com.momo.domain.Member;
 import com.momo.domain.Place;
@@ -86,12 +84,21 @@ public class BoardController {
 	
 	 @GetMapping("/post/{boardNum}")
 	    public String detail(@PathVariable("boardNum") Integer boardNum, @AuthenticationPrincipal PrincipalDetails principal, Model model) {
+
 		 	Board board = boardService.getPost(boardNum);
 	        Member member = principal.getMember();
 	    if(!placeService.findByBoardNum(boardNum).isEmpty()) {
+	        if(principal == null) {
+	        	model.addAttribute("boardBookmarkCheck", true);
+	        } else {
+	        	Member member = principal.getMember();
+	        	model.addAttribute("boardBookmarkCheck", boardBookmarkService.isBoardBookmarkChecked(member, (long) boardNum));
+	        }
+	       
+
 	        model.addAttribute("board", board);
 	        model.addAttribute("places", placeService.findByBoardNum(boardNum));
-	        model.addAttribute("boardBookmarkCheck", boardBookmarkService.isBoardBookmarkChecked(member, (long) boardNum));
+	        
 	        return "Board/detail";
 	    } else {
 	    	this.delete((long)boardNum);

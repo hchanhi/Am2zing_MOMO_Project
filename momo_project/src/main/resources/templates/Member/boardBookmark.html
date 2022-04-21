@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./css/saved posts.css">
+    <link rel="stylesheet" href="/css/saved posts.css">
     <title>saved posts</title>
 
 </head>
@@ -21,7 +21,7 @@
 
             <div class="user">
                 <div class="dropdown">
-                    <button class="dropbtn"><img src="./images/membericon.png" alt="membericon"></button>
+                    <button class="dropbtn"><img src="/images/membericon.png" alt="membericon"></button>
                     <div class="dropdown-content">
                         <a href="#">마이페이지</a>
                         <a href="#">회원정보수정</a>
@@ -42,9 +42,9 @@
 
             <!--------------------end of aside------------------->
 
-            <section class="contents">
+            <section class="contents" th:each="boardBookmark : ${boardBookmarks}">
                 <div class="content1">
-                    <div class="post"></div>
+                    <div class="post">[[${boardBookmark.board.boardTitle}]]</div>
                     <div class="post"></div>
                     <div class="post"></div>
                 </div>
@@ -90,8 +90,8 @@
 
     <!--------------------end of footer------------------->
 
-    <script src="./js/jquery-3.6.0.min.js"></script>
-    <script src="./js/slick.min.js"></script>
+    <script src="/js/jquery-3.6.0.min.js"></script>
+    <script src="/js/slick.min.js"></script>
 </body>
 
 </html>
