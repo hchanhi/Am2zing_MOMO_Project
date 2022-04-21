@@ -450,12 +450,9 @@
 				<button type="submit">삭제</button>
 			</form>
 		</div>
-		<div>
-			<form th:action="@{'/boardBookmark/' + ${board.boardNum}}" method="post">
-				<input type="hidden" name="_method" value="boardBookmark" />
-				<button th:if="${boardBookmarkCheck} == true" type="submit">저장</button>
-				<button th:unless="${boardBookmarkCheck} == true" type="submit">저장 취소</button>
-			</form>
+		<div id="bookmark-buttons">
+			<button th:if="${boardBookmarkCheck} == true" id="btn-bookmark" type="button">저장</button>
+			<button th:unless="${boardBookmarkCheck} == true" id="btn-unbookmark" type="button">저장취소</button>
 		</div>
 		<a th:href="@{/board}" role="button"><button>목록</button></a>
 	</div>
@@ -560,6 +557,49 @@
 						var url = 'https://map.kakao.com/link/map/' + pid;
 						window.open(url, '_blank');
 					});
+
+			var infoDiv = document.getElementById('placesList');
+			infoDiv.innerHTML = infoDiv.innerHTML + '<br><h1 class="contt"><a href="#' + places[i].placeNum + '">' + places[i].title + '</a></h1>';
+		}
+		//이미지 자세히 보기
+		var img = document.getElementsByTagName("img");
+		for (var x = 0; x < img.length; x++) {
+			img.item(x).onclick = function () {window.open(this.src)};
+		}
+		
+		//게시글 북마크
+		$('#btn-bookmark').click(function() {
+			let boardNum = document.getElementById("boardNum").value;
+			let sendData = {"boardNum": boardNum};
+			$.ajax({
+				method:'POST',
+				url:'/boardBookmark',
+				data: sendData,
+				success : function(data){
+					window.location.href = data;
+				},
+				error: function(){
+					console.log('ajax 통신 실패');
+				}
+			});
+		});
+		
+		//게시글 북마크 해제
+		$('#btn-unbookmark').click(function() {
+			let boardNum = document.getElementById("boardNum").value;
+			let deleteData = {"boardNum": boardNum};
+			$.ajax({
+				method:'POST',
+				url: '/unBoardBookmark',
+				data: deleteData,
+				success : function(data){
+					window.location.href = data;
+				},
+				error: function(){
+					console.log('ajax 통신 실패');
+				}
+			});
+		});
 
 					kakao.maps.event.addListener(marker, 'mouseout', function () {
 						infowindow.close();
