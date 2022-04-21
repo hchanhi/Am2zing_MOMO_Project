@@ -1,0 +1,111 @@
+@charset "utf-8";
+
+.all {
+    padding-top: 50px;
+    margin-bottom: 150px;
+    height: 650px;
+}
+
+aside {
+    float: left;
+    width: 180px;
+    height: 580px;
+    border-right: 2px solid rgb(133, 133, 133);
+    text-align: center;
+}
+
+aside .button_1 {
+    width: 150px;
+    background-color: rgb(203, 203, 203);
+    border: 2px solid rgb(185, 185, 185);
+    border-radius: 20px;
+    text-align: center;
+    padding: 10px 0;
+    margin-bottom: 20px;
+    color: rgb(75, 75, 75);
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+aside .button_2 {
+    width: 150px;
+    background-color: rgb(203, 203, 203);
+    border: 2px solid rgb(185, 185, 185);
+    border-radius: 20px;
+    text-align: center;
+    padding: 10px 0;
+    margin-bottom: 20px;
+    color: rgb(75, 75, 75);
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+aside .button_3 {
+    width: 150px;
+    background-color: rgb(203, 203, 203);
+    border: 2px solid rgb(185, 185, 185);
+    border-radius: 20px;
+    text-align: center;
+    padding: 10px 0;
+    color: rgb(75, 75, 75);
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+
+/* <!--------------------end of aside-------------------> */
+.contents {
+    float: right;
+    width: 1250px;
+    height: 750px;
+
+}
+/* ------------------end of section----------------- */  
+  .policy-table {
+    color: grey;
+    text-align: center;
+  }
+  
+  .headings, .policy {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    margin-bottom: 1em;
+    padding: 1em;
+  }
+  
+  .heading {
+    flex-basis: 33.333%;
+    font-weight: bold;
+  }
+  
+  .policy {
+    border-radius: 2em;
+    background-color: white;
+    margin-bottom: 20px;
+    -moz-box-shadow: 0 0 3px grey;
+    -webkit-box-shadow: 0 0 3px grey;
+    box-shadow: 0 0 5px grey;
+  }
+  
+  span {
+    flex-basis: 33.333%;
+  }
+  
+  a {
+    text-decoration: none;
+    color: #4c4c4c;
+  }
+  /* ------------------end of table----------------- */  
+
+  .paging {
+    position: absolute;
+    left: 53%;
+    bottom: 15%;
+  }
