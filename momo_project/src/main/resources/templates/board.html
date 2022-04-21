@@ -38,16 +38,18 @@
 
         <section class="inner">
             <div class="sec_left">
+
+                <!-- 제목입력창 -->
                 <div class="fortitle">
                     <input type="text" name="return" id="title" placeholder="제목을 입력하세요" maxlength="20">
                 </div>
 
+                <!-- 장소찾기버튼 -->
                 <div>
                     <button type="button" class="locationbtn">장소 찾기</button>
                 </div>
 
-
-
+                <!-- 이미지 첨부 미리보기 -->
                 <div id='image_preview'>
                     <span class="cameraImg">
                         <img src='./images/camera-4-70.png' class='profileImg' id='profileImg'>
@@ -56,30 +58,41 @@
                     <div id='att_zone'></div>
                 </div>
 
+                <!-- 코멘트 -->
                 <div id="commentbox">
-                    <textarea class="comment" ></textarea>
+                    <textarea class="comment"></textarea>
                 </div>
 
+                <!-- 추가버튼 -->
                 <div id="addbtnbox">
                     <button type="button" class="addbtn">추가</button>
                 </div>
-
-                <div id="cancelbtnbox">
-                    <button type="button" class="cancelbtn">취소</button>
-                </div>
-
-
-
             </div>
 
 
             <div class="sec_right">
-                <!-- <div></div>
-                <div></div>
-                <div></div> -->
+                <div id="places">
+                    <div id="myplace1">
+                        <img>
+                        <img>
+                    </div>
+                </div>
+
             </div>
 
         </section>
+
+
+        <div class="sec_bottom inner">
+            <div id="cancelbtnbox">
+                <button type="button" class="cancelbtn">취소</button>
+            </div>
+            <div id="savebtnbox">
+                <button type="button" class="savebtn">저장</button>
+            </div>
+        </div>
+
+
 
         <!--------------------end of section------------------->
 
