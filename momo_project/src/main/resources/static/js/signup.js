@@ -126,6 +126,7 @@ function memNicknameCheck() {
           $('#resetMemNickname').attr('disabled', false);
           $('#resetMemNickname').css('display', 'inline-block');
         }
+        
         return false;
       } else {
         alert('이미 사용중인 이름입니다.');
