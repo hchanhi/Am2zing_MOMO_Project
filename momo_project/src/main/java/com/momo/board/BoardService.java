@@ -57,12 +57,12 @@ public class BoardService {
     }
 	
 	public Map<String, Object> getBoardList(int page){
-		List<Board> boardList = boardRepository.findAll(PageRequest.of(page-1, 3, Direction.DESC, "boardNum"))
+		List<Board> boardList = boardRepository.findAll(PageRequest.of(page-1, 6, Direction.DESC, "boardNum"))
 				.getContent();
 		Paging paging = Paging.builder()
 				.url("/board")
 				.total((int)boardRepository.count())
-				.cntPerPage(3)
+				.cntPerPage(6)
 				.curPage(page)
 				.blockCnt(1)
 				.build();

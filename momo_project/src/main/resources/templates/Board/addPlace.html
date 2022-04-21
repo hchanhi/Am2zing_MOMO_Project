@@ -7,7 +7,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://kit.fontawesome.com/5168478d86.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="./css/slick.css">
     <link rel="stylesheet" href="./css/board.css">
 	<title>MOMO-글쓰기</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -371,7 +370,7 @@
 	</div>
 		
 		<div class="sec_right">
-			<h1>현재 추가된 장소</h1>
+			<div style="text-align:center; color:gray; font-size: 25px; font-weight: bold;">현재 추가된 장소</div>
 			<div id="resDiv" class="places"></div>
 			<div id="placeImg"></div>
 		</div>
@@ -410,7 +409,10 @@
 				"placeContent": $('#placeContent').val(),
 				"memEmail": $('input[name="memEmail"]').val()
 			};
-
+			
+			if($('input[name="placeTitle"]').val()==""){
+				alert("장소를 추가해주세요!")
+			} else {
 			$.ajax({
 				url: "/placeList/" + boardNum,
 				type: "POST",
@@ -429,6 +431,7 @@
 					$('#resDiv').html(data)
 				}
 			});
+			}
 		})
 		//이미지 미리보기
 		var sel_file;

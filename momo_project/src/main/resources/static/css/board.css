@@ -116,7 +116,7 @@ section {
     width: 100%;
     height: 800px;
     border-radius: 20px;
-    background-color: rgb(228, 228, 228);
+    background: linear-gradient(90deg, #e1e1e1 50%, #fbffd7 50%);
     /* background-color: rgb(194, 227, 174); */
 }
 
@@ -303,14 +303,12 @@ section {
     cursor:pointer;
 }
 
-
 /* ------------end of sec_left------------ */
 
 .sec_right {
     float: left;
     width: calc(100%/2);
     height: 100%;
-    background-color: rgb(237, 237, 177);
 }
 /* 
 #places{
@@ -324,15 +322,6 @@ section {
     border: 3px solid rgb(187, 187, 187);
     border-radius: 20px;
 }
-
-
-
-
-
-
-
-
-
 
 
 
