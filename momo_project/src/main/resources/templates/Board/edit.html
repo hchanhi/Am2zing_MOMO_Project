@@ -2,7 +2,12 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>MOMO - 글 수정</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/5168478d86.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/css/board.css">
+	<title>MOMO-글수정</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <style>
 body {
 	font-family: "맑은 고딕", "고딕", "굴림";
@@ -280,21 +285,42 @@ html, body {
 	width: 500px;
 	height: 200px;
 }
+
+.deletePlace {
+		    width:70px;
+		    height:40px;
+		    margin:5px;
+		    background-color: orange;
+		    border:3px solid rgb(255, 161, 28);
+		    border-radius: 20px;
+		    font-size:18px;
+		    font-weight: bold;
+		    color: rgb(68, 68, 68);
+		    cursor:pointer;
+    }
+    .boardTitle{
+    	width: 300px;
+    	height: 50px;
+    	font-size: 20px;
+    	text-align: center;
+    }
 </style>
 </head>
 <body>
-<div style="width:600px">
+<section class="inner">
+	<div class="sec_left">
     <form th:action="@{'/post/edit/' + ${board.boardNum}}" method="post">
         <input type="hidden" name="_method" value="put"/>
         <input type="hidden" name="id" th:value="${board.boardNum}"/>
         <div>
-            <h5>제목</h5>
+            <div style="font-size:30px; font-weight:bold; margin-left:30px;">제목</div>
             <div>
-                <input type="text" name="boardTitle" th:value="${board.boardTitle}">
+                <input style="text-align:center; font-size:25px; margin:10px;"class="comment2" type="text" name="boardTitle" th:value="${board.boardTitle}">
+                <button type="submit" style="float:right;" class="addbtn3">수정 완료</button>
             </div>
         </div>
 	<div>
-		<button onclick="writeplaycard()">장소 검색</button>
+		<button class="locationbtn" onclick="writeplaycard()">장소 검색</button>
 	</div>
 
 	<!-- 모달연습 -->
@@ -323,7 +349,7 @@ html, body {
 		<!-- 위도 및 경도 좌표 및 위치정보 -->
 		<div>
 			<input type="text" id="fulladdress" name="fulladdress"
-				style="width: 500px;" disabled>
+			style="width: 300px; height:30px; font-size:18px; font-weight: bold;" class="comment2" disabled>
 			<input hidden type="text" id="placeTitle" name="placeTitle" value="" readonly>
 			<!--  <input type="text" id="paddress" name="paddress" value="">-->
 			<input hidden type="text" id="placeLat" name="placeLat" value="" readonly>
@@ -332,43 +358,45 @@ html, body {
 			<input hidden type="number" id="boardNum" name="boardNum"
 				th:value="${boardNum}">
 			<input hidden name="memEmail" th:value="${#authentication.name}">
-			<br>
 			
-			<div>내용</div>
-			<textarea id="placeContent" name="placeContent"
+			<div id="commentbox" style="margin-top:20px; height:170px;">
+			<textarea class="comment" id="placeContent" name="placeContent"
 				style="width: 500px; height: 150px; resize: none;"></textarea>
-			<br>
-		</div>
-		<button type="submit" style="float:right;">수정 완료</button>	
+			</div>
+		</div>	
+			
 		</form>
 			
-			<label for="file1">사진</label>
-			<input type="file" id="file1" name="file1">
-			<button id="imgBtn" onclick="javascript:fn_submit()">사진 추가</button>
-			<div class="img_wrap">
-			<img style="width:300px; height:300px;"id="img" name="img"/>
+			<label for="file1"></label>
+			<span class="cameraImg">
+                  <img src='/images/camera-4-70.png' class='profileImg' id='profileImg'>
+            </span>
+			<input type="file" id="file1" name="file1" style="visibility:hidden;">
+			<div class="img_wrap" style="margin-left:200px;">
+			<img style="width:200px; height:200px;" id="img" name="img">
+			<button id="imgBtn" class="addbtn3" onclick="javascript:fn_submit()">사진 추가</button>
 			</div>
+			<button id="submitBtn" class="addbtn" style="float:right;">장소 추가</button>
 			<div id="placeImg"></div>
-			<button id="submitBtn">장소 추가</button>
-		<br>
-		
-</div>
-	<div>
-		<h1>현재 추가된 장소</h1>
-	</div>
-	<div id="resDiv" style="margin-top: 50px;">
+			
+		</div>
 	
-    <table>
+	<div class="sec_right">
+		<h1>현재 추가된 장소</h1>
+	
+	<div id="resDiv" style="margin-top: 50px;">
+	<table style="margin:auto; margin-top:50px;">
         <tr>
-            <th>장소명</th>
-            <th>코멘트</th>
+            <th style="font-size:35px; width:200px;">장소명</th>
+            <th style="font-size:35px; width:400px;">코멘트</th>
         </tr>
+        
         <tbody>
         <tr th:each="place : ${places}">
-            <td>
+            <td style="font-weight:bold; font-size:20px">
                 <span th:text="${place.placeTitle}"></span>
             </td>
-            <td>
+            <td style="text-align:center; font-size:17px;">
                 <span th:text="${place.placeContent}"></span>
             </td>
             <td>
@@ -381,6 +409,8 @@ html, body {
     </table>
 	</div>
 	<div id="placeImg"></div>
+	</div>
+	</section>
 	
 	<script src="https://code.jquery.com/jquery-latest.min.js"></script>
 	<script type="text/javascript"
@@ -400,6 +430,9 @@ $('#submitBtn').click(function(){
 			"placeContent" : $('#placeContent').val(),
 			"memEmail" : $('input[name="memEmail"]').val()
 		};
+	if($('input[name="placeTitle"]').val()==""){
+		alert("장소를 추가해주세요!")
+	} else{
 	$.ajax({
 		url:"/placeList/"+boardNum,
 		type:"POST",
@@ -414,11 +447,13 @@ $('#submitBtn').click(function(){
 			$('input[name="placeId"]').val("");
 			$('input[name="placeImg"]').val("");
 			$('#placeContent').val("");
+			$("#img").attr("src", "");
 			$('#resDiv').html(data)
 			
 		}
 		
 	 });
+	}
 })
 
 $(document).ready(function() {
@@ -764,7 +799,10 @@ function removeAllChildNods(el) {
         el.removeChild (el.lastChild);
     }
 }
-
+	
 </script>
+ <script src="/js/jquery-3.6.0.min.js"></script>
+    <script src="/js/slick.min.js"></script>
+    <script src="/js/board.js"></script>
 </body>
 </html>
