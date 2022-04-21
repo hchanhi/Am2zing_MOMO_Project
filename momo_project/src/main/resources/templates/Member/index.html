@@ -21,7 +21,7 @@
     <a sec:authorize="isAuthenticated()" th:href="@{/logout}">로그아웃</a>
     <!-- 특정 권한의 사용자 -->
     <a sec:authorize="hasRole('ROLE_MEMBER')" th:href="@{/member/mypage}">내정보</a>
-    <a sec:authorize="hasRole('ROLE_MEMBER')" th:href="@{/bookmark}">북마크</a>
+    <a sec:authorize="hasRole('ROLE_MEMBER')" th:href="@{/bookmark/board}">북마크</a>
     <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/admin/member/member-list}">어드민</a>
   </body>
 </html>

@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.momo.bookmark.BoardBookMarkService;
 import com.momo.domain.Member;
 
 import lombok.RequiredArgsConstructor;
@@ -38,6 +39,9 @@ public class MemberController {
 
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
+	
+	@Autowired
+	private BoardBookMarkService boardBookMarkService;
 
 	//멤버 메인 페이지 -> 추후 경로 수정 예정 
 	@GetMapping({ "/member" })
@@ -72,6 +76,14 @@ public class MemberController {
 
         return "Member/mypage";
     }
+	
+	//저장한 게시글
+	@GetMapping("bookmark/board") 
+	public String goMyboardBookmark(@AuthenticationPrincipal PrincipalDetails principal, Model model) {
+		Member member = principal.getMember();
+		model.addAttribute("boardBookmarks", boardBookMarkService.findAllByMember(member));
+		return "Member/boardBookmark"; 
+		} 
 	
 	 //내정보 수정
     @PostMapping("member/myinfoEdit")

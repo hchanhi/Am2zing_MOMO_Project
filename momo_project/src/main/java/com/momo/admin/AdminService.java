@@ -28,7 +28,7 @@ public class AdminService {
 	//회원 전체 조회
 	public Map<String,Object> findAllMembers(int page){
 		
-		int cntPerPage = 10;
+		int cntPerPage = 6;
 		List<Member> members = adminMemberRepository
 				.findAll(PageRequest.of(page-1, cntPerPage, Direction.DESC, "memId"))
 				.getContent();
@@ -38,7 +38,7 @@ public class AdminService {
 				.total((int)adminMemberRepository.count())
 				.cntPerPage(cntPerPage)
 				.curPage(page)
-				.blockCnt(1)
+				.blockCnt(10)
 				.build();
 		
 		return Map.of("members",members,"paging",paging);
@@ -52,7 +52,7 @@ public class AdminService {
 	}
 	
 	public Map<String, Object> findAllBoards(int page){
-		int cntPerPage = 9;
+		int cntPerPage = 6;
 		List<Board> boards = adminBoardRepository
 				.findAll(PageRequest.of(page-1, cntPerPage, Direction.DESC, "BoardNum"))
 				.getContent();
@@ -62,7 +62,7 @@ public class AdminService {
 				.total((int)adminBoardRepository.count())
 				.cntPerPage(cntPerPage)
 				.curPage(page)
-				.blockCnt(1)
+				.blockCnt(10)
 				.build();
 		
 		return Map.of("boards",boards,"paging",paging);
@@ -72,7 +72,7 @@ public class AdminService {
 	//댓글 전체 조회
 		public Map<String,Object> findAllComments(int page){
 			
-			int cntPerPage = 10;
+			int cntPerPage = 6;
 			List<Comment> comments = adminCommentRepository
 					.findAll(PageRequest.of(page-1, cntPerPage, Direction.DESC, "replyNum"))
 					.getContent();
@@ -82,7 +82,7 @@ public class AdminService {
 					.total((int)adminCommentRepository.count())
 					.cntPerPage(cntPerPage)
 					.curPage(page)
-					.blockCnt(1)
+					.blockCnt(10)
 					.build();
 			
 			return Map.of("comments",comments,"paging",paging);
