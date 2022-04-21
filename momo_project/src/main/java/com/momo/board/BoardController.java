@@ -91,7 +91,6 @@ public class BoardController {
 	        if(principal == null) {
 	        	model.addAttribute("boardBookmarkCheck", true);
 	        } else {
-	        	Member member = principal.getMember();
 	        	model.addAttribute("boardBookmarkCheck", boardBookmarkService.isBoardBookmarkChecked(member, (long) boardNum));
 	        }
 	       
