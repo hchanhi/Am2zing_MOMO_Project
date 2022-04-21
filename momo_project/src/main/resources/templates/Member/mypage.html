@@ -4,7 +4,7 @@
 <body>
 <div th:include="member/mypagesidebar"> </div>
 
-    <form th:action="@{/myInfoEdit}" method="post" th:object="${member}">
+    <form th:action="@{/member/myinfoEdit}" method="post" th:object="${member}">
 
         <h1 >내 정보 수정</h1>
         <hr>
@@ -23,6 +23,10 @@
             <span class="nickname_already">이미 사용중인 닉네임 입니다.</span>
         </div>
 
+		<div >
+            <label th:for="memMbit">내 MBTI</label>
+            <input type="text" th:field="*{memMbti}">
+        </div>
         
      
         <div >
