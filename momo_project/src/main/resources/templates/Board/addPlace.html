@@ -3,7 +3,13 @@
 <html xmlns:th="http://www.thymelaf.org" lang="ko" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
-	<title>Place Information UI</title>
+	<meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/5168478d86.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="./css/slick.css">
+    <link rel="stylesheet" href="./css/board.css">
+	<title>MOMO-글쓰기</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<style>
 		body {
@@ -290,10 +296,12 @@
 </head>
 
 <body>
-	<div id="body">
-		<div>
-			<button onclick="writeplaycard()">장소 검색</button>
-		</div>
+	
+	<section class="inner">
+        <div class="sec_left">
+			<div>
+				<button class="locationbtn" onclick="writeplaycard()">장소 검색</button>
+			</div>
 
 		<!-- 모달연습 -->
 		<div id="modal" class="modal-overlay">
@@ -324,7 +332,8 @@
 		<div>
 			<!-- 위도 및 경도 좌표 및 위치정보 -->
 
-			<input type="text" id="fulladdress" name="fulladdress" style="width: 500px;" disabled>
+			<input type="text" id="fulladdress" name="fulladdress"
+			style="width: 300px; height:30px; font-size:18px; font-weight: bold;" class="comment2" disabled>
 			<input hidden type="text" id="placeTitle" name="placeTitle" value="" readonly>
 			<input hidden type="text" id="placeLat" name="placeLat" value="" readonly>
 			<input hidden type="text" id="placeLng" name="placeLng" value="" readonly>
@@ -332,33 +341,42 @@
 			<input hidden type="number" id="boardNum" name="boardNum" th:value="${boardNum}" readonly>
 			<input hidden name="memEmail" th:value="${#authentication.name}">
 			<br>
-
-			<label for="file1">사진</label>
-			<input type="file" id="file1" name="file1">
-			<button id="imgBtn" onclick="javascript:fn_submit()">사진 추가</button>
-			<div class="img_wrap">
-				<img style="width:300px; height:300px;" id="img" name="img">
+            
+            <label for="file1"></label>
+            <span class="cameraImg">
+                  <img src='/images/camera-4-70.png' class='profileImg' id='profileImg'>
+            </span>
+			<input type="file" id="file1" name="file1" style="visibility:hidden;">
+			<button id="imgBtn" class="addbtn3" onclick="javascript:fn_submit()">사진 추가</button>
+			
+			<div class="img_wrap" style="margin-left:200px;">
+				<img style="width:200px; height:200px;" id="img" name="img">
 			</div>
-
-			<div>내용</div>
-			<textarea id="placeContent" name="placeContent"
+				
+			
+			
+			<br>
+			<div id="commentbox">
+			<textarea class="comment" id="placeContent" name="placeContent"
 				style="width: 500px; height: 150px; resize: none;"></textarea>
-			<br>
-
-			<button id="submitBtn">장소 추가</button><br><br>
-			<a th:href="@{'/post/' + ${boardNum}}" role="button"><button>작성 완료</button></a>
-			<a id="cancel" th:href="@{'/cancel/' + ${boardNum}}" role="button"><button>취 소</button></a>
-			<br>
-
+				<button id="submitBtn" class="addbtn">장소 추가</button>
+			</div>
+			
+			<div id="addbtnbox">
+				
+				<a id="cancel" th:href="@{'/cancel/' + ${boardNum}}" role="button"><button class="addbtn2">취 소</button></a>
+				<a th:href="@{'/post/' + ${boardNum}}" role="button"><button class="addbtn2">작성 완료</button></a>
+			</div>
 		</div>
-
-		<div>
-			<h1>현재 추가된 장소</h1>
-		</div>
-		<div id="resDiv" style="margin-top: 50px;"></div>
-		<div id="placeImg"></div>
 	</div>
-
+		
+		<div class="sec_right">
+			<h1>현재 추가된 장소</h1>
+			<div id="resDiv" class="places"></div>
+			<div id="placeImg"></div>
+		</div>
+	</section>
+		
 	<script src="https://code.jquery.com/jquery-latest.min.js"></script>
 	<script type="text/javascript"
 		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a7b5481a65eecc18bd2cc1106898f604&libraries=services"></script>
@@ -737,6 +755,10 @@
 		}
 
 	</script>
+	
+	  <script src="/js/jquery-3.6.0.min.js"></script>
+    <script src="/js/slick.min.js"></script>
+    <script src="/js/board.js"></script>
 </body>
 
 </html>
