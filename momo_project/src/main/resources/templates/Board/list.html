@@ -11,6 +11,7 @@
             <th>글번호</th>
             <th>제목</th>
             <th>작성자</th>
+            <th>MBTI</th>
             <th>조회수</th>
         </tr>
         
@@ -24,11 +25,16 @@
                     <span th:text="${board.boardTitle}"></span>
                 </a>
             </td>
-            <!--  
             <td>
-                <span th:text="${board.member.NickName}"></span>
+                <span th:text="${board.member.memNickname}"></span>
             </td>
-            -->
+            <td>
+            	<span th:text="${board.member.memMbti}"></span>
+            </td>
+            <td>
+            	<span th:text="${board.placeCnt}"></span>
+            </td>
+            
         </tr>
         </tbody>
     </table>
