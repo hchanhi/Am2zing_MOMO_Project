@@ -41,7 +41,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 			.loginProcessingUrl("/loginProc")
 			.usernameParameter("memEmail")
             .passwordParameter("memPassword")
-			.defaultSuccessUrl("/member")
+			.defaultSuccessUrl("/")
 		.and()
 			.logout()
     		.logoutRequestMatcher(new AntPathRequestMatcher("/logout")) // 로그아웃 시 URL 재정의 

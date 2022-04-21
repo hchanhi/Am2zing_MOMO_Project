@@ -23,6 +23,24 @@
 	</th:block>
 </head>
 <body>
+	<header th:fragment="flg_header" class="inner">
+		<a href="/">
+				<h2 class="logo">MOMO</h2>
+			</a> 
+			<span class="user"> 
+			<!-- 익명의 사용자 --> 
+			<a sec:authorize="isAnonymous()" th:href="@{/member/login}" class="login">로그인</a> 
+			<a sec:authorize="isAnonymous()" th:href="@{/member/join}" class="signup">회원가입</a>
+			
+			<!-- 인증된 사용자 -->
+    		<a sec:authorize="isAuthenticated()" th:href="@{/logout}">로그아웃</a>
+    		
+    		<!-- 특정 권한의 사용자 -->
+    		<a sec:authorize="hasRole('ROLE_MEMBER')" th:href="@{/member/mypage}">내정보</a>
+    		<a sec:authorize="hasRole('ROLE_MEMBER')" th:href="@{/bookmark}">북마크</a>
+    		<a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/admin/member/member-list}">어드민</a>
+			</span>
+	</header>
 
 	<nav th:fragment="paging" class="paging" th:object=${paging}>
 	  <ul class="pagination">
