@@ -4,12 +4,16 @@ package com.momo.board;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.momo.comment.CommentRepository;
+import com.momo.common.util.pagination.Paging;
 import com.momo.domain.Board;
 import com.momo.domain.Comment;
 import com.momo.domain.Member;
@@ -52,10 +56,18 @@ public class BoardService {
         return boardRepository.save(board);
     }
 	
-	public List<Board> getBoardList(){
-		List<Board> boardList = boardRepository.findAll();
+	public Map<String, Object> getBoardList(int page){
+		List<Board> boardList = boardRepository.findAll(PageRequest.of(page-1, 6, Direction.DESC, "boardNum"))
+				.getContent();
+		Paging paging = Paging.builder()
+				.url("/board")
+				.total((int)boardRepository.count())
+				.cntPerPage(6)
+				.curPage(page)
+				.blockCnt(1)
+				.build();
 		
-		return boardList;
+		return Map.of("boards", boardList, "paging",paging);
 	}
 	
 	@Transactional
