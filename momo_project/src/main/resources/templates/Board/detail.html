@@ -5,474 +5,84 @@
 
 	<meta charset="UTF-8">
 	<title>MOMO-게시판</title>
-	<style>
-		.map_wrap,
-		.map_wrap * {
-			margin: 0;
-			padding: 0;
-			font-family: 'Malgun Gothic', dotum, '돋움', sans-serif;
-			font-size: 12px;
-		}
-
-		.map_wrap a,
-		.map_wrap a:hover,
-		.map_wrap a:active {
-			color: coral;
-			font-size: 20px;
-			text-decoration: none;
-		}
-
-		.map_wrap {
-			position: relative;
-			width: 100%;
-			height: 500px;
-		}
-
-		#menu_wrap {
-			position: absolute;
-			top: 0;
-			left: 0;
-			bottom: 0;
-			width: 250px;
-			margin: 10px 0 30px 10px;
-			padding: 5px;
-			overflow-y: auto;
-			background: rgb(255, 255, 255);
-			z-index: 1;
-			font-size: 12px;
-			border-radius: 10px;
-		}
-
-		.bg_white {
-			background: #fff;
-		}
-
-		#menu_wrap hr {
-			display: block;
-			height: 1px;
-			border: 0;
-			border-top: 2px solid #5F5F5F;
-			margin: 3px 0;
-		}
-
-		#menu_wrap .option {
-			text-align: center;
-		}
-
-		#menu_wrap .option p {
-			margin: 10px 0;
-		}
-
-		#menu_wrap .option button {
-			margin-left: 5px;
-		}
-
-		#placesList .item {
-			position: relative;
-			border-bottom: 1px solid #888;
-			overflow: hidden;
-			cursor: pointer;
-			min-height: 65px;
-		}
-
-		#placesList .item span {
-			display: block;
-			margin-top: 4px;
-		}
-
-		#placesList .item h5,
-		#placesList .item .info {
-			text-overflow: ellipsis;
-			overflow: hidden;
-			white-space: nowrap;
-		}
-
-		#placesList .item .info {
-			padding: 10px 0 10px 55px;
-		}
-
-		#placesList .info .gray {
-			color: #8a8a8a;
-		}
-
-		#placesList .info .jibun {
-			padding-left: 26px;
-			background: url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/places_jibun.png) no-repeat;
-		}
-
-		#placesList .info .tel {
-			color: #009900;
-		}
-
-		#placesList .item .markerbg {
-			float: left;
-			position: absolute;
-			width: 36px;
-			height: 37px;
-			margin: 10px 0 0 10px;
-			background: url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_number_blue.png) no-repeat;
-		}
-
-		#placesList .item .marker_1 {
-			background-position: 0 -10px;
-		}
-
-		#placesList .item .marker_2 {
-			background-position: 0 -56px;
-		}
-
-		#placesList .item .marker_3 {
-			background-position: 0 -102px
-		}
-
-		#placesList .item .marker_4 {
-			background-position: 0 -148px;
-		}
-
-		#placesList .item .marker_5 {
-			background-position: 0 -194px;
-		}
-
-		#placesList .item .marker_6 {
-			background-position: 0 -240px;
-		}
-
-		#placesList .item .marker_7 {
-			background-position: 0 -286px;
-		}
-
-		#placesList .item .marker_8 {
-			background-position: 0 -332px;
-		}
-
-		#placesList .item .marker_9 {
-			background-position: 0 -378px;
-		}
-
-		#placesList .item .marker_10 {
-			background-position: 0 -423px;
-		}
-
-		#placesList .item .marker_11 {
-			background-position: 0 -470px;
-		}
-
-		#placesList .item .marker_12 {
-			background-position: 0 -516px;
-		}
-
-		#placesList .item .marker_13 {
-			background-position: 0 -562px;
-		}
-
-		#placesList .item .marker_14 {
-			background-position: 0 -608px;
-		}
-
-		#placesList .item .marker_15 {
-			background-position: 0 -654px;
-		}
-
-		#pagination {
-			margin: 10px auto;
-			text-align: center;
-		}
-
-		#pagination a {
-			display: inline-block;
-			margin-right: 10px;
-		}
-
-		#pagination .on {
-			font-weight: bold;
-			cursor: default;
-			color: #777;
-		}
-
-		.contt {
-			color: coral;
-			font-size: 20px;
-		}
-
-		.topBtn {
-			text-decoration: none;
-			font-weight: bold;
-			color: coral;
-			font-size: 15px;
-
-		}
-
-		.map_wrap {
-			position: relative;
-			width: 100%;
-			height: 500px;
-		}
-
-		#menu_wrap {
-			position: absolute;
-			top: 0;
-			left: 0;
-			bottom: 0;
-			width: 250px;
-			margin: 10px 0 30px 10px;
-			padding: 5px;
-			overflow-y: auto;
-			background: none;
-			z-index: 1;
-			font-size: 12px;
-			border-radius: 10px;
-		}
-
-		.bg_white {
-			background: #fff;
-		}
-
-		#menu_wrap hr {
-			display: block;
-			height: 1px;
-			border: 0;
-			border-top: 2px solid #5F5F5F;
-			margin: 3px 0;
-		}
-
-		#menu_wrap .option {
-			text-align: center;
-		}
-
-		#menu_wrap .option p {
-			margin: 10px 0;
-		}
-
-		#menu_wrap .option button {
-			margin-left: 5px;
-		}
-
-		#placesList .item {
-			position: relative;
-			border-bottom: 1px solid #888;
-			overflow: hidden;
-			cursor: pointer;
-			min-height: 65px;
-		}
-
-		#placesList .item span {
-			display: block;
-			margin-top: 4px;
-		}
-
-		#placesList .item h5,
-		#placesList .item .info {
-			text-overflow: ellipsis;
-			overflow: hidden;
-			white-space: nowrap;
-		}
-
-		#placesList .item .info {
-			padding: 10px 0 10px 55px;
-		}
-
-		#placesList .info .gray {
-			color: #8a8a8a;
-		}
-
-		#placesList .info .jibun {
-			padding-left: 26px;
-			background:
-				url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/places_jibun.png) no-repeat;
-		}
-
-		#placesList .info .tel {
-			color: #009900;
-		}
-
-		#placesList .item .markerbg {
-			float: left;
-			position: absolute;
-			width: 36px;
-			height: 37px;
-			margin: 10px 0 0 10px;
-			background:
-				url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_number_blue.png) no-repeat;
-		}
-
-		#placesList .item .marker_1 {
-			background-position: 0 -10px;
-		}
-
-		#placesList .item .marker_2 {
-			background-position: 0 -56px;
-		}
-
-		#placesList .item .marker_3 {
-			background-position: 0 -102px
-		}
-
-		#placesList .item .marker_4 {
-			background-position: 0 -148px;
-		}
-
-		#placesList .item .marker_5 {
-			background-position: 0 -194px;
-		}
-
-		#placesList .item .marker_6 {
-			background-position: 0 -240px;
-		}
-
-		#placesList .item .marker_7 {
-			background-position: 0 -286px;
-		}
-
-		#placesList .item .marker_8 {
-			background-position: 0 -332px;
-		}
-
-		#placesList .item .marker_9 {
-			background-position: 0 -378px;
-		}
-
-		#placesList .item .marker_10 {
-			background-position: 0 -423px;
-		}
-
-		#placesList .item .marker_11 {
-			background-position: 0 -470px;
-		}
-
-		#placesList .item .marker_12 {
-			background-position: 0 -516px;
-		}
-
-		#placesList .item .marker_13 {
-			background-position: 0 -562px;
-		}
-
-		#placesList .item .marker_14 {
-			background-position: 0 -608px;
-		}
-
-		#placesList .item .marker_15 {
-			background-position: 0 -654px;
-		}
-
-		#pagination {
-			margin: 10px auto;
-			text-align: center;
-		}
-
-		#pagination a {
-			display: inline-block;
-			margin-right: 10px;
-		}
-
-		#pagination .on {
-			font-weight: bold;
-			cursor: default;
-			color: #777;
-		}
-
-		.contt {
-			color: coral;
-			font-size: 20px;
-		}
-
-		.topBtn {
-			text-decoration: none;
-			font-weight: bold;
-			color: coral;
-			font-size: 15px;
-		}
-
-		.list123 {
-			width: 300px;
-			margin: 10px 0 30px 10px;
-			padding: 5px;
-
-			background: rgb(200, 234, 218);
-			z-index: 2;
-			font-size: 12px;
-			border-radius: 10px;
-		}
-	</style>
+	<link rel="stylesheet" href="/css/detail.css">
 </head>
 
-<body>
-
-	<div>
-		<div style="width:1000px;">
-			<div style="font-size: 40px; font-weight: bold;">
-				<span>제목 : </span><span th:text="@{${board.boardTitle}}"></span>
+<body style="margin: 0; padding: 0;  ">
+	<div id="nav" style="display: flex; justify-content: space-between; margin: 15px;">
+		<div>
+			<span style="color: rgb(94, 113, 161);">작성자: </span><span style="color: rgb(94, 113, 161);"
+				th:text="@{${board.member.memNickname}}"></span>
+		</div>
+		<div style="display: flex; justify-content: space-evenly;">
+			<div>
+				<a th:href="@{'/post/edit/' + ${board.boardNum}}" role="button"><button>수정</button></a>
 			</div>
-			<div style="font-size: 20px; margin-left: 50px; float:right;">	
-				<span>작성자: </span><span th:text="@{${board.member.memNickname}}"></span>
+			<div>
+				<form th:action="@{'/post/' + ${board.boardNum}}" method="post">
+					<input type="hidden" name="_method" value="delete" />
+					<button type="submit">삭제</button>
+				</form>
+			</div>
+			<div id="bookmark-buttons">
+				<button th:if="${boardBookmarkCheck} == true" id="btn-bookmark" type="button">저장</button>
+				<button th:unless="${boardBookmarkCheck} == true" id="btn-unbookmark" type="button">저장취소</button>
+			</div>
+			<a th:href="@{/board}" role="button"><button>목록</button></a>
+		</div>
+	</div>
+	<div class="container" style="display: flex; justify-content: space-around;">
+
+
+
+		<div style="margin: 0; padding: 0;" class="item1">
+			<div class=" hAddr">
+				<ul style="padding: 0;" id="placesList"></ul>
 			</div>
 		</div>
+		<div class="item2" id="map" style="width: 650px; height: 400px; justify-content: center; text-align: 
+		center; padding: 0; display: inline-block;"></div>
+
 		<div>
-			<div class="map_wrap">
-				<div id="map" style="width: 900px; height: 500px;"></div>
-				<div id="menu_wrap" class="bg_white">
-					<div class="hAddr">
-						<span id="centerAddr"></span>
-					</div>
-					<h1>MOMO리스트</h1>
-					<ul id="placesList"></ul>
 
-
-					<div id="pagination"></div>
-					<form method="post" action="/place/reply?cmd=save">
-						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-
-
-						<div class="">
-							<label for="title" class="">content</label>
-							<textarea placeholder="댓글을 입력해주세요" name="replyContent" id="replyContent"
-								style="width: 500px; height: 150px; resize: none;"></textarea>
-							<input type="number" id="boardNum" name="boardNum" th:value="${boardNum}">
-
-						</div>
-
-					</form>
-
-					<button id="btnSave">저장</button>
-					<h1>댓글목록</h1>
-					<div class=".list123" id="resDiv" style="margin-top: 50px;"></div>
-					<hr>
-
+			<div class="item3 list-color2  " th:each="place : ${places}">
+				<div class="item3-place" style="margin-left: 8px;">
+					<a hidden th:name="@{${place.placeNum}}"></a>
+					<h2 th:text="${place.placeTitle}"></h2><br>
+					<img style="width: 150px; height: 150px; cursor: pointer;" th:src="@{${place.placeImg}}"
+						onerror="this.style.display='none'" alt=''><br>
+					<span th:text="${place.placeContent}"></span><br>
+					<a class="topBtn" href="#top">지도로 이동 >>></a><br>
 				</div>
 			</div>
-
 		</div>
 	</div>
-	<div style="float: right">
-		<div>
-			<a th:href="@{'/post/edit/' + ${board.boardNum}}" role="button"><button>수정</button></a>
-		</div>
-		<div>
-			<form th:action="@{'/post/' + ${board.boardNum}}" method="post">
-				<input type="hidden" name="_method" value="delete" />
-				<button type="submit">삭제</button>
-			</form>
-		</div>
-		<div id="bookmark-buttons">
-			<button th:if="${boardBookmarkCheck} == true" id="btn-bookmark" type="button">저장</button>
-			<button th:unless="${boardBookmarkCheck} == true" id="btn-unbookmark" type="button">저장취소</button>
-		</div>
-		<a th:href="@{/board}" role="button"><button>목록</button></a>
-	</div>
-
-	 <input name="memEmail" th:value="${#authentication.name}">
+	<!-- div con -->
 
 
-	<div th:each="place : ${places}">
-		<a th:name="@{${place.placeNum}}"></a>
-		<h2 style="color: coral" th:text="${place.placeTitle}"></h2>
-		<img style="width: 150px; height: 150px; cursor: pointer;" th:src="@{${place.placeImg}}" onerror="this.style.display='none'" alt=''><br> <span
-			th:text="${place.placeContent}"></span><br> <a class="topBtn" href="#top">지도로 이동</a>
+	<input hidden name="memEmail" th:value="${#authentication.name}">
 
+	<hr>
+	<div style="text-align: center;">
+		<form method="post" action="/place/reply?cmd=save">
+			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+
+
+			<div class="">
+				<textarea placeholder="댓글을 입력해주세요" name="replyContent" id="replyContent"
+					style="width: 1000px; height: 30px; resize: none;"></textarea>
+				<input hidden type="number" id="boardNum" name="boardNum" th:value="${boardNum}">
+
+			</div>
+
+		</form>
+
+		<button id="btnSave">저장</button>
+		<h3 style="margin: 0; margin-top: 10px;">댓글목록</h3>
+
+		<div class=".list123" id="resDiv" style="margin-top: 5px; text-align: center;"></div>
 
 	</div>
-
-
 	<script src="https://code.jquery.com/jquery-latest.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
@@ -482,175 +92,122 @@
 	<script type="text/javascript"
 		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a7b5481a65eecc18bd2cc1106898f604&libraries=services"></script>
 	<script th:inline="javascript">
-	
-			var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
-				mapOption = {
-					center: new kakao.maps.LatLng(37.5546, 126.9706), // 지도의 중심좌표
-					level: 5 // 지도의 확대 레벨
-				};
 
-			var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
-			var infowindow = new kakao.maps.InfoWindow({zIndex: 1});
-			var places = [];
+		var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
+			mapOption = {
+				center: new kakao.maps.LatLng(37.5546, 126.9706), // 지도의 중심좌표
+				level: 5 // 지도의 확대 레벨
+			};
 
-			/*<![CDATA[*/
+		var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+		var infowindow = new kakao.maps.InfoWindow({ zIndex: 1 });
 
-			/*[# th:each="place : ${places}"]*/
-			var title = [[${place.placeTitle}]];
-			var lat = [[${place.placeLat}]];
-			var lng = [[${place.placeLng}]];
-			var content = [[${place.placeContent}]];
-			var id = [[${place.placeId}]];
-			var placeImg = [[${place.placeImg}]];
-			var placeNum = [[${place.placeNum}]];
+		var places = [];
+
+		/*<![CDATA[*/
+
+		/*[# th:each="place : ${places}"]*/
+		var title = [[${ place.placeTitle }]];
+		var lat = [[${ place.placeLat }]];
+		var lng = [[${ place.placeLng }]];
+		var content = [[${ place.placeContent }]];
+		var id = [[${ place.placeId }]];
+		var placeImg = [[${ place.placeImg }]];
+		var placeNum = [[${ place.placeNum }]];
 
 
-			places.push({title: title, latlng: new kakao.maps.LatLng(lat, lng), content: content, id: id, placeImg: placeImg, placeNum: placeNum})
+		places.push({ title: title, latlng: new kakao.maps.LatLng(lat, lng), content: content, id: id, placeImg: placeImg, placeNum: placeNum });
 
-			/*[/]*/
+		/*[/]*/
 
-			/*]]>*/
-			var infowindow = new kakao.maps.InfoWindow({zIndex: 1});
+		/*]]>*/
 
-			// 마커 이미지의 이미지 주소입니다
-			var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
 
-			function setCenter() {
-				// 이동할 위도 경도 위치를 생성합니다 
-				var moveLatLon = places[0].latlng;
-				map.setLevel(8);
-				// 지도 중심을 이동 시킵니다
-				map.setCenter(moveLatLon);
-			}
-			var infowindow = new kakao.maps.InfoWindow({zIndex: 1});
+		// 마커 이미지의 이미지 주소입니다
+		var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
 
-			function displayInfowindow(marker, title) {
-				var content = '<div style="padding:5px;z-index:1;">' + title + '</div>';
+		function setCenter() {
+			// 이동할 위도 경도 위치를 생성합니다 
+			var moveLatLon = places[0].latlng;
+			map.setLevel(8);
+			// 지도 중심을 이동 시킵니다
+			map.setCenter(moveLatLon);
+		}
 
-				infowindow.setContent(content);
-				infowindow.open(map, marker);
-			}
 
-			setCenter();
+		function displayInfowindow(marker, title) {
+			var content = '<div style=" font-weight: 800; text-align:center; color:#4D77D7; width:200px;text-align:center;padding:6px 0">' + title + '</div>';
 
-			for (var i = 0; i < places.length; i++) {
+			infowindow.setContent(content);
+			infowindow.open(map, marker);
+		}
 
-				// 마커 이미지의 이미지 크기 입니다
-				var imageSize = new kakao.maps.Size(24, 35);
+		setCenter();
 
-				// 마커 이미지를 생성합니다    
-				var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
+		for (var i = 0; i < places.length; i++) {
 
-				// 마커를 생성합니다
-				var marker = new kakao.maps.Marker({
-					map: map, // 마커를 표시할 지도
-					position: places[i].latlng, // 마커를 표시할 위치
-					title: places[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
-					image: markerImage // 마커 이미지 
+			// 마커 이미지의 이미지 크기 입니다
+			var imageSize = new kakao.maps.Size(24, 35);
+
+			// 마커 이미지를 생성합니다    
+			var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
+
+			// 마커를 생성합니다
+			var marker = new kakao.maps.Marker({
+				map: map, // 마커를 표시할 지도
+				position: places[i].latlng, // 마커를 표시할 위치
+				title: places[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
+				image: markerImage // 마커 이미지 
+			});
+
+
+			(function (marker, title, pid) {
+				kakao.maps.event.addListener(marker, 'mouseover', function () {
+					displayInfowindow(marker, title);
+
 				});
 
-				(function (marker, title, pid) {
-					kakao.maps.event.addListener(marker, 'mouseover', function () {
-						displayInfowindow(marker, title);
-					});
+				kakao.maps.event.addListener(marker, 'click', function () {
+					var position = this.getPosition();
 
-					kakao.maps.event.addListener(marker, 'click', function () {
-						var position = this.getPosition();
-						var url = 'https://map.kakao.com/link/map/' + pid;
-						window.open(url, '_blank');
-					});	
-					kakao.maps.event.addListener(marker, 'mouseout', function () {
-						infowindow.close();
-					});
-				})(marker, places[i].title, places[i].id);
+					var url = 'https://map.kakao.com/link/map/' + pid;
+					window.open(url, '_blank');
+				});
+				kakao.maps.event.addListener(marker, 'mouseout', function () {
+					infowindow.close();
+				});
+			})(marker, places[i].title, places[i].id);
 
-				var infoDiv = document.getElementById('placesList');
-				infoDiv.innerHTML = infoDiv.innerHTML + '<div class="list123"><h1 class="contt"><a href="#' + places[i].placeNum + '">' + places[i].title + '</a></h1><div><br>';
-			}
+			var infoDiv = document.getElementById('placesList');
+			infoDiv.innerHTML = infoDiv.innerHTML + '<div class="list-color"><h1 class="contt"><a class="a-tag" href="#' + places[i].placeNum + '">' + places[i].title + '</a></h1></div>';
+		}
+
 
 		//이미지 자세히 보기
 		var img = document.getElementsByTagName("img");
 		for (var x = 0; x < img.length; x++) {
-			img.item(x).onclick = function () {window.open(this.src)};
+			img.item(x).onclick = function () { window.open(this.src); };
 		}
-		
-		
-			//댓글저장
-			$('#btnSave').click(function () {
 
 
-				let boardNum = document.getElementById("boardNum").value;
-				var tempData = {
-
-					"boardNum": $('input[name="boardNum"]').val(),
-					"replyContent": $('#replyContent').val(),
-					"memEmail": $('input[name="memEmail"]').val()
+		//댓글저장
+		$('#btnSave').click(function () {
 
 
-				};
-				console.log(tempData);
-				var reply = $('#replyContent').val()
-				if (reply != "") {
-					$.ajax({
-						url: "/commentList/" + boardNum,
-						type: "POST",
-						async: true,
-						contentType: "application/json; charset=UTF-8",
-						data: JSON.stringify(tempData),
-						success: function (data) {
+			let boardNum = document.getElementById("boardNum").value;
+			var tempData = {
 
-							$('#replyContent').val();
-							$('#resDiv').html(data);
-							$('textarea[name="replyContent"]').val("");
-						},
-						error: function () {alert("에러 발생");}
+				"boardNum": $('input[name="boardNum"]').val(),
+				"replyContent": $('#replyContent').val(),
+				"memEmail": $('input[name="memEmail"]').val()
 
 
-					});
-				}
-			});
-			$(document).on("click", "#deleteComment", function () {
-
-
-				let item = $(this);
-				let replyNum = item.attr("data-replyNum");
-				//let replyNum = document.getElementById("replyNum").value;
+			};
+			console.log(tempData);
+			var reply = $('#replyContent').val();
+			if (reply != "") {
 				$.ajax({
-					method: 'Delete',
-					url: '/deleteComment/' + replyNum,
-					async: false,
-					contentType: "application/json; charset=UTF-8",
-					data: {"replyNum": replyNum},
-					success: function (data) {
-
-						$('#resDiv').html(data)
-						window.alert("삭제가 완료가 확인 되었습니다.");
-						document.location.reload(true);
-
-
-					},
-					error: function (data) {
-						console.dir(data);
-
-					}
-				});
-
-			});
-			//새로고침 유지
-			$(document).ready(function () {
-
-
-				let boardNum = document.getElementById("boardNum").value;
-				var tempData = {
-
-					"boardNum": $('input[name="boardNum"]').val(),
-
-				};
-				console.log(tempData);
-				var reply = $('#replyContent').val()
-
-				$.ajax({
-					url: "/commentList02/" + boardNum,
+					url: "/commentList/" + boardNum,
 					type: "POST",
 					async: true,
 					contentType: "application/json; charset=UTF-8",
@@ -658,46 +215,104 @@
 					success: function (data) {
 
 						$('#replyContent').val();
-						$('#resDiv').html(data)
-
-					}
-
-				});
-
-			});
-			//게시글 북마크
-			$('#btn-bookmark').click(function() {
-				let boardNum = document.getElementById("boardNum").value;
-				let sendData = {"boardNum": boardNum};
-				$.ajax({
-					method:'POST',
-					url:'/boardBookmark',
-					data: sendData,
-					success : function(data){
-						window.location.href = data;
+						$('#resDiv').html(data);
+						$('textarea[name="replyContent"]').val("");
 					},
-					error: function(){
-						console.log('ajax 통신 실패');
-					}
+					error: function () { alert("에러 발생"); }
+
+
 				});
+			}
+		});
+		$(document).on("click", "#deleteComment", function () {
+
+
+			let item = $(this);
+			let replyNum = item.attr("data-replyNum");
+			//let replyNum = document.getElementById("replyNum").value;
+			$.ajax({
+				method: 'Delete',
+				url: '/deleteComment/' + replyNum,
+				async: false,
+				contentType: "application/json; charset=UTF-8",
+				data: { "replyNum": replyNum },
+				success: function (data) {
+
+					$('#resDiv').html(data);
+					window.alert("삭제가 완료가 확인 되었습니다.");
+					document.location.reload(true);
+
+
+				},
+				error: function (data) {
+					console.dir(data);
+
+				}
 			});
-			
-			//게시글 북마크 해제
-			$('#btn-unbookmark').click(function() {
-				let boardNum = document.getElementById("boardNum").value;
-				let deleteData = {"boardNum": boardNum};
-				$.ajax({
-					method:'POST',
-					url: '/unBoardBookmark',
-					data: deleteData,
-					success : function(data){
-						window.location.href = data;
-					},
-					error: function(){
-						console.log('ajax 통신 실패');
-					}
-				});
+
+		});
+		//새로고침 유지
+		$(document).ready(function () {
+
+
+			let boardNum = document.getElementById("boardNum").value;
+			var tempData = {
+
+				"boardNum": $('input[name="boardNum"]').val(),
+
+			};
+			console.log(tempData);
+			var reply = $('#replyContent').val();
+
+			$.ajax({
+				url: "/commentList02/" + boardNum,
+				type: "POST",
+				async: true,
+				contentType: "application/json; charset=UTF-8",
+				data: JSON.stringify(tempData),
+				success: function (data) {
+
+					$('#replyContent').val();
+					$('#resDiv').html(data);
+
+				}
+
 			});
+
+		});
+		//게시글 북마크
+		$('#btn-bookmark').click(function () {
+			let boardNum = document.getElementById("boardNum").value;
+			let sendData = { "boardNum": boardNum };
+			$.ajax({
+				method: 'POST',
+				url: '/boardBookmark',
+				data: sendData,
+				success: function (data) {
+					window.location.href = data;
+				},
+				error: function () {
+					console.log('ajax 통신 실패');
+				}
+			});
+		});
+
+		//게시글 북마크 해제
+		$('#btn-unbookmark').click(function () {
+			let boardNum = document.getElementById("boardNum").value;
+			let deleteData = { "boardNum": boardNum };
+			$.ajax({
+				method: 'POST',
+				url: '/unBoardBookmark',
+				data: deleteData,
+				success: function (data) {
+					window.location.href = data;
+				},
+				error: function () {
+					console.log('ajax 통신 실패');
+				}
+			});
+		});
 
 	</script>
 </body>
