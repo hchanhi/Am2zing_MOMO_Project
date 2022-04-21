@@ -2,27 +2,60 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
-    <title>MOMO - 글쓰기</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/5168478d86.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="./css/board.css">
+	<title>MOMO-글쓰기</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<style>
+		.container{
+			display: grid;
+		 	place-items: center;
+		  	min-height: 100vh;
+		}
+		.addTitle {
+		    width:130px;
+		    height:60px;
+		    background-color: orange;
+		    border:3px solid rgb(255, 161, 28);
+		    border-radius: 20px;
+		    font-size:18px;
+		    font-weight: bold;
+		    color: rgb(68, 68, 68);
+		    cursor:pointer;
+    }
+    
+    .title{
+    	font-size:30px;
+    	text-align:center;
+    	font-weight:bold;
+    }
+    #boardTitle{
+    	width: 300px;
+    	height: 50px;
+    	font-size: 20px;
+    	text-align: center;
+    }
+    .center{
+    		display: grid;
+		 	place-items: center;
+		  	min-height: 20vh;
+		  	}
+	</style>
 </head>
 <body>
-<div>
-    <form name="form" th:action="@{/post}" method="post">
-        <div>
-            <h5>제목</h5>
+<div class="container">
+    <form name="form" th:action="@{/post}" method="post" class="item">
+        <div class="center" style="width:300px; height:300px;">
+            <div class="title">제목</div>
             <div>
-                <input type="text" name="boardTitle" id="boardTitle"><br>
-                
+                <input type="text" name="boardTitle" id="boardTitle"><span></span>
             </div>
-            <input hidden name="memEmail" th:value="${#authentication.name}">
+            <input class="addTitle" type="submit" role="button" value="장소추가하기">
         </div>
-        <div>
-        </div>
-        
-        <div>
-            <div>
-                <input type="submit" role="button" value="장소추가하기">
-            </div>
-        </div>
+        <input hidden name="memEmail" th:value="${#authentication.name}">
     </form>
 </div>
 </body>

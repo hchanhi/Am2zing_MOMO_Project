@@ -45,7 +45,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		.and()
 			.logout()
     		.logoutRequestMatcher(new AntPathRequestMatcher("/logout")) // 로그아웃 시 URL 재정의 
-    		.logoutSuccessUrl("/member") // 로그아웃 성공 시 redirect 이동 
+    		.logoutSuccessUrl("/") // 로그아웃 성공 시 redirect 이동 
     		.invalidateHttpSession(true) // HTTP Session 초기화 
     		.deleteCookies("JSESSIONID") // 특정 쿠키 제거
     .and() // 403 예외처리 핸들링 
@@ -60,10 +60,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		    .ignoringAntMatchers("/deletePlace/*")
 		    .ignoringAntMatchers("/commentList/*")
 		    .ignoringAntMatchers("/commentList02/*")
-		    .ignoringAntMatchers("/test02/*")
 		    .ignoringAntMatchers("/deleteComment/*")
 		    .ignoringAntMatchers("/boardBookmark")
-		    .ignoringAntMatchers("/unBoardBookmark");
+		    .ignoringAntMatchers("/unBoardBookmark")
+		    .ignoringAntMatchers("/post/*");
 
 		    	 
 		

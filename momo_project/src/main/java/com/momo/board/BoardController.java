@@ -41,15 +41,15 @@ public class BoardController {
 	
 	
 	@GetMapping("/board")
-	public String board(Model model) {
-		List<Board> boardList = boardService.getBoardList();
+	public String board(Model model, @RequestParam(required = false, defaultValue = "1")
+	  int page) {
+		List<Board> boardList = boardRepository.findAll();
 		for(Board board : boardList) {
 			if(placeService.findByBoardNum(board.getBoardNum().intValue()).isEmpty()) {
 				this.delete(board.getBoardNum());
 			}
 		}
-		boardList = boardService.getBoardList();
-		model.addAttribute("boards", boardList);
+		model.addAllAttributes(boardService.getBoardList(page));
 		return "Board/list";
 	}
 	

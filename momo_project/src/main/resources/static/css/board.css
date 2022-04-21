@@ -116,8 +116,11 @@ section {
     width: 100%;
     height: 800px;
     border-radius: 20px;
-    background-color: rgb(228, 228, 228);
-    /* background-color: rgb(194, 227, 174); */
+
+
+    background: linear-gradient(90deg, #e1e1e1 50%, #fbffd7 50%);
+
+
 }
 
 .sec_left {
@@ -225,6 +228,24 @@ section {
     font-family: "Noto Sans KR", sans-serif;
 }
 
+
+
+.comment2{
+    margin:0 40px 0 40px;
+    padding-left:10px;
+    padding-top:10px;
+    border: 3px solid rgb(187, 187, 187) ;
+    border-radius: 10px;
+    background-color: rgb(203, 203, 203);
+    font-size: 15px;
+    color: rgb(68, 68, 68);
+    resize: none;
+    font-family: "Noto Sans KR", sans-serif;
+}
+
+
+
+
 /* 스크롤바 막대 설정*/
 .comment::-webkit-scrollbar{
     width: 10px;
@@ -252,6 +273,20 @@ section {
 
 /* 추가버튼*/
 .addbtn{
+    float:bottom;
+    width:100px;
+    height:50px;
+    background-color: orange;
+    border:3px solid rgb(255, 161, 28);
+    border-radius: 20px;
+    font-size:18px;
+    font-weight: bold;
+    color: rgb(68, 68, 68);
+    cursor:pointer;
+}
+
+.addbtn2{
+
     float:right;
     width:100px;
     height:50px;
@@ -265,6 +300,20 @@ section {
 }
 
 
+.addbtn3{
+    width:100px;
+    height:40px;
+    background-color: orange;
+    border:3px solid rgb(255, 161, 28);
+    border-radius: 20px;
+    font-size:18px;
+    font-weight: bold;
+    color: rgb(68, 68, 68);
+    cursor:pointer;
+}
+
+
+
 /* ------------end of sec_left------------ */
 
 .sec_right {
@@ -272,12 +321,15 @@ section {
     width: calc(100%/2);
     height: 100%;
     background-color: rgb(237, 237, 177);
+
 }
 /* 
 #places{
 } */
 
-#myplace1{
+
+.myplace{
+
     margin:0 auto;
     width: 640px;
     height: 150px;
@@ -285,12 +337,6 @@ section {
     border: 3px solid rgb(187, 187, 187);
     border-radius: 20px;
 }
-
-
-
-
-
-
 
 
 

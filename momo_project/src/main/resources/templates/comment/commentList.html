@@ -1,74 +1,82 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
 <head>
-<meta charset="UTF-8">
-<title>*</title>
-<style>
-	.list123 {
-			width: 300px;
-			margin: 10px 0 30px 10px;
-			padding: 5px;
-		
-			background: rgb(200, 234, 218);
-			z-index: 2;
-			font-size: 12px;
-			border-radius: 10px;
-		}
-	</style>
-</head>
-<body>
-<div>
-    <table>
-
-        <tbody class=".list123" id="divReloadLayer">
-        <tr th:each="comment : ${comments}">
-           
-                <div style="background: rgb(200, 234, 218);width: 150px; height: 50px; text-align: center;
-			margin: 10px 10px 10px 10px;
-			padding: 5px; border-radius: 10px;"><span style="color: rgb(53, 26, 29); font-size: 15pt;" th:text="${comment.replyContent}"></span>
-            
-            <input type="button" style="background: none; border: none;" th:data-del="${comment.replyNum}" class="deleteComment" value="❌"></div>
-        
-                <span hidden id="replyNum" th:text="${comment.replyNum}"></span>
-              <span  id="memNickname" th:text="${comment.member.memNickname}"></span>
-
-           
-             <span hidden id="boardNum" th:boardNum="${boardNum}"></span>
-        </tr>
-      
-        </tbody>
-    </table>
-</div>
-   <script src="https://code.jquery.com/jquery-latest.min.js"></script>
-<script th:inline="javascript"> 
-$(document).ready(function() {
-   $("input:button.deleteComment").on('click',deleteComment);
-   
-});
-function deleteComment(){
- 
-
-      let boardNum = document.getElementById("boardNum").value;
-
-    let replyNum = $(this).attr("data-del");   
-    
-     var sendData = {"replyNum": replyNum, "boardNum": boardNum};
-  
-     $.ajax({
-        method: 'Delete',
-        url : '/deleteComment/'+replyNum,
-        data : sendData,
-        success: function(data){
-   
-           $('#resDiv').html(data)
-     
-
+    <meta charset="UTF-8">
+    <title>*</title>
+    <style>
+        .list123 {
+            width: 300px;
+            margin: 10px 0 30px 10px;
+            padding: 5px;
+            text-align: center;
+            background-color: rgb(255, 176, 151);
+            font-size: 12px;
+            border-radius: 10px;
         }
+    </style>
+</head>
 
-    });
-   
-};
+<body>
+    <div style="text-align: center;">
+        <table>
 
-</script>
+            <tbody class=".list123" id="divReloadLayer">
+                <tr style="text-align: center;" th:each="comment : ${comments}">
+
+                    <div style="text-align: center;
+			margin: 0px 10px 10px 10px;
+			padding: 5px; border-radius: 10px;">
+                        <span style="font-size: 20px; color: tomato; margin-right: 10px;" id="memNickname"
+                            th:text="${comment.member.memNickname}"></span>
+                        <span style="color: rgb(53, 26, 29); font-size: 13pt; margin-right: 20px;"
+                            th:text="${comment.replyContent}"></span>
+
+                        <input type="button" style="background: none; border: none;" th:data-del="${comment.replyNum}"
+                            class="deleteComment" value="❌">
+                    </div>
+
+                    <span hidden id="replyNum" th:text="${comment.replyNum}"></span>
+
+
+
+                    <span hidden id="boardNum" th:boardNum="${boardNum}"></span>
+                </tr>
+
+            </tbody>
+        </table>
+    </div>
+    <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+    <script th:inline="javascript">
+        $(document).ready(function () {
+            $("input:button.deleteComment").on('click', deleteComment);
+
+        });
+        function deleteComment() {
+
+
+            let boardNum = document.getElementById("boardNum").value;
+
+            let replyNum = $(this).attr("data-del");
+
+            var sendData = { "replyNum": replyNum, "boardNum": boardNum };
+
+            $.ajax({
+                method: 'Delete',
+                url: '/deleteComment/' + replyNum,
+                data: sendData,
+                success: function (data) {
+
+                    $('#resDiv').html(data);
+
+
+                }
+
+            });
+
+        };
+
+    </script>
 </body>
+
 </html>

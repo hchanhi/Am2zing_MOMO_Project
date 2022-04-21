@@ -2,22 +2,41 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>*</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/5168478d86.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="./css/board.css">
+	<title>PlaceList</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<style>
+		.deletePlace {
+		    width:70px;
+		    height:40px;
+		    margin:5px;
+		    background-color: orange;
+		    border:3px solid rgb(255, 161, 28);
+		    border-radius: 20px;
+		    font-size:18px;
+		    font-weight: bold;
+		    color: rgb(68, 68, 68);
+		    cursor:pointer;
+    }
+	</style>
 </head>
 <body>
 <div>
-    <table>
+    <table style="margin:auto; margin-top:50px;">
         <tr>
-            <th>장소명</th>
-            <th>코멘트</th>
+            <th style="font-size:35px; width:200px;">장소명</th>
+            <th style="font-size:35px; width:400px;">코멘트</th>
         </tr>
         
         <tbody>
         <tr th:each="place : ${places}">
-            <td>
+            <td style="font-weight:bold; font-size:20px">
                 <span th:text="${place.placeTitle}"></span>
             </td>
-            <td>
+            <td style="text-align:center; font-size:17px;">
                 <span th:text="${place.placeContent}"></span>
             </td>
             <td>
