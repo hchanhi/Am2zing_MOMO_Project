@@ -114,8 +114,8 @@ public class BoardController {
 	
 	//멤버는 잠시 제거
 	@PutMapping("/post/edit/{boardNum}")
-    public String update(Board board) {
-        boardService.savePost(board);
+    public String update(Long boardNum, String boardTitle) {
+		boardService.editTitle(boardNum, boardTitle);
         return "redirect:/post/{boardNum}";
     }
 	

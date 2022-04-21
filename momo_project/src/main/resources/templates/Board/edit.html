@@ -311,7 +311,7 @@ html, body {
 	<div class="sec_left">
     <form th:action="@{'/post/edit/' + ${board.boardNum}}" method="post">
         <input type="hidden" name="_method" value="put"/>
-        <input type="hidden" name="id" th:value="${board.boardNum}"/>
+        <input type="hidden" name="boardNum" th:value="${board.boardNum}"/>
         <div>
             <div style="font-size:30px; font-weight:bold; margin-left:30px;">제목</div>
             <div>

@@ -52,8 +52,10 @@ public class BoardService {
 	}
 	
 	@Transactional
-    public Board savePost(Board board) {
-        return boardRepository.save(board);
+    public Board editTitle(Long boardNum, String boardTitle) {
+		Board board = boardRepository.findById(boardNum).get();
+		board.setBoardTitle(boardTitle);
+		return board;
     }
 	
 	public Map<String, Object> getBoardList(int page){
