@@ -21,6 +21,7 @@ public interface MemberRepository extends JpaRepository<Member, Long>{
 
 	Member findByMemNickname(String memNickname);
 
+
 	
     
     

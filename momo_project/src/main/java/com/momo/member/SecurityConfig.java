@@ -65,6 +65,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 			.ignoringAntMatchers("/boardBookmark")
 			.ignoringAntMatchers("/unBoardBookmark");
 
+
 		    	 
 		
 	}
