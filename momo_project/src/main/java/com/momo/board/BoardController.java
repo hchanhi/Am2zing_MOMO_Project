@@ -64,9 +64,9 @@ public class BoardController {
 	//멤버는 일단 제거
 	@PostMapping("/post")
 	public String write(String boardTitle, String memEmail, Model model) {
-		Board board = new Board();
 		if (!Objects.isNull(boardTitle)&& !boardTitle.isBlank()) {
-			board = boardService.save(boardTitle,memEmail);
+			Board board = boardService.save(boardTitle,memEmail);
+			System.out.println(board.getMember().getMemMbti());
 			model.addAttribute("boardNum", board.getBoardNum());
 			return "Board/addPlace";
 		} else {
@@ -148,5 +148,11 @@ public class BoardController {
 		}
         return "redirect:/board";
     }
-	
+	//검색
+	@GetMapping("/board/search")
+	public String search(@RequestParam(value="keyword") String keyword, Model model,@RequestParam(required = false, defaultValue = "1")
+	  int page) {
+		model.addAllAttributes(boardService.searchmbti(page,keyword));
+		return "Board/list";
+	}
 }
