@@ -70,17 +70,9 @@ public class BoardController {
 			model.addAttribute("boardNum", board.getBoardNum());
 			return "Board/addPlace";
 		} else {
-		return "Board/list";
+		return "redirect:/board";
 	}
 }
-	
-//	 @GetMapping("/post/{boardNum}")
-//	    public String detail(@PathVariable("boardNum") Integer boardNum, Model model) {
-//	        Board board = boardService.getPost(boardNum);
-//	        model.addAttribute("board", board);
-//	        model.addAttribute("places", placeService.findByBoardNum(boardNum));
-//	        return "Board/detail";
-//	    }
 	
 	 @GetMapping("/post/{boardNum}")
 	    public String detail(@PathVariable("boardNum") Integer boardNum, @AuthenticationPrincipal PrincipalDetails principal, Model model) {
@@ -98,7 +90,7 @@ public class BoardController {
 	        return "Board/detail";
 	    } else {
 	    	this.delete((long)boardNum);
-	    	return "Board/list";
+	    	return "redirect:/board";
 	    }
 }
 	
@@ -114,9 +106,13 @@ public class BoardController {
 	
 	//멤버는 잠시 제거
 	@PutMapping("/post/edit/{boardNum}")
-    public String update(Board board) {
-        boardService.savePost(board);
+    public String update(Long boardNum, String boardTitle) {
+		if(placeService.findByBoardNum(boardNum.intValue()).isEmpty()) {
+			return "Board/list";
+		} else {
+		boardService.editTitle(boardNum, boardTitle);
         return "redirect:/post/{boardNum}";
+		}
     }
 	
 	@DeleteMapping("/post/{boardNum}")
