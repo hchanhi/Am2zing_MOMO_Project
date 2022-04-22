@@ -13,39 +13,59 @@
 <div class="inner">
 	<th:block th:replace="fragments :: flg_header"></th:block>
 	<!--end of header-->
+    <span th:if="${memMbti!=null}" th:text="${memMbti}"></span>
+    <span th:if="${memMbti==null}" th:text="전체"></span>
+    	<div class="div_table" id=contents>
+    	<div class="div_table_row" id="placeimg" th:each="board: ${boards}">
+       		<div class="div_table_cell" style="float:left">
+       			<span>작성자 : </span>
+       			<span th:text="${board.member.memNickname}"></span>
+       		</div>
+       		
+        	<div class="div_table_cell" style="float:right;">
+        	<br>
+        		<span th:text="${board.member.memMbti}"></span>
+        	</div>
+        	
+        	<div class="div_table_cell" style="float:right;">
+        		<span>조회수 : </span>
+        		<span th:text="${board.placeCnt}"></span>
+        	</div>
+        	<hr>
+        	<div class="div_table_cell">
+       			<a th:href="@{'/post/' + ${board.boardNum}}">
+       			<span class="title" th:text="${board.boardTitle}"></span>
+       			</a>
+       		</div>
+   		</div>	
+    </div>
+   
+    <!-- 
     <table>
-        <tr>
-            <th>글번호</th>
-            <th>제목</th>
-            <th>작성자</th>
-            <th>MBTI</th>
-            <th>조회수</th>
-        </tr>
-        
-        <tbody>
+        <tbody style="height:500px;">
         <tr th:each="board : ${boards}">
-            <th>
-                <span th:text="${board.boardNum}"></span>
-            </th>
             <td>
+            	<span>제목</span><br>
                 <a th:href="@{'/post/' + ${board.boardNum}}">
                     <span th:text="${board.boardTitle}"></span>
                 </a>
             </td>
             <td>
+            	<span>작성자</span><br>
                 <span th:text="${board.member.memNickname}"></span>
             </td>
             <td>
+            	<span>MBTI</span><br>
             	<span th:text="${board.member.memMbti}"></span>
             </td>
             <td>
+            	<span>조회수</span><br>
             	<span th:text="${board.placeCnt}"></span>
             </td>
-            
         </tr>
         </tbody>
     </table>
-    
+     -->
     <hr>
     <!-- 
     <form action="/board/search" method="get">
@@ -53,8 +73,9 @@
 	    	<input name="keyword" type="text">
 	    	<button> 검색하기 </button>
 	    </div>
-	 -->   
+	   
     </form>
+     -->
     <div th:replace="fragments :: paging"></div>
     <div>
         <a th:href="@{/postBoard}" role="button">글쓰기</a>
