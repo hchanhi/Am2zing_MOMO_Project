@@ -66,6 +66,7 @@
 	<input hidden name="memEmail" th:value="${#authentication.name}">
 
 	<hr>
+
 	<div style="text-align: center;">
 		<form method="post" action="/place/reply?cmd=save">
 			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
@@ -95,6 +96,8 @@
 	<script type="text/javascript"
 		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a7b5481a65eecc18bd2cc1106898f604&libraries=services"></script>
 	<script th:inline="javascript">
+
+
 
 		var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
 			mapOption = {
@@ -185,29 +188,14 @@
 			var infoDiv = document.getElementById('placesList');
 			infoDiv.innerHTML = infoDiv.innerHTML + '<div class="list-color"><h1 class="contt"><a class="a-tag" href="#' + places[i].placeNum + '">' + places[i].title + '</a></h1></div>';
 		}
-		var mLabel = new daum.maps.InfoWindow({
-			position: new daum.maps.LatLng(position.latlng[0], position.latlng[1]),
-			content: '<span class="info-title">말풍선타이틀</span>' // 인포윈도우 내부에 들어갈 컨텐츠 입니다.
-		});
-		mLabel.open(map, marker);
+
 
 		//이미지 자세히 보기
 		var img = document.getElementsByTagName("img");
 		for (var x = 0; x < img.length; x++) {
 			img.item(x).onclick = function () { window.open(this.src); };
 		}
-		var infoTitle = document.querySelectorAll('.info-title');
-		infoTitle.forEach(function (e) {
-			var w = e.offsetWidth + 10;
-			var ml = w / 2;
-			e.parentElement.style.top = "82px";
-			e.parentElement.style.left = "50%";
-			e.parentElement.style.marginLeft = -ml + "px";
-			e.parentElement.style.width = w + "px";
-			e.parentElement.previousSibling.style.display = "none";
-			e.parentElement.parentElement.style.border = "0px";
-			e.parentElement.parentElement.style.background = "unset";
-		});
+
 
 		//댓글저장
 		$('#btnSave').click(function () {
