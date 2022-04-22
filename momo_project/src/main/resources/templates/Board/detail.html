@@ -14,6 +14,9 @@
 			<span style="color: rgb(94, 113, 161);">작성자: </span><span style="color: rgb(94, 113, 161);"
 				th:text="@{${board.member.memNickname}}"></span>
 		</div>
+		<div style="color: rgb(255, 166, 83); font-size: 30px; font-weight: 800; margin-left: 10px;">
+			<span th:text="${board.boardTitle}"></span>
+		</div>
 		<div style="display: flex; justify-content: space-evenly;">
 			<div>
 				<a th:href="@{'/post/edit/' + ${board.boardNum}}" role="button"><button>수정</button></a>
@@ -31,17 +34,17 @@
 			<a th:href="@{/board}" role="button"><button>목록</button></a>
 		</div>
 	</div>
-	<div class="container" style="display: flex; justify-content: space-around;">
+	<div class="container" style="display: flex; justify-content: space-between;margin: 20px; padding: 0;">
 
 
 
 		<div style="margin: 0; padding: 0;" class="item1">
 			<div class=" hAddr">
-				<ul style="padding: 0;" id="placesList"></ul>
+				<ul style="padding: 0; margin: 0;" id="placesList"></ul>
 			</div>
 		</div>
-		<div class="item2" id="map" style="width: 650px; height: 400px; justify-content: center; text-align: 
-		center; padding: 0; display: inline-block;"></div>
+		<div class="item2" id="map" style=" width: 650px; height: 400px; justify-content: center; text-align: 
+		center; padding: 0; display: inline-block; border-radius: 10px;"></div>
 
 		<div>
 
@@ -49,8 +52,8 @@
 				<div class="item3-place" style="margin-left: 8px;">
 					<a hidden th:name="@{${place.placeNum}}"></a>
 					<h2 th:text="${place.placeTitle}"></h2><br>
-					<img style="width: 150px; height: 150px; cursor: pointer;" th:src="@{${place.placeImg}}"
-						onerror="this.style.display='none'" alt=''><br>
+					<img style="border-radius: 10px; width: 150px; height: 150px; cursor: pointer;"
+						th:src="@{${place.placeImg}}" onerror="this.style.display='none'" alt=''><br>
 					<span th:text="${place.placeContent}"></span><br>
 					<a class="topBtn" href="#top">지도로 이동 >>></a><br>
 				</div>
@@ -136,7 +139,8 @@
 
 
 		function displayInfowindow(marker, title) {
-			var content = '<div style=" font-weight: 800; text-align:center; color:#4D77D7; width:200px;text-align:center;padding:6px 0">' + title + '</div>';
+			var content = '<div class="info-title" style=" font-weight: 800; text-align:center; color:#4D77D7; width:200px;text-align:center;padding:6px 0"><span style="color:#FBAE3C;width:200px"  >&starf;추천&starf;</span><hr style=" background-color:#FBAE3C; margin:3px;padding:0; border: 0px;height: 2px;">'
+				+ title + '</div>';
 
 			infowindow.setContent(content);
 			infowindow.open(map, marker);
@@ -181,14 +185,29 @@
 			var infoDiv = document.getElementById('placesList');
 			infoDiv.innerHTML = infoDiv.innerHTML + '<div class="list-color"><h1 class="contt"><a class="a-tag" href="#' + places[i].placeNum + '">' + places[i].title + '</a></h1></div>';
 		}
-
+		var mLabel = new daum.maps.InfoWindow({
+			position: new daum.maps.LatLng(position.latlng[0], position.latlng[1]),
+			content: '<span class="info-title">말풍선타이틀</span>' // 인포윈도우 내부에 들어갈 컨텐츠 입니다.
+		});
+		mLabel.open(map, marker);
 
 		//이미지 자세히 보기
 		var img = document.getElementsByTagName("img");
 		for (var x = 0; x < img.length; x++) {
 			img.item(x).onclick = function () { window.open(this.src); };
 		}
-
+		var infoTitle = document.querySelectorAll('.info-title');
+		infoTitle.forEach(function (e) {
+			var w = e.offsetWidth + 10;
+			var ml = w / 2;
+			e.parentElement.style.top = "82px";
+			e.parentElement.style.left = "50%";
+			e.parentElement.style.marginLeft = -ml + "px";
+			e.parentElement.style.width = w + "px";
+			e.parentElement.previousSibling.style.display = "none";
+			e.parentElement.parentElement.style.border = "0px";
+			e.parentElement.parentElement.style.background = "unset";
+		});
 
 		//댓글저장
 		$('#btnSave').click(function () {
