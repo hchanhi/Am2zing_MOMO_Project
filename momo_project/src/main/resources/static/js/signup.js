@@ -1,5 +1,4 @@
-function checkAll() {
-	let re = /^[a-zA-Z0-9]{4,12}$/; // 아이디와 패스워드가 적합한지 검사할 정규식
+let re = /^[a-zA-Z0-9]{4,12}$/; // 아이디와 패스워드가 적합한지 검사할 정규식
 	let re2 =
 		/^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
 	// 이메일이 적합한지 검사할 정규식
@@ -7,7 +6,30 @@ function checkAll() {
 	let memEmail = document.getElementById('memEmail');
 	let memPassword = document.getElementById('memPassword');
 	let memPassword_Check = document.getElementById('memPassword_Check');
+	let memNickname = document.getElementById('memNickname');
+	let memMbti = document.getElementById('memMbti');
 
+function checkAll() {
+	
+	
+	 if (memNickname.value == '') {
+		alert('닉네임을 입력해 주세요');
+		memNickname.focus();
+		return false;
+		
+	}
+	
+	if (memNicknameCheckCnt == 0) {
+		alert('닉네임 중복체크를 해주세요');
+		return false;
+		}
+	
+	if (memEmail.value == '') {
+		alert('이메일을 입력해 주세요');
+		memEmail.focus();
+		return false;
+		
+	}
 	if (memEmailCheckCnt == 0) {
 		alert('이메일 중복체크를 해주세요');
 		return false;
@@ -23,22 +45,17 @@ function checkAll() {
 		return false;
 	} else if (!pwSame()) {
 		return false;
-	} else if (memNicknameCheckCnt == 0) {
-		alert('닉네임 중복체크를 해주세요');
-		return false;
+	
 	} else if (!checkBirth()) {
 		return false;
 	} else if (!checkMbti()) {
 		return false;
-	} else if (!check(re2, memEmail, '이메일을 확인해 주세요.')) {
-		return false;
-	} else if (memEmailCheckCnt == 0) {
-		alert('이메일 중복체크를 해주세요');
-		return false;
-	} else if (
+	}  else if (
 		!check(re, memPassword, '패스워드는 4~12자의 영문 대소문자와 숫자로만 입력해 주세요')
 	) {
 		return false;
+	} else if(memMbti == "noMbti"){
+		alert('MBTI를 선택해 주세요');
 	}
 	 else if (
 		!confirm('일부 정보는 수정이 불가합니다 \n회원가입을 진행하시겠습니까?')
@@ -55,6 +72,8 @@ function check(re, what, message) {
 	if (re.test(what.value)) {
 		return true;
 	}
+	
+	
 	alert(message);
 	what.value = '';
 	what.focus();
@@ -79,7 +98,7 @@ function memEmailCheck() {
 	const memEmail = $('#memEmail').val();
 	console.log(memEmail);
 	if (memEmail == '') {
-		alert('이메일 입력해주세요!. 필수항목입니다.');
+		alert('이메일 입력해주세요!');
 		$('#memEmail').focus();
 		return false;
 	}
@@ -92,7 +111,7 @@ function memEmailCheck() {
 
 		success: function(result) {
 			if (result.result == '0') {
-				if (confirm('이 아이디는 사용 가능합니다. \n사용하시겠습니까?')) {
+				if (confirm('이 이메일 사용 가능합니다. \n사용하시겠습니까?')) {
 					memEmailCheckCnt = 1;
 					$('#memEmail').attr('readonly', true);
 					$('#memEmailOverlay').attr('disabled', true);
