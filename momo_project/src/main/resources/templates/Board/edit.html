@@ -309,7 +309,7 @@ html, body {
 <body>
 <section class="inner">
 	<div class="sec_left">
-    <form th:action="@{'/post/edit/' + ${board.boardNum}}" method="post">
+    <form id="form" th:action="@{'/post/edit/' + ${board.boardNum}}" method="post">
         <input type="hidden" name="_method" value="put"/>
         <input type="hidden" name="boardNum" th:value="${board.boardNum}"/>
         <div>
@@ -417,6 +417,11 @@ html, body {
 	<script type="text/javascript"
 		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a7b5481a65eecc18bd2cc1106898f604&libraries=services"></script>
 	<script>
+$('#form').submit(function(){
+	if($('input[name="boardTitle"]').val()==""){
+		alert("장소를 추가해주세요!")
+	}
+});
 	
 $('#submitBtn').click(function(){
 	let boardNum = document.getElementById("boardNum").value;

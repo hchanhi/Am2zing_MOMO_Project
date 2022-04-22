@@ -381,23 +381,7 @@
 	<script type="text/javascript"
 		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a7b5481a65eecc18bd2cc1106898f604&libraries=services"></script>
 	<script>
-		//창종료시
-		/*
-		var boardNum = document.getElementById("boardNum").value;
-		window.addEventListener('beforeunload', cancel());
 		
-		function cancel(){
-			$.ajax({
-				url:"/cancel/"+boardNum,
-				type:"POST",
-				async: true,
-				data: {"boardNum":boardNum} ,
-				success: function(data){
-				
-				}
-			});
-		}
-		*/
 		$('#submitBtn').click(function () {
 			let boardNum = document.getElementById("boardNum").value;
 			var tempData = {
