@@ -99,11 +99,25 @@ public class BoardService {
 	    }
 	 
 	 //검색
-	 @Transactional
-	 public Map<String, Object> searchmbti(int page,String memMbti){
+//	 @Transactional
+//	 public Map<String, Object> searchmbti(int page,String memMbti){
+//			List<Board> boardList = boardRepository.findByMemberMemMbti(memMbti, PageRequest.of(page-1, 6, Direction.DESC, "boardNum"));
+//			Paging paging = Paging.builder()
+//					.url("/board")
+//					.total((int)boardRepository.count())
+//					.cntPerPage(6)
+//					.curPage(page)
+//					.blockCnt(5)
+//					.build();
+//			
+//			return Map.of("boards", boardList, "paging",paging);
+//		}
+	 
+	 public Map<String, Object> getMbtiBoardList(int page, String memMbti){
 			List<Board> boardList = boardRepository.findByMemberMemMbti(memMbti, PageRequest.of(page-1, 6, Direction.DESC, "boardNum"));
+			
 			Paging paging = Paging.builder()
-					.url("/board")
+					.url("/board/"+memMbti)
 					.total((int)boardRepository.count())
 					.cntPerPage(6)
 					.curPage(page)

@@ -149,10 +149,17 @@ public class BoardController {
         return "redirect:/board";
     }
 	//검색
-	@GetMapping("/board/search")
-	public String search(@RequestParam(value="keyword") String keyword, Model model,@RequestParam(required = false, defaultValue = "1")
-	  int page) {
-		model.addAllAttributes(boardService.searchmbti(page,keyword));
+//	@GetMapping("/board/search")
+//	public String search(@RequestParam(value="keyword") String keyword, Model model,@RequestParam(required = false, defaultValue = "1")
+//	  int page) {
+//		model.addAllAttributes(boardService.searchmbti(page,keyword));
+//		return "Board/list";
+//	}
+	
+	@GetMapping("/board/{memMbti}")
+	public String mbtiBoard(@PathVariable("memMbti")String memMbti, Model model,
+			@RequestParam(required = false, defaultValue = "1") int page) {
+		model.addAllAttributes(boardService.getMbtiBoardList(page, memMbti));
 		return "Board/list";
 	}
 }
