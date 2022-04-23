@@ -9,84 +9,132 @@
 </head>
 
 <body style="margin: 0; padding: 0;  ">
-	<div id="nav" style="display: flex; justify-content: space-between; margin: 15px;">
-		<div>
-			<span style="color: rgb(94, 113, 161);">작성자: </span><span style="color: rgb(94, 113, 161);"
-				th:text="@{${board.member.memNickname}}"></span>
+
+	<div class="container map_wrap">
+
+
+		<div id="map" style="width: 100%; height: 100%; position: relative; overflow: hidden; text-align: center; ">
 		</div>
-		<div style="color: rgb(255, 166, 83); font-size: 30px; font-weight: 800; margin-left: 10px;">
-			<span th:text="${board.boardTitle}"></span>
-		</div>
-		<div style="display: flex; justify-content: space-evenly;">
+
+
+		<div id="nav" style="margin: 15px; position: absolute;
+			top: 0;
+			left: 0;
+			bottom: 0;
+			width: 350px;
+			height: 60px;
+			left: 2%; 
+			top: 2%;
+			transform: translateX(-50);
+			padding: 5px;
+			overflow-y: scroll;
+			background-color: white;
+			z-index: 1;
+			box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.5);
+			border-radius: 15px;">
 			<div>
-				<a th:href="@{'/post/edit/' + ${board.boardNum}}" role="button"><button>수정</button></a>
+				<span style="color: rgb(94, 113, 161);font-size: 15px; margin-left: 10px;"
+					th:text="@{${board.member.memNickname}}"></span><span
+					style="color: rgb(94, 113, 161);font-size: 15px;">님의</span>
 			</div>
-			<div>
-				<form th:action="@{'/post/' + ${board.boardNum}}" method="post">
-					<input type="hidden" name="_method" value="delete" />
-					<button type="submit">삭제</button>
-				</form>
+			<div
+				style="display: inline-block; width: 340px; word-break:break-all; color: rgb(255, 166, 83); font-size: 30px; font-weight: 800; ">
+				<span style="color: rgb(255, 166, 83); font-size: 30px; font-weight: 800; margin-left: 10px;"
+					th:text="${board.boardTitle}"></span>
 			</div>
-			<div id="bookmark-buttons">
-				<button th:if="${boardBookmarkCheck} == true" id="btn-bookmark" type="button">저장</button>
-				<button th:unless="${boardBookmarkCheck} == true" id="btn-unbookmark" type="button">저장취소</button>
-			</div>
-			<a th:href="@{/board}" role="button"><button>목록</button></a>
+
 		</div>
-	</div>
-	<div class="container" style="display: flex; justify-content: space-between;margin: 20px; padding: 0;">
+		<div id="jj" style="display: flex; justify-content: space-between; margin: 15px; position: absolute;
+	
+		width: 300px;
+		height: 50px;
+		left: 2%; 
+		top:90%;
+		transform: translateX(-50);
+		
+		overflow-y: hidden;
+		background-color: none;
+		z-index: 2;
+		padding: 5px;
+		align-items:center;
+		border-radius: 10px;">
 
-
-
-		<div style="margin: 0; padding: 0;" class="item1">
-			<div class=" hAddr">
-				<ul style="padding: 0; margin: 0;" id="placesList"></ul>
-			</div>
-		</div>
-		<div class="item2" id="map" style=" width: 650px; height: 400px; justify-content: center; text-align: 
-		center; padding: 0; display: inline-block; border-radius: 10px;"></div>
-
-		<div>
-
-			<div class="item3 list-color2  " th:each="place : ${places}">
-				<div class="item3-place" style="margin-left: 8px;">
-					<a hidden th:name="@{${place.placeNum}}"></a>
-					<h2 th:text="${place.placeTitle}"></h2><br>
-					<img style="border-radius: 10px; width: 150px; height: 150px; cursor: pointer;"
-						th:src="@{${place.placeImg}}" onerror="this.style.display='none'" alt=''><br>
-					<span th:text="${place.placeContent}"></span><br>
-					<a class="topBtn" href="#top">지도로 이동 >>></a><br>
+			<div class="btns" style="display: flex; justify-content: space-evenly; align-items:center;  ">
+				<div>
+					<a th:if="${#authentication.name} == ${board.member.memEmail}" th:href=" @{'/post/edit/' + ${board.boardNum}}" role="button"><button><i
+								class="fas fa-edit fa-xl"></i></button></a>
+								<a  th:unless="${#authentication.name} == ${board.member.memEmail}" hidden th:href=" @{'/post/edit/' + ${board.boardNum}}" role="button"><button><i
+								class="fas fa-edit fa-xl"></i></button></a>
 				</div>
+				<div>
+					<form th:action="@{'/post/' + ${board.boardNum}}" method="post">
+						<input type="hidden" name="_method" value="delete" />
+						<button th:if="${#authentication.name} == ${board.member.memEmail}" type="submit"><i class="fas fa-trash-alt fa-xl"></i></button >
+						<button th:unless="${#authentication.name} == ${board.member.memEmail}" hidden type="submit"><i class="fas fa-trash-alt fa-xl"></i></button >
+					</form>
+				</div>
+				<div id="bookmark-buttons">
+					<button th:if="${boardBookmarkCheck} == true" id="btn-bookmark" type="button"> <i
+							class="far fa-heart fa-xl"></i></button>
+					<button style="text-align: center;" th:unless="${boardBookmarkCheck} == true" id="btn-unbookmark"
+						type="button">
+						<i class="fas fa-heart fa-xl"></i></button>
+				</div>
+				<a th:href="@{/board}" role="button"><button><i class="fas fa-bars fa-xl"></i></button></a>
 			</div>
 		</div>
-	</div>
-	<!-- div con -->
 
 
-	<input hidden name="memEmail" th:value="${#authentication.name}">
+		<div id="menu_wrap">
+			<div class="box box1">
+				<div class="item3 list-color2  " style=" margin-top: 10px;" th:each="place : ${places}">
+					<div class="item3-place" style="margin-left: 8px;">
+						<a hidden th:name="@{${place.placeNum}}"></a>
+						<h2 style="font-size: 15px; color: black;" th:text="${place.placeTitle}"></h2><br>
+						<img style="border-radius: 10px; width: 150px; height: 150px; cursor: pointer;"
+							th:src="@{${place.placeImg}}" onerror="this.style.display='none'" alt=''><br>
+						<div style=" word-break:break-all;">
+							<span th:text="${place.placeContent}"></span><br>
+						</div>
+						<a class="topBtn" href="#top">지도로 이동 >>></a><br>
+					</div>
 
-	<hr>
+				</div>
+				<p style="text-align: center; margin-top: 10px;"><button class="hide1">댓글보기</button></p>
+			</div>
+			<div hidden class="box box1">
+				<form method="post" action="/place/reply?cmd=save">
+					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 
-	<div style="text-align: center;">
-		<form method="post" action="/place/reply?cmd=save">
-			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 
+					<div class="">
+						<textarea placeholder="댓글을 입력해주세요" name="replyContent" id="replyContent"
+							style="width: 300px; height: 30px; resize: none; text-align: center;"></textarea>
+						<input hidden type="number" id="boardNum" name="boardNum" th:value="${boardNum}">
 
-			<div class="">
-				<textarea placeholder="댓글을 입력해주세요" name="replyContent" id="replyContent"
-					style="width: 1000px; height: 30px; resize: none;"></textarea>
-				<input hidden type="number" id="boardNum" name="boardNum" th:value="${boardNum}">
+					</div>
+
+				</form>
+
+				<button id="btnSave">저장</button>
+	
+
+				<div id="resDiv" style="margin-top: 5px; ">
+				</div>
+				<p><button class="hide1">장소보기</button></p>
 
 			</div>
 
-		</form>
+		</div>
 
-		<button id="btnSave">저장</button>
-		<h3 style="margin: 0; margin-top: 10px;">댓글목록</h3>
 
-		<div class=".list123" id="resDiv" style="margin-top: 5px; text-align: center;"></div>
 
 	</div>
+
+	<!-- div con -->
+	<input hidden id="memEmail" name="memEmail" th:value="${#authentication.name}">
+	<script src="https://kit.fontawesome.com/6478f529f2.js" crossorigin="anonymous"></script>
+
 	<script src="https://code.jquery.com/jquery-latest.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
@@ -99,6 +147,8 @@
 
 
 
+
+
 		var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
 			mapOption = {
 				center: new kakao.maps.LatLng(37.5546, 126.9706), // 지도의 중심좌표
@@ -106,29 +156,29 @@
 			};
 
 		var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
-		var infowindow = new kakao.maps.InfoWindow({ zIndex: 1 });
+		var infowindow = new kakao.maps.InfoWindow({zIndex: 1});
 
 		var places = [];
 
 		/*<![CDATA[*/
 
 		/*[# th:each="place : ${places}"]*/
-		var title = [[${ place.placeTitle }]];
-		var lat = [[${ place.placeLat }]];
-		var lng = [[${ place.placeLng }]];
-		var content = [[${ place.placeContent }]];
-		var id = [[${ place.placeId }]];
-		var placeImg = [[${ place.placeImg }]];
-		var placeNum = [[${ place.placeNum }]];
+		var title = [[${place.placeTitle}]];
+		var lat = [[${place.placeLat}]];
+		var lng = [[${place.placeLng}]];
+		var content = [[${place.placeContent}]];
+		var id = [[${place.placeId}]];
+		var placeImg = [[${place.placeImg}]];
+		var placeNum = [[${place.placeNum}]];
 
 
-		places.push({ title: title, latlng: new kakao.maps.LatLng(lat, lng), content: content, id: id, placeImg: placeImg, placeNum: placeNum });
+		places.push({title: title, latlng: new kakao.maps.LatLng(lat, lng), content: content, id: id, placeImg: placeImg, placeNum: placeNum});
 
 		/*[/]*/
 
 		/*]]>*/
 
-
+			
 		// 마커 이미지의 이미지 주소입니다
 		var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
 
@@ -185,51 +235,60 @@
 				});
 			})(marker, places[i].title, places[i].id);
 
-			var infoDiv = document.getElementById('placesList');
-			infoDiv.innerHTML = infoDiv.innerHTML + '<div class="list-color"><h1 class="contt"><a class="a-tag" href="#' + places[i].placeNum + '">' + places[i].title + '</a></h1></div>';
 		}
 
 
 		//이미지 자세히 보기
 		var img = document.getElementsByTagName("img");
 		for (var x = 0; x < img.length; x++) {
-			img.item(x).onclick = function () { window.open(this.src); };
+			img.item(x).onclick = function () {window.open(this.src);};
 		}
-
-
+		
+		//댓글 장소 체인지 버튼
+		$('button.hide1').click(function () {
+			$('.box1').toggle();
+		});
+		
+	
 		//댓글저장
 		$('#btnSave').click(function () {
+			var mem = $('input[name="memEmail"]').val();
+			if (mem == "anonymousUser") {
+				alert("로그인 후 이용해주세요.");
+				location.href = "http://localhost:9090/member/login";
+			} else {
+				let boardNum = document.getElementById("boardNum").value;
+				var tempData = {
+
+					"boardNum": $('input[name="boardNum"]').val(),
+					"replyContent": $('#replyContent').val(),
+					"memEmail": $('input[name="memEmail"]').val()
 
 
-			let boardNum = document.getElementById("boardNum").value;
-			var tempData = {
+				};
+				console.log(tempData);
+				var reply = $('#replyContent').val();
+				if (reply != "") {
+					$.ajax({
+						url: "/commentList/" + boardNum,
+						type: "POST",
+						async: true,
+						contentType: "application/json; charset=UTF-8",
+						data: JSON.stringify(tempData),
+						success: function (data) {
 
-				"boardNum": $('input[name="boardNum"]').val(),
-				"replyContent": $('#replyContent').val(),
-				"memEmail": $('input[name="memEmail"]').val()
-
-
-			};
-			console.log(tempData);
-			var reply = $('#replyContent').val();
-			if (reply != "") {
-				$.ajax({
-					url: "/commentList/" + boardNum,
-					type: "POST",
-					async: true,
-					contentType: "application/json; charset=UTF-8",
-					data: JSON.stringify(tempData),
-					success: function (data) {
-
-						$('#replyContent').val();
-						$('#resDiv').html(data);
-						$('textarea[name="replyContent"]').val("");
-					},
-					error: function () { alert("에러 발생"); }
+							$('#replyContent').val();
+							$('#resDiv').html(data);
+							$('textarea[name="replyContent"]').val("");
+						},
+						error: function () {alert("에러 발생");}
 
 
-				});
+					});
+				}
 			}
+
+
 		});
 		$(document).on("click", "#deleteComment", function () {
 
@@ -242,7 +301,7 @@
 				url: '/deleteComment/' + replyNum,
 				async: false,
 				contentType: "application/json; charset=UTF-8",
-				data: { "replyNum": replyNum },
+				data: {"replyNum": replyNum},
 				success: function (data) {
 
 					$('#resDiv').html(data);
@@ -290,7 +349,7 @@
 		//게시글 북마크
 		$('#btn-bookmark').click(function () {
 			let boardNum = document.getElementById("boardNum").value;
-			let sendData = { "boardNum": boardNum };
+			let sendData = {"boardNum": boardNum};
 			$.ajax({
 				method: 'POST',
 				url: '/boardBookmark',
@@ -307,7 +366,7 @@
 		//게시글 북마크 해제
 		$('#btn-unbookmark').click(function () {
 			let boardNum = document.getElementById("boardNum").value;
-			let deleteData = { "boardNum": boardNum };
+			let deleteData = {"boardNum": boardNum};
 			$.ajax({
 				method: 'POST',
 				url: '/unBoardBookmark',

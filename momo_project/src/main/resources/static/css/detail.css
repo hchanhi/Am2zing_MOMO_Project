@@ -1,33 +1,3 @@
-#placesList .item {
-    position: relative;
-    border-bottom: 3px solid #888;
-    overflow: hidden;
-    cursor: pointer;
-    min-height: 65px;
-}
-
-#placesList .item span {
-    display: block;
-    margin-top: 4px;
-}
-
-#placesList .item h5,
-#placesList .item .info {
-    color: #813737;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    white-space: nowrap;
-}
-
-#placesList .item .info {
-    padding: 10px 0 10px 55px;
-    color: #813737;
-}
-
-#placesList .info .gray {
-    color: #813737;
-}
-
 #placesList .info .jibun {
     padding-left: 26px;
     background:
@@ -107,74 +77,11 @@
 
 #pagination {
     margin: 10px auto;
-    text-align: center;
+  
 }
 
-#pagination a {
-    display: inline-block;
-    margin-right: 10px;
-}
 
-#pagination .on {
-    font-weight: bold;
-    cursor: default;
-    color: #777;
-}
 
-.contt {
-    color: rgb(255, 255, 255);
-    font-size: 20px;
-}
-
-.topBtn {
-    text-decoration: none;
-    font-weight: bold;
-    color: rgb(94, 113, 161);
-    font-size: 12px;
-    margin-top: 15px;
-}
-
-.list123 {
-    width: 300px;
-    margin: 10px 0 30px 10px;
-    padding: 5px;
-    text-align: center;
-    background-color: rgb(255, 176, 151);
-    font-size: 12px;
-    border-radius: 10px;
-}
-
-.a-tag {
-    text-decoration: none;
-    color: rgb(255, 255, 255);
-    text-align: center;
-}
-
-.list-color {
-    width: 300px;
-    margin: 10px 0 30px 10px;
-    padding: 5px;
-    text-align: center;
-    background-color: rgb(255, 176, 151);
-    font-size: 12px;
-    border-radius: 10px;
-}
-
-.list-color2 {
-    width: 300px;
-    margin: 10px 0 30px 10px;
-    padding: 5px;
-    text-align: left;
-    background-color: rgb(255, 176, 151);
-    font-size: 12px;
-    border-radius: 10px;
-}
-
-h2 {
-    color: aliceblue;
-    margin: 0;
-    padding: 0;
-}
 
 .item3-place h2,
 .item3-place img,
@@ -203,4 +110,165 @@ h2 {
     line-height: 22px;
     border-radius: 4px;
     padding: 0px 10px;
+}
+
+.map_wrap,
+.map_wrap * {
+    margin: 0;
+    padding: 0;
+    font-family: 'Malgun Gothic', dotum, '돋움', sans-serif;
+    font-size: 12px;
+}
+
+.map_wrap a,
+.map_wrap a:hover,
+.map_wrap a:active {
+    color: #000;
+    text-decoration: none;
+}
+
+.map_wrap {
+   
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    border-radius: 10px;
+}
+
+#menu_wrap {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 450px;
+    left: 75%;
+    top: 2%;
+    transform: translateX(-50);
+    padding: 5px;
+    overflow-y: scroll;
+    background: none;
+    z-index: 1;
+ text-align: center;
+    border-radius: 10px;
+}
+
+#menu_wrap::-webkit-scrollbar {
+    display: none;
+}
+ #nav::-webkit-scrollbar {
+	display: none;
+}
+
+.contt {
+    color: rgb(255, 255, 255);
+    font-size: 20px;
+}
+
+.topBtn {
+    text-decoration: none;
+    font-weight: bold;
+    color: rgb(94, 113, 161);
+    font-size: 12px;
+    margin-top: 15px;
+}
+
+.list123 {
+    width: 400px;
+    margin: 10px 0 30px 10px;
+    padding: 5px;
+    text-align: center;
+    background-color: rgb(255, 255, 255);
+    box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.5);
+    font-size: 12px;
+    border-radius: 10px;
+}
+
+.a-tag {
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+    text-align: center;
+}
+
+.list-color {
+    width: 400px;
+    margin: 10px 0 30px 10px;
+    padding: 5px;
+        text-align: left;
+    background-color: rgb(255, 255, 255);
+    box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.5);
+    font-size: 12px;
+    border-radius: 10px;
+}
+
+.list-color2 {
+    width: 400px;
+    margin: 10px 0 30px 10px;
+    padding: 5px;
+    text-align: left;
+    background-color: rgb(255, 255, 255);
+    box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.5);
+    font-size: 12px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.list-color3 {
+    width: 400px;
+    margin: 10px 0 30px 10px;
+    padding: 5px;
+    text-align: left;
+    background-color: rgb(255, 255, 255);
+    box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.5);
+    font-size: 12px;
+    border-radius: 10px;
+}
+
+h2 {
+    color: rgb(37, 60, 81);
+    margin: 0;
+    padding: 0;
+}
+
+.btns button {
+    border-radius: 25px;
+    border: solid 6px;
+    border-color: rgb(245, 188, 54);
+    box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.5);
+    width: 50px;
+    height: 50px;
+    margin-left: 10px;
+    text-align: center;
+    background-color: rgb(255, 255, 255);
+}
+
+#replyContent {
+	padding: 5px;
+}
+@keyframes heartBeat {
+  0% {
+    color: white;
+    transform: none;
+  }
+  50% {
+    color: tomato;
+    transform: scale(1.5);
+  }
+  100% {
+    color: white;
+    transform: none;
+  }
+}
+i {
+	color :black;
+}
+ #btn-unbookmark i,
+  #btn-bookmark i {
+	color: tomato;
+	
+}
+ #btn-unbookmark:hover i,
+ #btn-bookmark:hover i
+{
+  will-change: transform;
+  animation: heartBeat 1s linear infinite;
 }
