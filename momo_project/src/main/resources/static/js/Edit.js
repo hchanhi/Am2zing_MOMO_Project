@@ -51,17 +51,12 @@ function checkBirthEdit() {
 
 
 function modifyCheckAll(){
-    if(username.val()==""){
-        alert("아이디를 입력해주세요!. 필수항목입니다.");
-        username.focus();
-        return false;
-    }else if(nickname.val()==""){
+    
+    if(nickname.val()==""){
         alert("닉네임을 입력해주세요!. 필수항목입니다.");
         nickname.focus();
         return false;
-    } else if (usernameCheck == 0){
-        alert("아이디를 확인해 주세요!");
-        return false;
+  
     } else if (nicknameCheck == 0){
         alert("닉네임을 확인해 주세요!");
         return false;
@@ -82,10 +77,11 @@ function memNicknameEdit(){
         data : {"memId" : $('#memId').val(), "memNickname" : $("memNickname").val()},
         dataType : "JSON",
         success : function(result){
-            if(result.result == "0"){
+            if(result.result == true){
                 $('.nickname_ok').css({"display" : "inline-block","color" : "blue"});
                 $('.nickname_already').css("display", "none");
                 nicknameCheck = 1;
+                console.log(result.result);
             }else{
                 $('.nickname_ok').css("display","none");
                 $('.nickname_already').css({"display" :"inline-block", "color" : "red"});
@@ -97,3 +93,22 @@ function memNicknameEdit(){
         }
     });
 }
+
+function withdrawal(){
+	if(confirm("모든 정보가 사라집니다. 탈퇴 하시겠습니까?")){
+		 actionForm
+                    .attr("action", "/member/withdrawal")
+                    .attr("method","post")
+                    .submit();
+                    
+         alert("탈퇴가 완료되었습니다.")
+         }
+       else{
+			return "/member/mypage";
+	
+}
+		
+	}
+	
+
+

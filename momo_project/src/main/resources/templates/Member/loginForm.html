@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="ko" 
+xmlns:th="http://www.thymeleaf.org">
+
 <head>
 <meta charset="UTF-8" />
 <title>Login</title>
@@ -11,14 +13,13 @@
 <body class="login_body">
 	<div class="login_main">
 		<h1>로그인</h1>
-		<form th:action="@{/loginProc}" method="post" onsubmit="return Login();">
+		<form th:action="@{/member/login}" method="post" onsubmit="return Login();">
 			<!-- Spring Security가 적용되면 POST 방식으로 보내는 모든 데이터는 csrf 토큰 값이 필요 -->
 			<input type="hidden" th:name="${_csrf.parameterName}"
 				th:value="${_csrf.token}" />
-			<div class="inp_field">
-			
-			<p th:if="${loginError}" class="error">Wrong user or password</p>
-			
+				
+       		 <div th:if="${param.error}" th:text="${loginFailMsg}"  role="alert"></div>
+			<div class="inp_field">		
 				<input type="email" required name="memEmail" id="memEmail"
 					autocomplete="off"> <span></span> <label>이메일</label>
 			</div>

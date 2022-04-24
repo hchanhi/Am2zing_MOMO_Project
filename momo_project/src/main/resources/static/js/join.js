@@ -145,8 +145,8 @@ function pwSame() {
 		return false;
 	}
 	//패스워드 조건 확인
-	if (password.length < 6) {
-		alert('패스워드는 6글자 이상이어야 합니다.');
+	if (password.length < 4) {
+		alert('패스워드는 4글자 이상이어야 합니다.');
 		$('#memPassword').focus();
 		return false;
 	}

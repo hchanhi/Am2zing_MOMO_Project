@@ -1,5 +1,7 @@
 package com.momo.member;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Repository;
@@ -26,11 +28,12 @@ public class MemberCustomRepository {
 
 
     //본인 제외한 닉네임 중복 검사
-    public QueryResults<String> findExistMemNickname(Long memId) {
-        return queryFactory.select(QMember.member.memNickname)
-                .from(QMember.member)
-                .where(QMember.member.memId.ne(memId))
-                .fetchResults();
+   public List<String> findExistMemNickname(Long memId){
+	   return queryFactory.select(QMember.member.memNickname)
+			   .from(QMember.member)
+			   .where(QMember.member.memId.ne(memId))
+			   .fetch();
+			  
                
     }
 

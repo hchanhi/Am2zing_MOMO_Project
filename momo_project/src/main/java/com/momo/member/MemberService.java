@@ -46,10 +46,11 @@ public class MemberService {
 	
 	//닉네임 수정 중복 검사
     public HashMap<String, Object> memNicknameEdit(String memNickname, Long memId) {
-        List<String> findMemNickname = memberCustomRepository.findExistMemNickname(memId).getResults();
+        List<String> findMemNickname = memberCustomRepository.findExistMemNickname(memId);
 
         HashMap<String, Object> map = new HashMap<>();
         map.put("result", findMemNickname.contains(memNickname));
+        System.out.println("result");
         return map;
     }
 	
@@ -81,7 +82,7 @@ public class MemberService {
     }
     
     // 회원 탈퇴
-    public void deleteUser(Long memId) {    
+    public void deleteMember(Long memId) {    
         memberRepository.deleteById(memId);
     }
 }

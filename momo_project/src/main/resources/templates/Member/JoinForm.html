@@ -1,7 +1,7 @@
 <!--회원가입 페이지-->
 <!--signup.html-->
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
  
   <head>
     <meta charset="UTF-8" />
@@ -16,7 +16,7 @@
     <body class="login_body">
     <div class="login_main">
       <h1>회원가입</h1>
-       <form method="post" th:action="@{/joinProc}" th:object="${register}" onsubmit="return checkAll();">
+       <form method="post"  th:action="@{/joinProc}" th:object="${register}" onsubmit="return checkAll();">
         <div>
         <div class="inp_field">
          <input type="text" id="memNickname" name="memNickname" autocomplete="off">
@@ -130,7 +130,7 @@
         
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-	<script type="text/javascript" src="/js/signup.js"></script>
+	<script type="text/javascript" src="/js/join.js"></script>
    
   </body>
 </html>

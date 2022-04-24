@@ -11,6 +11,11 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
+import com.momo.member.MemberLoginFail;
+import com.momo.member.MemberLoginSuccess;
+
+import org.springframework.security.web.authentication.AuthenticationFailureHandler;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 @Configuration // IoC 빈(bean)을 등록
 @EnableWebSecurity // 필터 체인 관리 시작 어노테이션
@@ -25,6 +30,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		return new BCryptPasswordEncoder();
 	}
 	
+	@Bean
+    public AuthenticationSuccessHandler successHandler() {
+        return new MemberLoginSuccess();
+    }
+	@Bean
+    public AuthenticationFailureHandler failureHandler() {
+        return new MemberLoginFail();
+    }
+	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		
@@ -37,11 +51,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 			.anyRequest().permitAll()
 		.and()
 			.formLogin()
-			.loginPage("/loginForm")
-			.loginProcessingUrl("/loginProc")
+			.loginPage("/member/login")
+			.defaultSuccessUrl("/")
+			.failureUrl("/member/login?error=true")
 			.usernameParameter("memEmail")
             .passwordParameter("memPassword")
-			.defaultSuccessUrl("/")
+            .successHandler(successHandler())
+            .failureHandler(failureHandler())
+            .permitAll()
 		.and()
 			.logout()
     		.logoutRequestMatcher(new AntPathRequestMatcher("/logout")) // 로그아웃 시 URL 재정의 
