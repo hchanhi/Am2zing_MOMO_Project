@@ -13,29 +13,35 @@
 <div class="inner">
 	<th:block th:replace="fragments :: flg_header"></th:block>
 	<!--end of header-->
-    <span th:if="${memMbti!=null}" th:text="${memMbti}"></span>
-    <span th:if="${memMbti==null}" th:text="전체"></span>
-    	<div class="div_table" id=contents>
+    <div class="mbtiarea">
+	    <div class="mbti">
+	    <span th:if="${memMbti!=null}" th:text="${memMbti}"></span>
+	    <span th:if="${memMbti==null}" th:text="전체"></span>
+	    </div>
+    </div>	
+    	
+    	<div class="div_table" id="contents">
     	<div class="div_table_row" id="placeimg" th:each="board: ${boards}">
-       		<div class="div_table_cell" style="float:left">
-       			<span>작성자 : </span>
-       			<span th:text="${board.member.memNickname}"></span>
+       		<div class="info">
+	       		<div class="div_table_cell" style="width:150px; height:50px;">
+	       			<span>작성자 : </span>
+	       			<span th:text="${board.member.memNickname}"></span>
+	       		</div>
+	       		<div class="div_table_cell" style="width:70px; height:50px;">
+	        		<span th:text="${board.member.memMbti}"></span>
+	        	</div>
+	        	<div class="div_table_cell" style="width:110px; height:50px; text-align:right;">
+	        		<span>조회수 : </span>
+	        		<span th:text="${board.placeCnt}"></span>
+	        	</div>
        		</div>
-       		
-        	<div class="div_table_cell" style="float:right;">
-        	<br>
-        		<span th:text="${board.member.memMbti}"></span>
-        	</div>
-        	
-        	<div class="div_table_cell" style="float:right;">
-        		<span>조회수 : </span>
-        		<span th:text="${board.placeCnt}"></span>
-        	</div>
         	<hr>
-        	<div class="div_table_cell">
-       			<a th:href="@{'/post/' + ${board.boardNum}}">
-       			<span class="title" th:text="${board.boardTitle}"></span>
-       			</a>
+        	<div class="titlearea">
+	        	<div class="div_table_cell">
+	       			<a th:href="@{'/post/' + ${board.boardNum}}">
+	       			<span class="title" th:text="${board.boardTitle}"></span>
+	       			</a>
+	       		</div>
        		</div>
    		</div>	
     </div>
@@ -66,7 +72,6 @@
         </tbody>
     </table>
      -->
-    <hr>
     <!-- 
     <form action="/board/search" method="get">
 	    <div>
@@ -76,11 +81,13 @@
 	   
     </form>
      -->
-    <div th:replace="fragments :: paging"></div>
-    <div>
-        <a th:href="@{/postBoard}" role="button">글쓰기</a>
+     <div class="pagearea">
+     	
+    	<div th:replace="fragments :: paging"></div>
+	    <div class="post">
+	        <a th:href="@{/postBoard}" role="button"><button class="btn">+</button></a>
+	    </div>
     </div>
-    
 </div>
 </body>
 </html>
