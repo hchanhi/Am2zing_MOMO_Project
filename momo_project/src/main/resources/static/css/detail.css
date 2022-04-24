@@ -15,6 +15,7 @@
         url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_number_blue.png) no-repeat;
 }
 
+
 #placesList .item .marker_1 {
     background-position: 0 -10px;
 }
@@ -93,13 +94,6 @@
     font-size: 20px;
 }
 
-#nav button,
-#btnSave {
-    margin-right: 5px;
-    background: none;
-    color: rgb(94, 113, 161);
-    border: none;
-}
 
 .info-title {
     display: block;
@@ -155,7 +149,25 @@
 #menu_wrap::-webkit-scrollbar {
     display: none;
 }
- #nav::-webkit-scrollbar {
+
+#title {
+	margin: 15px; position: absolute;
+			top: 0;
+			left: 0;
+			bottom: 0;
+			width: 350px;
+			height: 60px;
+			left: 2%; 
+			top: 2%;
+			transform: translateX(-50);
+			padding: 5px;
+			overflow-y: scroll;
+			background-color:rgb(245, 188, 54);
+			z-index: 1;
+			box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.5);
+			border-radius: 15px;
+}
+ #title::-webkit-scrollbar {
 	display: none;
 }
 
@@ -189,18 +201,9 @@
     text-align: center;
 }
 
-.list-color {
-    width: 400px;
-    margin: 10px 0 30px 10px;
-    padding: 5px;
-        text-align: left;
-    background-color: rgb(255, 255, 255);
-    box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.5);
-    font-size: 12px;
-    border-radius: 10px;
-}
 
-.list-color2 {
+
+.list-color {
     width: 400px;
     margin: 10px 0 30px 10px;
     padding: 5px;
@@ -212,16 +215,7 @@
     margin-bottom: 10px;
 }
 
-.list-color3 {
-    width: 400px;
-    margin: 10px 0 30px 10px;
-    padding: 5px;
-    text-align: left;
-    background-color: rgb(255, 255, 255);
-    box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.5);
-    font-size: 12px;
-    border-radius: 10px;
-}
+
 
 h2 {
     color: rgb(37, 60, 81);
@@ -229,6 +223,25 @@ h2 {
     padding: 0;
 }
 
+#btns-box {
+	display: flex; 
+	justify-content: space-between;
+	 margin: 15px;
+	  position: absolute;
+			width: 300px;
+		height: 50px;
+		left: 2%; 
+		top:90%;
+		transform: translateX(-50);
+		
+		overflow-y: hidden;
+		background-color: none;
+		z-index: 2;
+		padding: 5px;
+		align-items:center;
+		border-radius: 10px;
+}
+ 
 .btns button {
     border-radius: 25px;
     border: solid 6px;
@@ -271,4 +284,26 @@ i {
 {
   will-change: transform;
   animation: heartBeat 1s linear infinite;
+}
+
+
+.box1 button {
+	width: 70px;
+	height: 30px;
+	background-color:  rgb(245, 188, 54);
+    color: rgb(0, 0, 0);
+    border: none;
+    border-radius: 10px;
+    font-size: 10pt;
+    font-weight: 600;
+}
+
+textarea {
+	width: 400px;	
+			border: solid 2px  rgb(245, 188, 54);
+			border-radius: 10px;
+			font-size: 16px;
+			height: 30px; 
+			resize: none; 
+			text-align: center;
 }
