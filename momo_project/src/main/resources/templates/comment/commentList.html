@@ -18,8 +18,8 @@
 			margin: 10px -10px 10px 20px;
 			 border-radius: 10px;">
 						<div style="display: flex;">
-							<div style="width: 120px; margin: 0; padding: 0;">
-								<span style="font-size: 20px; color: tomato; margin:0;" id="memNickname"
+							<div style="width: 100px; margin: 0; padding: 0;">
+								<span style="font-size: 18px; color: tomato; margin:0;" id="memNickname"
 									th:text="${comment.member.memNickname}"></span>
 								
 								<!--인증시 사용된 객체의 Username (ID)-->
@@ -31,7 +31,7 @@
 								<span style="color: rgb(53, 26, 29); font-size: 13pt; margin-right: 20px;"
 									th:text="${comment.replyContent}"></span>
 							</div>
-							<div  style="width: 60px;">
+							<div  style="width: 80px;">
 								<input th:if="${#authentication.name} == ${comment.member.memEmail}" type="button" style="background: none; border: none;"
 									th:data-del="${comment.replyNum}" id="deleteBtn" class="deleteComment" value="❌">
 									<input th:unless="${#authentication.name} == ${comment.member.memEmail}" type="button" style="background: none; border: none;"

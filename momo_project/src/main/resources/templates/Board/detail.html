@@ -23,30 +23,18 @@
 					th:text="@{${board.member.memNickname}}"></span><span
 					style="color: rgb(0, 0, 0);font-size: 15px;">님의</span>
 			</div>
-			<div
-				style="display: inline-block; width: 340px; word-break:break-all;  ">
+			<div style="display: inline-block; width: 340px; word-break:break-all;  ">
 				<span style="color: rgb(255, 255, 255); font-size: 26px; font-weight: 800; margin-left: 10px;
-				text-shadow:1px 1px 1px #000;"
-					th:text="${board.boardTitle}"></span>
+				text-shadow:1px 1px 1px #000;" th:text="${board.boardTitle}"></span>
 			</div>
 
 		</div>
 		<div id="btns-box">
 
 			<div class="btns" style="display: flex; justify-content: space-evenly; align-items:center;  ">
-				<div>
-					<a th:if="${#authentication.name} == ${board.member.memEmail}" th:href=" @{'/post/edit/' + ${board.boardNum}}" role="button"><button><i
-								class="fas fa-edit fa-xl"></i></button></a>
-								<a  th:unless="${#authentication.name} == ${board.member.memEmail}" hidden th:href=" @{'/post/edit/' + ${board.boardNum}}" role="button"><button><i
-								class="fas fa-edit fa-xl"></i></button></a>
-				</div>
-				<div>
-					<form th:action="@{'/post/' + ${board.boardNum}}" method="post">
-						<input type="hidden" name="_method" value="delete" />
-						<button th:if="${#authentication.name} == ${board.member.memEmail}" type="submit"><i class="fas fa-trash-alt fa-xl"></i></button >
-						<button th:unless="${#authentication.name} == ${board.member.memEmail}" hidden type="submit"><i class="fas fa-trash-alt fa-xl"></i></button >
-					</form>
-				</div>
+
+				<a th:href="@{/}" role="button"><button><i class="fas fa-home fa-xl"></i></button></a>
+				<a th:href="@{/board}" role="button"><button><i class="fas fa-bars fa-xl"></i></button></a>
 				<div id="bookmark-buttons">
 					<button th:if="${boardBookmarkCheck} == true" id="btn-bookmark" type="button"> <i
 							class="far fa-heart fa-xl"></i></button>
@@ -54,7 +42,23 @@
 						type="button">
 						<i class="fas fa-heart fa-xl"></i></button>
 				</div>
-				<a th:href="@{/board}" role="button"><button><i class="fas fa-bars fa-xl"></i></button></a>
+				<div>
+					<a th:if="${#authentication.name} == ${board.member.memEmail}"
+						th:href=" @{'/post/edit/' + ${board.boardNum}}" role="button"><button><i
+								class="fas fa-edit fa-xl"></i></button></a>
+					<a th:unless="${#authentication.name} == ${board.member.memEmail}" hidden
+						th:href=" @{'/post/edit/' + ${board.boardNum}}" role="button"><button><i
+								class="fas fa-edit fa-xl"></i></button></a>
+				</div>
+				<div>
+					<form th:action="@{'/post/' + ${board.boardNum}}" method="post">
+						<input type="hidden" name="_method" value="delete" />
+						<button th:if="${#authentication.name} == ${board.member.memEmail}" type="submit"><i
+								class="fas fa-trash-alt fa-xl"></i></button>
+						<button th:unless="${#authentication.name} == ${board.member.memEmail}" hidden type="submit"><i
+								class="fas fa-trash-alt fa-xl"></i></button>
+					</form>
+				</div>
 			</div>
 		</div>
 
@@ -64,14 +68,14 @@
 				<div class="item3 list-color  " style=" margin-top: 10px;" th:each="place : ${places}">
 					<div class="item3-place" style="margin: 10px;">
 						<a hidden th:name="@{${place.placeNum}}"></a>
-						<h2 style="font-size: 22px; color:rgb(245, 188, 54); font-weight: 600; text-shadow:1px 1px 1px #000;" th:text="${place.placeTitle}"></h2><br>
-						<img 
-						style="border-radius: 10px; width: 120px; height: 120px; cursor: pointer;"
+						<h2 style="font-size: 22px; color:rgb(245, 188, 54); font-weight: 600; text-shadow:1px 1px 1px #000;"
+							th:text="${place.placeTitle}"></h2><br>
+						<img style="border-radius: 10px; width: 120px; height: 120px; cursor: pointer;"
 							th:src="@{${place.placeImg}}" onerror="this.style.display='none'" alt=''><br>
 						<div style=" word-break:break-all;">
 							<span style="font-size: 18px;" th:text="${place.placeContent}"></span>
 						</div>
-					
+
 					</div>
 
 				</div>
@@ -89,15 +93,15 @@
 
 					</div>
 
-	
 
-	
+
+
 
 
 				</form>
 
 				<button id="btnSave">저장</button>
-	
+
 
 				<div id="resDiv" style="margin-top: 5px; ">
 				</div>
@@ -150,13 +154,16 @@
 		var placeNum = [[${place.placeNum}]];
 
 
-		places.push({title: title, latlng: new kakao.maps.LatLng(lat, lng), content: content, id: id, placeImg: placeImg, placeNum: placeNum});
+		places.push({
+			title: title, latlng: new kakao.maps.LatLng(lat, lng), content: content, id: id,
+			placeImg: placeImg, placeNum: placeNum
+		});
 
 		/*[/]*/
 
 		/*]]>*/
 
-			
+
 		// 마커 이미지의 이미지 주소입니다
 		var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
 
@@ -222,13 +229,13 @@
 			img.item(x).onclick = function () {window.open(this.src);};
 		}
 
-		
+
 		//댓글 장소 체인지 버튼
 		$('button.hide1').click(function () {
 			$('.box1').toggle();
 		});
-		
-	
+
+
 
 		//댓글저장
 		$('#btnSave').click(function () {

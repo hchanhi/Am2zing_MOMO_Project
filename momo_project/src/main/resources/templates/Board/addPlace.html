@@ -624,7 +624,8 @@
 					itemEl.onmouseout = function () {
 						infowindow.close();
 					};
-				})(marker, places[i].place_name, places[i].road_address_name, places[i].address_name, places[i].y, places[i].x, places[i].id);
+				})(marker, places[i].place_name, places[i].road_address_name, places[i].address_name, 
+				places[i].y, places[i].x, places[i].id);
 
 				fragment.appendChild(itemEl);
 			}
