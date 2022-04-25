@@ -6,13 +6,23 @@ header {
 .logo {
     float: left;
     color: orangered;
+   	width: 80px;
     font-size: 40pt;
     margin: 10px 0px 0px 0px;
 }
 
 .user {
     float: right;
-    padding-top:30px;
+    padding-top:50px;
+}
+
+.before_login {
+	margin-top:20px;
+	text-decoration: none;
+}
+
+.before_login a {
+	color: black;
 }
 
 .dropbtn {
