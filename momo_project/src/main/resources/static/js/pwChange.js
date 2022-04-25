@@ -51,7 +51,7 @@ function pwSame() {
         return false;
     }
     //패스워드 조건 확인
-    if (password.length < 6) {
+    if (password.length < 4) {
         alert('패스워드는 4글자 이상이어야 합니다.');
         $("#password").focus();
         return false;
@@ -78,9 +78,11 @@ function originalPwCheck(){
         success : function(result){
             console.log(result);
             if(result.result == "1"){
+				console.log(original_PwCheck);
                 original_PwCheck = 1;
             
             }else{
+				console.log(original_PwCheck);
                 original_PwCheck = 0;
                
             }
