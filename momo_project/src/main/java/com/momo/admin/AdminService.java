@@ -45,7 +45,7 @@ public class AdminService {
 	}
 	
 	//해당 회원 조회
-	public Member findMemberByMemNum(int memId) {
+	public Member findMemberByMemNum(long memId) {
 		Member member = adminMemberRepository.findById(memId).get();
 		
 		return member;
