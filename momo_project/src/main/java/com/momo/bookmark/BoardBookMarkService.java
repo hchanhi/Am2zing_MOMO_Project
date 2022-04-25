@@ -1,11 +1,15 @@
 package com.momo.bookmark;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import com.momo.board.BoardRepository;
+import com.momo.common.util.pagination.Paging;
 import com.momo.domain.Board;
 import com.momo.domain.BoardBookmark;
 import com.momo.domain.Member;
@@ -25,8 +29,21 @@ public class BoardBookMarkService {
 		} else return false;
 	}
 	
-	public List<BoardBookmark> findAllByMember(Member member){
-		return boardBookmarkRepository.findAllByMember(member);
+public Map<String,Object> findAllByMember(Member member, int page){
+		
+		int cntPerPage = 6;
+		List<BoardBookmark> boardBookmarks = boardBookmarkRepository
+				.findByMember(member, PageRequest.of(page-1, cntPerPage, Direction.DESC, "boardBookmarkNum"));
+		
+		Paging paging = Paging.builder()
+				.url("/Member/boardBookmark")
+				.total((int)boardBookmarkRepository.count())
+				.cntPerPage(cntPerPage)
+				.curPage(page)
+				.blockCnt(10)
+				.build();
+		
+		return Map.of("boardBookmarks",boardBookmarks,"paging",paging);
 	}
 	
 	public void save(Member member, long boardNum) {
