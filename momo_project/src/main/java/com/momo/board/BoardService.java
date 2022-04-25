@@ -1,8 +1,5 @@
 package com.momo.board;
 
-
-
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -40,9 +37,6 @@ public class BoardService {
 	
 	@Autowired
 	private MemberCustomRepository memberCustomRepository;
-	
-	@Autowired
-	private MemberRepository memberReposityory;
 	
 	public Board save(String boardTitle, String memEmail) {
 		Board board = new Board();
@@ -114,7 +108,8 @@ public class BoardService {
 //		}
 	 
 	 public Map<String, Object> getMbtiBoardList(int page, String memMbti){
-			List<Board> boardList = boardRepository.findByMemberMemMbti(memMbti, PageRequest.of(page-1, 6, Direction.DESC, "boardNum"));
+			List<Board> boardList = boardRepository.findByMemberMemMbti(memMbti, 
+					PageRequest.of(page-1, 6, Direction.DESC, "boardNum"));
 			
 			Paging paging = Paging.builder()
 					.url("/board/"+memMbti)
