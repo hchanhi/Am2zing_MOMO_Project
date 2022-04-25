@@ -1,0 +1,85 @@
+/* ===== Google Font Import - Poppins ===== */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    transition: all 0.4s ease;;
+}
+
+
+/* ===== Colours ===== */
+
+
+body{
+    height: 100vh;
+    background-color: var(--body-color);
+}
+
+
+nav{
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 70px;
+    width: 20%;
+    background-color: var(--nav-color);
+    z-index: 100;
+}
+
+nav .nav-bar .logo a{
+    font-size: 25px;
+    font-weight: 500;
+    color: var(--text-color);
+    text-decoration: none;
+}
+
+.nav-bar .nav-links{
+    display: flex;
+    align-items: center;
+}
+
+.nav-bar .nav-links li{
+    margin: 0 5px;
+    list-style: none;
+}
+
+.nav-links li a{
+    position: relative;
+    font-size: 17px;
+    font-weight: 400;
+    color: var(--text-color);
+    text-decoration: none;
+    padding: 10px;
+}
+
+    .menu{
+        position: fixed;
+        height: 100%;
+        width: 320px;
+        left: -100%;
+        top: 0;
+        padding: 20px;
+        background-color: var(--side-nav);
+        z-index: 100;
+        transition: all 0.4s ease;
+    }
+
+   
+
+    .nav-bar .navLogo a{
+        opacity: 0;
+        transition: all 0.3s ease;
+    }
+    .nav-bar .nav-links{
+        flex-direction: column;
+        padding-top: 30px;
+    }
+
+    .nav-links li a{
+        display: block;
+        margin-top: 20px;
+    }
+

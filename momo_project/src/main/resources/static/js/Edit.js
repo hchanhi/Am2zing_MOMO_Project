@@ -3,7 +3,7 @@
 const memNum = $("#memNum");
 const memEmail = $("#memEmail");
 const memNickname = $("#memNickname");
-let memNicknameCheck = 1;
+
 let memEmailCheck = 1;
 
 function withdrawalSubmit() {
@@ -51,17 +51,12 @@ function checkBirthEdit() {
 
 
 function modifyCheckAll(){
-    if(username.val()==""){
-        alert("아이디를 입력해주세요!. 필수항목입니다.");
-        username.focus();
-        return false;
-    }else if(nickname.val()==""){
+    
+    if(nickname.val()==""){
         alert("닉네임을 입력해주세요!. 필수항목입니다.");
         nickname.focus();
         return false;
-    } else if (usernameCheck == 0){
-        alert("아이디를 확인해 주세요!");
-        return false;
+  
     } else if (nicknameCheck == 0){
         alert("닉네임을 확인해 주세요!");
         return false;
@@ -74,6 +69,53 @@ function modifyCheckAll(){
     return true;
 }
 
+// 닉네임 중복 체크
+function memNicknameCheck() {
+	const memNickname = $('#memNickname').val();
+	if (memNickname == '') {
+		alert('닉네임을 입력해주세요!. 필수항목입니다.');
+		$('#memNickname').focus();
+		return false;
+	}
+	$.ajax({
+		type: 'get',
+		url: '/member/nicknameChk',
+		data: { "memNickname": memNickname },
+		dataType: 'JSON',
+
+		success: function(result) {
+			if (result.result == '0') {
+				if (confirm('이 이름은 사용 가능합니다. \n사용하시겠습니까?')) {
+					memNicknameCheckCnt = 1;
+					$('#memNickname').attr('readonly', true);
+					$('#memNicknameOverlay').attr('disabled', true);
+					$('#memNicknameOverlay').css('display', 'none');
+					$('#resetMemNickname').attr('disabled', false);
+					$('#resetMemNickname').css('display', 'inline-block');
+				}
+				return false;
+			} else {
+				alert('이미 사용중인 이름입니다.');
+				$('#memNickname').focus();
+			}
+		},
+		error: function(request, status, error) {
+			alert('ajax 실행 실패');
+			alert('code:' + request.status + '\n' + 'error :' + error);
+		},
+	});
+}
+
+function reMemNickname() {
+	nicknameOverlapCheck = 0;
+	$('#memNickname').attr('readonly', false).focus();
+	$('#memNickname').val('');
+	$('#memNicknameOverlay').attr('disabled', false);
+	$('#memNicknameOverlay').css('display', 'inline-block');
+	$('#resetMemNickname').attr('disabled', true);
+	$('#resetMemNickname').css('display', 'none');
+}
+
 function memNicknameEdit(){
 
     $.ajax({
@@ -82,10 +124,11 @@ function memNicknameEdit(){
         data : {"memId" : $('#memId').val(), "memNickname" : $("memNickname").val()},
         dataType : "JSON",
         success : function(result){
-            if(result.result == "0"){
+            if(result.result == true){
                 $('.nickname_ok').css({"display" : "inline-block","color" : "blue"});
                 $('.nickname_already').css("display", "none");
                 nicknameCheck = 1;
+                console.log(result.result);
             }else{
                 $('.nickname_ok').css("display","none");
                 $('.nickname_already').css({"display" :"inline-block", "color" : "red"});
@@ -97,3 +140,8 @@ function memNicknameEdit(){
         }
     });
 }
+
+
+	
+
+

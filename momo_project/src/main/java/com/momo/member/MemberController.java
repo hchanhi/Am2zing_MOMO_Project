@@ -5,6 +5,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Locale.Category;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,18 +51,26 @@ public class MemberController {
 	}
 
 	//로그인 페이지 이동
-	@GetMapping("member/login")
-	public String goLogin() {
+	@GetMapping("/member/login")
+	 public String goLogin(HttpServletRequest request) {
+        //이전 페이지의 정보
+        String url = request.getHeader("Referer");
+        if(!url.contains("/member/loginForm")) {
+            request.getSession().setAttribute("prevPage",request.getHeader("Referer"));
+        }
 		return "member/loginForm"; 
 		} 
 	
 	/* 로그인 에러 *
 	  @param model 
 	*/ 
-	@GetMapping("/login-error") 
-	public String loginError(Model model) {
-		model.addAttribute("loginError", true); 
-		return "Member/Login"; } 
+	
+    @PostMapping("member/login")
+    public String loginError(HttpServletRequest request, Model model) {
+        String loginFailMsg = (String) request.getAttribute("loginFailMsg");
+        model.addAttribute("loginFailMsg",loginFailMsg);
+        return "member/loginForm";
+    }
 
 	@GetMapping("member/join")
 	public String join() {
@@ -95,7 +104,7 @@ public class MemberController {
 	//회원가입 진행
 	@PostMapping("/joinProc")
 	public String joinProc(Member member) {
-		System.out.println("회원가입 진행 : " + member);
+		
 		String rawPassword = member.getMemPassword();
 		String encPassword = bCryptPasswordEncoder.encode(rawPassword);
 		member.setMemPassword(encPassword);
@@ -146,26 +155,19 @@ public class MemberController {
     public String pwdUpdate(Authentication authentication,Member member) {
         member.setMemEmail(authentication.getName());
         memberService.passwordUpdate(member);
-        return "redirect:/account/logout";
+        return "redirect:/logout";
     }
 
     
-    //회원탈퇴
-    @GetMapping("/member/withdrawal")
-    public String withdrawalMember(Authentication authentication, Model model) {
-        Member member = memberService.memberInfo(authentication.getName());
-        model.addAttribute("member", member);
-        return "account/withdrawal";
-    }
-
     //회원 탈퇴 실행
-    @PostMapping("/memebr/withdrawal")
+    @PostMapping("/memeber/withdrawal")
     public String withdrawalMember(Member member, HttpSession session) {
-        memberService.deleteUser(member.getMemId());
+        memberService.deleteMember(member.getMemId());
         session.invalidate();
         return "redirect:/";
     }
-
+    
+  
 
 	
 	

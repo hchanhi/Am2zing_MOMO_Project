@@ -1,34 +1,51 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title>회원정보 수정</title>
+<link rel="stylesheet" href="/css/login.css"/>
+   <link rel="stylesheet" href="/css/sidebar.css">
+</head>
+<div th:include="member/mypagesidebar2"> </div>
 
-<body>
-<div th:include="member/mypagesidebar"> </div>
 
-    <form th:action="@{/member/myinfoEdit}" method="post" th:object="${member}">
+
+<body class="login_body">
+	<div class="login_main">
+		<h1>내정보 수정</h1>
+	   <form  th:action="@{/member/myinfoEdit}" method="post" th:object="${member}">
+ 
   
 
-        <h1 >내 정보 수정</h1>
-        <hr>
+
         <input type="hidden" th:field="*{memId}" th:readonly="readonly" >
         <input type="hidden" th:field="*{memRole}" th:readonly="readonly" >
 
-        <div >
+
+      <div class="inp_field">
             <label th:for="memEmail">이메일</label>
             <input type="email" th:field="*{memEmail}" th:readonly="readonly" >
         </div>
-
-        <div >
-            <label th:for="memNickname">닉네임</label>
-            <input type="text"  th:field="*{memNickname}" oninput="memNicknameEdit()">
-           <!--  <span class="nickname_ok">사용 가능한 닉네임 입니다.</span>
-            <span class="nickname_already">이미 사용중인 닉네임 입니다.</span> -->
+		<div>
+           <div class="inp_field">
+           	<label th:for="memNickname">닉네임</label>
+            <input type="text"  name="memNickname" th:field="*{memNickname}" autocomplete="off">
+           </div>
+           <div class="inp_field"  style="margin-top:-15px;">
+        	<input type="button" id="memNicknameOverlay" onclick="memNicknameCheck()" value="중복 체크"/>
+        	<input type="button" id="resetMemNickname" onclick="reMemNickname()"  style = "display:none;" disabled value="다시입력"/>
         </div>
-
-		 <div class="inp_field" >
+        </div>
+			<div class="inp_field" >
+            <label style="top:-5px;" for="memBirth">생년월일</label>
+             <input id="birthdate" type="date" name="memBirth" th:value="*{memBirth}">
+             </div>
+	
+		 <div class="inp_field" style="border:none;">
             <label style="top:-8px;" for="memBirth">MBTI</label>
        <div id="memMbti" onchange="checkMbti()">
-     	<select name="memMbti">
-        <option value="noMbti">MBTI 선택</option>
+     	<select name="memMbti" style="margin-top: 10px">
+        <option th:text="*{memMbti}"></option>
         <option value="ISTJ">ISTJ</option>
         <option value="ISTP">ISTP</option>
         <option value="ISFJ">ISFJ</option>
@@ -52,18 +69,23 @@
         
      
         <div >
-            <button  type="submit" onclick="return EditCheckAll()">수정</button>
+           	<button class="lg_submit" onclick="return confirm('수정 하시겠습니까?');" th:formaction="@{/member/myinfoEdit}">수정</button>
+        </div>
+         <div >
+          	<button class="lg_submit" onclick="return confirm('정말 탈퇴하시겠습니까?');" th:formaction="@{/memeber/withdrawal}" >회원 탈퇴</button>
         </div>
 
         <div >
-            <a type="button" onclick="window.history.back();">취소</a>
+          	<button class="lg_submit" onclick="window.history.back();">취소</button>
         </div>
 
     </form>
+    </div>
 
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script type="text/javascript" th:src="@{/js/Edit.js}"></script>
+<script type="text/javascript" src="/js/Edit.js"></script>
+
 
 </body>
 </html>

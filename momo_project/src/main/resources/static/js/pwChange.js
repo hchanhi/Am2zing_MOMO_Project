@@ -51,8 +51,8 @@ function pwSame() {
         return false;
     }
     //패스워드 조건 확인
-    if (password.length < 6) {
-        alert('패스워드는 6글자 이상이어야 합니다.');
+    if (password.length < 4) {
+        alert('패스워드는 4글자 이상이어야 합니다.');
         $("#password").focus();
         return false;
     }
@@ -78,13 +78,13 @@ function originalPwCheck(){
         success : function(result){
             console.log(result);
             if(result.result == "1"){
+				console.log(original_PwCheck);
                 original_PwCheck = 1;
-                 pw_original_msg.html("비밀번호가 일치합니다.");
-          		 pw_original_msg.css("color", "blue");
+            
             }else{
+				console.log(original_PwCheck);
                 original_PwCheck = 0;
-                 pw_original_msg.html("비밀번호가 다릅니다. 다시 확인해 주세요.");
-           		 pw_original_msg.css("color", "red");
+               
             }
         },
         error : function(){
