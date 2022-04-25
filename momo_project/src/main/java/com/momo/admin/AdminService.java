@@ -1,5 +1,6 @@
 package com.momo.admin;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -12,6 +13,7 @@ import com.momo.common.util.pagination.Paging;
 import com.momo.domain.Board;
 import com.momo.domain.Comment;
 import com.momo.domain.Member;
+import com.momo.member.MemberCustomRepository;
 
 
 @Service
@@ -19,6 +21,9 @@ public class AdminService {
 	
 	@Autowired
 	private AdminMemberRepository adminMemberRepository;
+	
+	@Autowired
+	private MemberCustomRepository memberCustomRepository;
 	
 	@Autowired
 	private AdminBoardRepository adminBoardRepository;
