@@ -63,7 +63,7 @@ input:focus {
 	
 #contents {
     float: right;
-    width: 1250px;
+    width: 1400px;
     height: 750px;
 
 }
@@ -71,10 +71,10 @@ input:focus {
 
 #placeimg {
     float: left;
-    width: 330px;
+    width: 350px;
     height: 250px;
     background-color: khaki;
-    border-radius: 20px;
+    border-radius: 10px;
     margin-top: 30px;
     margin-left: 30px;
 }
@@ -112,7 +112,7 @@ input:focus {
     width: 200px;
     height: 50px;
     background-color: lightpink;
-    border-radius: 20px;
+    border-radius: 10px;
 }
 .pagearea{
 	width: 1500px;
