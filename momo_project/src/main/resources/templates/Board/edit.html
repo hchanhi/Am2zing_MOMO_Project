@@ -46,7 +46,7 @@ html, body {
 	top: 0;
 	left: 0;
 	bottom: 0;
-	width: 250px;
+	width: 300px;
 	margin: 10px 0 30px 10px;
 	padding: 5px;
 	overflow-y: auto;
@@ -292,10 +292,10 @@ html, body {
 		    margin:5px;
 		    background-color: orange;
 		    border:3px solid rgb(255, 161, 28);
-		    border-radius: 20px;
+		    border-radius: 10px;
 		    font-size:18px;
 		    font-weight: bold;
-		    color: rgb(68, 68, 68);
+		    color: white;
 		    cursor:pointer;
     }
     .boardTitle{
@@ -304,6 +304,19 @@ html, body {
     	font-size: 20px;
     	text-align: center;
     }
+    .addbtn4{
+		margin:5px;
+	    width:70px;
+	    height:30px;
+	    background-color: orange;
+	    border:3px solid rgb(255, 161, 28);
+	    font-size:12px;
+	    font-weight: bold;
+	    color: rgb(68, 68, 68);
+	    cursor:pointer;
+	    color:white;
+	    border-radius:10px;
+}
 </style>
 </head>
 <body>
@@ -331,12 +344,12 @@ html, body {
 			<div id="wrapper">
 				<div class="map_wrap">
 					<div id="map"
-						style="width: 600px; height: 300px; position: relative; overflow: hidden;"></div>
+						style="width: 600px; height: 450px; position: relative; overflow: hidden;"></div>
 					<div id="menu_wrap" class="bg_white">
 						<div class="option">
 							<div>
 								키워드 : <input type="text" value="서울역" id="keyword" size="15">
-								<button onclick="searchPlaces(); return false;">검색하기</button>
+								<button class="addbtn4" onclick="searchPlaces(); return false;">검색하기</button>
 							</div>
 						</div>
 						<hr>
@@ -377,7 +390,7 @@ html, body {
 			<img style="width:200px; height:200px;" id="img" name="img">
 			<button id="imgBtn" class="addbtn3" onclick="javascript:fn_submit()">사진 추가</button>
 			</div>
-			<button id="submitBtn" class="addbtn" style="float:right;">장소 추가</button>
+			<button id="submitBtn" class="addbtn" style="float:right; color:white;">장소 추가</button>
 			<div id="placeImg"></div>
 			
 		</div>
@@ -718,7 +731,7 @@ function getListItem(index, places) {
     }
       itemStr += '  <span class="tel">' + places.phone + '</span>';      
                 
-       itemStr += '  <span class="sumitaddr">' + '<button onclick="close_modal()">선택하기</button>' + '</span>'; +
+       itemStr += '  <span class="sumitaddr">' + '<button class="addbtn4" onclick="close_modal()">선택하기</button>' + '</span>'; +
                 '</div>';                         
 	
     el.innerHTML = itemStr;
