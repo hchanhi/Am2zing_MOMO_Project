@@ -63,7 +63,7 @@ input:focus {
 	
 #contents {
     float: right;
-    width: 1250px;
+    width: 1400px;
     height: 750px;
 
 }
@@ -71,7 +71,7 @@ input:focus {
 
 #placeimg {
     float: left;
-    width: 330px;
+    width: 350px;
     height: 250px;
     background-color: khaki;
     border-radius: 20px;
