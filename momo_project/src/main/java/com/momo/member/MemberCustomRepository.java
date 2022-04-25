@@ -51,6 +51,7 @@ public class MemberCustomRepository {
                 .set(QMember.member.memEmail, member.getMemEmail() )
                 .set(QMember.member.memNickname, member.getMemNickname())
                 .set(QMember.member.memBirth, member.getMemBirth())
+                .set(QMember.member.memMbti, member.getMemMbti())
                 .set(QMember.member.memRole, member.getMemRole())
                 .where(QMember.member.memId.eq(member.getMemId()))
                 .execute();

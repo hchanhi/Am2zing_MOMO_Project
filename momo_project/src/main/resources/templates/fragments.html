@@ -39,12 +39,14 @@
 </head>
 <body>
 	<header th:fragment="flg_header" class="inner">
+
 		<div class="nav_bar">
 			<a href="/">
 				<img class="logo" alt="" src="/images/logo/MOMO_LOGO.png">
 			</a> 
 		
 		
+
 		<span class="user"> 
 		<!-- 익명의 사용자 --> 
 		
@@ -99,13 +101,23 @@
 
 
 		<div class="user">
-			<div class="dropdown">
-				<button class="dropbtn" ><img src="/images/membericon.png" alt="membericon"></button>
-				<div class="dropdown-content">
-					<a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/admin/member/member-list}">Admin page</a>
-					<a sec:authorize="isAuthenticated()" th:href="@{/logout}">로그아웃</a>
+			<div sec:authorize="hasRole('ROLE_ADMIN')">
+				<div class="dropdown">
+					<button class="dropbtn">
+						<img src="/images/membericon.png" alt="membericon">
+					</button>
+					<div class="dropdown-content">
+					<div sec:authorize="isAuthenticated()">
+						<p sec:authentication="principal.member.memNickname"></p>
+						</div>
+						<a th:href="@{/member/mypage}">마이페이지</a> 
+						<a th:href="@{/bookmark/board}">내북마크</a> 
+						<a th:href="@{/admin/member/member-list}">어드민</a>
+						<a th:href="@{/logout}">로그아웃</a>
+						
+					</div>
 				</div>
-			</div>
+				</div>
 		</div>
 	</header>
 
