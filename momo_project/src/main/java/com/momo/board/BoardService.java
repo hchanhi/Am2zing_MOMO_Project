@@ -41,6 +41,9 @@ public class BoardService {
 	@Autowired
 	private MemberCustomRepository memberCustomRepository;
 	
+	@Autowired
+	private MemberRepository memberReposityory;
+	
 	public Board save(String boardTitle, String memEmail) {
 		Board board = new Board();
 		Member member = memberCustomRepository.findByMemEmail(memEmail);
@@ -66,7 +69,7 @@ public class BoardService {
 				.total((int)boardRepository.count())
 				.cntPerPage(6)
 				.curPage(page)
-				.blockCnt(1)
+				.blockCnt(5)
 				.build();
 		
 		return Map.of("boards", boardList, "paging",paging);
@@ -94,5 +97,33 @@ public class BoardService {
 		 }
 		 boardRepository.deleteById(board.getBoardNum());
 	    }
-	
+	 
+	 //검색
+//	 @Transactional
+//	 public Map<String, Object> searchmbti(int page,String memMbti){
+//			List<Board> boardList = boardRepository.findByMemberMemMbti(memMbti, PageRequest.of(page-1, 6, Direction.DESC, "boardNum"));
+//			Paging paging = Paging.builder()
+//					.url("/board")
+//					.total((int)boardRepository.count())
+//					.cntPerPage(6)
+//					.curPage(page)
+//					.blockCnt(5)
+//					.build();
+//			
+//			return Map.of("boards", boardList, "paging",paging);
+//		}
+	 
+	 public Map<String, Object> getMbtiBoardList(int page, String memMbti){
+			List<Board> boardList = boardRepository.findByMemberMemMbti(memMbti, PageRequest.of(page-1, 6, Direction.DESC, "boardNum"));
+			
+			Paging paging = Paging.builder()
+					.url("/board/"+memMbti)
+					.total((int)boardRepository.count())
+					.cntPerPage(6)
+					.curPage(page)
+					.blockCnt(5)
+					.build();
+			
+			return Map.of("boards", boardList, "paging",paging);
+		}
 }

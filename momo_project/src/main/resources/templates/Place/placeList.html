@@ -21,10 +21,16 @@
 		    color: rgb(68, 68, 68);
 		    cursor:pointer;
     }
+    
+    table tbody td {
+		  border-top: 1rem solid;
+		  border-bottom: 1rem solid;
+		  border-color: transparent;
+}
 	</style>
 </head>
 <body>
-<div>
+<div style="height:700px; overflow:auto;">
     <table style="margin:auto; margin-top:50px;">
         <tr>
             <th style="font-size:35px; width:200px;">장소명</th>
@@ -33,10 +39,10 @@
         
         <tbody>
         <tr th:each="place : ${places}">
-            <td style="font-weight:bold; font-size:20px">
+            <td style="font-weight:bold; word-break:break-all; font-size:20px">
                 <span th:text="${place.placeTitle}"></span>
             </td>
-            <td style="text-align:center; font-size:17px;">
+            <td style="text-align:center; word-break:break-all; font-size:17px;">
                 <span th:text="${place.placeContent}"></span>
             </td>
             <td>
