@@ -10,17 +10,20 @@
 	<title>MOMO-글쓰기</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<style>
+	body {
+		 background: linear-gradient( to bottom,#FBD786, #C6FFDD);
+	}
 		.container{
 			display: grid;
 		 	place-items: center;
-		  	min-height: 100vh;
+		 	height: 90vh;
 		}
 		.addTitle {
 		    width:130px;
 		    height:60px;
-		    background-color: orange;
-		    border:3px solid rgb(255, 161, 28);
-		    border-radius: 20px;
+			background-color:  rgb(245, 188, 54);
+		    border:3px solid rgb(245, 188, 54);
+		    border-radius: 10px;
 		    font-size:18px;
 		    font-weight: bold;
 		    color: rgb(68, 68, 68);
@@ -42,14 +45,23 @@
     		display: grid;
 		 	place-items: center;
 		  	min-height: 20vh;
+		  	width:350px; height:400px;  	
+		  	box-shadow: 3px 3px 8px 3px gray; 
+		  	border-radius: 10px;
+		  	background-color:white;
 		  	}
+		  	#boardTitle {
+			border: solid 2px  rgb(245, 188, 54);
+			border-radius: 10px;
+		}
 	</style>
 </head>
 <body>
 <th:block th:replace="fragments :: flg_header"></th:block>
 <div class="container">
-    <form name="form" th:action="@{/post}" method="post" class="item">
-        <div class="center" style="width:300px; height:300px;">
+
+    <form  name="form" th:action="@{/post}" method="post" class="item">
+        <div class="center">
             <div class="title">제목</div>
             <div>
                 <input type="text" name="boardTitle" id="boardTitle"><span></span>
@@ -58,6 +70,7 @@
         </div>
         <input hidden name="memEmail" th:value="${#authentication.name}">
     </form>
+  
 </div>
 </body>
 </html>
