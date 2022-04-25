@@ -20,14 +20,13 @@
 
     <nav>
        
-            <div class="menu">
-                    <span class="logo"><a href="#">CodingLab</a></span>
-                </div>
+                 
+               
 
                 <ul class="nav-links">
-                <li><a href="/">MOMO</a></li>
+                <li><a href="/"></a></li>
                     <li>  <a th:href="@{/member/mypage}">내 정보 수정</a></li>
-                    <li>  <a th:href="@{/member/{memId}}"">내 게시물</a></li>
+                    <li>  <a th:href="@{/member/board(id=${member.memId})}">내 게시물</a></li>
                     <li> <a th:href="@{/board/myComment}">내 댓글</a></li>
                     <li> <a th:href="@{/member/pwdEdit}">패스워드 변경</a></li>
                    
