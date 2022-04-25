@@ -43,12 +43,12 @@ public class PlaceService {
 	private MemberCustomRepository memberCustomRepository;
 	
 	public List<Place> findAll() {
-		return this.placeRepository.findAll();
+		return placeRepository.findAll();
 	}
 	public List<Place> findByBoardNum(int boardNum){
 
 		Board board = boardRepository.findById((long) boardNum).get();
-		return this.placeRepository.findByBoard(board);
+		return placeRepository.findByBoard(board);
 	}
 	
 	public void save(String placeTitle, String placeLat, String placeLng,
