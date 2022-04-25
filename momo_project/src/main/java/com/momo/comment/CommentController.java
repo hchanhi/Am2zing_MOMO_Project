@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -28,6 +29,7 @@ import com.momo.board.BoardService;
 import com.momo.domain.Board;
 import com.momo.domain.Comment;
 import com.momo.domain.Place;
+import com.momo.member.PrincipalDetails;
 import com.momo.place.PlaceRepository;
 import com.momo.place.PlaceService;
 
@@ -50,7 +52,7 @@ public class CommentController {
 	
 	
 	@PostMapping("/commentList/{boardNum}")
-	public String commentList(@PathVariable("boardNum") int boardNum, @RequestBody Map<String,String> map, Model model) {
+	public String commentList(@PathVariable("boardNum") int boardNum, @RequestBody Map<String,String> map,Model model) {
 		commentService.update(map);
 		List<Comment> commentList = commentService.getCommentList(boardNum);
 		model.addAttribute("boardNum", boardNum);
@@ -68,7 +70,7 @@ public class CommentController {
 
 	 
 	 @DeleteMapping("/deleteComment/{replyNum}")
-	    public String delete(@PathVariable("replyNum") long replyNum, @RequestParam int boardNum, Model model) {
+	    public String delete(@PathVariable("replyNum") long replyNum, @RequestParam int boardNum,Model model) {
 	       commentService.delete(replyNum);
 	       List<Comment> comments = commentService.findByBoardNum(boardNum);
 	       model.addAttribute("comments", comments);

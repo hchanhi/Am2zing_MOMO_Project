@@ -1,21 +1,83 @@
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
-	<h3>닉네임</h3>
-	<!-- 
-	<div>[[${member.memNickname}]]</div>
-	-->
-	<button>닉네임 수정</button>
-	<h3>회원정보</h3>
-	<div>Email : [[${member.memEmail}]]</div>
-	<div>Mbti: [[${member.memMbti}]]</div>
-	<!--  
-	<div>[[${member.memBirth}]]</div>
-	-->
-	<button>회원삭제</button>
-</body>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <th:block th:replace="fragments :: flg_head"></th:block>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script
+      src="https://kit.fontawesome.com/5168478d86.js"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="/css/common.css" />
+    <link rel="stylesheet" href="/css/adminheader.css" />
+    <link rel="stylesheet" href="/css/member-detail.css" />
+    <title>admin member list</title>
+  </head>
+  <body>
+    <div class="inner">
+      <th:block th:replace="fragments :: flg_admin_header"></th:block>
+
+      <div class="all inner">
+        <aside>
+          <div
+            class="button_1"
+            onclick="location.href='/admin/member/member-list'"
+          >
+            회원관리
+          </div>
+          <div
+            class="button_2"
+            onclick="location.href='/admin/board/board-list'"
+          >
+            전체게시글관리
+          </div>
+          <div
+            class="button_3"
+            onclick="location.href='/admin/comment/comment-list'"
+          >
+            전체댓글관리
+          </div>
+        </aside>
+
+        <!--------------------end of aside------------------->
+
+        <section class="contents">
+          <div class="sec_left">
+            <div class="inner_left">
+              <div class="profile_box" style="background: #bdbdbd">
+                <img class="profile_img" src="/images/profile.png" />
+              </div>
+              <div class="nickname_box">
+                <input class="nickname" type="text" value="닉네임" />
+                <button type="button" class="btn_edit">
+                  <img class="btn_edit_img" src="/images/edit-icon.png" />
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="sec_right">
+            <div class="inner_right">
+              <div class="info">회원정보</div>
+              <div class="infos">
+                <div>
+                  <label for="email">이메일</label>
+                  <input class="email" type="text" name="email" id="email" value="admin@admin.com" readonly />
+                </div>
+                <div>
+                  <label for="mbti">MBTI</label>
+                  <input class="mbti" type="text" name="mbti" id="mbti" value="INTP" readonly/>
+                </div>
+                <div>
+                  <label for="birth">생년월일</label>
+                  <input class="birth" type="text" name="birth" id="birth" value="1997/05/12" readonly/>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </body>
 </html>
