@@ -74,7 +74,7 @@ public class MemberController {
 
 	@GetMapping("member/join")
 	public String join() {
-		return "Member/joinForm";
+		return "member/joinForm";
 	}
 	
 	//마이페이지
