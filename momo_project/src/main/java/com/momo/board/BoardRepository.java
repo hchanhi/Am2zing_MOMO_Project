@@ -4,12 +4,6 @@ import java.util.List;
 
 import org.springframework.data.domain.Pageable;
 
-<<<<<<< HEAD
-
-
-=======
-import org.springframework.data.domain.PageRequest;
->>>>>>> 345a3a6787ae3a0f37bb878fb48eb953fa217779
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
