@@ -3,6 +3,7 @@ package com.momo.config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
@@ -13,6 +14,8 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import com.momo.member.MemberLoginFail;
 import com.momo.member.MemberLoginSuccess;
+import com.momo.member.MemberService;
+import com.momo.member.PrincipalDetailsService;
 
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
@@ -24,6 +27,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 //	
 //	@Autowired
 //	private PrincipalOauth2UserService principalOauth2UserService;
+	
+	@Autowired
+	private PrincipalDetailsService principalDetailsService;
 	
 	@Bean
 	public BCryptPasswordEncoder encodePwd() {
@@ -44,8 +50,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		
 		
 		http.authorizeRequests()
-			.antMatchers("/user/**").authenticated()
-//			.antMatchers("/admin/**").access("hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
+			.antMatchers("/member/**").authenticated()
+			.antMatchers("/member/**").access("hasRole('ROLE_MEMBER')")
 //			.antMatchers("/admin/**").access("hasRole('ROLE_ADMIN') and hasRole('ROLE_USER')")
 			.antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')")
 			.anyRequest().permitAll()
@@ -91,7 +97,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
     	//web security 예외처리 해당 url은 인증이 없어도 접근 가능
         web.ignoring().antMatchers("/static/js/**","/static/css/**","/static/img/**","/static/frontend/**"); 
     }
-    
+
 }
 
 

@@ -155,7 +155,7 @@ public class MemberController {
     public String pwdUpdate(Authentication authentication,Member member) {
         member.setMemEmail(authentication.getName());
         memberService.passwordUpdate(member);
-        return "redirect:/account/logout";
+        return "redirect:/logout";
     }
 
     
@@ -166,7 +166,8 @@ public class MemberController {
         session.invalidate();
         return "redirect:/";
     }
-
+    
+  
 
 	
 	

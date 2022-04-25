@@ -2,12 +2,19 @@ package com.momo.member;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.momo.board.BoardRepository;
+import com.momo.common.util.pagination.Paging;
+import com.momo.domain.Board;
 import com.momo.domain.Member;
 
 import lombok.AllArgsConstructor;
@@ -19,6 +26,9 @@ public class MemberService {
 
 	@Autowired
 	private MemberRepository memberRepository;
+	
+	@Autowired
+	private BoardRepository boardRepository;
 	
 	@Autowired
 	private MemberCustomRepository memberCustomRepository;
@@ -54,14 +64,7 @@ public class MemberService {
         return map;
     }
 	
-	//패스워드 변경 전 기존 패스워드 검사
-    public HashMap<String, Object> pwCheck(Authentication authentication, String original_Pw) {
-        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        String db_Pw = memberInfo(authentication.getName()).getMemPassword();
-        HashMap<String, Object> map = new HashMap<>();
-        map.put("result", passwordEncoder.matches(original_Pw, db_Pw));
-        return map;
-    }
+	
     
     //마이페이지 정보 
     public Member mypage(String memEmail) {
@@ -74,7 +77,16 @@ public class MemberService {
         memberCustomRepository.updateMember(member);
     }
     
-  //패스워드 변경
+    //패스워드 변경 전 기존 패스워드 검사
+    public HashMap<String, Object> pwCheck(Authentication authentication, String original_Pw) {
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        String db_Pw = memberInfo(authentication.getName()).getMemPassword();
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("result", passwordEncoder.matches(original_Pw, db_Pw));
+        return map;
+    }
+    
+    //패스워드 변경
     public void passwordUpdate(Member member) {
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         member.setMemPassword(passwordEncoder.encode(member.getMemPassword()));
@@ -85,4 +97,8 @@ public class MemberService {
     public void deleteMember(Long memId) {    
         memberRepository.deleteById(memId);
     }
-}
+    
+ 
+		
+	}
+
