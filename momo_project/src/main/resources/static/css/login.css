@@ -69,6 +69,7 @@ body {
 	position: center;
 	border-bottom: 2px solid #000;
 	margin: 30px 0;
+	
 }
 
 form .inp_field {
@@ -96,6 +97,7 @@ form .inp_field {
 	font-size: 16px;
 	pointer-events: none;
 	transition: 0.5s;
+	top: -5px;
 }
 
 .inp_field span::before {
@@ -108,8 +110,14 @@ form .inp_field {
 	background: #585858;
 	transition: 0.5s;
 }
+.login_error{
+	text-align: center;
+	margin : 10px auto;
+	font-size: 1.5rem;
+	color: red;
+}
 
-.inp_field input:focus ~ label, .inp_field input:valid ~ label{
+/* .inp_field input:focus ~ label, .inp_field input:valid ~ label{
 	top: -5px;
 	color: #585858;
 }
@@ -122,7 +130,7 @@ form .inp_field {
 	{
 	width: 100%;
 }
-
+ */
 .forgot {
 	width: 100%;
 	display: flex;
@@ -146,6 +154,7 @@ form .inp_field {
 	color: #ddd;
 	font-weight: bold;
 	outline: none;
+	margin-bottom: 15px
 }
 
 .lg_submit:hover {

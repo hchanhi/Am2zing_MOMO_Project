@@ -1,7 +1,7 @@
 <!--회원가입 페이지-->
 <!--signup.html-->
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
  
   <head>
     <meta charset="UTF-8" />
@@ -16,14 +16,14 @@
     <body class="login_body">
     <div class="login_main">
       <h1>회원가입</h1>
-       <form method="post" th:action="@{/joinProc}" th:object="${register}" onsubmit="return checkAll();">
+       <form method="post"  th:action="@{/joinProc}" th:object="${join}" onsubmit="return checkAll();">
         <div>
         <div class="inp_field">
-         <input type="text" id="memNickname" name="memNickname" required autocomplete="off">
+         <input type="text" id="memNickname" name="memNickname" autocomplete="off">
           <span></span>
           <label>닉네임</label>
           </div>
-          <div class="inp_field">
+          <div class="inp_field" style="margin-top:-15px;">
         <input type="button" id="memNicknameOverlay" onclick="memNicknameCheck()" value="중복 체크"/>
         <input type="button" id="resetMemNickname" onclick="reMemNickname()"  style = "display:none;" disabled value="다시입력"/>
         </div>
@@ -31,24 +31,24 @@
         </div>
 		<div>
         <div class="inp_field">
-        <input type="email"  id="memEmail" name="memEmail"   required autocomplete="off" >
+        <input type="email"  id="memEmail" name="memEmail"   autocomplete="off" >
          <span></span>
          <label>이메일</label>
          </div>
-          <div class="inp_field">
+          <div class="inp_field" style="margin-top:-15px;">
         <input type="button" id="memEmailOverlay" onclick="memEmailCheck()" value="중복 체크"/>
         <input  type="button" id="resetMemEmail" onclick="reMemEmail()" style = "display:none;" disabled value="다시입력"/>
         </div>
           </div>
         
           <div class="inp_field">
-    	  <input onchange="pwSame()" type="password" id="memPassword" name="memPassword" required autocomplete="off"> 
+    	  <input onchange="pwSame()" type="password" id="memPassword" name="memPassword"  autocomplete="off"> 
             <span></span>
             <label>비밀번호 4 ~ 12자의 영문과 숫자로만 입력</label>
           </div>
            <div class="inp_field">
     	 	
-			<input onkeyup="pwSame()" type="password" id="memPassword_Check" name="memPassword_Check" required autocomplete="off">
+			<input onkeyup="pwSame()" type="password" id="memPassword_Check" name="memPassword_Check" autocomplete="off">
             <span></span>
             <label>비밀번호 확인</label>
           </div>
@@ -122,15 +122,17 @@
         	<div class="signup_link">이미 회원이신가요?
          	 <a href="/member/login">로그인 하기</a>
         </div>
+            </form>
         </div>
-      </form>
+  
       
-      </div>
+      
+      
       
         
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-	<script type="text/javascript" src="/js/signup.js"></script>
+	<script type="text/javascript" src="/js/join.js"></script>
    
   </body>
 </html>

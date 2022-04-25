@@ -37,6 +37,7 @@ public class DumpMember implements CommandLineRunner{
                 .memNickname("aaaa")
                 .memMbti("INFP")
                 .memPassword(encPassword1)
+                .memBirth("1995-01-17")
                 .memRole("ROLE_MEMBER")
                 .build());
                 }

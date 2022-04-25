@@ -1,5 +1,7 @@
 package com.momo.member;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Repository;
@@ -26,13 +28,20 @@ public class MemberCustomRepository {
 
 
     //본인 제외한 닉네임 중복 검사
-    public QueryResults<String> findExistMemNickname(Long memId) {
-        return queryFactory.select(QMember.member.memNickname)
-                .from(QMember.member)
-                .where(QMember.member.memId.ne(memId))
-                .fetchResults();
-               
+   public List<String> findExistMemNickname(Long memId){
+	   return queryFactory.select(QMember.member.memNickname)
+			   .from(QMember.member)
+			   .where(QMember.member.memId.ne(memId))
+			   .fetch();
     }
+   
+   //본인것 제외한 닉네임 찾기
+   public QueryResults<String> findExistNickname(Long id) {
+       return queryFactory.select(QMember.member.memNickname)
+               .from(QMember.member)
+               .where(QMember.member.memId.ne(id))
+               .fetchResults();
+   }
 
     /*회원정보 수정*/
     @Transactional
@@ -53,16 +62,6 @@ public class MemberCustomRepository {
                 .set(QMember.member.memPassword, member.getMemPassword())
                 .where(QMember.member.memEmail.eq(member.getMemEmail()))
                 .execute();
-    }
-
-    private BooleanExpression eqSearchType(String searchType, String keyword){
-        if(!keyword.equals("")){
-            switch (searchType) {
-                case "memNickname":
-                    return QMember.member.memNickname.contains(keyword);
-            }
-        }
-        return null;
     }
 
 

@@ -86,7 +86,15 @@
 						<textarea placeholder="댓글을 입력해주세요" name="replyContent" id="replyContent"></textarea>
 						<input hidden type="number" id="boardNum" name="boardNum" th:value="${boardNum}">
 
+
 					</div>
+
+	<hr>
+
+	<div style="text-align: center;">
+		<form method="post" action="/place/reply?cmd=save">
+			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+
 
 				</form>
 
@@ -118,8 +126,6 @@
 	<script type="text/javascript"
 		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a7b5481a65eecc18bd2cc1106898f604&libraries=services"></script>
 	<script th:inline="javascript">
-
-
 
 
 
@@ -217,6 +223,7 @@
 		for (var x = 0; x < img.length; x++) {
 			img.item(x).onclick = function () {window.open(this.src);};
 		}
+
 		
 		//댓글 장소 체인지 버튼
 		$('button.hide1').click(function () {
@@ -224,6 +231,7 @@
 		});
 		
 	
+
 		//댓글저장
 		$('#btnSave').click(function () {
 			var mem = $('input[name="memEmail"]').val();
