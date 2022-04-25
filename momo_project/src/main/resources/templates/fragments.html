@@ -39,18 +39,17 @@
 </head>
 <body>
 	<header th:fragment="flg_header" class="inner">
-		<div>
 		<a href="/">
-			<img class="logo" alt="" src="/images/MOMO_LOGO.png">
+			<!--  <img class="logo" alt="" src="/images/MOMO_LOGO.png">-->
+			<span>MOMO</span>
 		</a> 
-		</div>
 		
 		<span class="user"> 
 		<!-- 익명의 사용자 --> 
 		
 		<div class=before_login sec:authorize="isAnonymous()">
 			<a th:href="@{/member/login}" class="login">로그인</a>
-			&nbsp/&nbsp
+			&nbsp;/&nbsp;
 			<a th:href="@{/member/join}" class="signup">회원가입</a> 
 		</div>
 		<!-- 로그인한 사용자 -->

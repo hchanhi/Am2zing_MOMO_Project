@@ -89,7 +89,7 @@ header {
     background-color: #f9f9f9;
     min-width: 160px;
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-    border-radius: 20px;
+    border-radius: 10px;
     z-index: 1;
 }
 
@@ -102,7 +102,7 @@ header {
 
 .dropdown-content a:hover {
     background-color: #f1f1f1;
-    border-radius: 20px;
+    border-radius: 10px;
 }
 
 .dropdown:hover .dropdown-content {
@@ -115,7 +115,7 @@ header {
 section {
     width: 100%;
     height: 800px;
-    border-radius: 20px;
+    border-radius: 10px;
 
 
     background: linear-gradient(90deg, #e1e1e1 50%, #fbffd7 50%);
@@ -142,7 +142,7 @@ section {
     height: 70px;
     background-color: rgb(203, 203, 203);
     border: 3px solid rgb(187, 187, 187) ;
-    border-radius: 20px;
+    border-radius: 10px;
     font-size: 20pt;
     font-weight: bold;
     text-align: center;
@@ -156,12 +156,12 @@ section {
     width: 500px;
     height: 50px;
     border: 0;
-    border-radius: 20px;
+    border-radius: 10px;
     background-color: rgb(134, 190, 126);
     color: rgb(68, 68, 68);
     font-size: 15pt;
     font-weight: bold;
-    margin: 0 auto 20px auto;
+    margin: 20px auto 20px auto;
     text-align: center;
     cursor: pointer;
     
@@ -184,7 +184,7 @@ section {
     height:130px;
     margin-left: 40px;
     border:3px solid rgb(143, 143, 143);
-    border-radius: 20px;
+    border-radius: 10px;
     cursor: pointer;
 }
 
@@ -233,7 +233,6 @@ section {
 .comment2{
     margin:0 40px 0 40px;
     padding-left:10px;
-    padding-top:10px;
     border: 3px solid rgb(187, 187, 187) ;
     border-radius: 10px;
     background-color: rgb(203, 203, 203);
@@ -256,7 +255,7 @@ section {
     height: 17%;
     background-color: rgba(255,255,255,1);
     /* 스크롤바 둥글게 설정    */
-    border-radius: 20px;    
+    border-radius: 10px;    
 }
 
 /* 스크롤바 뒷 배경 설정*/
@@ -278,7 +277,7 @@ section {
     height:50px;
     background-color: orange;
     border:3px solid rgb(255, 161, 28);
-    border-radius: 20px;
+    border-radius: 10px;
     font-size:18px;
     font-weight: bold;
     color: rgb(68, 68, 68);
@@ -286,29 +285,30 @@ section {
 }
 
 .addbtn2{
-
+	margin-left:10px;
     float:right;
     width:100px;
     height:50px;
     background-color: orange;
     border:3px solid rgb(255, 161, 28);
-    border-radius: 20px;
+    border-radius: 10px;
     font-size:18px;
     font-weight: bold;
-    color: rgb(68, 68, 68);
+    color: white;
     cursor:pointer;
 }
 
 
 .addbtn3{
+	margin:5px;
     width:100px;
     height:40px;
     background-color: orange;
     border:3px solid rgb(255, 161, 28);
-    border-radius: 20px;
+    border-radius: 10px;
     font-size:18px;
     font-weight: bold;
-    color: rgb(68, 68, 68);
+    color: white;
     cursor:pointer;
 }
 
@@ -321,6 +321,7 @@ section {
     width: calc(100%/2);
     height: 100%;
     background-color: rgb(237, 237, 177);
+    border-radius: 10px;
 
 }
 /* 
@@ -335,7 +336,7 @@ section {
     height: 150px;
     text-align: center;
     border: 3px solid rgb(187, 187, 187);
-    border-radius: 20px;
+    border-radius: 10px;
 }
 
 
@@ -357,7 +358,7 @@ section {
     left:0;
     background-color: rgb(203, 203, 203);
     border: 3px solid rgb(187, 187, 187) ;
-    border-radius: 20px;
+    border-radius: 10px;
     font-size:18px;
     font-weight: bold;
     color: rgb(68, 68, 68);
@@ -370,7 +371,7 @@ section {
     height:50px;
     background-color: rgb(203, 203, 203);
     border: 3px solid rgb(187, 187, 187) ;
-    border-radius: 20px;
+    border-radius: 10px;
     font-size:18px;
     font-weight: bold;
     color: rgb(68, 68, 68);
