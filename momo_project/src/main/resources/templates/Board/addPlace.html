@@ -3,6 +3,7 @@
 <html xmlns:th="http://www.thymelaf.org" lang="ko" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
+	<th:block th:replace="fragments :: flg_head"></th:block>
 	<meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -295,8 +296,9 @@
 </head>
 
 <body>
-	
+	<th:block th:replace="fragments :: flg_header"></th:block>
 	<section class="inner">
+		
         <div class="sec_left">
 			<div>
 				<button class="locationbtn" onclick="writeplaycard()">검색하기</button>
