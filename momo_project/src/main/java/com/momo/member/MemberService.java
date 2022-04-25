@@ -112,6 +112,20 @@ public class MemberService {
 		
 		return Map.of("boards", boardList, "paging",paging);
 	}
+    //내가쓴 ektrmf
+    public Map<String, Object> getMemComList(int page, Long memId){
+		List<Board> boardList = boardRepository.findByMemberMemId(memId, PageRequest.of(page-1, 6, Direction.DESC, "boardNum"));
+		
+		Paging paging = Paging.builder()
+				.url("/board/"+memId)
+				.total((int)boardRepository.count())
+				.cntPerPage(6)
+				.curPage(page)
+				.blockCnt(5)
+				.build();
+		
+		return Map.of("boards", boardList, "paging",paging);
+	}
     
  
 		
