@@ -3,17 +3,22 @@ header {
     /* background-color: rgb(212, 212, 212); */
 }
 
+.nav_bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .logo {
-    float: left;
-    color: orangered;
-   	width: 80px;
-    font-size: 40pt;
-    margin: 10px 0px 0px 0px;
+    display: flex;
+   	width: 100px;
+   	padding-bottom: 10px
+
 }
 
 .user {
-    float: right;
-    padding-top:50px;
+    display:flex;
+  	font-size: 14px
 }
 
 .before_login {

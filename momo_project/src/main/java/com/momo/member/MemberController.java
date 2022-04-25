@@ -99,7 +99,7 @@ public class MemberController {
     @PostMapping("member/myinfoEdit")
     public String memberUpdate(Member member) {
         memberService.updateMember(member);
-        return "redirect:/";
+        return "member/mypage";
     }
 
 	//회원가입 진행
@@ -168,10 +168,19 @@ public class MemberController {
         return "redirect:/";
     }
     
-    @GetMapping("/member/{memId}")
-	public String mbtiBoard(@PathVariable("memId")Long memId, Model model,
+    // 내가쓴 글
+    @GetMapping("/member/board")
+	public String memBoard(@RequestParam(value="id")Long memId, Model model,
 			@RequestParam(required = false, defaultValue = "1") int page) {
 		model.addAllAttributes(memberService.getMemBoardList(page, memId));
+		return "member/list";
+	}
+    
+ // 내가쓴 댓글
+    @GetMapping("/member/comment")
+	public String memComment(@RequestParam(value="id")Long memId, Model model,
+			@RequestParam(required = false, defaultValue = "1") int page) {
+		model.addAllAttributes(memberService.getMemComList(page, memId));
 		return "member/list";
 	}
   
