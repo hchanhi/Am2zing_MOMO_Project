@@ -17,6 +17,8 @@ public interface BoardRepository extends JpaRepository<Board, Long>{
 	List<Board> findByMember(Member member);
 	
 	List<Board> findByMemberMemMbti(String memMbti, Pageable pageale);
+	
+	List<Board> findByMemberMemId(Long memId, Pageable pageale);
 
 
 }

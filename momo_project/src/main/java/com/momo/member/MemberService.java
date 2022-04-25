@@ -98,6 +98,21 @@ public class MemberService {
         memberRepository.deleteById(memId);
     }
     
+    //내가쓴 게시글
+    public Map<String, Object> getMemBoardList(int page, Long memId){
+		List<Board> boardList = boardRepository.findByMemberMemId(memId, PageRequest.of(page-1, 6, Direction.DESC, "boardNum"));
+		
+		Paging paging = Paging.builder()
+				.url("/board/"+memId)
+				.total((int)boardRepository.count())
+				.cntPerPage(6)
+				.curPage(page)
+				.blockCnt(5)
+				.build();
+		
+		return Map.of("boards", boardList, "paging",paging);
+	}
+    
  
 		
 	}
