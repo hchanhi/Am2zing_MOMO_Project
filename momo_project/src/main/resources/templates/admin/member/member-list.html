@@ -10,19 +10,19 @@
       crossorigin="anonymous"
     ></script>
     <link rel="stylesheet" href="/css/common.css" />
-    <link rel="stylesheet" href="/css/adminheader.css" />
+    <link rel="stylesheet" href="/css/sidebutton.css" />
     <link rel="stylesheet" href="/css/admin-list.css" />
+    <link rel="stylesheet" href="/css/fragment.css" />
     <title>admin member list</title>
+    <th:block th:replace="fragments :: flg_header"></th:block>
   </head>
   <body>
     <div class="inner">
-      <th:block th:replace="fragments :: flg_admin_header"></th:block>
-
-      <div class="all inner">
+      <div class="all">
         <aside>
-			<div class="button_1" onclick="location.href='/admin/member/member-list'">회원관리</div>
+			      <div class="button_1" onclick="location.href='/admin/member/member-list'">회원관리</div>
             <div class="button_2" onclick="location.href='/admin/board/board-list'">전체게시글관리</div>
-			<div class="button_3" onclick="location.href='/admin/comment/comment-list'">전체댓글관리</div>
+			      <div class="button_3" onclick="location.href='/admin/comment/comment-list'">전체댓글관리</div>
         </aside>
 
         <!--------------------end of aside------------------->
@@ -45,10 +45,7 @@
                   <span th:text="*{memMbti}"></span>
                   <span th:text="*{memBirth}"></span>
                   <span>
-                    <a
-                      th:href="@{/admin/member/member-detail/{id}(id = ${member.memId})}"
-                      >view</a
-                    >
+                    <a th:href="@{/admin/member/member-detail/{id}(id = ${member.memId})}">view</a>
                   </span>
                 </div>
               </th:block>
