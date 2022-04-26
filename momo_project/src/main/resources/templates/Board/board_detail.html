@@ -87,7 +87,7 @@
 
 
 					<div class="">
-						<textarea placeholder="댓글을 입력해주세요" name="replyContent" id="replyContent"></textarea>
+						<textarea placeholder="댓글을 입력해주세요" name="commentContent" id="commentContent"></textarea>
 						<input hidden type="number" id="boardNum" name="boardNum" th:value="${boardNum}">
 
 
@@ -248,14 +248,14 @@
 				var tempData = {
 
 					"boardNum": $('input[name="boardNum"]').val(),
-					"replyContent": $('#replyContent').val(),
+					"commentContent": $('#commentContent').val(),
 					"memEmail": $('input[name="memEmail"]').val()
 
 
 				};
 				console.log(tempData);
-				var reply = $('#replyContent').val();
-				if (reply != "") {
+				var comment = $('#commentContent').val();
+				if (comment != "") {
 					$.ajax({
 						url: "/commentList/" + boardNum,
 						type: "POST",
@@ -264,9 +264,9 @@
 						data: JSON.stringify(tempData),
 						success: function (data) {
 
-							$('#replyContent').val();
+							$('#commentContent').val();
 							$('#resDiv').html(data);
-							$('textarea[name="replyContent"]').val("");
+							$('textarea[name="commentContent"]').val("");
 						},
 						error: function () {alert("에러 발생");}
 
@@ -277,33 +277,7 @@
 
 
 		});
-		$(document).on("click", "#deleteComment", function () {
-
-
-			let item = $(this);
-			let replyNum = item.attr("data-replyNum");
-			//let replyNum = document.getElementById("replyNum").value;
-			$.ajax({
-				method: 'Delete',
-				url: '/deleteComment/' + replyNum,
-				async: false,
-				contentType: "application/json; charset=UTF-8",
-				data: {"replyNum": replyNum},
-				success: function (data) {
-
-					$('#resDiv').html(data);
-					window.alert("삭제가 완료가 확인 되었습니다.");
-					document.location.reload(true);
-
-
-				},
-				error: function (data) {
-					console.dir(data);
-
-				}
-			});
-
-		});
+		
 		//새로고침 유지
 		$(document).ready(function () {
 
@@ -315,7 +289,7 @@
 
 			};
 			console.log(tempData);
-			var reply = $('#replyContent').val();
+			var comment = $('#commentContent').val();
 
 			$.ajax({
 				url: "/commentList02/" + boardNum,
@@ -325,7 +299,7 @@
 				data: JSON.stringify(tempData),
 				success: function (data) {
 
-					$('#replyContent').val();
+					$('#commentContent').val();
 					$('#resDiv').html(data);
 
 				}

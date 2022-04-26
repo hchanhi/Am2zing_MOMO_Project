@@ -44,14 +44,14 @@ public class CommentService {
 		return this.commentRepository.findByBoard(board);
 	}
 	
-	public void save(String replyContent, int boardNum, String memEmail) {
+	public void save(String commentContent, int boardNum, String memEmail) {
 	      Board board = boardRepository.findById((long) boardNum).get();
 	      Member member = memberCustomRepository.findByMemEmail(memEmail);
 	 
 
 
 	      Comment comment = new Comment();
-	      comment.setReplyContent(replyContent);
+	      comment.setCommentContent(commentContent);
 	      comment.setBoard(board);
 	      comment.setMember(member);
 	 
@@ -60,24 +60,19 @@ public class CommentService {
 	   }
 
 	
-	public void deleteComment(Long replyNum) {
-        commentRepository.deleteById(replyNum);// 3
-    }
-	public void deleteComment02(Long replyNum) {
-        commentRepository.deleteById(replyNum); // 3
-    }
+
 	 public ResponseEntity<?> update(Map<String,String> map) {
 	      
 	      Map<String, String> tempMap=new HashMap<>();
 	   
-	      String replyContent = map.get("replyContent");
+	      String commentContent = map.get("commentContent");
 	      String memEmail = map.get("memEmail");
 	
 	      int boardNum = Integer.parseInt(map.get("boardNum"));
-	      this.save(replyContent, boardNum, memEmail);
+	      this.save(commentContent, boardNum, memEmail);
 	      
 	      try {      
-	         tempMap.put("replyContent", map.get("replyContent"));          
+	         tempMap.put("commentContent", map.get("commentContent"));          
 	      } catch(Exception e) {
 	         return new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
 	      }
@@ -85,8 +80,8 @@ public class CommentService {
 	   }
 	   
 
-	public void delete(Long replyNum) {
-		commentRepository.deleteById((long) replyNum);
+	public void delete(Long commentNum) {
+		commentRepository.deleteById((long) commentNum);
 	}
 	public List<Comment> getCommentList(int boardNum){
 		Board board = boardRepository.findById((long) boardNum).get();
@@ -94,13 +89,7 @@ public class CommentService {
 		return commentList;
 	}
 	
-	public void deleteComment02(List<String> replyNumArray) {
-		 for(int i=0; i<replyNumArray.size(); i++) {
-	            String replyNum = replyNumArray.get(i);
-	            Optional<Comment> optional = commentRepository.findById(Long.parseLong(replyNum));
-	            
-	        }
-	    }
+
 
 	
 	

@@ -45,11 +45,6 @@ public class CommentController {
 	@Autowired
 	private CommentRepository commentRepository;
 	
-	@GetMapping("/addComment")
-	public String MapTest05() {
-		return "comment/test03";
-	}
-	
 	
 	@PostMapping("/commentList/{boardNum}")
 	public String commentList(@PathVariable("boardNum") int boardNum, @RequestBody Map<String,String> map,Model model) {
@@ -57,24 +52,24 @@ public class CommentController {
 		List<Comment> commentList = commentService.getCommentList(boardNum);
 		model.addAttribute("boardNum", boardNum);
 		model.addAttribute("comments", commentList);
-		return "comment/commentList";
+		return "comment/comment_commentList";
 	}
 
 	@PostMapping("/commentList02/{boardNum}")
 	public String commentList02(@PathVariable("boardNum") int boardNum, Model model) {
 		List<Comment> commentList = commentService.getCommentList(boardNum);
 		model.addAttribute("comments", commentList);
-		return "comment/commentList";
+		return "comment/comment_commentList";
 	}
 	
 
 	 
-	 @DeleteMapping("/deleteComment/{replyNum}")
-	    public String delete(@PathVariable("replyNum") long replyNum, @RequestParam int boardNum,Model model) {
-	       commentService.delete(replyNum);
+	 @DeleteMapping("/deleteComment/{commentNum}")
+	    public String delete(@PathVariable("commentNum") long commentNum, @RequestParam int boardNum,Model model) {
+	       commentService.delete(commentNum);
 	       List<Comment> comments = commentService.findByBoardNum(boardNum);
 	       model.addAttribute("comments", comments);
-	       return "comment/commentList";
+	       return "comment/comment_commentList";
 	    }
 }
 
