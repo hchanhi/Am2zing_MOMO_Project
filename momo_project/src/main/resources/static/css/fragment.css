@@ -20,12 +20,19 @@ image-rendering: crisp-edges;
 -ms-interpolation-mode: nearest-neighbor; /* IE (non-standard property) */
 }
 
+
+
 .nav_bar {
 
   display: flex;
   justify-content: space-between;
   align-items: center;
   
+}
+
+.nav_inner{
+	width: 1200px;
+	margin: 0 auto;
 }
 
 .logo {

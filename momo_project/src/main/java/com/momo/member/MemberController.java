@@ -87,13 +87,13 @@ public class MemberController {
         return "Member/mypage";
     }
 	
-//	//저장한 게시글
-//	@GetMapping("bookmark/board") 
-//	public String goMyboardBookmark(@AuthenticationPrincipal PrincipalDetails principal, Model model) {
-//		Member member = principal.getMember();
-//		model.addAttribute("boardBookmarks", boardBookMarkService.findAllByMember(member));
-//		return "Member/boardBookmark"; 
-//		} 
+	//저장한 게시글
+	@GetMapping("bookmark/board") 
+	public String goMyboardBookmark(@AuthenticationPrincipal PrincipalDetails principal, Model model, int page) {
+		Member member = principal.getMember();
+		model.addAttribute("boardBookmarks", boardBookMarkService.findAllByMember(member, page));
+		return "Member/boardBookmark"; 
+		} 
 	
 	 //내정보 수정
     @PostMapping("member/myinfoEdit")

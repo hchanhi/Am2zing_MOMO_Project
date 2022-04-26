@@ -1,16 +1,17 @@
 /* ===== Google Font Import - Poppins ===== */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
 
 *{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
+    font-family: sans-serif;
     transition: all 0.4s ease;;
 }
 
-
-/* ===== Colours ===== */
+ol, ul {
+	padding-left: 0;
+}
 
 
 body{
@@ -19,13 +20,13 @@ body{
 }
 
 
-nav{
+.sidebar{
     position: fixed;
-    top: 0;
+    top: 100px;
     left: 0;
-    height: 70px;
+    height: 100px;
     width: 20%;
-    background-color: var(--nav-color);
+  
     z-index: 100;
 }
 
