@@ -116,7 +116,7 @@ public class PlaceService {
 	
 	public String upload(MultipartFile multi, HttpServletRequest request,
 			HttpServletResponse response, Model model) {
-		String path = new File("").getAbsolutePath()+"\\src\\main\\resources\\static\\images\\";
+		String path = new File("").getAbsolutePath()+"\\src\\main\\resources\\static\\images\\place\\";
 		String url = null;
 		try {
 			String uploadpath = path;
@@ -132,14 +132,14 @@ public class PlaceService {
 				multi.transferTo(file);
 				model.addAttribute("fileName", multi.getOriginalFilename());
 				//model.addAttribute("uploadPath", file.getAbsolutePath());
-				model.addAttribute("uploadPath", "/images/"+name);
+				model.addAttribute("uploadPath", "/images/place/"+name);
 				//return file.getAbsolutePath();
-				return "Board/board_filePath";
+				return "Board/board_filepath";
 			}
 		} catch(Exception e){
 			
 		}
-		return "Board/board_filePath";
+		return "Board/board_filepath";
 	}
 	
 	private String genSaveFileName(String extName) {

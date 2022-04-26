@@ -113,7 +113,10 @@ $(document).on('click', '#profileImg', function () {
   $('#file1').trigger('click');
 
 });
+$(document).on('click', '#editbtn', function () {
+  $('#editsubmit').trigger('click');
 
+});
 //파일선택 버튼 대신 이미지 클릭해서 파일 첨부 (javascript)
 
 
