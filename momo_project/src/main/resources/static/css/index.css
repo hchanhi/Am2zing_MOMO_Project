@@ -119,6 +119,8 @@ table {
 .cards img {
     border-radius: 20px;
     cursor: pointer;
+    width: 420px;
+    height: 300px;
 }
 
 .cards img:hover{
