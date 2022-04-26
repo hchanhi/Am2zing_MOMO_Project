@@ -184,7 +184,7 @@ public class MemberController {
 	public String memComment(@RequestParam(value="id")Long memId, Model model,
 			@RequestParam(required = false, defaultValue = "1") int page) {
 		model.addAllAttributes(memberService.getMemComList(page, memId));
-		return "member/list";
+		return "member/commnet-list";
 	}
   
 

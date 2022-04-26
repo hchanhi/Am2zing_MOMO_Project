@@ -6,15 +6,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://kit.fontawesome.com/5168478d86.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="/css/list.css">
+    <link rel="stylesheet" href="/css/boardList.css">
 	<title>MOMO-게시판</title>
 </head>
 <body>
 <div class="inner">
 	<th:block th:replace="fragments :: flg_header"></th:block>
 	<!--end of header-->
-    <div class="mbtiarea">
-	    <div class="mbti">
+    <div class="list_area" th:object="${member}">
+	    <div class="list_name">
 	    <span th:if="${memId!=null}" th:text="${memNickname}"></span>
 	    <span th:if="${memId==null}" th:text="전체"></span>
 	    </div>
@@ -45,48 +45,11 @@
        		</div>
    		</div>	
     </div>
-   
-    <!-- 
-    <table>
-        <tbody style="height:500px;">
-        <tr th:each="board : ${boards}">
-            <td>
-            	<span>제목</span><br>
-                <a th:href="@{'/post/' + ${board.boardNum}}">
-                    <span th:text="${board.boardTitle}"></span>
-                </a>
-            </td>
-            <td>
-            	<span>작성자</span><br>
-                <span th:text="${board.member.memNickname}"></span>
-            </td>
-            <td>
-            	<span>MBTI</span><br>
-            	<span th:text="${board.member.memMbti}"></span>
-            </td>
-            <td>
-            	<span>조회수</span><br>
-            	<span th:text="${board.placeCnt}"></span>
-            </td>
-        </tr>
-        </tbody>
-    </table>
-     -->
-    <!-- 
-    <form action="/board/search" method="get">
-	    <div>
-	    	<input name="keyword" type="text">
-	    	<button> 검색하기 </button>
-	    </div>
-	   
-    </form>
-     -->
+  
      <div class="pagearea">
      	
     	<div th:replace="fragments :: paging"></div>
-	    <div class="post">
-	        <a th:href="@{/postBoard}" role="button"><button class="btn">+</button></a>
-	    </div>
+	   
     </div>
 </div>
 </body>
