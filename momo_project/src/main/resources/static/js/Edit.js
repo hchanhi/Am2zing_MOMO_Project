@@ -73,7 +73,7 @@ function modifyCheckAll(){
 function memNicknameCheck() {
 	const memNickname = $('#memNickname').val();
 	if (memNickname == '') {
-		alert('닉네임을 입력해주세요!. 필수항목입니다.');
+		alert('닉네임을 입력해주세요!');
 		$('#memNickname').focus();
 		return false;
 	}

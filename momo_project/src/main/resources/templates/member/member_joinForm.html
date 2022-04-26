@@ -1,13 +1,14 @@
 <!--회원가입 페이지-->
 <!--signup.html-->
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="ko">
+<html xmlns:th="http://www.thymeleaf.org">
  
   <head>
     <meta charset="UTF-8" />
     <title>회원가입</title>
     <link rel="stylesheet" href="/css/login.css"/>
-    
+     <link rel="stylesheet" href="/css/fragment.css">
+   <th:block th:replace="fragments :: flg_header"></th:block>
     <!-- default header name is X-CSRF-TOKEN -->
     <meta id="_csrf" name="_csrf" th:content="${_csrf.token}"/>
     <meta id="_csrf_header" name="_csrf_header" th:content="${_csrf.headerName}"/>
@@ -16,7 +17,8 @@
     <body class="login_body">
     <div class="login_main">
       <h1>회원가입</h1>
-       <form method="post"  th:action="@{/joinProc}" th:object="${join}" onsubmit="return checkAll();">
+       <form method="post"  th:action="@{/joinProc}" id="join" name="join" onsubmit="return checkAll();">
+        
         <div>
         <div class="inp_field">
          <input type="text" id="memNickname" name="memNickname" autocomplete="off">
@@ -27,8 +29,8 @@
         <input type="button" id="memNicknameOverlay" onclick="memNicknameCheck()" value="중복 체크"/>
         <input type="button" id="resetMemNickname" onclick="reMemNickname()"  style = "display:none;" disabled value="다시입력"/>
         </div>
+       </div>
        
-        </div>
 		<div>
         <div class="inp_field">
         <input type="email"  id="memEmail" name="memEmail"   autocomplete="off" >
@@ -124,12 +126,7 @@
         </div>
             </form>
         </div>
-  
-      
-      
-      
-      
-        
+
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script type="text/javascript" src="/js/join.js"></script>
