@@ -6,12 +6,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://kit.fontawesome.com/5168478d86.js" crossorigin="anonymous"></script>
-<<<<<<< Updated upstream
-    <link rel="stylesheet" href="/css/list.css">
-=======
+
     <link rel="stylesheet" href="/css/board-list.css">
     <link rel="stylesheet" href="/css/fragment.css">
->>>>>>> Stashed changes
+
 	<title>MOMO-게시판</title>
 	<th:block th:replace="fragments :: flg_header"></th:block>
 </head>
@@ -21,17 +19,12 @@
 <div class="inner">
 
 	<!--end of header-->
-<<<<<<< Updated upstream
-    <div class="mbtiarea">
-	    <div class="mbti">
-	    <span th:if="${memMbti!=null}" th:text="${memMbti}"></span>
-	    <span th:if="${memMbti==null}" th:text="전체"></span>
-=======
+
     <div class="list_area" th:object="${member}">
 	    <div class="list_name">
 	    <span th:if="*{memId!=null}" th:text="*{memNickname}"></span>
 	   
->>>>>>> Stashed changes
+
 	    </div>
     </div>	
     	
@@ -98,15 +91,10 @@
      -->
      <div class="pagearea">
      	
-<<<<<<< Updated upstream
-    	<div th:replace="fragments :: paging"></div>
-	    <div class="post">
-	        <a th:href="@{/postBoard}" role="button"><button class="btn">+</button></a>
-	    </div>
-=======
+
  <!--    	<div th:replace="fragments :: paging"></div> -->
 	   
->>>>>>> Stashed changes
+
     </div>
 </div>
 </body>

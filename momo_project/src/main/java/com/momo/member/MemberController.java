@@ -140,18 +140,9 @@ public class MemberController {
     //패스워드 수정페이지
     @GetMapping("/member/pwdEdit")
     public String modifyPassword(Authentication authentication, Model model) {
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-    	 Member member = memberService.mypage(authentication.getName());
-	      model.addAttribute("member",member);
-=======
     	Member member = memberService.mypage(authentication.getName());
     	model.addAttribute("member",member);
->>>>>>> Stashed changes
-=======
-    	Member member = memberService.mypage(authentication.getName());
-    	model.addAttribute("member",member);
->>>>>>> Stashed changes
+
         return "member/pwdEdit";
     }
     
@@ -185,19 +176,8 @@ public class MemberController {
 	public String memBoard(Authentication authentication, @RequestParam(value="id")Long memId, Model model,
 			@RequestParam(required = false, defaultValue = "1") int page) {
 		model.addAllAttributes(memberService.getMemBoardList(page, memId));
-		
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-		 Member member = memberService.mypage(authentication.getName());
-	      model.addAttribute("member",member);
-=======
 		Member member = memberService.mypage(authentication.getName());
         model.addAttribute("member",member);
->>>>>>> Stashed changes
-=======
-		Member member = memberService.mypage(authentication.getName());
-        model.addAttribute("member",member);
->>>>>>> Stashed changes
 		return "member/list";
 	}
     
@@ -206,7 +186,6 @@ public class MemberController {
 	public String memComment(Authentication authentication, @RequestParam(value="id")Long memId, Model model,
 			@RequestParam(required = false, defaultValue = "1") int page) {
 		model.addAllAttributes(memberService.getMemComList(page, memId));
-		
 		 Member member = memberService.mypage(authentication.getName());
 	      model.addAttribute("member",member);
 		return "member/commnet-list";
