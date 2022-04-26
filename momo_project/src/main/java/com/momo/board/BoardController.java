@@ -68,7 +68,7 @@ public class BoardController {
 			Board board = boardService.save(boardTitle,memEmail);
 			System.out.println(board.getMember().getMemMbti());
 			model.addAttribute("boardNum", board.getBoardNum());
-			return "Board/board_addPlace";
+			return "Board/board_addplace";
 		} else {
 		return "redirect:/board";
 	}
