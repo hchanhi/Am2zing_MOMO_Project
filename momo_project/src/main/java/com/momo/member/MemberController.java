@@ -31,6 +31,7 @@ import net.bytebuddy.dynamic.DynamicType.Builder.FieldDefinition.Optional;
 
 @Controller
 @RequiredArgsConstructor
+
 public class MemberController {
 
 	@Autowired
@@ -64,8 +65,7 @@ public class MemberController {
 	
 	/* 로그인 에러 *
 
-	*/ 
-	
+	*/
     @PostMapping("member/login")
     public String loginError(HttpServletRequest request, Model model) {
         String loginFailMsg = (String) request.getAttribute("loginFailMsg");
@@ -183,14 +183,14 @@ public class MemberController {
 		return "member/member_board_list";
 	}
     
- // 내가쓴 댓글
+    // 내가쓴 댓글
     @GetMapping("/member/comment")
 	public String memComment(Authentication authentication, @RequestParam(value="id")Long memId, Model model,
 			@RequestParam(required = false, defaultValue = "1") int page) {
 		model.addAllAttributes(memberService.getMemComList(page, memId));
 		 Member member = memberService.mypage(authentication.getName());
 	      model.addAttribute("member",member);
-		return "member/member_commnet_list";
+		return "member/member_comment_list";
 	}
   
 

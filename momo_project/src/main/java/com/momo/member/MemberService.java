@@ -119,7 +119,7 @@ public class MemberService {
 	}
     //내가쓴 댓글
     public Map<String, Object> getMemComList(int page, Long memId){
-		List<Comment> CommnetList = commentRepository.findByMemberMemId(memId, PageRequest.of(page-1, 6, Direction.DESC, "replyNum"));
+		List<Comment> CommnetList = commentRepository.findByMemberMemId(memId, PageRequest.of(page-1, 6, Direction.DESC, "commentNum"));
 		
 		Paging paging = Paging.builder()
 				.url("/board/"+memId)

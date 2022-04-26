@@ -83,19 +83,12 @@ function check(re, what, message) {
 let memEmailCheckCnt = 0;
 let memNicknameCheckCnt = 0;
 
-/*ajax csrf 토큰 설정*/
-let token = $("meta[name='_csrf']").attr('content');
-let header = $("meta[name='_csrf_header']").attr('content');
-$(function() {
-	$(document).ajaxSend(function(e, xhr, options) {
-		xhr.setRequestHeader(header, token);
-	});
-});
+
 
 // 이메일 중복 체크
 function memEmailCheck() {
 	const memEmail = $('#memEmail').val();
-	console.log(memEmail);
+	
 	if (memEmail == '') {
 		alert('이메일 입력해주세요!');
 		$('#memEmail').focus();
@@ -109,7 +102,7 @@ function memEmailCheck() {
 		dataType: 'JSON',
 
 		success: function(result) {
-			if (result.result == '0') {
+			if (result.result == "0") {
 				if (confirm('이 이메일 사용 가능합니다. \n사용하시겠습니까?')) {
 					memEmailCheckCnt = 1;
 					$('#memEmail').attr('readonly', true);
@@ -167,7 +160,7 @@ function pwSame() {
 function memNicknameCheck() {
 	const memNickname = $('#memNickname').val();
 	if (memNickname == '') {
-		alert('닉네임을 입력해주세요!. 필수항목입니다.');
+		alert('닉네임을 입력해주세요!');
 		$('#memNickname').focus();
 		return false;
 	}
