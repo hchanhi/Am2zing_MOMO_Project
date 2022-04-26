@@ -98,7 +98,7 @@
 				<div sec:authorize="hasRole('ROLE_MEMBER')">
 					<div class="dropdown">
 						<button class="dropbtn">
-							<i class="fa-solid fa-circle-user"></i>
+							<i class="fas fa-user-circle"></i>
 						</button>
 						<div class="dropdown-content">
 							<div sec:authorize="isAuthenticated()">
@@ -114,8 +114,9 @@
 				<!-- 특정 권한의 사용자 -->
 				<div sec:authorize="hasRole('ROLE_ADMIN')">
 					<div class="dropdown">
+					<i class="fas fa-user-circle fa-4x"></i>
 						<button class="dropbtn">
-							<img src="/images/membericon.png" alt="membericon">
+							<i class="fas fa-user-circle"></i>
 						</button>
 						<div class="dropdown-content">
 							<div sec:authorize="isAuthenticated()">
@@ -188,6 +189,7 @@
 	</div>
 
 
+<script src="https://kit.fontawesome.com/6478f529f2.js" crossorigin="anonymous"></script>
 
 </body>
 
