@@ -44,7 +44,7 @@
 </head>
 
 <body>
-	<header th:fragment="flg_header" class="inner">
+	<header th:fragment="flg_header" class="nav_inner">
 
 		<div class="nav_bar">
 			<a href="/">
@@ -97,9 +97,8 @@
 				<!-- 로그인한 사용자 -->
 				<div sec:authorize="hasRole('ROLE_MEMBER')">
 					<div class="dropdown">
-						<button class="dropbtn">
-							<i class="fas fa-user-circle"></i>
-						</button>
+						<button class="dropbtn"></button>
+						<i class="fas fa-user-circle"></i>
 						<div class="dropdown-content">
 							<div sec:authorize="isAuthenticated()">
 								<p sec:authentication="principal.member.memNickname">
