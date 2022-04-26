@@ -88,11 +88,12 @@ public class MemberController {
     }
 	
 	//저장한 게시글
-	@GetMapping("bookmark/board") 
-	public String goMyboardBookmark(@AuthenticationPrincipal PrincipalDetails principal, Model model, int page) {
+	@GetMapping("member/boardBookmark") 
+	public String goMyboardBookmark(@AuthenticationPrincipal PrincipalDetails principal, Model model, @RequestParam(required = false, defaultValue = "1")
+	  int page) {
 		Member member = principal.getMember();
-		model.addAttribute("boardBookmarks", boardBookMarkService.findAllByMember(member, page));
-		return "Member/boardBookmark"; 
+		model.addAllAttributes(boardBookMarkService.findAllByMember(member, page));
+		return "member/boardBookmark"; 
 		} 
 	
 	 //내정보 수정
