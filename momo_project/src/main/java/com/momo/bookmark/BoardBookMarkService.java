@@ -36,7 +36,7 @@ public Map<String,Object> findAllByMember(Member member, int page){
 				.findByMember(member, PageRequest.of(page-1, cntPerPage, Direction.DESC, "boardBookmarkNum"));
 		
 		Paging paging = Paging.builder()
-				.url("/Member/boardBookmark")
+				.url("/member/boardBookmark")
 				.total((int)boardBookmarkRepository.count())
 				.cntPerPage(cntPerPage)
 				.curPage(page)
