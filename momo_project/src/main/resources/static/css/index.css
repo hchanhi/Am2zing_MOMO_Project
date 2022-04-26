@@ -109,18 +109,19 @@ table {
 
 .cards {
     height: 320px;
-    padding-top: 40px;
+    padding-top: 20px;
     margin-bottom: 150px;
     text-align: center;
-    background-color: rgb(222, 222, 222);
-    border-radius: 20px;
+    background-color: #FFCD4A;
+     border-radius: 20px;
 }
 
 .cards img {
     border-radius: 20px;
     cursor: pointer;
-    width: 420px;
+    width: 430px;
     height: 300px;
+    margin: 0 10px;
 }
 
 .cards img:hover{
