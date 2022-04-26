@@ -110,7 +110,8 @@
 .map_wrap * {
     margin: 0;
     padding: 0;
-    font-family: '빙그레 메로나체';
+    font-family: 'NanumSquareRoundLight','NanumSquareRound','NanumSquareRoundBold','NanumSquareRoundExtraBold';
+
     font-size: 12px;
 }
 
@@ -154,7 +155,7 @@
 			left: 0;
 			bottom: 0;
 			width: 350px;
-			height: 60px;
+			height: 50px;
 			left: 2%; 
 			top: 2%;
 			transform: translateX(-50);
@@ -304,4 +305,5 @@ textarea {
 			height: 30px; 
 			resize: none; 
 			text-align: center;
+			padding: 10px;
 }
