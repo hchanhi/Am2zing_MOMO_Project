@@ -5,8 +5,7 @@
 	<meta charset="UTF-8">
 	<title>Insert title here</title>
 	<link rel="stylesheet" href="/css/fragment.css" />
-	<script src="https://kit.fontawesome.com/5168478d86.js"
-	crossorigin="anonymous"></script>
+	<script src="https://kit.fontawesome.com/6478f529f2.js" crossorigin="anonymous"></script>
 	<script type="text/javascript" src="/js/webUtil.js"></script>
 	<script type="text/javascript" src="/js/urlEncoder.js"></script>
 
@@ -40,7 +39,7 @@
 
 </head>
 <body>
-	<header th:fragment="flg_header" class="inner">
+	<header th:fragment="flg_header" class="nav_inner">
 		<div class="nav_bar">
 			<a href="/">
 				<img class="logo" alt="" src="/images/logo/MOMOLOGO.png">
@@ -58,8 +57,8 @@
 		<!-- 로그인한 사용자 -->
 			<div sec:authorize="hasRole('ROLE_MEMBER')">
 				<div class="dropdown">
+				<i class="fas fa-user-circle"></i>
 					<button class="dropbtn">
-						<i class="fas fa-user-circle"></i>
 					</button>
 					<div class="dropdown-content">
 					<div sec:authorize="isAuthenticated()">
