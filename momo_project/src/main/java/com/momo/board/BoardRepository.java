@@ -3,8 +3,7 @@ package com.momo.board;
 import java.util.List;
 
 import org.springframework.data.domain.Pageable;
-
-
+import org.springframework.data.jdbc.repository.query.Query;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 
@@ -20,7 +19,7 @@ public interface BoardRepository extends JpaRepository<Board, Long>{
 	
 	List<Board> findByMemberMemId(Long memId, Pageable pageale);
 
-
+	//List<Board> findTop3ByPlaceCnt();
 }
 	
 	

@@ -45,11 +45,11 @@ public class MemberController {
 	@Autowired
 	private BoardBookMarkService boardBookMarkService;
 
-	//멤버 메인 페이지 -> 추후 경로 수정 예정 
-	@GetMapping({ "/member" })
-	public String index() {
-		return "member/index";
-	}
+//	//멤버 메인 페이지 -> 추후 경로 수정 예정 
+//	@GetMapping({ "/member" })
+//	public String index() {
+//		return "member/index";
+//	}
 
 	//로그인 페이지 이동
 	@GetMapping("/member/login")
@@ -63,7 +63,7 @@ public class MemberController {
 		} 
 	
 	/* 로그인 에러 *
-	  @param model 
+
 	*/ 
 	
     @PostMapping("member/login")
@@ -75,7 +75,7 @@ public class MemberController {
 
 	@GetMapping("member/join")
 	public String join() {
-		return "member/joinForm";
+		return "member/member_joinForm";
 	}
 	
 	//마이페이지
@@ -84,9 +84,10 @@ public class MemberController {
         Member member = memberService.mypage(authentication.getName());
         model.addAttribute("member",member);
 
-        return "Member/mypage";
+        return "member/member_mypage";
     }
 	
+
 	//저장한 게시글
 	@GetMapping("member/boardBookmark") 
 	public String goMyboardBookmark(@AuthenticationPrincipal PrincipalDetails principal, Model model, @RequestParam(required = false, defaultValue = "1")
@@ -100,7 +101,7 @@ public class MemberController {
     @PostMapping("member/myinfoEdit")
     public String memberUpdate(Member member) {
         memberService.updateMember(member);
-        return "member/mypage";
+        return "member/member_mypage";
     }
 
 	//회원가입 진행
@@ -112,7 +113,7 @@ public class MemberController {
 		member.setMemPassword(encPassword);
 		member.setMemRole("ROLE_MEMBER");
 		memberRepository.save(member);
-		return "member/loginForm";
+		return "member/member_loginForm";
 	}
 	
 	//회원가입 이메일 중복 체크
@@ -144,7 +145,7 @@ public class MemberController {
     	Member member = memberService.mypage(authentication.getName());
     	model.addAttribute("member",member);
 
-        return "member/pwdEdit";
+        return "member/member_pwd_edit";
     }
     
     //패스워드 확인
@@ -179,7 +180,7 @@ public class MemberController {
 		model.addAllAttributes(memberService.getMemBoardList(page, memId));
 		Member member = memberService.mypage(authentication.getName());
         model.addAttribute("member",member);
-		return "member/list";
+		return "member/member_board_list";
 	}
     
  // 내가쓴 댓글
@@ -189,7 +190,7 @@ public class MemberController {
 		model.addAllAttributes(memberService.getMemComList(page, memId));
 		 Member member = memberService.mypage(authentication.getName());
 	      model.addAttribute("member",member);
-		return "member/commnet-list";
+		return "member/member_commnet_list";
 	}
   
 

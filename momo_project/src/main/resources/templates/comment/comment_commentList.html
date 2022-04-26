@@ -29,17 +29,17 @@
 							</div>
 							<div style="width: 220px;word-break:break-all;">
 								<span style="color: rgb(53, 26, 29); font-size: 13pt; margin-right: 20px;"
-									th:text="${comment.replyContent}"></span>
+									th:text="${comment.commentContent}"></span>
 							</div>
 							<div  style="width: 80px;">
 								<input th:if="${#authentication.name} == ${comment.member.memEmail}" type="button" style="background: none; border: none;"
-									th:data-del="${comment.replyNum}" id="deleteBtn" class="deleteComment" value="❌">
+									th:data-del="${comment.commentNum}" id="deleteBtn" class="deleteComment" value="❌">
 									<input th:unless="${#authentication.name} == ${comment.member.memEmail}" type="button" style="background: none; border: none;"
-									th:data-del="${comment.replyNum}"  id="deleteBtn" class="deleteComment" hidden value="5">
+									th:data-del="${comment.commentNum}"  id="deleteBtn" class="deleteComment" hidden value="5">
 							</div>
 						</div>
 
-						<span hidden id="replyNum" th:text="${comment.replyNum}"></span>
+						<span hidden id="commentNum" th:text="${comment.commentNum}"></span>
 
 
 
@@ -63,14 +63,14 @@
 
 			let boardNum = document.getElementById("boardNum").value;
 
-			let replyNum = $(this).attr("data-del");
+			let commentNum = $(this).attr("data-del");
 		
-			var sendData = {"replyNum": replyNum, "boardNum": boardNum};
+			var sendData = {"commentNum": commentNum, "boardNum": boardNum};
 			
 			
 				$.ajax({
 				method: 'Delete',
-				url: '/deleteComment/' + replyNum,
+				url: '/deleteComment/' + commentNum,
 				data: sendData,
 				success: function (data) {
 

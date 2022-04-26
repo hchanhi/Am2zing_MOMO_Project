@@ -162,4 +162,10 @@ public class BoardController {
 		model.addAllAttributes(boardService.getMbtiBoardList(page, memMbti));
 		return "Board/board_list";
 	}
+	
+//	@GetMapping("/top3")
+//	public List<Board> index() {
+//		List<Board> boards = boardService.getTop3Board();
+//		return boards;
+//	}
 }
