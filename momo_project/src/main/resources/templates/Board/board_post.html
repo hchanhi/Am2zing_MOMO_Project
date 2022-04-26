@@ -11,20 +11,22 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<style>
 	body {
-		 background: linear-gradient( to bottom,#FBD786, #C6FFDD);
+		margin: 0;
+		padding: 0;
 	}
 		.container{
 			display: grid;
 		 	place-items: center;
 		 	height: 90vh;
+		
 		}
 		.addTitle {
-		    width:130px;
-		    height:60px;
-			background-color:  rgb(245, 188, 54);
-		    border:3px solid rgb(245, 188, 54);
+		    width:100px;
+		    height:50px;
+			background-color:  #FFCD4A;
+		    border:3px solid #FFCD4A;
 		    border-radius: 10px;
-		    font-size:18px;
+		    font-size:16px;
 		    font-weight: bold;
 		    color: rgb(68, 68, 68);
 		    cursor:pointer;
@@ -38,7 +40,7 @@
     #boardTitle{
     	width: 300px;
     	height: 50px;
-    	font-size: 20px;
+    	font-size: 18px;
     	text-align: center;
     }
     .center{
@@ -51,13 +53,14 @@
 		  	background-color:white;
 		  	}
 		  	#boardTitle {
-			border: solid 2px  rgb(245, 188, 54);
+			border: solid 2px  #FFCD4A;
 			border-radius: 10px;
 		}
 	</style>
 </head>
 <body>
-<th:block th:replace="fragments :: flg_header"></th:block>
+<th:block  th:replace="fragments :: flg_header"></th:block>
+<div style=" background: linear-gradient( to bottom,#FFCD4A, #C6FFDD);">
 <div class="container">
 
     <form  name="form" th:action="@{/post}" method="post" class="item">
@@ -66,11 +69,12 @@
             <div>
                 <input type="text" name="boardTitle" id="boardTitle"><span></span>
             </div>
-            <input class="addTitle" type="submit" role="button" value="장소추가하기">
+            <input class="addTitle" type="submit" role="button" value="장소 추가">
         </div>
         <input hidden name="memEmail" th:value="${#authentication.name}">
     </form>
   
+</div>
 </div>
 </body>
 </html>

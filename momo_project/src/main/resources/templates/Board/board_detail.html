@@ -68,7 +68,7 @@
 				<div class="item3 list-color  " style=" margin-top: 10px;" th:each="place : ${places}">
 					<div class="item3-place" style="margin: 10px;">
 						<a hidden th:name="@{${place.placeNum}}"></a>
-						<h2 style="font-size: 22px; color:rgb(245, 188, 54); font-weight: 600; text-shadow:1px 1px 1px #000;"
+						<h2 style="font-size: 22px; color:#FFCD4A; font-weight: 600; text-shadow:1px 1px 1px #000;"
 							th:text="${place.placeTitle}"></h2><br>
 						<img style="border-radius: 10px; width: 120px; height: 120px; cursor: pointer;"
 							th:src="@{${place.placeImg}}" onerror="this.style.display='none'" alt=''><br>
