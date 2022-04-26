@@ -139,7 +139,9 @@ public class MemberController {
     
     //패스워드 수정페이지
     @GetMapping("/member/pwdEdit")
-    public String modifyPassword() {
+    public String modifyPassword(Authentication authentication, Model model) {
+    	 Member member = memberService.mypage(authentication.getName());
+	      model.addAttribute("member",member);
         return "member/pwdEdit";
     }
     
@@ -170,17 +172,23 @@ public class MemberController {
     
     // 내가쓴 글
     @GetMapping("/member/board")
-	public String memBoard(@RequestParam(value="id")Long memId, Model model,
+	public String memBoard(Authentication authentication, @RequestParam(value="id")Long memId, Model model,
 			@RequestParam(required = false, defaultValue = "1") int page) {
 		model.addAllAttributes(memberService.getMemBoardList(page, memId));
+		
+		 Member member = memberService.mypage(authentication.getName());
+	      model.addAttribute("member",member);
 		return "member/list";
 	}
     
  // 내가쓴 댓글
     @GetMapping("/member/comment")
-	public String memComment(@RequestParam(value="id")Long memId, Model model,
+	public String memComment(Authentication authentication, @RequestParam(value="id")Long memId, Model model,
 			@RequestParam(required = false, defaultValue = "1") int page) {
 		model.addAllAttributes(memberService.getMemComList(page, memId));
+		
+		 Member member = memberService.mypage(authentication.getName());
+	      model.addAttribute("member",member);
 		return "member/commnet-list";
 	}
   

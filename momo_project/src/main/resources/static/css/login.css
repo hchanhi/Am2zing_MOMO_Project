@@ -148,10 +148,10 @@ form .inp_field {
 	height: 50px;
 	text-align: center;
 	border: 1px solid;
-	background: #999;
+	background: #FFCD4A;
 	border-radius: 25px;
 	font-size: 18px;
-	color: #ddd;
+	color: white;
 	font-weight: bold;
 	outline: none;
 	margin-bottom: 15px

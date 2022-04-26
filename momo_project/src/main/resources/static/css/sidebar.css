@@ -1,5 +1,4 @@
-/* ===== Google Font Import - Poppins ===== */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
 
 *{
     margin: 0;
@@ -18,10 +17,13 @@ body{
     background-color: var(--body-color);
 }
 
+ol, ul {
+    padding-left: 0;
+}
 
 nav{
     position: fixed;
-    top: 0;
+    top: 100px;
     left: 0;
     height: 70px;
     width: 20%;
@@ -29,12 +31,7 @@ nav{
     z-index: 100;
 }
 
-nav .nav-bar .logo a{
-    font-size: 25px;
-    font-weight: 500;
-    color: var(--text-color);
-    text-decoration: none;
-}
+
 
 .nav-bar .nav-links{
     display: flex;
@@ -55,31 +52,35 @@ nav .nav-bar .logo a{
     padding: 10px;
 }
 
-    .menu{
-        position: fixed;
-        height: 100%;
-        width: 320px;
-        left: -100%;
-        top: 0;
-        padding: 20px;
-        background-color: var(--side-nav);
-        z-index: 100;
-        transition: all 0.4s ease;
-    }
+.nav-link li a:hover{
+	background-color: #FFCD4A;
+}
 
-   
+.menu{
+    position: fixed;
+    height: 100%;
+    width: 320px;
+    left: -100%;
+    top: 0;
+    padding: 20px;
+    background-color: var(--side-nav);
+    z-index: 100;
+    transition: all 0.4s ease;
+}
 
-    .nav-bar .navLogo a{
-        opacity: 0;
-        transition: all 0.3s ease;
-    }
-    .nav-bar .nav-links{
-        flex-direction: column;
-        padding-top: 30px;
-    }
 
-    .nav-links li a{
-        display: block;
-        margin-top: 20px;
-    }
+
+.nav-bar .navLogo a{
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+.nav-bar .nav-links{
+    flex-direction: column;
+    padding-top: 30px;
+}
+
+.nav-links li a{
+    display: block;
+    margin-top: 20px;
+}
 
