@@ -7,14 +7,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://kit.fontawesome.com/5168478d86.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/css/list.css">
+    <link rel="stylesheet" href="/css/board-list.css">
 	<title>MOMO-게시판</title>
 </head>
 <body>
 <div class="inner">
 	<th:block th:replace="fragments :: flg_header"></th:block>
 	<!--end of header-->
-    <div class="mbtiarea">
-	    <div class="mbti">
+    <div class="list_area">
+	    <div class="list_name">
 	    <span th:if="${memMbti!=null}" th:text="${memMbti}"></span>
 	    <span th:if="${memMbti==null}" th:text="ALL"></span>
 	    </div>
@@ -84,8 +85,8 @@
      <div class="pagearea">
      	
     	<div th:replace="fragments :: paging"></div>
-	    <div class="post">
-	        <a th:href="@{/postBoard}" role="button"><button class="btn">+</button></a>
+	    <div class="post_btn">
+	        <a th:href="@{/postBoard}" role="button"><button class="btn"><i class="fa-solid fa-plus"></i></button></a>
 	    </div>
     </div>
 </div>
