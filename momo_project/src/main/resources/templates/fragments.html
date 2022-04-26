@@ -5,6 +5,8 @@
 	<meta charset="UTF-8">
 	<title>Insert title here</title>
 	<link rel="stylesheet" href="/css/fragment.css" />
+	<script src="https://kit.fontawesome.com/5168478d86.js"
+	crossorigin="anonymous"></script>
 	<script type="text/javascript" src="/js/webUtil.js"></script>
 	<script type="text/javascript" src="/js/urlEncoder.js"></script>
 
@@ -42,7 +44,7 @@
 
 		<div class="nav_bar">
 			<a href="/">
-				<img class="logo" alt="" src="/images/logo/MOMO_LOGO.png">
+				<img class="logo" alt="" src="/images/logo/MOMOLOGO.png">
 			</a> 
 		
 
@@ -60,7 +62,7 @@
 			<div sec:authorize="hasRole('ROLE_MEMBER')">
 				<div class="dropdown">
 					<button class="dropbtn">
-						<img src="/images/membericon.png" alt="membericon">
+						<i class="fa-solid fa-circle-user"></i>
 					</button>
 					<div class="dropdown-content">
 					<div sec:authorize="isAuthenticated()">
