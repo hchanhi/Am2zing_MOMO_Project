@@ -50,15 +50,15 @@ public class BoardController {
 			}
 		}
 		model.addAllAttributes(boardService.getBoardList(page));
-		return "Board/list";
+		return "Board/board_list";
 	}
 	
 	@GetMapping("/postBoard")
 	public String post(@AuthenticationPrincipal PrincipalDetails principal) {
 		if(principal == null) {
-			return "Member/loginForm";
+			return "Member/member_loginForm";
 		}
-		return "Board/post";
+		return "Board/board_post";
 	}
 	
 	//멤버는 일단 제거
@@ -68,7 +68,7 @@ public class BoardController {
 			Board board = boardService.save(boardTitle,memEmail);
 			System.out.println(board.getMember().getMemMbti());
 			model.addAttribute("boardNum", board.getBoardNum());
-			return "Board/addPlace";
+			return "Board/board_addPlace";
 		} else {
 		return "redirect:/board";
 	}
@@ -87,7 +87,7 @@ public class BoardController {
 	        model.addAttribute("board", board);
 	        model.addAttribute("places", placeService.findByBoardNum(boardNum));
 	        
-	        return "Board/detail";
+	        return "Board/board_detail";
 	    } else {
 	    	this.delete((long)boardNum);
 	    	return "redirect:/board";
@@ -101,14 +101,14 @@ public class BoardController {
 		model.addAttribute("board", board);
 		model.addAttribute("places", places);
 		
-		return "Board/edit";
+		return "Board/board_edit";
 	}
 	
 	//멤버는 잠시 제거
 	@PutMapping("/post/edit/{boardNum}")
     public String update(Long boardNum, String boardTitle) {
 		if(placeService.findByBoardNum(boardNum.intValue()).isEmpty()) {
-			return "Board/list";
+			return "Board/board_list";
 		} else {
 		boardService.editTitle(boardNum, boardTitle);
         return "redirect:/post/{boardNum}";
@@ -126,7 +126,7 @@ public class BoardController {
 	////////////////////////////////////////////////////////////////////////
 	@GetMapping("/addBoard")
 	public String MapTest() {
-		return "/Board/addBoard";
+		return "/Board/board_addBoard";
 	}
 	
 	@RequestMapping("/writeBoard")
@@ -138,7 +138,7 @@ public class BoardController {
 
 		model.addAttribute("boardNum", board.getBoardNum());
 
-		return "Board/addPlace";
+		return "Board/board_addPlace";
 	}
 	@GetMapping("/cancel/{boardNum}")
     public String cancel(@PathVariable("boardNum") Long boardNum) {
@@ -160,6 +160,6 @@ public class BoardController {
 	public String mbtiBoard(@PathVariable("memMbti")String memMbti, Model model,
 			@RequestParam(required = false, defaultValue = "1") int page) {
 		model.addAllAttributes(boardService.getMbtiBoardList(page, memMbti));
-		return "Board/list";
+		return "Board/board_list";
 	}
 }
