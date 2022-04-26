@@ -155,7 +155,7 @@ input:focus {
 	margin: 0 auto;
 	
 }
-.post{
+.post_btn{
 	position: fixed;
 	float:right;
 	display:grid;
@@ -169,7 +169,7 @@ input:focus {
     color: white;
     border: none;
     cursor: pointer;
-    background-color: lightpink;
+    background-color: #FFCD4A;
     width:100px;
     height: 100px;
     font-size: 50px;
@@ -177,5 +177,5 @@ input:focus {
     border-radius: 50px;
 }
 .btn:hover{
-	color:lightblue;
+	color:lightgray;
 }
