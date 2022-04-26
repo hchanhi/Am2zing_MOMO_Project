@@ -86,8 +86,8 @@ public class BoardService {
 		 }
 		 List<Comment> comments = commentRepository.findByBoard(board);
 		 for(Comment comment : comments) {
-			 Long replyNum = comment.getReplyNum();
-			 commentRepository.deleteById(replyNum);
+			 Long commentNum = comment.getCommentNum();
+			 commentRepository.deleteById(commentNum);
 		 }
 		 boardRepository.deleteById(board.getBoardNum());
 	    }
