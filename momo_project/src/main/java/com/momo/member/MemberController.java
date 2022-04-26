@@ -56,10 +56,10 @@ public class MemberController {
 	 public String goLogin(HttpServletRequest request) {
         //이전 페이지의 정보
         String url = request.getHeader("Referer");
-        if(!url.contains("/member/loginForm")) {
+        if(!url.contains("/member/login")) {
             request.getSession().setAttribute("prevPage",request.getHeader("Referer"));
         }
-		return "member/loginForm"; 
+		return "member/member_loginForm"; 
 		} 
 	
 	/* 로그인 에러 *
@@ -70,7 +70,7 @@ public class MemberController {
     public String loginError(HttpServletRequest request, Model model) {
         String loginFailMsg = (String) request.getAttribute("loginFailMsg");
         model.addAttribute("loginFailMsg",loginFailMsg);
-        return "member/loginForm";
+        return "member/member_loginForm";
     }
 
 	@GetMapping("member/join")
@@ -140,8 +140,13 @@ public class MemberController {
     //패스워드 수정페이지
     @GetMapping("/member/pwdEdit")
     public String modifyPassword(Authentication authentication, Model model) {
+<<<<<<< Updated upstream
     	 Member member = memberService.mypage(authentication.getName());
 	      model.addAttribute("member",member);
+=======
+    	Member member = memberService.mypage(authentication.getName());
+    	model.addAttribute("member",member);
+>>>>>>> Stashed changes
         return "member/pwdEdit";
     }
     
@@ -176,8 +181,13 @@ public class MemberController {
 			@RequestParam(required = false, defaultValue = "1") int page) {
 		model.addAllAttributes(memberService.getMemBoardList(page, memId));
 		
+<<<<<<< Updated upstream
 		 Member member = memberService.mypage(authentication.getName());
 	      model.addAttribute("member",member);
+=======
+		Member member = memberService.mypage(authentication.getName());
+        model.addAttribute("member",member);
+>>>>>>> Stashed changes
 		return "member/list";
 	}
     
