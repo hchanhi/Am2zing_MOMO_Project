@@ -19,6 +19,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -88,10 +89,12 @@ public class MemberController {
     }
 	
 	//저장한 게시글
-	@GetMapping("bookmark/board") 
-	public String goMyboardBookmark(@AuthenticationPrincipal PrincipalDetails principal, Model model) {
+	@GetMapping("Member/boardBookmark") 
+	public String goMyboardBookmark(@AuthenticationPrincipal PrincipalDetails principal, Model model
+			, @RequestParam(required = false, defaultValue = "1")
+	  int page) {
 		Member member = principal.getMember();
-		model.addAttribute("boardBookmarks", boardBookMarkService.findAllByMember(member));
+		model.addAllAttributes(boardBookMarkService.findAllByMember(member, page));
 		return "Member/boardBookmark"; 
 		} 
 	
@@ -181,7 +184,7 @@ public class MemberController {
 	public String memComment(@RequestParam(value="id")Long memId, Model model,
 			@RequestParam(required = false, defaultValue = "1") int page) {
 		model.addAllAttributes(memberService.getMemComList(page, memId));
-		return "member/list";
+		return "member/commnet-list";
 	}
   
 
