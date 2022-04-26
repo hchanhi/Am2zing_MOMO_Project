@@ -4,13 +4,15 @@
     <meta charset="UTF-8" />
     <title>회원가입</title>
     <link rel="stylesheet" href="/css/login.css"/>
-    
+       <link rel="stylesheet" href="/css/fragment.css">
     <!-- default header name is X-CSRF-TOKEN -->
     <meta id="_csrf" name="_csrf" th:content="${_csrf.token}"/>
     <meta id="_csrf_header" name="_csrf_header" th:content="${_csrf.headerName}"/>
+    <th:block th:replace="fragments :: flg_header"></th:block>
+    </head>
 <body>
 
-<div th:include="member/mypagesidebar2"> </div>
+<div th:include="member/mypagesidebar"> </div>
 
 <body class="login_body">
     <div class="login_main">
