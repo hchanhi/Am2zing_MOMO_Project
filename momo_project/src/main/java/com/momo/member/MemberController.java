@@ -19,7 +19,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -57,10 +56,10 @@ public class MemberController {
 	 public String goLogin(HttpServletRequest request) {
         //이전 페이지의 정보
         String url = request.getHeader("Referer");
-        if(!url.contains("/member/loginForm")) {
+        if(!url.contains("/member/login")) {
             request.getSession().setAttribute("prevPage",request.getHeader("Referer"));
         }
-		return "member/loginForm"; 
+		return "member/member_loginForm"; 
 		} 
 	
 	/* 로그인 에러 *
@@ -71,7 +70,7 @@ public class MemberController {
     public String loginError(HttpServletRequest request, Model model) {
         String loginFailMsg = (String) request.getAttribute("loginFailMsg");
         model.addAttribute("loginFailMsg",loginFailMsg);
-        return "member/loginForm";
+        return "member/member_loginForm";
     }
 
 	@GetMapping("member/join")
@@ -88,15 +87,13 @@ public class MemberController {
         return "Member/mypage";
     }
 	
-	//저장한 게시글
-	@GetMapping("Member/boardBookmark") 
-	public String goMyboardBookmark(@AuthenticationPrincipal PrincipalDetails principal, Model model
-			, @RequestParam(required = false, defaultValue = "1")
-	  int page) {
-		Member member = principal.getMember();
-		model.addAllAttributes(boardBookMarkService.findAllByMember(member, page));
-		return "Member/boardBookmark"; 
-		} 
+//	//저장한 게시글
+//	@GetMapping("bookmark/board") 
+//	public String goMyboardBookmark(@AuthenticationPrincipal PrincipalDetails principal, Model model) {
+//		Member member = principal.getMember();
+//		model.addAttribute("boardBookmarks", boardBookMarkService.findAllByMember(member));
+//		return "Member/boardBookmark"; 
+//		} 
 	
 	 //내정보 수정
     @PostMapping("member/myinfoEdit")
@@ -142,7 +139,10 @@ public class MemberController {
     
     //패스워드 수정페이지
     @GetMapping("/member/pwdEdit")
-    public String modifyPassword() {
+    public String modifyPassword(Authentication authentication, Model model) {
+    	Member member = memberService.mypage(authentication.getName());
+    	model.addAttribute("member",member);
+
         return "member/pwdEdit";
     }
     
@@ -173,17 +173,21 @@ public class MemberController {
     
     // 내가쓴 글
     @GetMapping("/member/board")
-	public String memBoard(@RequestParam(value="id")Long memId, Model model,
+	public String memBoard(Authentication authentication, @RequestParam(value="id")Long memId, Model model,
 			@RequestParam(required = false, defaultValue = "1") int page) {
 		model.addAllAttributes(memberService.getMemBoardList(page, memId));
+		Member member = memberService.mypage(authentication.getName());
+        model.addAttribute("member",member);
 		return "member/list";
 	}
     
  // 내가쓴 댓글
     @GetMapping("/member/comment")
-	public String memComment(@RequestParam(value="id")Long memId, Model model,
+	public String memComment(Authentication authentication, @RequestParam(value="id")Long memId, Model model,
 			@RequestParam(required = false, defaultValue = "1") int page) {
 		model.addAllAttributes(memberService.getMemComList(page, memId));
+		 Member member = memberService.mypage(authentication.getName());
+	      model.addAttribute("member",member);
 		return "member/commnet-list";
 	}
   
