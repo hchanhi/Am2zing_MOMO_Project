@@ -112,10 +112,8 @@
 				<!-- 특정 권한의 사용자 -->
 				<div sec:authorize="hasRole('ROLE_ADMIN')">
 					<div class="dropdown">
-					<i class="fas fa-user-circle fa-4x"></i>
-						<button class="dropbtn">
-							<i class="fas fa-user-circle"></i>
-						</button>
+				
+					<i class="fas fa-user-circle"></i>
 						<div class="dropdown-content">
 							<div sec:authorize="isAuthenticated()">
 								<p sec:authentication="principal.member.memNickname">
