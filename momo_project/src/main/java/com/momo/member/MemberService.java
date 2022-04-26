@@ -13,8 +13,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.momo.board.BoardRepository;
+import com.momo.comment.CommentRepository;
 import com.momo.common.util.pagination.Paging;
 import com.momo.domain.Board;
+import com.momo.domain.Comment;
 import com.momo.domain.Member;
 
 import lombok.AllArgsConstructor;
@@ -29,6 +31,9 @@ public class MemberService {
 	
 	@Autowired
 	private BoardRepository boardRepository;
+	
+	@Autowired
+	private CommentRepository commentRepository;
 	
 	@Autowired
 	private MemberCustomRepository memberCustomRepository;
@@ -112,9 +117,9 @@ public class MemberService {
 		
 		return Map.of("boards", boardList, "paging",paging);
 	}
-    //내가쓴 ektrmf
+    //내가쓴 댓글
     public Map<String, Object> getMemComList(int page, Long memId){
-		List<Board> boardList = boardRepository.findByMemberMemId(memId, PageRequest.of(page-1, 6, Direction.DESC, "boardNum"));
+		List<Comment> CommnetList = commentRepository.findByMemberMemId(memId, PageRequest.of(page-1, 6, Direction.DESC, "replyNum"));
 		
 		Paging paging = Paging.builder()
 				.url("/board/"+memId)
@@ -124,7 +129,7 @@ public class MemberService {
 				.blockCnt(5)
 				.build();
 		
-		return Map.of("boards", boardList, "paging",paging);
+		return Map.of("commnets", CommnetList, "paging",paging);
 	}
     
  
