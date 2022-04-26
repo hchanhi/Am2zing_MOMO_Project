@@ -141,8 +141,13 @@ public class MemberController {
     @GetMapping("/member/pwdEdit")
     public String modifyPassword(Authentication authentication, Model model) {
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     	 Member member = memberService.mypage(authentication.getName());
 	      model.addAttribute("member",member);
+=======
+    	Member member = memberService.mypage(authentication.getName());
+    	model.addAttribute("member",member);
+>>>>>>> Stashed changes
 =======
     	Member member = memberService.mypage(authentication.getName());
     	model.addAttribute("member",member);
@@ -182,8 +187,13 @@ public class MemberController {
 		model.addAllAttributes(memberService.getMemBoardList(page, memId));
 		
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 		 Member member = memberService.mypage(authentication.getName());
 	      model.addAttribute("member",member);
+=======
+		Member member = memberService.mypage(authentication.getName());
+        model.addAttribute("member",member);
+>>>>>>> Stashed changes
 =======
 		Member member = memberService.mypage(authentication.getName());
         model.addAttribute("member",member);
