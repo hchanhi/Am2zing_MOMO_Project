@@ -42,9 +42,6 @@ public class PlaceService {
 	@Autowired
 	private MemberCustomRepository memberCustomRepository;
 	
-	public List<Place> findAll() {
-		return placeRepository.findAll();
-	}
 	public List<Place> findByBoardNum(int boardNum){
 
 		Board board = boardRepository.findById((long) boardNum).get();
@@ -137,12 +134,12 @@ public class PlaceService {
 				//model.addAttribute("uploadPath", file.getAbsolutePath());
 				model.addAttribute("uploadPath", "/images/"+name);
 				//return file.getAbsolutePath();
-				return "Board/filePath";
+				return "Board/board_filePath";
 			}
 		} catch(Exception e){
 			
 		}
-		return "Board/filePath";
+		return "Board/board_filePath";
 	}
 	
 	private String genSaveFileName(String extName) {

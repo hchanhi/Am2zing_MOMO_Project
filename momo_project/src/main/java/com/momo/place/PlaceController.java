@@ -35,17 +35,6 @@ public class PlaceController {
 	@Autowired
 	private PlaceService placeService;
 	
-	@Autowired
-	private PlaceRepository placeRepository;
-	
-	@Autowired
-	private MemberRepository memberRepository;
-	
-	@RequestMapping("/place")
-	public String findAllPlace(Model model) {
-		model.addAttribute("myplaces", this.placeService.findAll());
-		return "/view/place";
-	}
 	
 	@PostMapping("/placeList/{boardNum}")
 	public String placeList(@PathVariable("boardNum") int boardNum, @RequestBody Map<String,String> map, Model model) {
@@ -53,7 +42,7 @@ public class PlaceController {
 		
 		List<Place> placeList = placeService.getPlaceList(boardNum);
 		model.addAttribute("places", placeList);
-		return "Place/placeList";
+		return "Place/place_list";
 	}
 	
 	@DeleteMapping("/deletePlace/{placeNum}")
@@ -61,12 +50,7 @@ public class PlaceController {
 		placeService.delete((long) placeNum);
 		List<Place> placeList = placeService.getPlaceList(boardNum);
 		model.addAttribute("places", placeList);
-		return "Place/placeList";
-	}
-	
-	@RequestMapping("/form")
-	public String form() {
-		return "Board/addPlace";
+		return "Place/place_list";
 	}
 	
 	 @PostMapping("/upload")
