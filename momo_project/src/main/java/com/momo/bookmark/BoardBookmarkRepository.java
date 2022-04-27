@@ -12,4 +12,6 @@ public interface BoardBookmarkRepository extends JpaRepository<BoardBookmark, Lo
 	BoardBookmark findByMemberAndBoard(Member member, Board board);
 
 	List<BoardBookmark> findByMember(Member member, Pageable pageable);
+	
+	List<BoardBookmark> findByBoard(Board board);
 }
