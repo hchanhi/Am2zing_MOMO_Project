@@ -113,6 +113,25 @@ header {
 
 
 /* ------------------end of header----------------- */
+.list_area{
+	display: grid;
+	place-items: center;
+	margin: 15px;
+	text-align: center;
+}
+.list_name{
+	font-size: 30px;
+	
+	margin: 0 auto;
+	font-weight: bold;
+    width: 200px;
+    height: 50px;
+    background-color: #FFCD4A;
+ 	border-radius: 20px;
+ 	box-shadow: 1px 1px 1px 1px lightgray;
+}
+
+
 
 section {
     width: 100%;
