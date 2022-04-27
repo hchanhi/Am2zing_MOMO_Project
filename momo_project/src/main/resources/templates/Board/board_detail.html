@@ -54,9 +54,9 @@
 				<div>
 					<form th:action="@{'/post/' + ${board.boardNum}}" method="post">
 						<input type="hidden" name="_method" value="delete" />
-						<button th:if="${#authentication.name} == ${board.member.memEmail}" type="submit"><i
+						<button th:if="${#authentication.name} == ${board.member.memEmail} or ${#authorization.expression('hasRole(''ROLE_ADMIN'')')}" type="submit"><i
 								class="fas fa-trash-alt fa-xl"></i></button>
-						<button th:unless="${#authentication.name} == ${board.member.memEmail}" hidden type="submit"><i
+						<button th:unless="${#authentication.name} == ${board.member.memEmail} or ${#authorization.expression('hasRole(''ROLE_ADMIN'')')}" hidden type="submit"><i
 								class="fas fa-trash-alt fa-xl"></i></button>
 					</form>
 				</div>
