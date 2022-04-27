@@ -21,7 +21,7 @@ public interface BoardRepository extends JpaRepository<Board, Long>{
 	
 	List<Board> findAllByMemberMemId(Long memId);
 
-	//List<Board> findTop3ByPlaceCnt();
+	List<Board> findTop3ByMemberMemMbtiIsOrderByPlaceCntDesc(String memMbti);
 }
 	
 	
