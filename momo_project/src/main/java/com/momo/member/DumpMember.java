@@ -22,15 +22,13 @@ public class DumpMember implements CommandLineRunner{
     public void run(String... args) throws Exception {
     	String encPassword = bCryptPasswordEncoder.encode("admin");
 
-        if (!memberRepository.findById(1L).isPresent()) {
-
                   Member member1 = memberRepository.save(Member.builder()
                     .memEmail("admin@admin.com")
                     .memNickname("admin")
                     .memPassword(encPassword)
                     .memRole("ROLE_ADMIN")
                     .build());
-                    }
+                    
         String encPassword1 = bCryptPasswordEncoder.encode("aaaa");
         Member member2 = memberRepository.save(Member.builder()
                 .memEmail("aaaa@aaaa.com")

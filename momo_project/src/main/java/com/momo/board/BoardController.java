@@ -163,9 +163,11 @@ public class BoardController {
 		return "Board/board_list";
 	}
 	
-//	@GetMapping("/top3")
-//	public List<Board> index() {
-//		List<Board> boards = boardService.getTop3Board();
-//		return boards;
-//	}
+	@GetMapping("/top3/{memMbti}")
+	public String top3(@PathVariable("memMbti")String memMbti, Model model) {
+		List<Board> boards = boardService.getTop3Board(memMbti);
+		model.addAttribute("boards", boards);
+		System.out.println(boards.toString());
+		return "Board/board_top3";
+	}
 }
