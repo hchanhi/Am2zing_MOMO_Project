@@ -30,7 +30,8 @@ public class AdminController {
 	@Autowired
 	private BoardService boardService;
 	
-	@Autowired MemberService memberService;
+	@Autowired 
+	private MemberService memberService;
 	
 	//전체 회원 조회
 	@GetMapping("member/member-list")
@@ -75,7 +76,7 @@ public class AdminController {
 		Board board = boardService.getPost(boardNum);
 		model.addAttribute("board", board);
 		model.addAttribute("places", this.placeService.findByBoardNum(boardNum));
-		return "Board/detail";
+		return "Board/board_detail";
 	}
 	
 	@GetMapping("comment/comment-list")
@@ -91,7 +92,7 @@ public class AdminController {
 		Board board = boardService.getPost(boardNum);
 		model.addAttribute("board", board);
 		model.addAttribute("places", this.placeService.findByBoardNum(boardNum));
-		return "Board/detail";
+		return "Board/board_detail";
 	}
 	
 
