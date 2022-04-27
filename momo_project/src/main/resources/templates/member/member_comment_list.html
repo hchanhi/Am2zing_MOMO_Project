@@ -34,10 +34,10 @@
   
 				<th:block th:each="comment : ${comments}" th:object="${comment}">
 				  <div class="policy">
-					<span th:text="${commnet.commentContent}"></span>
-					<span th:text="${comment.member.memNickname}"></span>
-					<span th:text="${board.boardTitle}"></span>
-					<span><a th:href="@{/admin/comment/comment-detail/{id}(id = *{board.boardNum})}">view</a>
+					<span th:text="*{commentContent}"></span>
+					<span th:text="*{member.memNickname}"></span>
+					<span th:text="*{board.boardTitle}"></span>
+					<span><a th:href="@{/member/comment/comment-detail/{id}(id = *{board.boardNum})}">view</a>
 					</span>
 				  </div>
 				</th:block>

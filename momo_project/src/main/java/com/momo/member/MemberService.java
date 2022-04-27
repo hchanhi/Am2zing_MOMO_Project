@@ -119,7 +119,7 @@ public class MemberService {
 	}
     //내가쓴 댓글
     public Map<String, Object> getMemComList(int page, Long memId){
-		List<Comment> CommnetList = commentRepository.findByMemberMemId(memId, PageRequest.of(page-1, 6, Direction.DESC, "commentNum"));
+		List<Comment> CommentList = commentRepository.findByMemberMemId(memId, PageRequest.of(page-1, 6, Direction.DESC, "commentNum"));
 		
 		Paging paging = Paging.builder()
 				.url("/member/member_comment-list")
@@ -129,7 +129,7 @@ public class MemberService {
 				.blockCnt(10)
 				.build();
 		
-		return Map.of("commnets", CommnetList, "paging",paging);
+		return Map.of("comments", CommentList, "paging",paging);
 	}
     
  
