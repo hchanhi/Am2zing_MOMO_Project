@@ -122,11 +122,11 @@ public class MemberService {
 		List<Comment> CommnetList = commentRepository.findByMemberMemId(memId, PageRequest.of(page-1, 6, Direction.DESC, "commentNum"));
 		
 		Paging paging = Paging.builder()
-				.url("/board/"+memId)
-				.total((int)boardRepository.count())
+				.url("/member/member_comment-list")
+				.total((int)memberRepository.count())
 				.cntPerPage(6)
 				.curPage(page)
-				.blockCnt(5)
+				.blockCnt(10)
 				.build();
 		
 		return Map.of("commnets", CommnetList, "paging",paging);

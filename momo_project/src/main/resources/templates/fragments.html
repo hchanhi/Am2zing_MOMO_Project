@@ -97,15 +97,14 @@
 						<i class="fas fa-user-circle"></i>
 						<div class="dropdown-content">
 							<div sec:authorize="isAuthenticated()">
-								<p sec:authentication="principal.member.memNickname">
-							</div>
+								<p sec:authentication="principal.member.memNickname"/>
 							<a th:href="@{/member/mypage}">마이페이지</a>
 							<a th:href="@{/member/boardBookmark}">내북마크</a>
 							<a th:href="@{/logout}">로그아웃</a>
 						</div>
 					</div>
 				</div>
-
+				</div>
 				<!-- 특정 권한의 사용자 -->
 				<div sec:authorize="hasRole('ROLE_ADMIN')">
 					<div class="dropdown">
@@ -113,18 +112,19 @@
 
 						<div class="dropdown-content">
 							<div sec:authorize="isAuthenticated()">
-								<p sec:authentication="principal.member.memNickname">
-							</div>
+								<p sec:authentication="principal.member.memNickname"/>
 							<a th:href="@{/member/mypage}">마이페이지</a>
 							<a th:href="@{/member/boardBookmark}">내북마크</a>
 							<a th:href="@{/admin/member/member-list}">어드민</a>
 							<a th:href="@{/logout}">로그아웃</a>
+							</div>
 						</div>
 					</div>
 				</div>
 			</span>
 		</div>
 	</header>
+
 
 	<header th:fragment="flg_admin_header" class="inner">
 		<a href="#">
@@ -141,18 +141,18 @@
 					</button>
 					<div class="dropdown-content">
 						<div sec:authorize="isAuthenticated()">
-							<p sec:authentication="principal.member.memNickname"></p>
-						</div>
+							<p sec:authentication="principal.member.memNickname"/>
 						<a th:href="@{/member/mypage}">마이페이지</a>
 						<a th:href="@{/member/boardBookmark}">내북마크</a>
 						<a th:href="@{/admin/member/member-list}">어드민</a>
 						<a th:href="@{/logout}">로그아웃</a>
-
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</header>
+
 
 	<nav th:fragment="paging" class="paging" th:object=${paging}>
 		<ul class="pagination">

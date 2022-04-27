@@ -3,14 +3,21 @@
 .div_table{
 	display:table;
 	border-collapse:collapse;
+	width:400px;
 	table-layout:fixed;
 	}
 	
 .div_table_row{
 	display:table-row;
-	background-color: khaki;
+	border : solid 2px #FFCD4A;
 	  display: block;
+	  width: 300px;
+	  height: 200px;
+	  box-shadow: 2px 2px 2px  2px  lightgray;
+	  background: linear-gradient(to top, #fff 80%, #FFCD4A 20%);
 	}
+
+
 	
 .div_table_cell{
 	display:table-cell; 
@@ -19,7 +26,7 @@
 	
 #contents {
     float: right;
-    width: 1400px;
+    width: 1250px;
     height: 750px;
 
 }
@@ -27,10 +34,11 @@
 
 #placeimg {
     float: left;
-    width: calc(90% / 3);
-    height: 300px;
-    background-color: khaki;
-    border-radius: 10px;
+    width: 330px;
+    height: 250px;
+
+    opacity:0.8;
+    border-radius: 20px;
     margin-top: 30px;
     margin-left: 30px;
 }
@@ -56,19 +64,25 @@
 	padding:10px;
 	font-size:20px;
 }
-.mbtiarea{
+.list_area{
 	display: grid;
 	place-items: center;
 	margin: 15px;
 }
-.mbti{
+.list_name{
 	font-size: 30px;
 	text-align:center;
+	margin: 0 auto;
 	font-weight: bold;
     width: 200px;
     height: 50px;
-    background-color: lightpink;
-    border-radius: 10px;
+    background-color: #FFCD4A;
+ 	border-radius: 20px;
+ 	box-shadow: 1px 1px 1px 1px lightgray;
+}
+
+.list_name span {
+	color: white
 }
 .pagearea{
 	width: 1500px;

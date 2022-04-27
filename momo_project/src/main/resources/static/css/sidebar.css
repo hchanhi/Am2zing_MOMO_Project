@@ -15,8 +15,8 @@ ol, ul {
 
 
 body{
-    height: 100vh;
-    background-color: var(--body-color);
+    height: 120vh;
+    
 }
 
 
@@ -33,7 +33,7 @@ body{
 nav .nav-bar .logo a{
     font-size: 25px;
     font-weight: 500;
-    color: var(--text-color);
+    color: black;
     text-decoration: none;
 }
 
@@ -43,7 +43,7 @@ nav .nav-bar .logo a{
 }
 
 .nav-bar .nav-links li{
-    margin: 0 5px;
+    
     list-style: none;
 }
 
@@ -51,7 +51,7 @@ nav .nav-bar .logo a{
     position: relative;
     font-size: 17px;
     font-weight: 400;
-    color: var(--text-color);
+    color: black;
     text-decoration: none;
     padding: 10px;
 }
@@ -63,7 +63,7 @@ nav .nav-bar .logo a{
         left: -100%;
         top: 0;
         padding: 20px;
-        background-color: var(--side-nav);
+        background-color: black;
         z-index: 100;
         transition: all 0.4s ease;
     }
