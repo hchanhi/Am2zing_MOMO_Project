@@ -133,7 +133,7 @@ public class BoardService {
 			return Map.of("boards", boardList, "paging",paging);
 		}
 	 
-//	 public List<Board> getTop3Board(){
-//		 return boardRepository.findTop3ByPlaceCnt();
-//	 }
+	 public List<Board> getTop3Board(String mbti){
+		 return boardRepository.findTop3ByMemberMemMbtiIsOrderByPlaceCntDesc(mbti);
+	 }
 }

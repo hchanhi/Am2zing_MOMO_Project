@@ -19,7 +19,7 @@ public interface BoardRepository extends JpaRepository<Board, Long>{
 	
 	List<Board> findByMemberMemId(Long memId, Pageable pageale);
 
-	//List<Board> findTop3ByPlaceCnt();
+	List<Board> findTop3ByMemberMemMbtiIsOrderByPlaceCntDesc(String memMbti);
 }
 	
 	
