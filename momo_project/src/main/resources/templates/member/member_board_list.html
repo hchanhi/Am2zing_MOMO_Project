@@ -11,13 +11,13 @@
     <link rel="stylesheet" href="/css/fragment.css">
 	<link rel="stylesheet" href="/css/sidebar.css">
 	<title>MOMO-게시판</title>
-	  <th:block th:replace="fragments :: flg_header"></th:block>
+	 
 </head>
 <div th:include="member/mypagesidebar"> </div>
 
 <body>
 <div class="inner">
-
+ <th:block th:replace="fragments :: flg_header"></th:block>
 	<!--end of header-->
 
     <div class="list_area" th:object="${member}">
@@ -93,7 +93,6 @@
      	<div class="paging">
     		<div th:replace="fragments :: paging"></div>
     	</div>
-
     </div>
 </div>
 </body>
