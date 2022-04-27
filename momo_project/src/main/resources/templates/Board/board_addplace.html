@@ -26,14 +26,19 @@
 		</div>
 		<section style="background-color: white;" class="inner">
 
-			<div class="sec_left" style=" flex-wrap: nowrap; display: flex; flex-direction: column; justify-content: space-between;">
+			<div class="sec_left"
+				style=" flex-wrap: nowrap; display: flex; flex-direction: column; justify-content: space-between;">
 
 				<!-- 모달연습 -->
 				<div id="modal" class="modal-overlay">
 					<div class="modal-window">
-						<div class="close-area">X</div>
+
 						<div id="wrapper">
 							<div class="map_wrap">
+												<div id="close_modal">
+
+										<div class="close-area">X</div>
+									</div>
 								<div id="map"
 									style="border-radius:10px; width: 1130px; height: 650px; position: relative; overflow: hidden;">
 								</div>
@@ -47,7 +52,11 @@
 									</div>
 									<br>
 									<hr>
+									
+				
+
 									<ul id="placesList"></ul>
+
 									<div id="pagination"></div>
 								</div>
 							</div>
@@ -58,7 +67,7 @@
 
 				<div class="left_title">
 					<!-- 위도 및 경도 좌표 및 위치정보 -->
-					<div >
+					<div>
 						<input type="text" id="fulladdress" name="fulladdress" class="comment2" disabled>
 						<button class="locationbtn" onclick="writeplaycard()">장소 검색</button>
 					</div>
@@ -69,7 +78,7 @@
 				<input hidden type="text" id="placeId" name="placeId" value="" readonly>
 				<input hidden type="number" id="boardNum" name="boardNum" th:value="${boardNum}" readonly>
 				<input hidden name="memEmail" th:value="${#authentication.name}">
-				
+
 				<div class="left_img">
 					<label for="file1"></label>
 					<span class="cameraImg">
@@ -79,7 +88,8 @@
 
 
 					<div class="img_wrap" style="margin-left:230px;">
-						<img style="width:170px; height:170px; border-radius:10px;" id="img" name="img">
+						<img style="width:170px; height:170px; border:solid 1px; border-radius:10px;" id="img"
+							name="img">
 						<button id="imgBtn" class="addbtn3" onclick="javascript:fn_submit()">사진 추가</button>
 					</div>
 
@@ -102,8 +112,9 @@
 
 			<div class="sec_right">
 				<div
-					style="text-align: center;  border-radius: 10px; text-align:center; color:middelyellow; font-size: 20px; height: 50px; font-weight: bold;  background-color: white;">
-					<span>>현재 추가된 장소</span></div>
+					style="box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.5); text-align: center;  border-radius: 10px; text-align:center; color:middelyellow; font-size: 20px; height: 50px; font-weight: bold;  background-color: white;">
+					<span style="line-height: 50px;">현재 추가된 장소</span>
+				</div>
 				<div style="align-items: center;" id="resDiv" class="places"></div>
 				<div id="placeImg"></div>
 			</div>
@@ -390,7 +401,7 @@
 			}
 			itemStr += '  <span class="tel">' + places.phone + '</span>';
 
-			itemStr += '  <span class="sumitaddr">' + '<button class="addbtn4" onclick="close_modal()">선택하기</button>' + '</span>'; +
+			itemStr += '  <span class="sumitaddr">' + '<button class="addbtn4" onclick="close_modal()">선택 하기</button>' + '</span>'; +
 				'</div>';
 
 			el.innerHTML = itemStr;
