@@ -1,7 +1,8 @@
 /* Slider */
+@import "/css/fonts.css";
 
 *{
-	 font-family: '빙그레 메로나체';
+	  font-family: '빙그레','빙그레bold';
 }
 .slick-slider
 {

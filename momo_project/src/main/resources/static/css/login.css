@@ -1,9 +1,9 @@
+@import "/css/fonts.css";
 * {
-	margin: 0;
-	padding: 0;
-	font-family: '빙그레 메로나체'
+    margin: 0;
+    padding: 0;
+    font-family: '빙그레','빙그레bold';
 }
-
 :root { 
 	-background: #424242; 
 	-navbar: #ffffff; 
