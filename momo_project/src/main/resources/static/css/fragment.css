@@ -1,6 +1,9 @@
+* { font-family: '빙그레 메로나체';}
+
 header {
     height: 70px;
     /* background-color: rgb(212, 212, 212); */
+ 
 }
 
 #menus > a, .dropdown_momo > a {
@@ -67,6 +70,7 @@ image-rendering: crisp-edges;
     background-color: white;
 }
 .dropdown i {
+
 	font-size: 40px
 }
 
@@ -113,6 +117,7 @@ image-rendering: crisp-edges;
     padding: 12px 10px;
     text-decoration: none;
     display: block;
+    
 }
 .dropdown-content a, p {
     color: black;
