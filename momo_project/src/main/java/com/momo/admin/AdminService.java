@@ -79,7 +79,7 @@ public class AdminService {
 			
 			int cntPerPage = 6;
 			List<Comment> comments = adminCommentRepository
-					.findAll(PageRequest.of(page-1, cntPerPage, Direction.DESC, "replyNum"))
+					.findAll(PageRequest.of(page-1, cntPerPage, Direction.DESC, "commentNum"))
 					.getContent();
 			
 			Paging paging = Paging.builder()

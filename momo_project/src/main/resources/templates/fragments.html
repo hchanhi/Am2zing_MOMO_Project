@@ -29,15 +29,11 @@
 
 
 		<style type="text/css">
-
-
 			a {
 				color: black;
 				text-decoration: none;
 				cursor: pointer;
 			}
-			
-			
 		</style>
 	</th:block>
 
@@ -51,33 +47,33 @@
 				<img class="logo" alt="" src="/images/logo/MOMOLOGO.png">
 			</a>
 			<div id="menus">
-			<div class="dropdown_momo">
-				<a  th:href="@{/board}">MOMO판</a>
-			
-					
-				
-						<div class="dropdown_momo_content">
-						
-							<a href="/board/ENFJ">ENFJ</a>
-							<a href="/board/ENFP">ENFP</a>
-							<a href="/board/ENTJ">ENTJ</a>
-							<a href="/board/ENTP">ENTP</a>
-							<a href="/board/ESFJ">ESFJ</a>
-							<a href="/board/ESFP">ESFP</a>
-							<a href="/board/ESTJ">ESTJ</a>
-							<a href="/board/ESTP">ESTP</a>
-							<a href="/board/INFJ">INFJ</a>
-							<a href="/board/INFP">INFP</a>
-							<a href="/board/INTJ">INTJ</a>
-							<a href="/board/INTJ">INTP</a>
-							<a href="/board/ISFJ">ISFJ</a>
-							<a href="/board/ISFP">ISFP</a>
-							<a href="/board/ISTJ">ISTJ</a>
-							<a href="/board/ISTP">ISTP</a>
-						</div>
-					
-				
-				</div >
+				<div class="dropdown_momo">
+					<a th:href="@{/board}">MOMO판</a>
+
+
+
+					<div class="dropdown_momo_content">
+
+						<a href="/board/ENFJ">ENFJ</a>
+						<a href="/board/ENFP">ENFP</a>
+						<a href="/board/ENTJ">ENTJ</a>
+						<a href="/board/ENTP">ENTP</a>
+						<a href="/board/ESFJ">ESFJ</a>
+						<a href="/board/ESFP">ESFP</a>
+						<a href="/board/ESTJ">ESTJ</a>
+						<a href="/board/ESTP">ESTP</a>
+						<a href="/board/INFJ">INFJ</a>
+						<a href="/board/INFP">INFP</a>
+						<a href="/board/INTJ">INTJ</a>
+						<a href="/board/INTJ">INTP</a>
+						<a href="/board/ISFJ">ISFJ</a>
+						<a href="/board/ISFP">ISFP</a>
+						<a href="/board/ISTJ">ISTJ</a>
+						<a href="/board/ISTP">ISTP</a>
+					</div>
+
+
+				</div>
 				<a th:href="@{/member/mypage}">마이페이지</a>
 				<a th:href="@{/member/boardBookmark}">마이북마크</a>
 				<a href="#">공지사항</a>
@@ -98,7 +94,7 @@
 				<!-- 로그인한 사용자 -->
 				<div sec:authorize="hasRole('ROLE_MEMBER')">
 					<div class="dropdown">
-					<i class="fas fa-user-circle"></i>
+						<i class="fas fa-user-circle"></i>
 						<div class="dropdown-content">
 							<div sec:authorize="isAuthenticated()">
 								<p sec:authentication="principal.member.memNickname"/>
@@ -113,6 +109,7 @@
 				<div sec:authorize="hasRole('ROLE_ADMIN')">
 					<div class="dropdown">
 						<i class="fas fa-user-circle"></i>
+
 						<div class="dropdown-content">
 							<div sec:authorize="isAuthenticated()">
 								<p sec:authentication="principal.member.memNickname"/>
@@ -127,6 +124,7 @@
 			</span>
 		</div>
 	</header>
+
 
 	<header th:fragment="flg_admin_header" class="inner">
 		<a href="#">
@@ -154,6 +152,7 @@
 			</div>
 		</div>
 	</header>
+
 
 	<nav th:fragment="paging" class="paging" th:object=${paging}>
 		<ul class="pagination">
@@ -183,7 +182,7 @@
 	</div>
 
 
-<script src="https://kit.fontawesome.com/6478f529f2.js" crossorigin="anonymous"></script>
+	<script src="https://kit.fontawesome.com/6478f529f2.js" crossorigin="anonymous"></script>
 
 </body>
 

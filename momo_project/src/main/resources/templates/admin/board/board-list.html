@@ -10,14 +10,13 @@
 		  crossorigin="anonymous"
 		></script>
 		<link rel="stylesheet" href="/css/common.css" />
-		<link rel="stylesheet" href="/css/adminheader.css" />
+		<link rel="stylesheet" href="/css/sidebutton.css" />
 		<link rel="stylesheet" href="/css/admin-list.css" />
 		<title>admin board list</title>
+		<th:block th:replace="fragments :: flg_header"></th:block>
 	  </head>
 <body>
 	<div class="inner">
-		<th:block th:replace="fragments :: flg_admin_header"></th:block>
-  
 		<div class="all inner">
 		  <aside>
 			  <div class="button_1" onclick="location.href='/admin/member/member-list'">회원관리</div>
