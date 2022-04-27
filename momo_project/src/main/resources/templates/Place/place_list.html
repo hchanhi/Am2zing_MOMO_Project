@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://kit.fontawesome.com/5168478d86.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="./css/addplace.css">
+    <link rel="stylesheet" href="/css/addplace.css">
 	<title>PlaceList</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<style>
@@ -23,35 +23,56 @@
     }
     
     table tbody td {
-		  border-top: 1rem solid;
+		  border-top: 1rem solid black;
 		  border-bottom: 1rem solid;
 		  border-color: transparent;
 }
+
+.add_place{
+	display: flex;
+  	justify-content: space-between;
+  	align-items: center;
+ 	padding: 10px;
+ 	padding-right:25px;
+ 	margin-right: 10px;
+ 	margin-bottom: 10px;
+ 	border:5px solid #FFCD4A;
+ 	border-radius: 20px;
+ 	box-shadow: 2px 2px 2px 2px lightgray;
+}
+
+
 	</style>
 </head>
 <body>
-<div style="height:700px; overflow:auto;">
-    <table style="margin:auto; margin-top:50px;">
+<div style="height:700px; overflow:auto;" >
+    <table style="margin:auto; margin-top:50px; ">
         <tr>
             <th style="font-size:25px; width:200px;">장소명</th>
             <th style="font-size:25px; width:400px; text-align:center;">코멘트</th>
         </tr>
+        </table>
         
-        <tbody>
-        <tr th:each="place : ${places}">
-            <td style="font-weight:bold; word-break:break-all; font-size:20px">
+        <!-- <tbody > -->
+      
+        <div class="add_place" th:each="place : ${places}" >
+      
+            <div style="font-weight:bold; word-break:break-all; font-size:20px; width:40%;">
                 <span th:text="${place.placeTitle}"></span>
-            </td>
-            <td style="text-align:center; word-break:break-all; font-size:17px;">
+            </div>
+            <div style="text-align:center; word-break:break-all; font-size:17px; width:50%;">
                 <span th:text="${place.placeContent}"></span>
-            </td>
-            <td>
+            </div>
+            <div style="width:10%;">
             <span hidden id="boardNum" th:boardNum="${place.board.boardNum}"></span>
             <input type="button" class="deletePlace" th:data-del="${place.placeNum}"
              value="삭제">
-            </td>
-        </tr>
-        </tbody>
+            </div>
+        </div>
+         
+      <!--   
+        </tbody> -->
+      
     </table>
 </div>
 <script src="https://code.jquery.com/jquery-latest.min.js"></script>
