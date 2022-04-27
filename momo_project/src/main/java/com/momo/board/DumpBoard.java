@@ -28,8 +28,8 @@ public class DumpBoard implements CommandLineRunner{
 
     @Override
     public void run(String... args) throws Exception {
-    	String encPassword1 = bCryptPasswordEncoder.encode("bbbb");
-        Member member1 = memberRepository.save(Member.builder()
+    	String encPassword1 = bCryptPasswordEncoder.encode("1234");
+    	Member member1 = memberRepository.save(Member.builder()
             .memEmail("bbbb@bbbb.com")
             .memNickname("bbbb")
             .memMbti("ENFP")
@@ -37,21 +37,64 @@ public class DumpBoard implements CommandLineRunner{
             .memBirth("2000-01-17")
             .memRole("ROLE_MEMBER")
             .build());
-        	
-        Board board1 = boardRepository.save(Board.builder()
-	        .boardTitle("1번")
-	        .member(member1)
-	        .placeCnt(1000)
-	        .build());
         
-        Place place1 = placeRepository.save(Place.builder()
-        		.placeTitle("스타벅스 강남점")
-        		.placeContent("조용해요")
-        		.placeId("12345")
-        		.placeLat("37.506229157876774")
-        		.placeLng("127.05688880326076")
-        		.board(board1)
-        		.member(member1)
-        		.build());
+        Member member2 = memberRepository.save(Member.builder()
+                .memEmail("cccc@cccc.com")
+                .memNickname("cccc")
+                .memMbti("ESFJ")
+                .memPassword(encPassword1)
+                .memBirth("1999-01-11")
+                .memRole("ROLE_MEMBER")
+                .build());
+        
+        Member member3 = memberRepository.save(Member.builder()
+                .memEmail("dddd@dddd.com")
+                .memNickname("dddd")
+                .memMbti("ISTJ")
+                .memPassword(encPassword1)
+                .memBirth("1997-02-20")
+                .memRole("ROLE_MEMBER")
+                .build());
+        
+        Member member4 = memberRepository.save(Member.builder()
+                .memEmail("eeee@eeee.com")
+                .memNickname("eeee")
+                .memMbti("ENTJ")
+                .memPassword(encPassword1)
+                .memBirth("1997-02-20")
+                .memRole("ROLE_MEMBER")
+                .build());
+        
+        Member member5 = memberRepository.save(Member.builder()
+                .memEmail("ffff@ffff.com")
+                .memNickname("ffff")
+                .memMbti("ESFJ")
+                .memPassword(encPassword1)
+                .memBirth("1993-02-1")
+                .memRole("ROLE_MEMBER")
+                .build());
+        
+        Member[] member = {member1, member2, member3, member4, member5};
+        
+        for(int k=0;k<4;k++) {
+	        for(int i=1;i<9;i++) {
+		        Board board = boardRepository.save(Board.builder()
+			        .boardTitle(i+"번")
+			        .member(member[k])
+			        .placeCnt(1000+i*100)
+			        .build());
+		        
+		        
+		        Place place = placeRepository.save(Place.builder()
+	        		.placeTitle("스타벅스 강남점")
+	        		.placeContent("조용해요")
+	        		.placeId("12345")
+	        		.placeLat("37.506229157876774")
+	        		.placeLng("127.05688880326076")
+	        		.board(board)
+	        		.member(member[k])
+	        		.build());
+	        }  
+        }
     }
 }
