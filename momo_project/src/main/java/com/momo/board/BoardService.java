@@ -9,9 +9,11 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.momo.bookmark.BoardBookmarkRepository;
 import com.momo.comment.CommentRepository;
 import com.momo.common.util.pagination.Paging;
 import com.momo.domain.Board;
+import com.momo.domain.BoardBookmark;
 import com.momo.domain.Comment;
 import com.momo.domain.Member;
 import com.momo.domain.Place;
@@ -37,6 +39,9 @@ public class BoardService {
 	
 	@Autowired
 	private MemberCustomRepository memberCustomRepository;
+	
+	@Autowired
+	private BoardBookmarkRepository boardBookmarkRepository;
 	
 	public Board save(String boardTitle, String memEmail) {
 		Board board = new Board();
@@ -89,6 +94,12 @@ public class BoardService {
 			 Long commentNum = comment.getCommentNum();
 			 commentRepository.deleteById(commentNum);
 		 }
+		 List<BoardBookmark> bookmarks = boardBookmarkRepository.findByBoard(board);
+		 for(BoardBookmark bookmark : bookmarks) {
+			 Long bookarkNum = bookmark.getBoard().getBoardNum();
+			 boardBookmarkRepository.deleteById(bookarkNum);
+		 }
+		 
 		 boardRepository.deleteById(board.getBoardNum());
 	    }
 	 
