@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymelaf.org" lang="ko" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
-	<th:block th:replace="fragments :: flg_head"></th:block>
+	
 	<meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,9 +9,9 @@
 
     <link rel="stylesheet" href="/css/board-list.css">
     <link rel="stylesheet" href="/css/fragment.css">
-
+	<link rel="stylesheet" href="/css/sidebar.css">
 	<title>MOMO-게시판</title>
-	<th:block th:replace="fragments :: flg_header"></th:block>
+	  <th:block th:replace="fragments :: flg_header"></th:block>
 </head>
 <div th:include="member/mypagesidebar"> </div>
 
@@ -89,11 +89,10 @@
 	   
     </form>
      -->
-     <div class="pagearea">
-     	
-
- <!--    	<div th:replace="fragments :: paging"></div> -->
-	   
+    <div class="pagearea">
+     	<div class="paging">
+    		<div th:replace="fragments :: paging"></div>
+    	</div>
 
     </div>
 </div>

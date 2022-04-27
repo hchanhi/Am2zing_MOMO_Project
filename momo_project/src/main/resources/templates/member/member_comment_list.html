@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 	<head>
-		<th:block th:replace="fragments :: flg_head"></th:block>
 		<meta charset="UTF-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -35,9 +34,9 @@
   
 				<th:block th:each="comment : ${comments}" th:object="${comment}">
 				  <div class="policy">
-					<span th:text="*{commentContent}"></span>
-					<span th:text="*{member.memNickname}"></span>
-					<span th:text="*{board.boardTitle}"></span>
+					<span th:text="${commnet.commentContent}"></span>
+					<span th:text="${comment.member.memNickname}"></span>
+					<span th:text="${board.boardTitle}"></span>
 					<span><a th:href="@{/admin/comment/comment-detail/{id}(id = *{board.boardNum})}">view</a>
 					</span>
 				  </div>
