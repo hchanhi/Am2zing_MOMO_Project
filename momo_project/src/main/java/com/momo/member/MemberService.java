@@ -108,8 +108,8 @@ public class MemberService {
 		List<Board> boardList = boardRepository.findByMemberMemId(memId, PageRequest.of(page-1, 6, Direction.DESC, "boardNum"));
 		
 		Paging paging = Paging.builder()
-				.url("/board/"+memId)
-				.total((int)boardRepository.count())
+				.url("/member/board/{memId}")
+				.total(boardRepository.findAllByMemberMemId(memId).size())
 				.cntPerPage(6)
 				.curPage(page)
 				.blockCnt(5)
@@ -122,8 +122,8 @@ public class MemberService {
 		List<Comment> CommentList = commentRepository.findByMemberMemId(memId, PageRequest.of(page-1, 6, Direction.DESC, "commentNum"));
 		
 		Paging paging = Paging.builder()
-				.url("/member/member_comment-list")
-				.total((int)memberRepository.count())
+				.url("/member/comment")
+				.total(commentRepository.findAllByMemberMemId(memId).size())
 				.cntPerPage(6)
 				.curPage(page)
 				.blockCnt(10)

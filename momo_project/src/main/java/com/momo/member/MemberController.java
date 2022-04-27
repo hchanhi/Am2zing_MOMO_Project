@@ -183,8 +183,8 @@ public class MemberController {
     }
     
     // 내가쓴 글
-    @GetMapping("/member/board")
-	public String memBoard(Authentication authentication, @RequestParam(value="id")Long memId, Model model,
+    @GetMapping("/member/board/{memID}")
+	public String memBoard(Authentication authentication, @RequestParam(value="id", required=false)Long memId, Model model,
 			@RequestParam(required = false, defaultValue = "1") int page) {
 		model.addAllAttributes(memberService.getMemBoardList(page, memId));
 		Member member = memberService.mypage(authentication.getName());
