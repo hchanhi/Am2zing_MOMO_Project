@@ -1,3 +1,5 @@
+@import "/css/fonts.css";
+
 #placesList .info .jibun {
     padding-left: 26px;
     background:
@@ -110,7 +112,7 @@
 .map_wrap * {
     margin: 0;
     padding: 0;
-    font-family: '빙그레 메로나체';
+     font-family: '빙그레','빙그레bold';
 
     font-size: 12px;
 }

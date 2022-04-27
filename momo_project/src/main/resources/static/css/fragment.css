@@ -1,4 +1,6 @@
-* { font-family: '빙그레 메로나체';}
+@import "/css/fonts.css";
+
+* { font-family: '빙그레','빙그레bold';}
 
 header {
     height: 70px;
@@ -11,6 +13,7 @@ header {
 	margin-right: 25px;
 	color: black;
 	font-size: 15px;
+	font-weight: 700;
 	}
 
 

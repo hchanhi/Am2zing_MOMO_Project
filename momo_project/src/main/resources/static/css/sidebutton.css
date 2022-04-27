@@ -1,6 +1,7 @@
 @charset "utf-8";
+@import "/css/fonts.css";
 *{
-	 font-family: '빙그레 메로나체';
+	 font-family: '빙그레','빙그레bold';
 }
 .all {
     padding-top: 50px;
