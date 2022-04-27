@@ -3,6 +3,7 @@ package com.momo.admin;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,9 +13,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.momo.board.BoardService;
+import com.momo.bookmark.BoardBookMarkService;
 import com.momo.domain.Board;
 import com.momo.domain.Member;
 import com.momo.member.MemberService;
+import com.momo.member.PrincipalDetails;
 import com.momo.place.PlaceService;
 
 @Controller
@@ -32,6 +35,9 @@ public class AdminController {
 	
 	@Autowired 
 	private MemberService memberService;
+	
+	@Autowired 
+	private BoardBookMarkService boardBookmarkService;
 	
 	//전체 회원 조회
 	@GetMapping("member/member-list")
@@ -74,8 +80,10 @@ public class AdminController {
 	
 	//개별 게시글 조회
 	@GetMapping("board/board-detail/{boardNum}")
-	public String showboardDetail(@PathVariable Integer boardNum, Model model) {
+	public String showboardDetail(@PathVariable Integer boardNum, Model model, @AuthenticationPrincipal PrincipalDetails principal) {
 		Board board = boardService.getPost(boardNum);
+		Member member = principal.getMember();
+    	model.addAttribute("boardBookmarkCheck", boardBookmarkService.isBoardBookmarkChecked(member, (long) boardNum));
 		model.addAttribute("board", board);
 		model.addAttribute("places", this.placeService.findByBoardNum(boardNum));
 		return "Board/board_detail";
@@ -92,8 +100,10 @@ public class AdminController {
 	
 	//개별 댓글 조회
 	@GetMapping("comment/comment-detail/{boardNum}")
-	public String showcommentDetail(@PathVariable Integer boardNum, Model model) {
+	public String showcommentDetail(@PathVariable Integer boardNum, Model model, @AuthenticationPrincipal PrincipalDetails principal) {
 		Board board = boardService.getPost(boardNum);
+		Member member = principal.getMember();
+    	model.addAttribute("boardBookmarkCheck", boardBookmarkService.isBoardBookmarkChecked(member, (long) boardNum));
 		model.addAttribute("board", board);
 		model.addAttribute("places", this.placeService.findByBoardNum(boardNum));
 		return "Board/board_detail";
