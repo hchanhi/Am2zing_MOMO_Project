@@ -66,7 +66,7 @@ public class MemberController {
 	 public String goLogin(HttpServletRequest request) {
         //이전 페이지의 정보
         String url = request.getHeader("Referer");
-        if(!url.contains("/member/login")) {
+        if(!url.contains("member/member_loginForm")) {
             request.getSession().setAttribute("prevPage",request.getHeader("Referer"));
         }
 		return "member/member_loginForm"; 
@@ -183,8 +183,8 @@ public class MemberController {
     }
     
     // 내가쓴 글
-    @GetMapping("/member/board")
-	public String memBoard(Authentication authentication, @RequestParam(value="id")Long memId, Model model,
+    @GetMapping("/member/board/{memId}")
+	public String memBoard(Authentication authentication, @PathVariable("memId") Long memId, Model model,
 			@RequestParam(required = false, defaultValue = "1") int page) {
 		model.addAllAttributes(memberService.getMemBoardList(page, memId));
 		Member member = memberService.mypage(authentication.getName());
@@ -193,8 +193,8 @@ public class MemberController {
 	}
     
     // 내가쓴 댓글
-    @GetMapping("/member/comment")
-	public String memComment(Authentication authentication, @RequestParam(value="id")Long memId, Model model,
+    @GetMapping("/member/comment/{memId}")
+	public String memComment(Authentication authentication, @PathVariable("memId") Long memId, Model model,
 			@RequestParam(required = false, defaultValue = "1") int page) {
 		model.addAllAttributes(memberService.getMemComList(page, memId));
 		 Member member = memberService.mypage(authentication.getName());

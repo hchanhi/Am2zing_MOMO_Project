@@ -104,6 +104,7 @@ input:focus {
 	font-weight:bold;
 	font-size:25px;
 	display: inline-block;
+	color: black;
 }
 
 .titlearea{

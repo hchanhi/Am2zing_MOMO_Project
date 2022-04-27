@@ -18,4 +18,6 @@ public interface CommentRepository extends JpaRepository<Comment, Long>{
 	
 	List<Comment> findByMemberMemId(Long memId, Pageable pageale);
 	
+	List<Comment> findAllByMemberMemId(Long memId);
+	
 }

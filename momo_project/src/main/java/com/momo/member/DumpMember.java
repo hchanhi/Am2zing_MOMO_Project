@@ -1,3 +1,4 @@
+
 package com.momo.member;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,3 +41,4 @@ public class DumpMember implements CommandLineRunner{
                 .build());
                 }
            }
+
