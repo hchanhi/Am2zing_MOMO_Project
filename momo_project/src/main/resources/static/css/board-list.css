@@ -139,22 +139,20 @@ input:focus {
 	color: white
 }
 .pagearea{
-	width: 1500px;
-	float: right;
+	width: 1440px;
+	float: left;
 	display: grid;
-	place-items: center;
 	text-align: center;
 	padding-top: 10px;
 	padding-bottom: 10px;
-	position: fixed;
 	bottom: 0;
 	right:0;
 	height: 100px;
 }
-.paging{
-	margin: 0 auto;
-	
-}
+.paging {
+     display:block;
+   margin: 0 auto;
+  }
 .post_btn{
 	position: fixed;
 	float:right;

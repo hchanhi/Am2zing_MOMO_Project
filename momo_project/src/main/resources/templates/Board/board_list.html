@@ -6,8 +6,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://kit.fontawesome.com/5168478d86.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="/css/list.css">
-
     <link rel="stylesheet" href="/css/board-list.css">
 	<title>MOMO-게시판</title>
 
@@ -38,7 +36,7 @@
 	        		<span th:text="${board.placeCnt}"></span>
 	        	</div>
        		</div>
-        	<hr>
+        	
         	<div class="titlearea">
 	        	<div class="div_table_cell">
 	       			<a th:href="@{'/post/' + ${board.boardNum}}">
@@ -85,11 +83,12 @@
     </form>
      -->
      <div class="pagearea">
-     	
+     	<div class="paging">
     	<div th:replace="fragments :: paging"></div>
 	    <div class="post_btn">
 	        <a th:href="@{/postBoard}" role="button"><button class="btn"><i class="fa-solid fa-plus"></i></button></a>
 	    </div>
+    </div>
     </div>
 </div>
 </body>
