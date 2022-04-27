@@ -118,7 +118,6 @@ public class BoardService {
 //			return Map.of("boards", boardList, "paging",paging);
 //		}
 	 
-	 //내가쓴 게시글
 	 public Map<String, Object> getMbtiBoardList(int page, String memMbti){
 			List<Board> boardList = boardRepository.findByMemberMemMbti(memMbti, 
 					PageRequest.of(page-1, 6, Direction.DESC, "boardNum"));
