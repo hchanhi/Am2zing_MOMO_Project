@@ -358,8 +358,12 @@ section {
     width: calc(100%/2);
     height: 100%;
     border-radius: 10px;
+    padding-left: 50px;
 
 }
+
+
+
 /* 
 #places{
 } */
