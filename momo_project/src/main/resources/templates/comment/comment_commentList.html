@@ -32,9 +32,9 @@
 									th:text="${comment.commentContent}"></span>
 							</div>
 							<div  style="width: 80px;">
-								<input th:if="${#authentication.name} == ${comment.member.memEmail}" type="button" style="background: none; border: none;"
+								<input th:if="${#authentication.name} == ${comment.member.memEmail} or ${#authorization.expression('hasRole(''ROLE_ADMIN'')')}" type="button" style="background: none; border: none;"
 									th:data-del="${comment.commentNum}" id="deleteBtn" class="deleteComment" value="❌">
-									<input th:unless="${#authentication.name} == ${comment.member.memEmail}" type="button" style="background: none; border: none;"
+									<input th:unless="${#authentication.name} == ${comment.member.memEmail} or ${#authorization.expression('hasRole(''ROLE_ADMIN'')')}" type="button" style="background: none; border: none;"
 									th:data-del="${comment.commentNum}"  id="deleteBtn" class="deleteComment" hidden value="5">
 							</div>
 						</div>

@@ -22,8 +22,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.momo.board.BoardService;
 import com.momo.bookmark.BoardBookMarkService;
+import com.momo.domain.Board;
 import com.momo.domain.Member;
+import com.momo.place.PlaceService;
 
 import lombok.RequiredArgsConstructor;
 import net.bytebuddy.dynamic.DynamicType.Builder.FieldDefinition.Optional;
@@ -45,6 +48,12 @@ public class MemberController {
 	
 	@Autowired
 	private BoardBookMarkService boardBookMarkService;
+	
+	@Autowired
+	private BoardService boardService;
+	
+	@Autowired
+	private PlaceService placeService;
 
 //	//멤버 메인 페이지 -> 추후 경로 수정 예정 
 //	@GetMapping({ "/member" })
@@ -193,7 +202,13 @@ public class MemberController {
 		return "member/member_comment_list";
 	}
   
-
+    @GetMapping("/member/comment/comment-detail/{boardNum}")
+	public String showcommentDetail(@PathVariable Integer boardNum, Model model) {
+		Board board = boardService.getPost(boardNum);
+		model.addAttribute("board", board);
+		model.addAttribute("places", this.placeService.findByBoardNum(boardNum));
+		return "Board/board_detail";
+	}
 	
 	
 }

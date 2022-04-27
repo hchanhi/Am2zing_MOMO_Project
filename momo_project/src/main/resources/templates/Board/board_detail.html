@@ -44,10 +44,10 @@
 						<i class="fas fa-heart fa-xl"></i></button>
 				</div>
 				<div>
-					<a th:if="${#authentication.name} == ${board.member.memEmail}"
+					<a th:if="${#authentication.name} == ${board.member.memEmail} or ${#authorization.expression('hasRole(''ROLE_ADMIN'')')}" 
 						th:href=" @{'/post/edit/' + ${board.boardNum}}" role="button"><button><i
 								class="fas fa-edit fa-xl"></i></button></a>
-					<a th:unless="${#authentication.name} == ${board.member.memEmail}" hidden
+					<a th:unless="${#authentication.name} == ${board.member.memEmail} or ${#authorization.expression('hasRole(''ROLE_ADMIN'')')}" hidden
 						th:href=" @{'/post/edit/' + ${board.boardNum}}" role="button"><button><i
 								class="fas fa-edit fa-xl"></i></button></a>
 				</div>

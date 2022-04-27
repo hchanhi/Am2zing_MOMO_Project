@@ -63,6 +63,7 @@ public class AdminController {
         return "redirect:member-list";
     }
 	
+    //게시글 전체 조회
 	@GetMapping("board/board-list")
 	public void searchAllBoards(Model model
 					, @RequestParam(required = false, defaultValue = "1")
@@ -71,6 +72,7 @@ public class AdminController {
 		model.addAllAttributes(adminService.findAllBoards(page));
 	}
 	
+	//개별 게시글 조회
 	@GetMapping("board/board-detail/{boardNum}")
 	public String showboardDetail(@PathVariable Integer boardNum, Model model) {
 		Board board = boardService.getPost(boardNum);
@@ -79,6 +81,7 @@ public class AdminController {
 		return "Board/board_detail";
 	}
 	
+	//전체 댓글 조회
 	@GetMapping("comment/comment-list")
 	public void searchAllComments(Model model
 					, @RequestParam(required = false, defaultValue = "1")
@@ -87,6 +90,7 @@ public class AdminController {
 		model.addAllAttributes(adminService.findAllComments(page));
 	}
 	
+	//개별 댓글 조회
 	@GetMapping("comment/comment-detail/{boardNum}")
 	public String showcommentDetail(@PathVariable Integer boardNum, Model model) {
 		Board board = boardService.getPost(boardNum);
