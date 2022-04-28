@@ -25,7 +25,7 @@
 					style="color: rgb(0, 0, 0);font-size: 15px;">님의</span>
 			</div>
 			<div style="display: inline-block; width: 340px; word-break:break-all;  ">
-				<span style="color: rgb(255, 255, 255); font-size: 26px; font-weight: 800; margin-left: 10px;
+				<span style="color: rgb(255, 255, 255); font-size: 20px; font-weight: 800; margin-left: 10px;
 				text-shadow:1px 1px 1px #000;" th:text="${board.boardTitle}"></span>
 			</div>
 
@@ -87,7 +87,7 @@
 					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 
 
-					<div class="">
+					<div style="margin-top:10px;">
 						<textarea  spellcheck="false" style="padding: 5px;" placeholder="댓글을 입력해주세요" name="commentContent" id="commentContent"></textarea>
 						<input hidden type="number" id="boardNum" name="boardNum" th:value="${boardNum}">
 
