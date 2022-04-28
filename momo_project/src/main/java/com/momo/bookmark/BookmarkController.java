@@ -22,7 +22,7 @@ public class BookmarkController {
 	@ResponseBody
 	public String boardBookmark(@RequestParam int boardNum, @AuthenticationPrincipal PrincipalDetails principal) {
 		if(principal == null) {
-        	return "/member/member_loginForm";
+        	return "/member/login";
         } else {
         	Member member = principal.getMember();
         	boardBookMarkService.save(member, boardNum);
