@@ -43,7 +43,7 @@ public class Member {
 	@CreationTimestamp
 	private Timestamp createDate;
 	
-	public void excodePassword(PasswordEncoder passwordEncoder) {
+	public void encodePassword(PasswordEncoder passwordEncoder) {
 		this.memPassword = passwordEncoder.encode(this.memPassword);
 	}
 }

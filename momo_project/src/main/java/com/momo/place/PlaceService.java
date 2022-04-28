@@ -65,25 +65,14 @@ public class PlaceService {
 		this.placeRepository.save(place);
 	}
 			
-	@Transactional
-    public void deletePlace(Long boardNum) {
-	 List<Place> places = this.findByBoardNum(boardNum.intValue());
-	 
-	 	for(Place place : places) {
-			 Long placeNum = place.getPlaceNum();
-			 placeRepository.deleteById(placeNum);
-	 	}
-    }
 	
 	public void delete(Long placeNum) {
 		placeRepository.deleteById(placeNum);
 	}
 	
 	public ResponseEntity<?> update(Map<String,String> map) {
-		//System.out.println(map.toString());
 		Map<String, String> tempMap=new HashMap<>();
 		String memEmail = map.get("memEmail");
-		//DB처리
 		String placeTitle = map.get("placeTitle");
 		String placeLat = map.get("placeLat");
 		String placeLng = map.get("placeLng");

@@ -164,6 +164,13 @@ function memNicknameCheck() {
 		$('#memNickname').focus();
 		return false;
 	}
+	
+
+	if (memNickname.length > 5) {
+		alert('닉네임은 5글자 이하이어야 합니다.');
+		$('#memNickname').focus();
+		return false;
+	}
 	$.ajax({
 		type: 'get',
 		url: '/member/nicknameChk',

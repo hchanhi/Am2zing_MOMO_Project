@@ -150,7 +150,7 @@ public class MemberController {
     
     //패스워드 수정페이지
     @GetMapping("/member/pwdEdit")
-    public String modifyPassword(Authentication authentication, Model model) {
+    public String EditPassword(Authentication authentication, Model model) {
     	Member member = memberService.mypage(authentication.getName());
     	model.addAttribute("member",member);
 
