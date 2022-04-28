@@ -24,7 +24,11 @@
 
 	
 .div_table_cell{
-	display:table-cell; 
+	display:table-cell;
+	}
+
+.div_table_cell span {
+	margin: 3px;
 	}
 	
 	
