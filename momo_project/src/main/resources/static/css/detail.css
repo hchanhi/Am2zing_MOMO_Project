@@ -97,16 +97,7 @@
 }
 
 
-.info-title {
-    display: block;
-    background: #50627F;
-    color: #fff;
-    text-align: center;
-    height: 60px;
-    line-height: 22px;
-    border-radius: 4px;
-    padding: 0px 10px;
-}
+
 
 .map_wrap,
 .map_wrap * {
