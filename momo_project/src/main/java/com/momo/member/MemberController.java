@@ -22,9 +22,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.momo.board.BoardRepository;
 import com.momo.board.BoardService;
 import com.momo.bookmark.BoardBookMarkService;
+import com.momo.bookmark.BoardBookmarkRepository;
 import com.momo.domain.Board;
+import com.momo.domain.BoardBookmark;
 import com.momo.domain.Member;
 import com.momo.place.PlaceService;
 
@@ -54,6 +57,13 @@ public class MemberController {
 	
 	@Autowired
 	private PlaceService placeService;
+	
+	@Autowired
+	private BoardRepository boardRepository;
+	
+	@Autowired
+	private BoardBookmarkRepository boardBookmarkRepository;
+	
 
 //	//멤버 메인 페이지 -> 추후 경로 수정 예정 
 //	@GetMapping({ "/member" })
@@ -177,7 +187,14 @@ public class MemberController {
     //회원 탈퇴 실행
     @PostMapping("/memeber/withdrawal")
     public String withdrawalMember(Member member, HttpSession session) {
-        memberService.deleteMember(member.getMemId());
+        List<Board> boards = boardRepository.findByMember(member);
+        for(Board board : boards) {
+        	boardService.deletePost(board);
+        }
+        for(BoardBookmark boardBookmark :boardBookmarkRepository.findByMember(member)) {
+        	boardBookmarkRepository.deleteById(boardBookmark.getBoardBookmarkNum());
+        }
+    	memberService.deleteMember(member.getMemId());
         session.invalidate();
         return "redirect:/";
     }
