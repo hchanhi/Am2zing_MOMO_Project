@@ -206,7 +206,7 @@ public class MemberController {
 	public String showcommentDetail(@PathVariable Integer boardNum, Model model) {
 		Board board = boardService.getPost(boardNum);
 		model.addAttribute("board", board);
-		model.addAttribute("places", this.placeService.findByBoardNum(boardNum));
+		model.addAttribute("places", placeService.getPlaceList(boardNum));
 		return "Board/board_detail";
 	}
 	

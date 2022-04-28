@@ -84,7 +84,7 @@ public class BoardService {
 	
 	 @Transactional
 	    public void deletePost(Board board) {
-		 List<Place> places = placeService.findByBoardNum(board.getBoardNum().intValue());
+		 List<Place> places = placeService.getPlaceList(board.getBoardNum().intValue());
 		 for(Place place : places) {
 			 Long placeNum = place.getPlaceNum();
 			 placeRepository.deleteById(placeNum);

@@ -45,7 +45,7 @@ public class BoardController {
 	  int page) {
 		List<Board> boardList = boardRepository.findAll();
 		for(Board board : boardList) {
-			if(placeService.findByBoardNum(board.getBoardNum().intValue()).isEmpty()) {
+			if(placeService.getPlaceList(board.getBoardNum().intValue()).isEmpty()) {
 				this.delete(board.getBoardNum());
 			}
 		}
@@ -65,7 +65,6 @@ public class BoardController {
 	public String write(String boardTitle, String memEmail, Model model) {
 		if (!Objects.isNull(boardTitle)&& !boardTitle.isBlank()) {
 			Board board = boardService.save(boardTitle,memEmail);
-			System.out.println(board.getMember().getMemMbti());
 			model.addAttribute("boardNum", board.getBoardNum());
 			return "Board/board_addplace";
 		} else {
@@ -76,7 +75,7 @@ public class BoardController {
 	 @GetMapping("/post/{boardNum}")
 	    public String detail(@PathVariable("boardNum") Integer boardNum, @AuthenticationPrincipal PrincipalDetails principal, Model model) {
 		 	Board board = boardService.getPost(boardNum);
-	    if(!placeService.findByBoardNum(boardNum).isEmpty()) {
+	    if(!placeService.getPlaceList(boardNum).isEmpty()) {
 	        if(principal == null) {
 	        	model.addAttribute("boardBookmarkCheck", true);
 	        } else {
@@ -84,7 +83,7 @@ public class BoardController {
 	        	model.addAttribute("boardBookmarkCheck", boardBookmarkService.isBoardBookmarkChecked(member, (long) boardNum));
 	        }
 	        model.addAttribute("board", board);
-	        model.addAttribute("places", placeService.findByBoardNum(boardNum));
+	        model.addAttribute("places", placeService.getPlaceList(boardNum));
 	        
 	        return "Board/board_detail";
 	    } else {
@@ -105,7 +104,7 @@ public class BoardController {
 	
 	@PutMapping("/post/edit/{boardNum}")
     public String update(Long boardNum, String boardTitle) {
-		if(placeService.findByBoardNum(boardNum.intValue()).isEmpty()) {
+		if(placeService.getPlaceList(boardNum.intValue()).isEmpty()) {
 			return "Board/board_list";
 		} else {
 		boardService.editTitle(boardNum, boardTitle);
@@ -121,11 +120,6 @@ public class BoardController {
 		}
         return "redirect:/board";
     }
-	////////////////////////////////////////////////////////////////////////
-	@GetMapping("/addBoard")
-	public String insertPlace() {
-		return "/Board/board_addBoard";
-	}
 	
 	@RequestMapping("/writeBoard")
 	public String addBoard(@RequestParam(required = false) String boardTitle, String memEmail, Model model) {
@@ -138,6 +132,7 @@ public class BoardController {
 
 		return "Board/board_addPlace";
 	}
+	
 	@GetMapping("/cancel/{boardNum}")
     public String cancel(@PathVariable("boardNum") Long boardNum) {
 		List<Board> boards = boardRepository.findByBoardNum(boardNum);

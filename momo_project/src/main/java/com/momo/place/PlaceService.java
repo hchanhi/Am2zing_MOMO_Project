@@ -42,12 +42,6 @@ public class PlaceService {
 	@Autowired
 	private MemberCustomRepository memberCustomRepository;
 	
-	public List<Place> findByBoardNum(int boardNum){
-
-		Board board = boardRepository.findById((long) boardNum).get();
-		return placeRepository.findByBoard(board);
-	}
-	
 	public void save(String placeTitle, String placeLat, String placeLng,
 			String placeId, String placeContent, String memEmail, int boardNum, String placeImg) {
 		Board board = boardRepository.findById((long) boardNum).get();
@@ -98,7 +92,7 @@ public class PlaceService {
 	
 	public List<Place> getPlaceList(int boardNum){
 		Board board = boardRepository.findById((long) boardNum).get();
-		List<Place> placeList = this.placeRepository.findByBoard(board);
+		List<Place> placeList = placeRepository.findByBoard(board);
 		return placeList;
 	}
 	
