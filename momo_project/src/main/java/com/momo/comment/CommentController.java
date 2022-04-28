@@ -22,7 +22,6 @@ public class CommentController {
 	
 
 	
-	
 	@PostMapping("/commentList/{boardNum}")
 	public String commentList(@PathVariable("boardNum") int boardNum, @RequestBody Map<String,String> map,Model model) {
 		commentService.update(map);
@@ -38,7 +37,6 @@ public class CommentController {
 		model.addAttribute("comments", commentList);
 		return "comment/comment_commentList";
 	}
-	
 
 	 
 	 @DeleteMapping("/deleteComment/{commentNum}")
