@@ -1,17 +1,21 @@
 package com.momo.admin;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.momo.board.BoardRepository;
 import com.momo.board.BoardService;
 import com.momo.bookmark.BoardBookMarkService;
 import com.momo.domain.Board;
@@ -32,6 +36,9 @@ public class AdminController {
 	
 	@Autowired
 	private BoardService boardService;
+	
+	@Autowired
+	private BoardRepository boardRepository;
 	
 	@Autowired 
 	private MemberService memberService;
@@ -88,6 +95,15 @@ public class AdminController {
 		model.addAttribute("places", this.placeService.findByBoardNum(boardNum));
 		return "Board/board_detail";
 	}
+	
+	@DeleteMapping("board-delete/{boardNum}")
+    public String delete(@PathVariable("boardNum") Long boardNum) {
+		List<Board> boards = boardRepository.findByBoardNum(boardNum);
+		for(Board board:boards) {
+		boardService.deletePost(board);
+		}
+        return "redirect:/admin/board/board-list";
+    }
 	
 	//전체 댓글 조회
 	@GetMapping("comment/comment-list")
