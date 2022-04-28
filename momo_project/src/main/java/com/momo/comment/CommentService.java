@@ -3,9 +3,6 @@ package com.momo.comment;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
-
-import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,10 +13,8 @@ import com.momo.board.BoardRepository;
 import com.momo.domain.Board;
 import com.momo.domain.Comment;
 import com.momo.domain.Member;
-import com.momo.domain.Place;
 import com.momo.member.MemberCustomRepository;
-import com.momo.member.MemberRepository;
-import com.momo.place.PlaceRepository;
+
 
 @Service
 public class CommentService {
@@ -34,10 +29,6 @@ public class CommentService {
 	   private MemberCustomRepository memberCustomRepository;
 
 
-
-	public List<Comment> findAll() {
-		return this.commentRepository.findAll();
-	}
 	public List<Comment> findByBoardNum(int boardNum){
 
 		Board board = boardRepository.findById((long) boardNum).get();
