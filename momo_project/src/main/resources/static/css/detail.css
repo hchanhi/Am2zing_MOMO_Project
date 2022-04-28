@@ -289,9 +289,12 @@ i {
     font-size: 10pt;
     font-weight: 600;
 }
-
+.box1 {
+	height: 600px;
+}
 textarea {
 	width: 400px;	
+	
 			border: solid 2px  #FFCD4A;
 			border-radius: 10px;
 			font-size: 16px;
