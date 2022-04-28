@@ -83,11 +83,6 @@ public class CommentService {
 	public void delete(Long commentNum) {
 		commentRepository.deleteById((long) commentNum);
 	}
-	public List<Comment> getCommentList(int boardNum){
-		Board board = boardRepository.findById((long) boardNum).get();
-		List<Comment> commentList = this.commentRepository.findByBoard(board);
-		return commentList;
-	}
 	
 
 

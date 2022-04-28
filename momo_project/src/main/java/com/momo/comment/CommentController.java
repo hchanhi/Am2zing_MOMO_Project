@@ -49,7 +49,7 @@ public class CommentController {
 	@PostMapping("/commentList/{boardNum}")
 	public String commentList(@PathVariable("boardNum") int boardNum, @RequestBody Map<String,String> map,Model model) {
 		commentService.update(map);
-		List<Comment> commentList = commentService.getCommentList(boardNum);
+		List<Comment> commentList = commentService.findByBoardNum(boardNum);
 		model.addAttribute("boardNum", boardNum);
 		model.addAttribute("comments", commentList);
 		return "comment/comment_commentList";
@@ -57,7 +57,7 @@ public class CommentController {
 
 	@PostMapping("/commentList02/{boardNum}")
 	public String commentList02(@PathVariable("boardNum") int boardNum, Model model) {
-		List<Comment> commentList = commentService.getCommentList(boardNum);
+		List<Comment> commentList = commentService.findByBoardNum(boardNum);
 		model.addAttribute("comments", commentList);
 		return "comment/comment_commentList";
 	}
