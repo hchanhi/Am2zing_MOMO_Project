@@ -14,9 +14,7 @@
 			<tbody class="comments" id="divReloadLayer">
 				<tr th:each="comment : ${comments}">
 
-					<div class="comments" style="
-			margin: 10px -10px 10px 20px;
-			 border-radius: 10px;">
+					<div class="comments" style="margin: 10px -10px 10px 20px; border-radius: 10px;">
 						<div style="display: flex;">
 							<div style="width: 100px; margin: 0; padding: 0;">
 								<span style="font-size: 18px; color: rgb(255, 187, 6); margin:0;" id="memNickname"
@@ -32,7 +30,7 @@
 									th:text="${comment.commentContent}"></span>
 							</div>
 							<div  style="width: 80px;">
-								<input th:if="${#authentication.name} == ${comment.member.memEmail} or ${#authorization.expression('hasRole(''ROLE_ADMIN'')')}" type="button" style="background: none; border: none;"
+								<input th:if="${#authentication.name} == ${comment.member.memEmail} or ${#authorization.expression('hasRole(''ROLE_ADMIN'')')}" type="button" style="background: none; border: none; width: 30px; margin: 0 auto;"
 									th:data-del="${comment.commentNum}" id="deleteBtn" class="deleteComment" value="❌">
 									<input th:unless="${#authentication.name} == ${comment.member.memEmail} or ${#authorization.expression('hasRole(''ROLE_ADMIN'')')}" type="button" style="background: none; border: none;"
 									th:data-del="${comment.commentNum}"  id="deleteBtn" class="deleteComment" hidden value="5">

@@ -27,8 +27,6 @@ public class PrincipalDetailsService implements UserDetailsService{
 	@Autowired
 	private MemberRepository memberRepository;
 	
-	@Autowired
-	private MemberCustomRepository memberCustomRepository;
 	
 	@Override
 	public UserDetails loadUserByUsername(String memEmail) throws UsernameNotFoundException {
