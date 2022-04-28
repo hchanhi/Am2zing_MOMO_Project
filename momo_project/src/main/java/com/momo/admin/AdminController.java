@@ -92,7 +92,7 @@ public class AdminController {
 		Member member = principal.getMember();
     	model.addAttribute("boardBookmarkCheck", boardBookmarkService.isBoardBookmarkChecked(member, (long) boardNum));
 		model.addAttribute("board", board);
-		model.addAttribute("places", this.placeService.findByBoardNum(boardNum));
+		model.addAttribute("places", placeService.getPlaceList(boardNum));
 		return "Board/board_detail";
 	}
 	
@@ -121,7 +121,7 @@ public class AdminController {
 		Member member = principal.getMember();
     	model.addAttribute("boardBookmarkCheck", boardBookmarkService.isBoardBookmarkChecked(member, (long) boardNum));
 		model.addAttribute("board", board);
-		model.addAttribute("places", this.placeService.findByBoardNum(boardNum));
+		model.addAttribute("places", placeService.getPlaceList(boardNum));
 		return "Board/board_detail";
 	}
 	
