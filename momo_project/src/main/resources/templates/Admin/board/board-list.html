@@ -42,9 +42,9 @@
 					<span th:text="*{member.memNickname}"></span>
 					<span><a th:href="@{/admin/board/board-detail/{id}(id = ${board.boardNum})}">view</a></span>
 					<span>
-					<form th:action="@{'/admin/board-delete/' + ${board.boardNum}}" method="post">
+					<form th:action="@{'/admin/board-delete/' + ${board.boardNum}}" name="removefrm" method="post">
 						<input type="hidden" name="_method" value="delete" />
-						<button type="submit" class="delete_btn">삭제</button>
+						<input type="submit" class="delete_btn" id="delete_btn" value="삭제" onclick="if(!confirm('정말로 삭제하시겠습니까?')){return false;}">
 					</form>
 				</span>
 				  </div>
