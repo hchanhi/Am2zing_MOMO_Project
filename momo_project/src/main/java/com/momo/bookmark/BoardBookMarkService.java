@@ -56,7 +56,6 @@ public Map<String,Object> findAllByMember(Member member, int page){
 	}
 	
 	public void deleteBoardBookMark(Member member, long boardNum) {
-		System.out.println(boardNum);
 		Board board = boardRepository.findByBoardNum(boardNum).get(0);
 		long boardBookmarkNum = boardBookmarkRepository.findByMemberAndBoard(member, board).getBoardBookmarkNum();
 		

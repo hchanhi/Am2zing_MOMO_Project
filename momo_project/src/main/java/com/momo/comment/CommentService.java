@@ -36,29 +36,24 @@ public class CommentService {
 
 
 	public List<Comment> findAll() {
-		return this.commentRepository.findAll();
+		return commentRepository.findAll();
 	}
 	public List<Comment> findByBoardNum(int boardNum){
 
 		Board board = boardRepository.findById((long) boardNum).get();
-		return this.commentRepository.findByBoard(board);
+		return commentRepository.findByBoard(board);
 	}
 	
 	public void save(String commentContent, int boardNum, String memEmail) {
 	      Board board = boardRepository.findById((long) boardNum).get();
 	      Member member = memberCustomRepository.findByMemEmail(memEmail);
-	 
-
-
 	      Comment comment = new Comment();
 	      comment.setCommentContent(commentContent);
 	      comment.setBoard(board);
 	      comment.setMember(member);
-	 
 	      
-	      this.commentRepository.save(comment);
+	      commentRepository.save(comment);
 	   }
-
 	
 
 	 public ResponseEntity<?> update(Map<String,String> map) {
@@ -83,10 +78,5 @@ public class CommentService {
 	public void delete(Long commentNum) {
 		commentRepository.deleteById((long) commentNum);
 	}
-	
-
-
-	
-	
 	
 }

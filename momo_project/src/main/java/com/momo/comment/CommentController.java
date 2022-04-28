@@ -42,9 +42,6 @@ public class CommentController {
 	@Autowired
 	private CommentService commentService;
 	
-	@Autowired
-	private CommentRepository commentRepository;
-	
 	
 	@PostMapping("/commentList/{boardNum}")
 	public String commentList(@PathVariable("boardNum") int boardNum, @RequestBody Map<String,String> map,Model model) {
@@ -61,7 +58,6 @@ public class CommentController {
 		model.addAttribute("comments", commentList);
 		return "comment/comment_commentList";
 	}
-	
 
 	 
 	 @DeleteMapping("/deleteComment/{commentNum}")
