@@ -61,7 +61,6 @@ public class BoardController {
 		return "Board/board_post";
 	}
 	
-	//멤버는 일단 제거
 	@PostMapping("/post")
 	public String write(String boardTitle, String memEmail, Model model) {
 		if (!Objects.isNull(boardTitle)&& !boardTitle.isBlank()) {
@@ -104,7 +103,6 @@ public class BoardController {
 		return "Board/board_edit";
 	}
 	
-	//멤버는 잠시 제거
 	@PutMapping("/post/edit/{boardNum}")
     public String update(Long boardNum, String boardTitle) {
 		if(placeService.findByBoardNum(boardNum.intValue()).isEmpty()) {
@@ -125,7 +123,7 @@ public class BoardController {
     }
 	////////////////////////////////////////////////////////////////////////
 	@GetMapping("/addBoard")
-	public String MapTest() {
+	public String insertPlace() {
 		return "/Board/board_addBoard";
 	}
 	
@@ -167,7 +165,6 @@ public class BoardController {
 	public String top3(@PathVariable("memMbti")String memMbti, Model model) {
 		List<Board> boards = boardService.getTop3Board(memMbti);
 		model.addAttribute("boards", boards);
-		System.out.println(boards.toString());
 		return "Board/board_top3";
 	}
 }

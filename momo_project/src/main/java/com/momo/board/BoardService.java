@@ -96,7 +96,7 @@ public class BoardService {
 		 }
 		 List<BoardBookmark> bookmarks = boardBookmarkRepository.findByBoard(board);
 		 for(BoardBookmark bookmark : bookmarks) {
-			 Long bookarkNum = bookmark.getBoard().getBoardNum();
+			 Long bookarkNum = bookmark.getBoardBookmarkNum();
 			 boardBookmarkRepository.deleteById(bookarkNum);
 		 }
 		 

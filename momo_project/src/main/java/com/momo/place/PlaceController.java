@@ -35,7 +35,6 @@ public class PlaceController {
 	@Autowired
 	private PlaceService placeService;
 	
-	
 	@PostMapping("/placeList/{boardNum}")
 	public String placeList(@PathVariable("boardNum") int boardNum, @RequestBody Map<String,String> map, Model model) {
 		placeService.update(map);
