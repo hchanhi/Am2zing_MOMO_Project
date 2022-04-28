@@ -45,6 +45,11 @@
     text-decoration: none;
     color: #4c4c4c;
   }
+
+  .delete_btn {
+    border: none;
+    background-color: white;
+  }
   /* ------------------end of table----------------- */  
 
   .paging {

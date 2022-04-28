@@ -33,14 +33,20 @@
 				  <span class="heading">제목</span>
 				  <span class="heading">닉네임</span>
 				  <span class="heading">view</span>
+				  <span class="heading">삭제</span>
 				</div>
   
 				<th:block th:each="board : ${boards}" th:object="${board}">
 				  <div class="policy">
 					<span th:text="*{boardTitle}"></span>
 					<span th:text="*{member.memNickname}"></span>
-					<span><a th:href="@{/admin/board/board-detail/{id}(id = ${board.boardNum})}">view</a>
-					</span>
+					<span><a th:href="@{/admin/board/board-detail/{id}(id = ${board.boardNum})}">view</a></span>
+					<span>
+					<form th:action="@{'/admin/board-delete/' + ${board.boardNum}}" method="post">
+						<input type="hidden" name="_method" value="delete" />
+						<button type="submit" class="delete_btn">삭제</button>
+					</form>
+				</span>
 				  </div>
 				</th:block>
 			  </div>
