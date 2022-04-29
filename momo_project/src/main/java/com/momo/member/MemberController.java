@@ -26,8 +26,10 @@ import com.momo.board.BoardRepository;
 import com.momo.board.BoardService;
 import com.momo.bookmark.BoardBookMarkService;
 import com.momo.bookmark.BoardBookmarkRepository;
+import com.momo.comment.CommentRepository;
 import com.momo.domain.Board;
 import com.momo.domain.BoardBookmark;
+import com.momo.domain.Comment;
 import com.momo.domain.Member;
 import com.momo.place.PlaceService;
 
@@ -63,6 +65,9 @@ public class MemberController {
 	
 	@Autowired
 	private BoardBookmarkRepository boardBookmarkRepository;
+	
+	@Autowired
+	private CommentRepository commentRepository;
 	
 
 //	//멤버 메인 페이지 -> 추후 경로 수정 예정 
@@ -193,6 +198,9 @@ public class MemberController {
         }
         for(BoardBookmark boardBookmark :boardBookmarkRepository.findByMember(member)) {
         	boardBookmarkRepository.deleteById(boardBookmark.getBoardBookmarkNum());
+        }
+        for(Comment comment: commentRepository.findAllByMemberMemId(member.getMemId())) {
+        	commentRepository.deleteById(comment.getCommentNum());
         }
     	memberService.deleteMember(member.getMemId());
         session.invalidate();
