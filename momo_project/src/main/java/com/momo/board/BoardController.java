@@ -33,9 +33,6 @@ public class BoardController {
 	@Autowired
 	private PlaceService placeService;
 	
-	@Autowired
-	private BoardRepository boardRepository;
-	
 	@Autowired 
 	private BoardBookMarkService boardBookmarkService;
 	
@@ -43,13 +40,7 @@ public class BoardController {
 	@GetMapping("/board")
 	public String board(Model model, @RequestParam(required = false, defaultValue = "1")
 	  int page) {
-		List<Board> boardList = boardRepository.findAll();
-		for(Board board : boardList) {
-			if(placeService.getPlaceList(board.getBoardNum().intValue()).isEmpty()) {
-				this.delete(board.getBoardNum());
-			}
-		}
-		model.addAllAttributes(boardService.getBoardList(page));
+		boardService.getAll(model, page);
 		return "Board/board_list";
 	}
 	
@@ -94,10 +85,7 @@ public class BoardController {
 	
 	@GetMapping("/post/edit/{boardNum}")
 	public String edit(@PathVariable("boardNum") Long boardNum, Model model) {
-		Board board = boardRepository.findById(boardNum).get();
-		List<Place> places = placeService.getPlaceList(boardNum.intValue());
-		model.addAttribute("board", board);
-		model.addAttribute("places", places);
+		boardService.editBoard(boardNum, model);
 		
 		return "Board/board_edit";
 	}
@@ -114,7 +102,7 @@ public class BoardController {
 	
 	@DeleteMapping("/post/{boardNum}")
     public String delete(@PathVariable("boardNum") Long boardNum) {
-		List<Board> boards = boardRepository.findByBoardNum(boardNum);
+		List<Board> boards = boardService.getBoardList(boardNum);
 		for(Board board:boards) {
 		boardService.deletePost(board);
 		}
@@ -135,19 +123,12 @@ public class BoardController {
 	
 	@GetMapping("/cancel/{boardNum}")
     public String cancel(@PathVariable("boardNum") Long boardNum) {
-		List<Board> boards = boardRepository.findByBoardNum(boardNum);
+		List<Board> boards = boardService.getBoardList(boardNum);
 		for(Board board:boards) {
 		boardService.deletePost(board);
 		}
         return "redirect:/board";
     }
-	//검색
-//	@GetMapping("/board/search")
-//	public String search(@RequestParam(value="keyword") String keyword, Model model,@RequestParam(required = false, defaultValue = "1")
-//	  int page) {
-//		model.addAllAttributes(boardService.searchmbti(page,keyword));
-//		return "Board/list";
-//	}
 	
 	@GetMapping("/board/{memMbti}")
 	public String mbtiBoard(@PathVariable("memMbti")String memMbti, Model model,
