@@ -8,6 +8,9 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.momo.bookmark.BoardBookmarkRepository;
 import com.momo.comment.CommentRepository;
@@ -103,20 +106,6 @@ public class BoardService {
 		 boardRepository.deleteById(board.getBoardNum());
 	    }
 	 
-	 //검색
-//	 @Transactional
-//	 public Map<String, Object> searchmbti(int page,String memMbti){
-//			List<Board> boardList = boardRepository.findByMemberMemMbti(memMbti, PageRequest.of(page-1, 6, Direction.DESC, "boardNum"));
-//			Paging paging = Paging.builder()
-//					.url("/board")
-//					.total((int)boardRepository.count())
-//					.cntPerPage(6)
-//					.curPage(page)
-//					.blockCnt(5)
-//					.build();
-//			
-//			return Map.of("boards", boardList, "paging",paging);
-//		}
 	 
 	 public Map<String, Object> getMbtiBoardList(int page, String memMbti){
 			List<Board> boardList = boardRepository.findByMemberMemMbti(memMbti, 
@@ -135,5 +124,28 @@ public class BoardService {
 	 
 	 public List<Board> getTop3Board(String mbti){
 		 return boardRepository.findTop3ByMemberMemMbtiIsOrderByPlaceCntDesc(mbti);
+	 }
+	 
+	 public void getAll(Model model, @RequestParam(required = false, defaultValue = "1")
+	  int page) {
+		List<Board> boardList = boardRepository.findAll();
+		for(Board board : boardList) {
+			if(placeService.getPlaceList(board.getBoardNum().intValue()).isEmpty()) {
+				boardRepository.deleteById(board.getBoardNum());
+			}
+		}
+		model.addAllAttributes(getBoardList(page));
+	}
+	 
+	 public void editBoard(Long boardNum, Model model) {
+			Board board = boardRepository.findById(boardNum).get();
+			List<Place> places = placeService.getPlaceList(boardNum.intValue());
+			model.addAttribute("board", board);
+			model.addAttribute("places", places);
+	 }
+	 
+	 public List<Board> getBoardList(Long boardNum) {
+			List<Board> boards = boardRepository.findByBoardNum(boardNum);
+			return boards;
 	 }
 }
