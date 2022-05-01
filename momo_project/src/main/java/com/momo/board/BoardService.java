@@ -87,6 +87,7 @@ public class BoardService {
 	
 	 @Transactional
 	    public void deletePost(Board board) {
+		 //Board를 삭제하기전에 해당글의 장소, 댓글, 북마크를 먼저 삭제 (다음에는 이러한 과정없이 삭제되도록..)
 		 List<Place> places = placeService.getPlaceList(board.getBoardNum().intValue());
 		 for(Place place : places) {
 			 Long placeNum = place.getPlaceNum();
@@ -106,7 +107,7 @@ public class BoardService {
 		 boardRepository.deleteById(board.getBoardNum());
 	    }
 	 
-	 
+	 //mbti로 board조회, 출력
 	 public Map<String, Object> getMbtiBoardList(int page, String memMbti){
 			List<Board> boardList = boardRepository.findByMemberMemMbti(memMbti, 
 					PageRequest.of(page-1, 6, Direction.DESC, "boardNum"));
@@ -122,6 +123,7 @@ public class BoardService {
 			return Map.of("boards", boardList, "paging",paging);
 		}
 	 
+	 //jpa로 top3출력, 조회수기준 내림차순
 	 public List<Board> getTop3Board(String mbti){
 		 return boardRepository.findTop3ByMemberMemMbtiIsOrderByPlaceCntDesc(mbti);
 	 }

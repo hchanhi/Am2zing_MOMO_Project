@@ -34,6 +34,7 @@ public class PlaceService {
 	@Autowired
 	private MemberCustomRepository memberCustomRepository;
 	
+	//Place객체 생성후 set으로 값대입, repository로 DB저장
 	public void save(String placeTitle, String placeLat, String placeLng,
 			String placeId, String placeContent, String memEmail, int boardNum, String placeImg) {
 		Board board = boardRepository.findById((long) boardNum).get();
@@ -56,6 +57,7 @@ public class PlaceService {
 		placeRepository.deleteById(placeNum);
 	}
 	
+	//JSON형식으로 받은 데이터를 맵으로 받아 각 변수에 대입 , save메소드로 db저장
 	public ResponseEntity<?> update(Map<String,String> map) {
 		Map<String, String> tempMap=new HashMap<>();
 		String memEmail = map.get("memEmail");
@@ -69,11 +71,7 @@ public class PlaceService {
 		this.save(placeTitle, placeLat, placeLng, placeId, placeContent, memEmail, boardNum, placeImg);
 		
 		try {
-			
-			//DB처리 후 서비스에서 Place PK를 반환 받아옴
-			tempMap.put("placeTitle", map.get("placeTitle")); //DB에 넣으려는 제목
-			//DB에 저장되고 난 후 placeNo(PK) int값 String.valeuOf 로 타입변환
-			
+			tempMap.put("placeTitle", map.get("placeTitle"));
 		} catch(Exception e) {
 			return new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
@@ -91,13 +89,16 @@ public class PlaceService {
 	
 	public String upload(MultipartFile multi, HttpServletRequest request,
 			HttpServletResponse response, Model model) {
+		//파일 저장 경로 설정..
 		String path = new File("").getAbsolutePath()+"\\src\\main\\resources\\static\\images\\place\\";
 		String url = null;
 		try {
 			String uploadpath = path;
+			//파일의 원래 이름
 			String originFileName = multi.getOriginalFilename();
 			String extName = originFileName.substring(originFileName.lastIndexOf(".")
 					,originFileName.length());
+			//뒤에 붙을 이름 생성
 			String saveFileName = genSaveFileName(extName);
 			
 			if(!multi.isEmpty()) {
@@ -114,6 +115,7 @@ public class PlaceService {
 		return "Board/board_filepath";
 	}
 	
+	//이름생성 메소드.. 날짜 시간으로..
 	private String genSaveFileName(String extName) {
         String fileName = "";
         
