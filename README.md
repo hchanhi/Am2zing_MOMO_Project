@@ -40,8 +40,8 @@ Spring Boot의 MVC패턴을 기반으로 만든 MBTI별 장소공유 게시판 �
   - 회원은 MyPage에서 본인이 작성한 게시물 및 댓글을 관리 할 수 있습니다.
   - 회원은 개인정보관리 페이지에서 패스워드 및 회원정보를 수정 할 수 있습니다. 이때 패스워드 변경 시 기존 패스워드를 한번 더 체크합니다.
   - 회원정보 수정 시 닉네임은 중복체크를 통해 변경이 가능합니다.
-    <details>
-  <summary>회원가입</summary>
+  <details>
+    <summary>회원가입</summary>
 
 ![join](https://user-images.githubusercontent.com/79136087/166146202-d132214b-3455-4551-acc2-b3be5d821751.gif)
 
