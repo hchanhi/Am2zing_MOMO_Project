@@ -62,11 +62,30 @@ Spring Boot의 MVC패턴을 기반으로 만든 MBTI별 장소공유 게시판 �
 ![마이페이지](https://user-images.githubusercontent.com/79136087/166146252-61ba1a4b-af4b-428a-addd-bf2f82cb6b6f.gif)
 
 </details>
+
 - ## 관리자
 
 - Spring Security를 이용하여 로그인 과정 시 로그인을 완료하면 회원의 Role이 `Admin`과`Member` 로 구분이 되어있습니다.
 - 관리자는 모든 게시물 및 댓글들의 삭제 권한이 주어집니다.
 - 관리자는 모든 회원들의 정보를 확인할 수 있고 일부 회원의 정보를 편집 수정 할 수 있습니다.
+<details>
+    <summary>회원 관리</summary>
+
+![관리자 회원 관리](https://user-images.githubusercontent.com/79136087/166146734-458ec6a8-01d7-4936-b4f5-a4b5f8290b24.gif)
+
+</details>
+<details>
+    <summary>게시글 관리</summary>
+
+![관리자 게시글 삭제](https://user-images.githubusercontent.com/79136087/166146731-bccf5ff9-0051-4027-ac78-4d424cc81e14.gif)
+
+</details>
+<details>
+    <summary>댓글 관리</summary>
+
+![관리자 댓글 관리](https://user-images.githubusercontent.com/79136087/166146732-cc09601b-ce27-44d9-b0db-f0a71755ce1a.gif)
+
+</details>
 
 - ## 게시물 작성
 
