@@ -25,10 +25,10 @@ public class PlaceController {
 	@Autowired
 	private PlaceService placeService;
 	
+	//JSON으로 보낸 Place정보를 map으로 받음 
 	@PostMapping("/placeList/{boardNum}")
 	public String placeList(@PathVariable("boardNum") int boardNum, @RequestBody Map<String,String> map, Model model) {
 		placeService.update(map);
-		
 		List<Place> placeList = placeService.getPlaceList(boardNum);
 		model.addAttribute("places", placeList);
 		return "Place/place_list";
