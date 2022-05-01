@@ -40,11 +40,31 @@ Spring Boot의 MVC패턴을 기반으로 만든 MBTI별 장소공유 게시판 �
   - 회원은 MyPage에서 본인이 작성한 게시물 및 댓글을 관리 할 수 있습니다.
   - 회원은 개인정보관리 페이지에서 패스워드 및 회원정보를 수정 할 수 있습니다. 이때 패스워드 변경 시 기존 패스워드를 한번 더 체크합니다.
   - 회원정보 수정 시 닉네임은 중복체크를 통해 변경이 가능합니다.
+    <details>
+  <summary>회원가입</summary>
+
+![join](https://user-images.githubusercontent.com/79136087/166146202-d132214b-3455-4551-acc2-b3be5d821751.gif)
+
+</details>
+
+<details>
+  <summary>로그인</summary>
+
+![login](https://user-images.githubusercontent.com/79136087/166146231-99ee7bc4-9b1a-466a-af86-59519489cea5.gif)
+
+</details>
+
+<details>
+  <summary>마이페이지</summary>
+
+![마이페이지](https://user-images.githubusercontent.com/79136087/166146252-61ba1a4b-af4b-428a-addd-bf2f82cb6b6f.gif)
+
+</details>
 - ## 관리자
 
-  - Spring Security를 이용하여 로그인 과정 시 로그인을 완료하면 회원의 Role이 `Admin`과`Member` 로 구분이 되어있습니다.
-  - 관리자는 모든 게시물 및 댓글들의 삭제 권한이 주어집니다.
-  - 관리자는 모든 회원들의 정보를 확인할 수 있고 일부 회원의 정보를 편집 수정 할 수 있습니다.
+- Spring Security를 이용하여 로그인 과정 시 로그인을 완료하면 회원의 Role이 `Admin`과`Member` 로 구분이 되어있습니다.
+- 관리자는 모든 게시물 및 댓글들의 삭제 권한이 주어집니다.
+- 관리자는 모든 회원들의 정보를 확인할 수 있고 일부 회원의 정보를 편집 수정 할 수 있습니다.
 
 - ## 게시물 작성
 
@@ -53,6 +73,18 @@ Spring Boot의 MVC패턴을 기반으로 만든 MBTI별 장소공유 게시판 �
   - 장소 선택하기 클릭 시 `Kakao Map API`를 이용하여 모달찰이 생성 됩니다. 원하는 장소를 검색 후 선택하기를 누르면 장소가 선택됩니다.
   - 장소를 선택한 뒤 사진을 추가할 수 있고 장소에 대한 코멘트를 작성해 장소 추가하기를 누르면 저장된 장소가 추가됩니다.
   - 이후 글쓰기 버튼을 클릭시 게시글이 등록됩니다.
+  <details>
+  <summary>글쓰기</summary>
+
+![글쓰기](https://user-images.githubusercontent.com/79136087/166146268-1ac79e89-9cdb-426a-addf-f0bbf54bec8a.gif)
+
+</details>
+<details>
+  <summary>댓글</summary>
+
+![댓글](https://user-images.githubusercontent.com/79136087/166146403-1b26d8db-c144-4ea0-9edc-c13d0da02c21.gif)
+
+</details>
 
 - ## 게시물 리스트 & 상세 보기
 
@@ -60,6 +92,13 @@ Spring Boot의 MVC패턴을 기반으로 만든 MBTI별 장소공유 게시판 �
   - 게시글을 클릭하면 `Kakao Map API`를 사용한 게시글을 볼 수 있습니다. 지도 위에 게시글 제목과 장소, 사진, 코멘트를 확인 할 수있습니다.
   - 회원 로그인 된 상태라면 게시글을 북마크에 저장할 수 있습니다.
   - 댓글 보기 버튼을 클릭하면 댓글 창으로 전환되며 댓글을 작성할 수 있습니다.
+
+  <details>
+  <summary>북마크</summary>
+
+![북마크](https://user-images.githubusercontent.com/79136087/166146431-d714970b-c03d-4844-8c23-75df3f1c7092.gif)
+
+</details>
 
 - ## 지도에 게시물 표시
   - `Kakao Map API`를 이용하여 지도 위에 저장된 장소의 마커가 보이게 했습니다.
