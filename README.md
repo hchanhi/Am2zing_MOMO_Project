@@ -42,7 +42,7 @@ Spring Boot의 MVC패턴을 기반으로 만든 MBTI별 장소공유 게시판 �
   - 회원은 개인정보관리 페이지에서 패스워드 및 회원정보를 수정 할 수 있습니다. 이때 패스워드 변경 시 기존 패스워드를 한번 더 체크합니다.
   - 회원정보 수정 시 닉네임은 중복체크를 통해 변경이 가능합니다.
 
-  <details>
+<details>
     <summary>회원가입</summary>
 
 ![join](https://user-images.githubusercontent.com/79136087/166146202-d132214b-3455-4551-acc2-b3be5d821751.gif)
@@ -76,7 +76,7 @@ Spring Boot의 MVC패턴을 기반으로 만든 MBTI별 장소공유 게시판 �
   - 장소를 선택한 뒤 사진을 추가할 수 있고 장소에 대한 코멘트를 작성해 장소 추가하기를 누르면 저장된 장소가 추가됩니다.
   - 이후 글쓰기 버튼을 클릭시 게시글이 등록됩니다.
 
-  <details>
+<details>
   <summary>글쓰기</summary>
 
 ![글쓰기](https://user-images.githubusercontent.com/79136087/166146268-1ac79e89-9cdb-426a-addf-f0bbf54bec8a.gif)
@@ -96,8 +96,8 @@ Spring Boot의 MVC패턴을 기반으로 만든 MBTI별 장소공유 게시판 �
   - 회원 로그인 된 상태라면 게시글을 북마크에 저장할 수 있습니다.
   - 댓글 보기 버튼을 클릭하면 댓글 창으로 전환되며 댓글을 작성할 수 있습니다.
 
-  <details>
-  <summary>북마크</summary>
+<details>
+    <summary>북마크</summary>
 
 ![북마크](https://user-images.githubusercontent.com/79136087/166146431-d714970b-c03d-4844-8c23-75df3f1c7092.gif)
 
