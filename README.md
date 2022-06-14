@@ -124,3 +124,7 @@ Spring Boot의 MVC패턴을 기반으로 만든 MBTI별 장소공유 게시판 �
 
 - ## 지도에 게시물 표시
   - `Kakao Map API`를 이용하여 지도 위에 저장된 장소의 마커가 보이게 했습니다.
+
+
+- ## 웹 전체 실행 영상 
+<iframe width="640" height="360" src="https://www.youtube.com/embed/6Az2cNU7gUw" frameborder="0" gesture="media" allowfullscreen=""></iframe>
